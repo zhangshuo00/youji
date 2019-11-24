@@ -7,7 +7,9 @@
     <title>有纪</title>
 </head>
 <body>
-    <div id="root">hello webpack</div>
-    <script src="../src/index.js"></script>
+    <div id="root"></div>
+    <!-- <script src="../src/index.js"></script> -->
+    <!-- 用html-webpack-plugin插件引入资源，不能使用script标签再引入 --> 
+    <!-- Uncaught SyntaxError: Cannot use import statement outside a module -->
 </body>
 </html>

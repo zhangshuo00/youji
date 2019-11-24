@@ -1,5 +1,4 @@
 import './index.less';
-console.log();
 import React,{Component} from 'react'
 
 export default class App extends Component{
