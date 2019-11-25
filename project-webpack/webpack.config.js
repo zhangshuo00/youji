@@ -5,7 +5,7 @@ var FilemanagerWebpackPlugin = require('filemanager-webpack-plugin');
 module.exports = {
     entry: path.resolve(__dirname, './public/main'),
     output:{
-        filename:'bundle.js',
+        filename:'js/[name].js',
         path:path.resolve(__dirname,'./public/out'),
         // publicPath:'/assets'
     },
