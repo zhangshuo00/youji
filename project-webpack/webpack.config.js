@@ -3,20 +3,17 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var FilemanagerWebpackPlugin = require('filemanager-webpack-plugin');
 module.exports = {
-    entry : {
-        index:'./src/index.js'
-        // app:'./src/app.js'
-    },
+    entry: path.resolve(__dirname, './public/main'),
     output:{
-        filename:'js/[name].js',
-        path:path.resolve(__dirname,'build'),
+        filename:'bundle.js',
+        path:path.resolve(__dirname,'./public/out'),
         // publicPath:'/assets'
     },
     plugins:[
         new HtmlWebpackPlugin({
             filename:'index.html',
             chunks:['index'],
-            template:'./public/index.html'
+            template:'./index.html'
         }),
         // new HtmlWebpackPlugin({
         //     filename:'app.html',
