@@ -1,10 +1,16 @@
 import React from 'react';
-import { Button } from 'antd-mobile';
-import Sign from './Components/注册/sign';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
+import Login from './Components/Login';
+import ListSort from './Components/ListSort';
 
 function App() {
   return (
-    <Sign />
+    <Router>
+      <div>
+          <Route exact path='/' component={Login} />
+          <Route path='/sort' component={ListSort}/>
+      </div>
+    </Router>
   );
 }
 

@@ -1,0 +1,5 @@
+.am-icon am-icon-user am-icon-md>use{
+    background: url(../images/person.png);
+    width: 30px;
+    height: 30px;
+}
