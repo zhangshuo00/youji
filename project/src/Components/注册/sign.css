@@ -1,0 +1,61 @@
+.sign-p1{
+    font-size:18px;text-align:center;margin-top:43px;
+    left: 170px;
+top: 43px;
+line-height: 26px;
+color: rgba(16, 16, 16, 1);
+font-size: 18px;
+text-align: center;
+font-family: Arial;
+}
+.sign-div{
+    width:279px;height:428px;margin:0 auto;margin-top:10%;
+    left: 48px;
+top: 132px;
+line-height: 20px;
+border-radius: 10px;
+text-align: center;
+box-shadow: 0px 0px 20px 0px rgba(170, 170, 170, 1);
+border: 1px solid rgba(187, 187, 187, 1);
+}
+.sign-input1{
+    width:208px;height:46px;margin-top:20%;
+line-height: 20px;
+opacity: 0.5;
+border-radius: 20px;
+color: rgba(16, 16, 16, 1);
+font-size: 14px;
+text-align: center;
+font-family: Arial;
+border: 1px solid rgba(187, 187, 187, 1);
+}
+.sign-input2{
+    width:208px;height:46px;margin-top:10%;
+line-height: 20px;
+opacity: 0.5;
+border-radius: 20px;
+text-align: center;
+border: 1px solid rgba(187, 187, 187, 1);
+}
+.sign-button{
+    width:208px;height:46px;margin-Top:20%;color:white;
+line-height: 20px;
+border-radius: 20px;
+background-color: rgba(51, 54, 67, 1);
+text-align: center;
+}
+.sign-p2{
+    font-size:18px;text-align:center;margin-top:20%;
+line-height: 20px;
+opacity: 0.7;
+color: rgba(16, 16, 16, 1);
+font-size: 14px;
+text-align: center;
+font-family: Arial;
+}
+.sign-img{
+    left: 143px;
+top: 172px;
+width: 90px;
+height: 90px;
+}
