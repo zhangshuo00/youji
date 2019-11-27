@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import {HashRouter as Router,Route}from 'react-router-dom';
 import '../css/Sign.css';
 import {Link,Route} from 'react-router-dom'; 
+import Login from './Login';
 
 
 
@@ -22,10 +23,10 @@ export default class App extends Component {
           <input className='sign-button' type="button" value="注册"></input>
         </div>
         </form>
-        <Link to={{pathname:url+'/login',state:{url:url+'/login'}}} className='sign-p2'>已有账户了，点击登陆</Link>
+        <Link to={{pathname:url+'/login',state:{url:url+'/login'}}}><p className='sign-p2'>已有账户了，点击登陆</p></Link>
       </div>
       <div>
-        <Route path={`${url}/login`} component={} />
+        <Route path={`${url}/login`} component={Login} />
       </div>
       </div>
       // </Router>
