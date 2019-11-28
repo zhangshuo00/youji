@@ -1,0 +1,68 @@
+.label-title{
+    float: left;
+    width: 70%;
+    padding-left: 3%;
+    padding-top: 15px;
+}
+.label-save{
+    float: left;
+    width: 15%;
+    color:#000;
+    font-size:14px;
+    margin-top: 27px;
+    outline: none;
+    border: none;
+    background: none;
+    margin-bottom: 15px;
+}
+.label-head{
+    margin-top: 10px;
+    background-color: #fff;
+}
+.label-name{
+    font-size: 14px;
+    float: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.label-text{
+    margin-top: 5px;
+    width: 60%;
+    height: 40px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+}
+.label-cover{
+    font-size: 14px;
+    float: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+}
+/* .label-image{
+    width: 80%;
+    margin-left: 10%;
+    height:  10px;
+    border-radius: 2px;
+    border: 1px solid gainsboro;
+} */
+.label-image{
+    opacity: 0;
+    width: 80%;
+    margin-left: 10%;
+    border: none;
+    text-decoration: none;
+    height: 130px;
+    position: relative;
+    top: -130px;
+    margin-bottom: 250px;
+}
+.label-show{
+    width:80%;
+    height:130px;
+    margin-left:10%;
+    border-radius: 10px;
+    border: 1px solid gainsboro;
+}
