@@ -1,44 +1,51 @@
 import React,{Component} from 'react';
 import '../css/Login.css';
-import store from './UserId';
+// import store from './UserId';
 //登录页
 
 export default class Login extends Component{
-  constructor(props){
-    super(props)
-    this.state = store.getState();
-    store.subscribe(()=>{
-      this.setState(store.getState())
+  constructor(){
+    super();
+    this.state = {
+      uemail:'',
+      upassword:''
+    }
+  }
+  onChange(e){
+    this.setState({
+      [e.target.name]:e.target.value
     })
   }
-  //使用redux共享userID与登陆状态login
-  Cheaking=()=> {
-    fetch('')
-        .then((res)=>res.json())
-        .then((res)=>{
-          let action = {
-            type:'change_userID',
-            value:res.data.userID,
-            login:res.data.login,
-          }
-          store.dispatch(action)
-        })
-    if(this.state.data.login === true){
-      window.location = '/sort';
+  onSubmit(e){
+    e.preventDefault();
+    const post ={
+      uemail:this.state.uemail,
+      upassword:this.state.upassword
     }
+    console.log(post);
+    fetch('/login',{
+      method:'POST',
+      mode:'cors',
+      headers: {'Content-Type': 'application/json'},
+      body:JSON.stringify(post)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      // 返回数据格式：{msg: "success/pwdErr/notExist"}
+      console.log(data);
+      // 根据返回的消息，渲染响应的页面
+    })
   }
   render(){
     return(
       <div>
         <p className = 'log-login'>登录</p>
-        <form className="log-center" action="" method="POST">
+        <form id="form" className="log-center" onSubmit={this.onSubmit.bind(this)}>
             <img className='log-img'></img>
-            <input type='Email' className='log-email' placeholder='  Email' name='email'></input>
-            <input type='password' className='log-email' placeholder='  密码' name='password'></input>
+            <input onChange={this.onChange.bind(this)} type='Email' className='log-email' placeholder='  Email' name="uemail"></input>
+            <input onChange={this.onChange.bind(this)} type='password' className='log-email' placeholder='  密码' name="upassword"></input>
             <a className='log-forget'>忘记密码？</a>
-            <input type = 'submit' className = 'log-submit' value='登录'
-              onClick={() => this.Cheaking()}>
-            </input>
+            <input onClick={this.get} type = 'submit' className = 'log-submit' value='登录'></input>
         </form> 
         <a className='log-reg'>新用户？点击这里注册</a>
       </div>
