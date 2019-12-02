@@ -1,16 +1,26 @@
 .picture{
-    left: 8px;
-top: 87px;
 width: 100%;
 height: 154px;
+margin:0 auto;
+background:url(../images/2-191015104P02N.jpg);
+background-size: 90% 154px;
 }
 .p{
     margin:0 auto;
     width:80%;
     margin-top:10%;
 }
+.p1{
+    margin-left: 10%;
+width: 33px;
+height: 23px;
+color: rgba(16, 16, 16, 1);
+font-size: 16px;
+text-align: left;
+font-family: PingFangSC-regular;
+}
 .but{
-    margin-top:10%;
+    margin-top:20%;
 }
 .but1{
     left: 17px;
@@ -19,6 +29,7 @@ height: 154px;
     height: 44px;
     line-height: 20px;
     border-radius: 16px;
+    border:0px;
     background-color: rgba(250, 167, 85, 1);
     text-align: center;
     margin-left: 4%;
@@ -30,6 +41,7 @@ height: 154px;
     height: 44px;
     line-height: 20px;
     border-radius: 16px;
+    border:0px;
     background-color: rgba(232, 230, 232, 1);
     color: rgba(16, 16, 16, 1);
     font-size: 14px;
