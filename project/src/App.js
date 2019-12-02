@@ -9,6 +9,7 @@ import p from './Components/Perpon';
 import ListSort from './Components/ListSort';
 import AddTag from './Components/AddTag';
 import UserDetails from './Components/UserDetails';
+import Newperpon from './Components/Newperpon';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path='/sort' component={ListSort}/>
           <Route path='/addTag' component={AddTag}/>
           <Route path='/details' component={UserDetails}/>
+          <Route path='/newperpon' component={Newperpon}/>
       </div>
     </Router>
   );
