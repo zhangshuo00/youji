@@ -29,7 +29,7 @@ componentDidMount(){
             <div>
                             <NavBar
                 style={{backgroundColor:'pink',color:'white'}}
-                onLeftClick={() => window.location='/sion'}
+                onLeftClick={() => window.location='/perpon'}
                 leftContent={[
                     <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
                   ]}
@@ -45,7 +45,7 @@ componentDidMount(){
               >头像</InputItem>
               <InputItem
                 type="text"
-                placeholder="186 1234 1234"
+                placeholder="做一份美食，看一场电影"
               >签名</InputItem>
               <InputItem
                 type="text"
