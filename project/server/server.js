@@ -9,6 +9,8 @@ var login = require('./api/login');
 var sign = require('./api/sign');
 var sion = require('./api/sion');
 var listSort = require('./api/listSort');
+var sionple = require('./api/sionple');
+var addTag = require('./api/addTag');
 
 var app = express();
 
@@ -32,7 +34,9 @@ app.get('/',(req,res)=>{
 app.use('/login',login);// 登录页api
 app.use('/sign',sign);// 注册页api
 app.use('/sion',sion);// 笔记列表页api
-app.use('/listSort',listSort);
+app.use('/listSort',listSort);// 笔记分类页api
+app.use('/sionple',sionple);// 笔记详情页api
+app.use('/addTag',addTag);// 新增笔记分类页 api
 
 // catch 404 and forward to error handler
 // app.use(function(req,res,next){

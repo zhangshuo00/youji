@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import '../css/listSort.css';
+// import '../css/listSort.css';
 import { NavBar } from 'antd-mobile';
-import store from './UserId';
+// import store from './UserId';
 //笔记分类页
 
 export default class ListSort extends Component {
@@ -16,8 +16,8 @@ export default class ListSort extends Component {
     }
 
     componentDidMount(){
-        const user =store.getState();
-        console.log(user);
+        // const user =store.getState();
+        // console.log(user);
         // fetch('')
         // .then((res)=>res.json())
         // .then((res)=>{

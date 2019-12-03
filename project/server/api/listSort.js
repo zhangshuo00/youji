@@ -3,10 +3,10 @@ var router = express.Router();
 var query = require('../db');
 // 笔记分类页的请求数据
 
-router.get('/',async (req,res)=>{
+router.post('/',async (req,res)=>{
     // 获取前端返回的 uid
-    const uid = 'k3i297def';
-    // const {uid} = req.body;
+    // const uid = 'k3i297def';
+    const {uid} = req.body;
     var tags = [];
     var a = new Object();
     // 根据uid从数据库中查找相应的分类

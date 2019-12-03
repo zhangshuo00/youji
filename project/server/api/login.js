@@ -5,9 +5,9 @@ var router = express.Router();
 
 router.post('/',async (req,res)=>{
     // 用户提交的email和password
-    const {getEmail, getPwd} = req.body;
-    // var getEmail = req.body.uemail;
-    // var getPwd = req.body.upassword;
+    // const {getEmail, getPwd} = req.body;
+    var getEmail = req.body.uemail;
+    var getPwd = req.body.upassword;
     // var getEmail = 'zhangsan@qq.com';
     // var getPwd = 'zhangsan';
     // 从数据库中获取user表进行对比
