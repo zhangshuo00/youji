@@ -1,22 +1,12 @@
-import React, { ReactDOM,Component } from 'react';
-import { NavBar, Icon, Tabs, WingBlank, Carousel, Grid, Flex, WhiteSpace} from 'antd-mobile';
-import {Link,Route} from 'react-router-dom'; 
-import { ImagePicker, SegmentedControl } from 'antd-mobile';
+import React, {Component } from 'react';
+import { NavBar, Icon} from 'antd-mobile';
 import { List, InputItem } from 'antd-mobile';
-// import { createForm } from 'rc-form';
-export default class AppHome extends Component {
 
+export default class AppHome extends Component {
+//个人信息编辑页
   constructor(props){
     super();
     this.state={
-        // data:[
-        //     {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',time:'11月22号',text:'做一份美味面包'},           
-        //     {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',time:'11月22号',text:'做一份美味炒菜'},
-        //     {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',time:'11月22号',text:'做一份美味炒菜2'},
-        //     {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',time:'11月22号',text:'做一份美味炒菜3'},
-        //     {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',time:'11月22号',text:'做一份美味炒菜4'},
-        //     {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',time:'11月22号',text:'做一份美味炒菜5'},
-        // ],
     }
 }
 
@@ -30,13 +20,9 @@ componentDidMount(){
     // })
 }
 
-// handleClick = () => {
-//   this.inputRef.focus();
-// }
 
     render() {
-        // const { getFieldProps } = this.props.form;
-        
+
         
         return (
             <div>

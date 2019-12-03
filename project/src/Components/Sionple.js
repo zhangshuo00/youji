@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavBar, Icon, Tabs, WingBlank, Carousel, Grid, Flex, WhiteSpace} from 'antd-mobile';
+import { NavBar, Icon} from 'antd-mobile';
 import './Sionple.css';
 
 
