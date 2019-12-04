@@ -42,7 +42,9 @@ export default class AppHome extends Component {
                   ]}
                 >新建笔记 </NavBar>
             </div>
-        
+            <div>
+                <textarea cols='20' rows='2' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'38px',width:'100%',border:'0px',lineHeight:'40px'}}>双击编辑标题</textarea>
+            </div>
             <div>
                 <textarea cols='50' rows='5' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'168px',width:'100%',border:'0px',lineHeight:'40px'}}>双击编辑文本</textarea>
             </div>
