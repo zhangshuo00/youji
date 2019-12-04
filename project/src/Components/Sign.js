@@ -47,8 +47,8 @@ export default class App extends Component {
       // <Router>
       <div>
       <div>
-        <form clsaaName="sign-form"  onSubmit={this.onSubmit.bind(this)}>
-        <p className='sign-p1'>注册</p>
+        <form className="sign-form"  onSubmit={this.onSubmit.bind(this)}>
+        <p className='sign-p1'></p>
         <div className='sign-div'>
           {/* <img src="my-app\src\img\1.jpg" className='sign-img'></img> */}
           <input onChange={this.onChange.bind(this)} className='sign-input1' placeholder="昵称" name="uname"></input>
@@ -57,7 +57,7 @@ export default class App extends Component {
           <input className='sign-button' type="submit" value="注册"></input>
         </div>
         </form>
-        <Link to={{pathname:'login'}}><p className='sign-p2'>已有账户了，点击登陆</p></Link>
+        <Link to='/'><p className='sign-p2'>已有账户了，点击登陆</p></Link>
       </div>
       <div>
          <Route path={`login`} component={Login} />

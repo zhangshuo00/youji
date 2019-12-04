@@ -13,6 +13,9 @@ router.post('/',async (req,res)=>{
     // const context = '家乐鸡粉四间房了司法局未播放机无法焦距的v耳机架的更多见收购的精神电视剧定时关机搜被动句dove';
     // const isShare = 1;
     var chdate = new Date();// 创建笔记的时间
+    month = chdate.getMonth()+1;
+    chdate = chdate.getFullYear() + '-' + month + '-' + chdate.getDate();
+    // console.log(chdate);
 
     var tag_id = await query('select tag_id from tagsName where tags=?',[tags]);
     tag_id = JSON.parse(JSON.stringify(tag_id))[0].tag_id;

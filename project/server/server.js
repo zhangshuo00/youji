@@ -11,6 +11,10 @@ var sion = require('./api/sion');
 var listSort = require('./api/listSort');
 var sionple = require('./api/sionple');
 var addTag = require('./api/addTag');
+var addSionple = require('./api/addSionple');
+var personal = require('./api/personal');
+var userDetail = require('./api/userDetail');
+var editPerInfo = require('./api/editPerInfo');
 
 var app = express();
 
@@ -37,6 +41,10 @@ app.use('/sion',sion);// 笔记列表页api
 app.use('/listSort',listSort);// 笔记分类页api
 app.use('/sionple',sionple);// 笔记详情页api
 app.use('/addTag',addTag);// 新增笔记分类页 api
+app.use('/addSionple',addSionple);// 新增笔记 api
+app.use('/personal',personal);// 个人信息页 api
+app.use('/userDetail',userDetail);
+app.use('/editPerInfo',editPerInfo);
 
 // catch 404 and forward to error handler
 // app.use(function(req,res,next){

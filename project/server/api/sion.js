@@ -6,6 +6,7 @@ var router = express.Router();
 router.post('/',async (req,res)=>{
     // 前端发送post请求携带 uid,tags(用户所点击的笔记分类)
     const {uid,tags} = req.body;
+    console.log(uid,tags)
     // const uid = 'k3i297def';
     // const tags = '测试1';
     const tagId = await query('select tag_id from tagsName where tags=?',[tags]);

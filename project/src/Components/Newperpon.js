@@ -2,7 +2,7 @@ import React, {Component } from 'react';
 import { NavBar, Icon} from 'antd-mobile';
 import { List, InputItem } from 'antd-mobile';
 
-export default class AppHome extends Component {
+export default class Newperpon extends Component {
 //个人信息编辑页
   constructor(props){
     super();
@@ -68,6 +68,3 @@ componentDidMount(){
         )
     }
 }
-
-// const BasicInputExampleWrapper = createForm()(AppHome);
-// ReactDOM.render(<BasicInputExampleWrapper />,  document.getElementById('root'));

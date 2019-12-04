@@ -5,32 +5,17 @@ import Sionple from './Sionple'
 
 export default class Sion extends Component {
     constructor(props){
-        super();
+        super(props);
         this.state={
             datacopy:[],
-            data:[
-                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味面包'},           
-                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜'},
-                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜2'},
-                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜3'},
-                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜4'},
-                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜5'},
-            ],
+            data:[],
         }
     }
 
     componentDidMount(){
-        // const user =this.getState();
-        // console.log(user);
-        // fetch('')
-        // .then((res)=>res.json())
-        // .then((res)=>{
-        //     this.setState({data:res.data});
-        // })
-        var storage = window.localStorage;
         const post ={
-            uid:'k3i297def',
-            tags:1
+            uid:localStorage.getItem('uid'),
+            tags:decodeURI(window.location.search.split('=')[1])
         }
         console.log(post);
         fetch('/sion',{
@@ -81,8 +66,8 @@ export default class Sion extends Component {
                 {/* <Link className="back">></Link> */}
                 
                             <NavBar
-                style={{backgroundColor:'pink',color:'white'}}
-                onLeftClick={() => window.location='/sign'}
+                mode="light"
+                onLeftClick={() => window.location='/sort'}
                 onRightClick={() => window.location='/sionnew'}
                 leftContent={[
                     <Icon key="0" type="left" style={{ marginLeft: '16px' }} />,

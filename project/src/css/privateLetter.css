@@ -1,0 +1,70 @@
+.letter-title{
+    float: left;
+    width: 80%;
+    /* padding-left: 3%; */
+    text-align: center;
+    padding-top: 12px;
+    margin-right: 10%;
+}
+.letter-list{
+    width: 100%;
+    float: left;
+    list-style: none;
+    /* background-color: #fff; */
+}
+/* .letter-li{
+    background-color: #fff;
+} */
+.letter-img{
+    margin-top: 10px;
+    height: 46px;
+    width: 46px;
+    float: left;
+    border-radius: 23px;
+    margin-left: 5%;
+}
+.letter-trian{
+    margin-left: 1%;
+    margin-top: 23px;
+    width: 0;
+    height: 0;
+    float: left;
+    border-top: 10px solid transparent;
+    border-right: 10px solid white;
+    border-bottom: 10px solid transparent;
+    
+}
+.letter-text{
+    margin: 0;
+    float: left;
+    font-size: 20px;
+    margin-top: 20px;
+    width: 60%;
+    /* height: 40px; */
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.letter-input{
+    margin-left: 2%;
+    width: 77%;
+    height: 30px;
+    border: none;
+    border-radius: 15px;
+}
+.letter-bottom{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+}
+.letter-bottom button{
+    height: 30px;
+    width: 17%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 15px;
+    background-color: rgb(10, 90, 238);
+    border: none;
+    color: #fff;
+}

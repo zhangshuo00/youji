@@ -1,37 +1,54 @@
 import React, {Component} from 'react';
-// import '../css/listSort.css';
+import '../css/listSort.css';
 import { NavBar } from 'antd-mobile';
-// import store from './UserId';
 //笔记分类页
 
 export default class ListSort extends Component {
     constructor(props){
         super(props)
         this.state={
-            data:[
-                {img_path:'images/sort-test1.jpg',item:'美食'},           
-                {img_path:'images/sort-test2.jpg',item:'旅行'},
+            datas:[
+                // {img_path:'images/sort-test1.jpg',tags:'美食'},           
+                // {img_path:'images/sort-test2.jpg',tags:'旅行'},
             ],
         }
     }
 
     componentDidMount(){
-        // const user =store.getState();
-        // console.log(user);
-        // fetch('')
-        // .then((res)=>res.json())
-        // .then((res)=>{
-        //     this.setState({data:res.data});
-        // })
+        const storage = window.localStorage;
+        const post ={
+            uid:storage.uid
+        }
+        // console.log(post);
+        fetch('/listSort',{
+            method:'POST',
+            mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            this.setState({
+                datas:data
+            })
+            // 根据返回的消息，渲染响应的页面
+        })
     }
-
+    
+    jumpToSion = (e)=>{
+        console.log(e.target.innerHTML.slice(3,-4));
+        const clickTag = e.target.innerHTML.slice(3,-4);
+        // 跳转到点击笔记标签的列表页
+        window.location.href = '/Sion?tags=' + encodeURI(clickTag);
+    }
 
     render() {
         return (
             <div>
                 <NavBar
                 mode="light"
-                onLeftClick={() => window.location='/'}
+                onLeftClick={() => window.location='/details'}
                 leftContent={[
                     <img key='0' className='sort-header-person'></img>
                 ]}
@@ -41,11 +58,11 @@ export default class ListSort extends Component {
                 >笔记分类</NavBar>
                 <div className='sort-center'>
                 {
-                    this.state.data.map((tag,idx)=>
-                    <li key={idx} className="sort-li" style={{background:"url(" + require("../" +tag.img_path) + ")"}} onClick={() => window.location='/'}>
+                    this.state.datas.map((tag,idx)=>
+                    <li key={idx} className="sort-li" style={{background:"url(" + require("../" +tag.img_path) + ")"}} onClick={this.jumpToSion}>
                     {/* <li key={idx} className="sort-li" style={{background:"url(" + require('../images/sort-test1.jpg') + ")"}} 
                     onClick={() => window.location='/'} >  */}
-                        <p>{tag.item}</p>
+                        <p>{tag.tags}</p>
                     </li>)
                 }
                 </div>

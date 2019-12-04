@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {Link} from 'react-router-dom'
 import '../css/Login.css';
 // import store from './UserId';
 //登录页
@@ -33,13 +34,21 @@ export default class Login extends Component{
     .then(data=>{
       // 返回数据格式：{msg: "success/pwdErr/notExist"}
       console.log(data);
+      if(data.msg === 'success'){
+        localStorage.setItem('uid',data.uid);
+        window.location = '/sort';
+      }else if(data.msg === 'pwdErr'){
+        alert('密码错误');
+      }else{
+        alert('用户不存在');
+      }
       // 根据返回的消息，渲染响应的页面
     })
   }
   render(){
     return(
       <div>
-        <p className = 'log-login'>登录</p>
+        <p className = 'log-login'></p>
         <form id="form" className="log-center" onSubmit={this.onSubmit.bind(this)}>
             <img className='log-img'></img>
             <input onChange={this.onChange.bind(this)} type='Email' className='log-email' placeholder='  Email' name="uemail"></input>
@@ -47,7 +56,7 @@ export default class Login extends Component{
             <a className='log-forget'>忘记密码？</a>
             <input onClick={this.get} type = 'submit' className = 'log-submit' value='登录'></input>
         </form> 
-        <a className='log-reg'>新用户？点击这里注册</a>
+        <a className='log-reg'>新用户？点击这里<Link to='/sign'>注册</Link></a>
       </div>
     )
   }

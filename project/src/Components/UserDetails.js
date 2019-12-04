@@ -8,17 +8,31 @@ export default class UserDetails extends Component {
     constructor(props){
         super(props)
         this.state={
-            data:{heading:'images/timg.jpg',uname:'请登录',uemail:'请登录'},           
+            data:{headimg:'images/timg.jpg',uname:'请登录',uemail:'请登录'},           
         }
     }
 
-    // componentDidMount(){
-    //     fetch('')
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         this.setState({data:res.data});
-    //     })
-    // }
+    componentDidMount(){
+        const uid = localStorage.getItem('uid');
+        const post = {uid:uid};
+        fetch('/userDetail',{
+            method:'POST',
+            mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data[0])
+            this.setState({
+                data: {
+                    headimg:data[0].headimg,
+                    uname:data[0].uname,
+                    uemail:data[0].uemail
+                }
+            })
+        })
+    }
 
     headingChange=()=> {
         console.log('x');
@@ -27,13 +41,14 @@ export default class UserDetails extends Component {
         this.setState({
             data:{heading:'images/timg.jpg',uname:'请登录',uemail:'请登录'}
         })
+        window.location = '/'
     }
 
     render() {
         return (
             <div>
-                <Icon type="left" onClick={() => window.location='/sort'} style={{marginLeft:'10%',paddingTop:'30px',float:'left'}}/>
-                <img src={require("../" +this.state.data.heading)} className='user-heading' onClick={() => this.headingChange()}></img>
+                <Icon type="left" onClick={() => window.location='/sort'} style={{marginLeft:'5%',paddingTop:'30px',float:'left'}}/>
+                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => this.headingChange()}></img>
                 <p className='user-name'>{this.state.data.uname}</p>
                 <p className='user-email'>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
@@ -55,7 +70,7 @@ export default class UserDetails extends Component {
                 </div>
                 <div className='user-mark1'></div>
                 <p className='user-out' onClick={() =>
-                        alert('Delete', 'Are you sure???', [
+                        alert('退出登录', 'Are you sure???', [
                         { text: '取消', onPress: () => console.log('cancel') },
                         { text: '确定', onPress: () => this.userOut() },
                         ])

@@ -1,0 +1,34 @@
+.msg-title{
+    float: left;
+    width: 80%;
+    /* padding-left: 3%; */
+    text-align: center;
+    padding-top: 12px;
+    margin-right: 10%;
+}
+.msg-list{
+    width: 100%;
+    float: left;
+    list-style: none;
+}
+.msg-li{
+    background-color: #fff;
+}
+.msg-li:hover{
+    background-color: #f8f8f8;
+}
+.msg-img{
+    margin-top: 10px;
+    height: 46px;
+    width: 46px;
+    float: left;
+    border-radius: 23px;
+    margin-left: 5%;
+}
+.msg-text{
+    margin: 0;
+    float: left;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 10%;
+}
