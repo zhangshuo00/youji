@@ -9,10 +9,10 @@ router.post('/',async (req,res)=>{
     // const uid = 'k3i297def';
     
     var result = await query('select uname,headimg,signature from user where uid=?',[uid]);
-    result = JSON.parse(JSON.stringify(result))[0];
+    result = JSON.parse(JSON.stringify(result));
 
     res.send(result);
-    // {"uname":"张三","headimg":"../images/zhangsan.jpg","signature":"这个人很懒，什么都没有写"}
+    // [{"uname":"张三","headimg":"../images/zhangsan.jpg","signature":"这个人很懒，什么都没有写"}]
 });
 
 module.exports = router;
