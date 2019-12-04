@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Person.css';
+import '../css/Person.css';
 import { Icon} from 'antd-mobile';
 export default class AppHome extends Component {
     //个人信息页

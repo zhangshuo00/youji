@@ -9,12 +9,12 @@ export default class Sion extends Component {
         this.state={
             datacopy:[],
             data:[
-                {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味面包'},           
-                {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜'},
-                {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜2'},
-                {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜3'},
-                {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜4'},
-                {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜5'},
+                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味面包'},           
+                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜'},
+                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜2'},
+                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜3'},
+                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜4'},
+                // {img_path:'images/b7ac218a5ff18bb0d7df7b1c955c0d8f.jpg',chdate:'11月22号',title:'做一份美味炒菜5'},
             ],
         }
     }
@@ -27,15 +27,49 @@ export default class Sion extends Component {
         // .then((res)=>{
         //     this.setState({data:res.data});
         // })
-        var copya = this.state.data;
-        var list=[];
-        for(var i=0;i<copya.length;i+=2){
-            list.push(copya.slice(i,i+2));
+        var storage = window.localStorage;
+        const post ={
+            uid:'k3i297def',
+            tags:1
         }
-        console.log(list);
-        this.setState({
-            datacopy:list
+        console.log(post);
+        fetch('/sion',{
+            method:'POST',
+            mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
         })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            this.setState((state)=>{
+                return {
+                    data:data
+                }
+            },()=>{
+                var copya = this.state.data;
+                var list=[];
+                for(var i=0;i<copya.length;i+=2){
+                    list.push(copya.slice(i,i+2));
+                }
+                // console.log(list);
+                this.setState({
+                    datacopy:list
+                })
+            })
+            console.log(this.state.data);
+            // var copya = this.state.data;
+            // var list=[];
+            // for(var i=0;i<data.length;i+=2){
+            //     list.push(data.slice(i,i+2));
+            // }
+            // this.setState({
+            //         datacopy:list
+            //     })
+            // 根据返回的消息，渲染响应的页面
+        })
+
+        
     }
 
 
@@ -76,7 +110,8 @@ export default class Sion extends Component {
                                     {
                                          item.map((ita)=>(
                                             <Flex.Item> 
-                                                <div><Link to={{pathname:'sionple'}}><img src={require("../" +ita.img_path)} style={{height:'30%',width:'100%',borderRadius: '10px'}}></img></Link>
+                                                <div>
+                                                    <Link to={{pathname:'sionple'}}><img src={require("../" +ita.ch_headimg)} style={{height:'120px',width:'150px',borderRadius: '10px'}}></img></Link>
                                                 <p>{ita.chdate}</p>
                                                 <p>{ita.title}</p>
                                                 </div>
