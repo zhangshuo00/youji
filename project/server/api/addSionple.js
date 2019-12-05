@@ -16,11 +16,13 @@ router.post('/',async (req,res)=>{
     month = chdate.getMonth()+1;
     chdate = chdate.getFullYear() + '-' + month + '-' + chdate.getDate();
     // console.log(chdate);
+    // 设置默认的文章图片
+    var ch_headimg = 'images/ch_headimg1.jpg';
 
     var tag_id = await query('select tag_id from tagsName where tags=?',[tags]);
     tag_id = JSON.parse(JSON.stringify(tag_id))[0].tag_id;
 
-    await query('insert into chapter (uid,title,tag_id,context,chdate,isShare) values(?,?,?,?,?,?)',[uid,title,tag_id,context,chdate,isShare]);
+    await query('insert into chapter (uid,title,tag_id,context,chdate,isShare,ch_headimg) values(?,?,?,?,?,?,?)',[uid,title,tag_id,context,chdate,isShare,ch_headimg]);
     
     res.send({msg:'success'});
 });

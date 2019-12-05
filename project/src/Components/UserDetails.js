@@ -53,8 +53,8 @@ export default class UserDetails extends Component {
                 <p className='user-email'>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
                 <div className='user-type'>
-                    <img src={require("../images/personx.png")}  onClick={() => window.location='/sort'}></img>
-                    <p onClick={() => window.location='/sort'}>个人主页</p>
+                    <img src={require("../images/personx.png")}  onClick={() => window.location='/perpon'}></img>
+                    <p onClick={() => window.location='/perpon'}>个人主页</p>
                 </div>
                 <div className='user-type'>
                     <img src={require("../images/infor.png")} onClick={() => window.location='/sort'}></img>

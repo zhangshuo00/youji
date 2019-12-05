@@ -20,7 +20,7 @@ export default class Sionnew extends Component {
     //     multiple: false,
     //   }
       onChange = (files, type, index) => {
-        console.log(files, type, index);
+        // console.log(files, type, index);
         this.setState({
           files,
         });
@@ -32,24 +32,26 @@ export default class Sionnew extends Component {
         });
       }
       submitSion = () =>{
-        const title = document.getElementById('title').value;
-        const context = document.getElementById('context').value;
         const post = {
-          title :title,
-          context: context
+          uid: localStorage.getItem('uid'),
+          tags: localStorage.getItem('tags'),
+          title :document.getElementById('title').value,
+          context: document.getElementById('context').value,
+          isShare: this.state.checked ? 1 : 0
         }
-        console.log(title,context,this.state.checked)
-        // fetch('',{
-        //   method:'POST',
-        //   mode:'cors',
-        //   headers: {'Content-Type': 'application/json'},
-        //   body:JSON.stringify(post)
-        // })
-        // .then(res=>res.json())
-        // .then(data=>{
-        //   console.log(data)
-        //   console.log(this.state.checked)
-        // })
+        fetch('/addSionple',{
+          method:'POST',
+          mode:'cors',
+          headers: {'Content-Type': 'application/json'},
+          body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data)
+          if(data.msg === 'success'){
+            // window.location.reload();
+          }
+        })
       }
 
 
@@ -58,9 +60,9 @@ export default class Sionnew extends Component {
         return (
             <div>
             <div>
-                            <NavBar
+                <NavBar
                 mode="light"
-                onLeftClick={() => window.location='/sion'}
+                onLeftClick={() => window.history.back(-1)}
                 // onRightClick={this.submitSion}
                 leftContent={[
                     <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,

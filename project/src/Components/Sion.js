@@ -17,7 +17,9 @@ export default class Sion extends Component {
             uid:localStorage.getItem('uid'),
             tags:decodeURI(window.location.search.split('=')[1])
         }
-        console.log(post);
+        localStorage.setItem('tags',decodeURI(window.location.search.split('=')[1]))
+        // console.log(post);
+        // console.log(localStorage.getItem('tags'))
         fetch('/sion',{
             method:'POST',
             mode:'cors',
@@ -57,6 +59,12 @@ export default class Sion extends Component {
         
     }
 
+    jumpToSionple = (e) =>{
+        // 跳转到笔记详情页，获取点击文章的chid
+        const chid = e.target.getAttribute('data-index');
+        // console.log(e.target.getAttribute('data-index'))
+        window.location = '/sionple?chid=' + chid;
+    }
 
 
     render() {
@@ -96,14 +104,13 @@ export default class Sion extends Component {
                                          item.map((ita)=>(
                                             <Flex.Item> 
                                                 <div>
-                                                    <Link to={{pathname:'sionple'}}><img src={require("../" +ita.ch_headimg)} style={{height:'120px',width:'150px',borderRadius: '10px'}}></img></Link>
-                                                <p>{ita.chdate}</p>
-                                                <p>{ita.title}</p>
+                                                    <img data-index={ita.chid} onClick={this.jumpToSionple} src={require("../" +ita.ch_headimg)} style={{height:'120px',width:'150px',borderRadius: '10px'}}></img>
+                                                    <p>{ita.chdate}</p>
+                                                    <p>{ita.title}</p>
                                                 </div>
                                             </Flex.Item>
                                         ))
                                     }
-                               
                                 </Flex> 
                                 </WingBlank> 
                             )

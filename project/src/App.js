@@ -12,6 +12,8 @@ import AddTag from './Components/AddTag';
 import UserDetails from './Components/UserDetails';
 import MessageList from './Components/MessageList';
 import PrivateLetter from './Components/PrivateLetter'
+import Welcome from './Components/Welcome'
+import Carousel from './Components/Carousel'
 
 
 
@@ -19,7 +21,9 @@ function App() {
   return (
     <Router>
       <div style={{backgroundColor:'#fff'}}>
-          <Route exact path='/' component={Login} />
+          <Route exact path='/' component={Welcome}/>
+          <Route exact path='/car' component={Carousel}/>
+          <Route exact path='/login' component={Login} />
           <Route exact path='/sign' component={Sign} />
           {/* <Route exact path='/login' component={Login} /> */}
           <Route path='/sion' component={Sion}/>

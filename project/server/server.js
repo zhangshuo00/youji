@@ -15,6 +15,10 @@ var addSionple = require('./api/addSionple');
 var personal = require('./api/personal');
 var userDetail = require('./api/userDetail');
 var editPerInfo = require('./api/editPerInfo');
+var discover = require('./api/discover');
+var getCarousel = require('./api/getCarousel');
+var me = require('./api/me');
+var getFollowUser = require('./api/getFollowUser');
 
 var app = express();
 
@@ -43,8 +47,12 @@ app.use('/sionple',sionple);// 笔记详情页api
 app.use('/addTag',addTag);// 新增笔记分类页 api
 app.use('/addSionple',addSionple);// 新增笔记 api
 app.use('/personal',personal);// 个人信息页 api
-app.use('/userDetail',userDetail);
-app.use('/editPerInfo',editPerInfo);
+app.use('/userDetail',userDetail);// 侧边栏 api
+app.use('/editPerInfo',editPerInfo);// 修改个人信息 api
+app.use('/discover',discover);// 发现页文章块的 api
+app.use('/getCarousel',getCarousel);// 获取轮播图的api
+app.use('/me',me);// 我页面的 api
+app.use('/getFollowUser',getFollowUser);// 获取关注用户列表
 
 // catch 404 and forward to error handler
 // app.use(function(req,res,next){
