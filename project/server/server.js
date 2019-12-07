@@ -19,6 +19,8 @@ var discover = require('./api/discover');
 var getCarousel = require('./api/getCarousel');
 var me = require('./api/me');
 var getFollowUser = require('./api/getFollowUser');
+var backGetUsers = require('./api/backGetUsers');
+var backLogin = require('./api/backLogin');
 
 var app = express();
 
@@ -53,6 +55,10 @@ app.use('/discover',discover);// 发现页文章块的 api
 app.use('/getCarousel',getCarousel);// 获取轮播图的api
 app.use('/me',me);// 我页面的 api
 app.use('/getFollowUser',getFollowUser);// 获取关注用户列表
+app.use('/backLogin',backLogin);// 后台登录接口
+
+// 后台系统接口
+app.use('/backGetUsers',backGetUsers);// 获取所有用户的信息
 
 // catch 404 and forward to error handler
 // app.use(function(req,res,next){

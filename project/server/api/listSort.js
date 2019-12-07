@@ -5,9 +5,9 @@ var query = require('../db');
 
 router.post('/',async (req,res)=>{
     // 获取前端返回的 uid
-    const uid = 'k3i297def';
-    console.log(req.body);
-    // const {uid} = req.body;
+    // const uid = 'k3i297def';
+    // console.log(req.body);
+    const {uid} = req.body;
     var tags = [];
     // 根据uid从数据库中查找相应的分类
     var tagId = await query('select tag_id,img_id from userTags where uid = ?',[uid]);
