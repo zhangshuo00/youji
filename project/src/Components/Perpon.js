@@ -4,7 +4,7 @@ import { Icon} from 'antd-mobile';
 export default class Perpon extends Component {
     //个人信息页
     constructor(props){
-        super(props);
+        super();
         this.state={
             data:[
                 // {url_image:'images/timg.jpg',word:'',title:'眷恋'}, //url_image用户头像，word签名，title昵称
@@ -14,9 +14,9 @@ export default class Perpon extends Component {
 
     componentDidMount(){
         const post ={
-            uid: localStorage.getItem('uid'),
+            uid:'k3i297def',
         }
-        fetch('/personal',{
+        fetch('/perpon',{
             method:'POST',
             mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -35,8 +35,8 @@ export default class Perpon extends Component {
         return (
             <div>
             <div className="picture">
-                <Icon onClick={()=>window.history.back(-1)} key="0" type="left" style={{ marginRight: '16px' ,marginTop:'20px'}}></Icon>
-                <Icon onClick={()=>{window.location='/newperpon'}} key="0" type="plus" style={{ marginLeft: '80%' ,marginTop:'20px'}}></Icon>
+                <Icon onClick={()=>{window.location='/sion'}} key="0" type="left" style={{ marginRight: '16px' }}></Icon>
+                <Icon onClick={()=>{window.location='/newperpon'}} key="0" type="plus" style={{ marginLeft: '80%' }}></Icon>
             </div>
             {this.state.data.map(
                             (item,index)=>(
