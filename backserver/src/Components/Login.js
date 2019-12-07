@@ -35,7 +35,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-                <Row style={{marginTop:'30%'}} type="flex" align="middle">
+                <Row style={{marginTop:'10%'}} type="flex" align="middle">
                     <Col span={8} offset={8}>
                     {/* col-12 col-offset-6 */}
                         <Form className="login-form">
