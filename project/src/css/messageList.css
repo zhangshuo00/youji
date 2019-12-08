@@ -1,10 +1,14 @@
 .msg-title{
-    float: left;
+    /* float: left;
     width: 80%;
-    /* padding-left: 3%; */
+    padding-left: 3%;
     text-align: center;
     padding-top: 12px;
-    margin-right: 10%;
+    margin-right: 10%; */
+    margin-left: 10%;
+    height: 25px;
+    width: auto;
+    content: url(../images/category.png);
 }
 .msg-list{
     width: 100%;
@@ -13,6 +17,7 @@
 }
 .msg-li{
     background-color: #fff;
+    margin-bottom: 2px;
 }
 .msg-li:hover{
     background-color: #f8f8f8;
@@ -25,10 +30,32 @@
     border-radius: 23px;
     margin-left: 5%;
 }
+.msg-center{
+
+}
 .msg-text{
     margin: 0;
     float: left;
     font-size: 20px;
-    margin-top: 20px;
-    margin-left: 10%;
+    margin-top: 14px;
+    margin-left: 5%;
+    width: 50%;
+}
+.msg-last{
+    margin: 0;
+    float: left;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 5%;
+    color: #928f8f;
+    width: 50%;
+}
+.msg-time{
+    margin: 0;
+    float: right;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-right: 2%;
+    color: #bbb6b6;
+    /* width: 50%; */
 }

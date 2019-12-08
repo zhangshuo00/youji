@@ -1,0 +1,129 @@
+.find-search-list{
+  padding: 0%;
+  margin: 0%;
+  float: left;
+  width: 12%;
+  height: 44px;
+  padding-right: 2%;
+  margin-top: 10px;
+}
+.find-search-list img{
+  /* width: 60%; */
+  margin-top: 5px;
+  margin-left: 30%;
+  height: 34px;
+  display: block;
+}
+.am-search{
+  /* opacity: 0.5;
+  background-color: #918c8c !important; */
+  background-color: #FAA755 !important;
+  width: 86% !important;
+  float: right;
+  margin: 0%;
+  padding: 0%;
+  border: none;
+  margin-top: 10px;
+}
+
+.am-search-input{
+  border-radius: 5px !important;
+  border: none;
+}
+.find-search{
+  position: fixed;
+  width: 100%;
+  padding-right: 2%;
+  z-index:9999;
+  background-color: #FAA755;
+}
+.find-heading{
+  width: 100%;
+  float: left;
+  background-color: #fff;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+.find-head{
+  float: left;
+  margin-left: 5%;
+  width: 12%;
+  height: 44px;
+  border-radius: 25px;
+  margin-top: 10px;
+}
+.find-author{
+  margin: 0;
+  width: 78%;
+  float: left;
+  margin-left: 5%;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.find-time{
+  margin: 0;
+  width: 78%;
+  float: left;
+  margin-left: 5%;
+  font-size: 12px;
+  color: rgb(185, 184, 184);
+}
+.find-essay{
+  width: 100%;
+  float: left;
+}
+.find-title{
+  margin: 0%;
+  width: 90%;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left:5%;
+  margin-right: 5%;
+  float: left;
+}
+.find-img1{
+  float: left;
+  margin-left: 5%;
+  width: 44%;
+  margin-right: 2%;
+  height: 100px;
+}
+.find-img2{
+  float: left;
+  margin-right: 5%;
+  width: 44%;
+  height: 100px;
+}
+.find-button{
+  width: 100%;
+  margin-top: 10px;
+  float: left;
+}
+.find-img-like{
+  width: auto;
+  float: left;
+  margin-left: 9%;
+  border: none;
+  height: 16px;
+}
+.find-img-collect{
+  width: auto;
+  float: left;
+  margin-left: 15%;
+  border: none;
+  height: 16px;
+}
+.find-like{
+  margin: 0%;
+  float: left;
+  margin-left: 2%;
+  font-size: 14px;
+  margin-top: 2px;
+}
+.find-collect{
+  margin: 0%;
+  margin-left: 2%;
+  float: left;
+  font-size: 14px;
+  margin-top: 2px;
+}
