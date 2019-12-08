@@ -36,6 +36,11 @@ export default class Login extends Component {
         return (
             <div>
                 <Row style={{marginTop:'10%'}} type="flex" align="middle">
+                    <Col span={8} offset={10}>
+                        <h1>有纪后台管理系统</h1>
+                    </Col>
+                </Row>
+                <Row style={{marginTop:'100px'}} type="flex" align="middle">
                     <Col span={8} offset={8}>
                     {/* col-12 col-offset-6 */}
                         <Form className="login-form">
