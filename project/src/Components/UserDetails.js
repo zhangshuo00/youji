@@ -47,14 +47,14 @@ export default class UserDetails extends Component {
     render() {
         return (
             <div>
-                <Icon type="left" onClick={() => window.location='/sort'} style={{marginLeft:'5%',paddingTop:'30px',float:'left'}}/>
+                <Icon type="left" onClick={() =>  window.history.back(-1)} style={{marginLeft:'5%',paddingTop:'30px',float:'left'}}/>
                 <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => this.headingChange()}></img>
                 <p className='user-name'>{this.state.data.uname}</p>
                 <p className='user-email'>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
                 <div className='user-type'>
-                    <img src={require("../images/personx.png")}  onClick={() => window.location='/perpon'}></img>
-                    <p onClick={() => window.location='/perpon'}>个人主页</p>
+                    <img src={require("../images/personx.png")}  onClick={() => window.location='/sort'}></img>
+                    <p onClick={() => window.location='/sort'}>个人主页</p>
                 </div>
                 <div className='user-type'>
                     <img src={require("../images/infor.png")} onClick={() => window.location='/sort'}></img>

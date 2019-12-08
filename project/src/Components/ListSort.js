@@ -54,7 +54,7 @@ export default class ListSort extends Component {
                 ]}
                 rightContent={[
                     <img key='0' className='sort-header-add' onClick={() => window.location='/addTag'}></img>
-                ]}  style={{paddingTop:'10px'}}
+                ]}  style={{paddingTop:'10px',width:'100%',backgroundColor:'#FAA755',color:'#fff'}}
                 >笔记分类</NavBar>
                 <div className='sort-center'>
                 {
