@@ -52,8 +52,8 @@ export default class PrivateLetter extends Component {
     render() {
         return (
             <div>
-                <div style={{width:'100%',backgroundColor:'#F8F8F8',height:'60px'}}>
-                    <Icon type="left" className='letter-left' onClick={() => window.location='/msg'} 
+                <div style={{width:'100%',backgroundColor:'#FAA755',height:'60px'}}>
+                    <Icon type="left" className='letter-left' onClick={() =>  window.history.back(-1)} 
                         style={{color:'#000',float: 'left',width: '10%',marginTop:'27px'}}/>
                     <p className='letter-title' style={{color:'#000',fontSize:'16px'}}>{this.state.other}</p>
                 </div>
