@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom'
-import '../css/Login.css';
+import '../css/login.css';
 // import store from './UserId';
 //登录页
 
@@ -53,10 +53,10 @@ export default class Login extends Component{
             <img className='log-img'></img>
             <input onChange={this.onChange.bind(this)} type='Email' className='log-email' placeholder='  Email' name="uemail"></input>
             <input onChange={this.onChange.bind(this)} type='password' className='log-email' placeholder='  密码' name="upassword"></input>
-            <a className='log-forget'>忘记密码？</a>
+            <a className='log-forget' href=''>忘记密码？</a>
             <input onClick={this.get} type = 'submit' className = 'log-submit' value='登录'></input>
         </form> 
-        <a className='log-reg'>新用户？点击这里<Link to='/sign'>注册</Link></a>
+        <a className='log-reg' href='/sign'>新用户？点击这里注册</a>
       </div>
     )
   }
