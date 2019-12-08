@@ -11,7 +11,7 @@ router.post('/',async (req,res)=>{
     // const usex = '男';
     // const signature = '我不懒，所以我写了点啥'
 
-    await query('insert into table user (uname,usex,signature) values(?,?,?)',[uname,usex,signature]);
+    await query('update user set uname=?,usex=?,signature=? where uid=?',[uname,usex,signature,uid]);
     res.send({msg:'success'});
 });
 

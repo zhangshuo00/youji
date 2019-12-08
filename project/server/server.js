@@ -21,6 +21,8 @@ var me = require('./api/me');
 var getFollowUser = require('./api/getFollowUser');
 var backGetUsers = require('./api/backGetUsers');
 var backLogin = require('./api/backLogin');
+var backGetChapter = require('./api/backGetChapter');
+var getUserCount = require('./api/getUserCount');
 
 var app = express();
 
@@ -55,10 +57,13 @@ app.use('/discover',discover);// 发现页文章块的 api
 app.use('/getCarousel',getCarousel);// 获取轮播图的api
 app.use('/me',me);// 我页面的 api
 app.use('/getFollowUser',getFollowUser);// 获取关注用户列表
-app.use('/backLogin',backLogin);// 后台登录接口
+
 
 // 后台系统接口
+app.use('/backLogin',backLogin);// 后台登录接口
 app.use('/backGetUsers',backGetUsers);// 获取所有用户的信息
+app.use('/backGetChapter',backGetChapter);// 获取所有文章的信息
+app.use('/getUserCount',getUserCount);// 获取用户数量、文章数量，分享的文章数量
 
 // catch 404 and forward to error handler
 // app.use(function(req,res,next){
