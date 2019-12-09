@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post('/',async (req,res)=>{
     // 请求中须携带的数据 uid，tags，title，context，isShare，添加图片的路径img_path
-    // 
-    const {uid,tags,title,context,isShare} = req.body;
+    // post请求中的 imgData需要时一个数据
+    const {uid,tags,title,context,isShare,imgData} = req.body;
     // const uid = 'k3i297def';
     // const tags = '测试2';
     // const title = '测试测试';
