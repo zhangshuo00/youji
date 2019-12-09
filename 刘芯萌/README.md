@@ -15,9 +15,22 @@
 
 2019.12.4 tbc.
 
+>修改chapter表，添加likes列关联findNote表  
 >添加adminuser表，存储后台管理人员  
 >添加carousel表，存储轮播图  
 >添加followUser表，存储关注用户  
 >修改并重新上传逻辑结构图  
 
-2019.12.9 tbc.
+2019.12.9 tbc.  
+ ------  
+ ## 各表结构 ##
+user:  
+| Field | Type | Key | Default | Extra |  
+|:-------:|:------:|:------:|:-------:|:------:|
+| uid | varchar(20) | PRI | NULL |  |  
+| uemail | varchar(20) | UNI | NULL |  |  
+| uname | varchar(20) |  | NULL |  |  
+| headimg | varchar(100) |  | NULL |  |  
+| usex | char(2) |  | NULL |  |  
+| signature | varchar(40) |  | NULL |  |  
+| upassword | varchar(20) |  | NULL |  |  
