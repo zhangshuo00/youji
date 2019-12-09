@@ -8,43 +8,43 @@ constructor(){
   super();
   this.state = {
     uid:'',
-          name:'',//姓名
-          context:'',//签名
-          img_path:'',//图片
+          uname:'',//姓名
+          signature:'',//签名
+          // img_path:'',//图片
           email:'',//邮件
-          exc:''//性别
+          usex:''//性别
   }
 }
-onChange1(e){// 当input内改变时，将value值写入state
-  this.setState({
-    // title:document.getElementById('title').innerHTML
-    img_path:e.target.value
-  })
-}
-onChange2(e){// 当input内改变时，将value值写入state
-  this.setState({
-    // context:document.getElementById('context').innerHTML
-    context:e.target.value
-  })
-}
-onChange3(e){// 当input内改变时，将value值写入state
-  this.setState({
-    // context:document.getElementById('context').innerHTML
-    name:e.target.value
-  })
-}
-onChange4(e){// 当input内改变时，将value值写入state
-  this.setState({
-    // context:document.getElementById('context').innerHTML
-    exc:e.target.value
-  })
-}
-onChange5(e){// 当input内改变时，将value值写入state
-  this.setState({
-    // context:document.getElementById('context').innerHTML
-    email:e.target.value
-  })
-}
+// onChange1(e){// 当input内改变时，将value值写入state
+//   this.setState({
+//     // title:document.getElementById('title').innerHTML
+//     img_path:e.target.value
+//   })
+// }
+// onChange2(e){// 当input内改变时，将value值写入state
+//   this.setState({
+//     // context:document.getElementById('context').innerHTML
+//     context:e.target.value
+//   })
+// }
+// onChange3(e){// 当input内改变时，将value值写入state
+//   this.setState({
+//     // context:document.getElementById('context').innerHTML
+//     name:e.target.value
+//   })
+// }
+// onChange4(e){// 当input内改变时，将value值写入state
+//   this.setState({
+//     // context:document.getElementById('context').innerHTML
+//     exc:e.target.value
+//   })
+// }
+// onChange5(e){// 当input内改变时，将value值写入state
+//   this.setState({
+//     // context:document.getElementById('context').innerHTML
+//     email:e.target.value
+//   })
+// }
     onSubmit(e){
       // const labelTitle = document.getElementById('title').innerHTML;
       //   const labelContext = document.getElementById('context').innerHTML;
@@ -55,13 +55,13 @@ onChange5(e){// 当input内改变时，将value值写入state
         const post ={
           uid:'k3i297def', 
           //img_path:this.state.img_path,
-          name:this.state.name,
-          context:this.state.context,
-          email:this.state.email,
-          exc:this.state.exc,
+          uname:document.getElementById('2').value,
+          signature:document.getElementById('1').value,
+          // email:document.getElementById('4').value,
+          usex:document.getElementById('3').value,
         }
       console.log(post);
-      fetch('/newperpon',{
+      fetch('/editPerInfo',{
         method:'POST',
         mode:'cors',
         headers: {'Content-Type': 'application/json'},
@@ -80,8 +80,8 @@ onChange5(e){// 当input内改变时，将value值写入state
             <div>
             <div>
                             <NavBar
-                style={{backgroundColor:'pink',color:'white'}}
-                onLeftClick={() => window.location='/perpon'}
+                style={{backgroundColor:'#FAA755',color:'white'}}
+                onLeftClick={() => window.history.back(-1)}
                 leftContent={[
                     <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
                   ]}
@@ -92,25 +92,29 @@ onChange5(e){// 当input内改变时，将value值写入state
             </div>
             <div>
                 <List renderHeader={() => 'Format'}>
-              <InputItem
+              {/* <InputItem
                 type="image" value={this.state.img_path} onChange={(e) => this.onChange1(e)}
-              >头像</InputItem>
+              >头像</InputItem> */}
               <InputItem
-                type="text" value={this.state.context} onChange={(e) => this.onChange2(e)}
+                type="text" 
                 placeholder="做一份美食，看一场电影"
+                id="1"
               >签名</InputItem>
               <InputItem
-                type="text" value={this.state.name} onChange={(e) => this.onChange3(e)}
+                type="text" 
                 placeholder="眷恋"
+                id="2"
               >昵称</InputItem>
               <InputItem
-                type="text" value={this.state.sex} onChange={(e) => this.onChange4(e)}
+                type="text" 
                 placeholder="男"
+                id="3"
               >性别</InputItem>
-              <InputItem
-                type="email" value={this.state.email} onChange={(e) => this.onChange5(e)}
+              {/* <InputItem
+                type="email" 
                 placeholder="1062208122@qq.com"
-              >邮箱</InputItem>
+                id="4"
+              >邮箱</InputItem> */}
             </List>
             
             </div>

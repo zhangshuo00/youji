@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../css/Person.css';
 import { Icon} from 'antd-mobile';
+import { NavBar} from 'antd-mobile';
+
 export default class Perpon extends Component {
     //个人信息页
     constructor(props){
@@ -16,7 +18,7 @@ export default class Perpon extends Component {
         const post ={
             uid:'k3i297def',
         }
-        fetch('/perpon',{
+        fetch('/personal',{
             method:'POST',
             mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -34,9 +36,19 @@ export default class Perpon extends Component {
     render() {
         return (
             <div>
+                <div>
+                            <NavBar
+                style={{backgroundColor:'#FAA755',color:'white'}}
+                onLeftClick={() => window.history.back(-1)}
+                leftContent={[
+                    <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
+                  ]}
+                  rightContent={[
+                    <Icon onClick={()=>{window.location='/newperpon'}} key="0" type="plus"></Icon>
+                  ]}
+                >个人信息 </NavBar>
+                </div>
             <div className="picture">
-                <Icon onClick={()=>{window.location='/sion'}} key="0" type="left" style={{ marginRight: '16px' }}></Icon>
-                <Icon onClick={()=>{window.location='/newperpon'}} key="0" type="plus" style={{ marginLeft: '80%' }}></Icon>
             </div>
             {this.state.data.map(
                             (item,index)=>(
