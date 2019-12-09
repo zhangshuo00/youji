@@ -23,6 +23,7 @@ var backGetUsers = require('./api/backGetUsers');
 var backLogin = require('./api/backLogin');
 var backGetChapter = require('./api/backGetChapter');
 var getUserCount = require('./api/getUserCount');
+var discoverSearch = require('./api/discoverSearch');
 
 var app = express();
 
@@ -57,6 +58,7 @@ app.use('/discover',discover);// 发现页文章块的 api
 app.use('/getCarousel',getCarousel);// 获取轮播图的api
 app.use('/me',me);// 我页面的 api
 app.use('/getFollowUser',getFollowUser);// 获取关注用户列表
+app.use('/discoverSearch',discoverSearch);// 搜索接口
 
 
 // 后台系统接口
