@@ -4,7 +4,8 @@
 >本文件夹内包含上传服务器内的youji数据库文件夹及数据库逻辑结构图  
 >覆盖使用时可通过WinSCP直接拉取至本地服务器的 **/var/lib/mysql/** 目录下  
 >数据库内暂时只存了测试用数据  
->逻辑结构图虽问题的发现会不断调整
+>逻辑结构图会随着问题的发现会不断调整  
+* 底部为各个表的结构，目的为直观展示，随问题的发现不断调整
 
 2019.11.28 tbc.  
 
@@ -22,6 +23,7 @@
 >修改并重新上传逻辑结构图  
 
 2019.12.9 tbc.  
+
  ------  
  ## 各表结构 ##
 user:  
@@ -77,6 +79,217 @@ user:
  </tr>
  <tr>
   <th>upassword</th>
+  <th>varchar(20)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+</table>
+chapter:
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <td>chid</td>
+  <td>int</td>
+  <td>PRI</td>
+  <td>NULL</td>
+  <td>auo_increment</td>
+ </tr>
+ <tr>
+  <td>uid</td>
+  <td>varchar(20)</td>
+  <td>MUL</td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>title</td>
+  <td>varchar(20)</td>
+  <td></td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>tag_id</td>
+  <td>int</td>
+  <td>MUL</td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>context</td>
+  <td>varchar(500)</td>
+  <td></td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>chdate</td>
+  <td>varchar(20)</td>
+  <td></td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>isShare</td>
+  <td>tinyint</td>
+  <td></td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>ch_headimg</td>
+  <td>varchar(40)</td>
+  <td></td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>favorites</td>
+  <td>int</td>
+  <td></td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>likes</td>
+  <td>int</td>
+  <td></td>
+  <td>NULL</td>
+  <td></td>
+ </tr>
+</table>
+images:
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>img_id</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th>auto_increment</th>
+ </tr>
+ <tr>
+  <th>img_id</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>chid</th>
+  <th>int</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+</table>
+userTags:
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>ut_id</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th>auto_increment</th>
+ </tr>
+ <tr>
+  <th>uid</th>
+  <th>varchar(20)</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>ag_id</th>
+  <th>int</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>img_id</th>
+  <th>int</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+</table>
+tagsName:
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>tag_id</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th>auto_increment</th>
+ </tr>
+ <tr>
+  <th>tags</th>
+  <th>varchar(20)</th>
+  <th>UNI</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+</table>
+findNote:
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>uid</th>
+  <th>varchar(20)</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>chid</th>
+  <th>int</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>likes</th>
+  <th>varchar(20)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>comments</th>
   <th>varchar(20)</th>
   <th></th>
   <th>NULL</th>
