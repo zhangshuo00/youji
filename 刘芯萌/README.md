@@ -11,11 +11,13 @@
 >删除noteList表  
 >privateletter重制，同时新增两个关联表sendMes、receiveMes  
 >sendMes同时可以实现获取用户消息组  
+>修改并重新上传逻辑结构图  
 
 2019.12.4 tbc.
 
 >添加adminuser表，存储后台管理人员  
 >添加carousel表，存储轮播图  
 >添加followUser表，存储关注用户  
+>修改并重新上传逻辑结构图  
 
 2019.12.9 tbc.
