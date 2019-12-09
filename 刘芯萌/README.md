@@ -25,12 +25,61 @@
  ------  
  ## 各表结构 ##
 user:  
-| Field | Type | Key | Default | Extra |  
-|:-------:|:------:|:------:|:-------:|:------:|
-| uid | varchar(20) | PRI | NULL |  |  
-| uemail | varchar(20) | UNI | NULL |  |  
-| uname | varchar(20) |  | NULL |  |  
-| headimg | varchar(100) |  | NULL |  |  
-| usex | char(2) |  | NULL |  |  
-| signature | varchar(40) |  | NULL |  |  
-| upassword | varchar(20) |  | NULL |  |  
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>uid</th>
+  <th>varchar(20)</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>uemail</th>
+  <th>varchar(20)</th>
+  <th>UNI</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>uname</th>
+  <th>varchar(20)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>headimg</th>
+  <th>varchar(100)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>usex</th>
+  <th>char(2)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>signature</th>
+  <th>varchar(40)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>upassword</th>
+  <th>varchar(20)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+</table>
