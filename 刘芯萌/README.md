@@ -16,12 +16,12 @@
 
 2019.12.4 tbc.
 
+>删除findNote表  
 >修改chapter表，添加likes列关联findNote表  
 >添加adminuser表，存储后台管理人员  
 >添加carousel表，存储轮播图  
 >添加followUser表，存储关注用户  
 >修改并重新上传逻辑结构图  
-
 2019.12.9 tbc.  
 
  ------  
@@ -258,7 +258,7 @@ tagsName:
   <th></th>
  </tr>
 </table>
-findNote:
+userCollection:
 <table>
  <tr>
   <th>Field</th>
@@ -266,6 +266,13 @@ findNote:
   <th>Key</th>
   <th>Default</th>
   <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>colid</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th>auto_increment</th>
  </tr>
  <tr>
   <th>uid</th>
@@ -281,17 +288,72 @@ findNote:
   <th>NULL</th>
   <th></th>
  </tr>
+</table>
+followUsers:
+<table>
  <tr>
-  <th>likes</th>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>fid</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th>auto_increment</th>
+ </tr>
+ <tr>
+  <th>uid</th>
+  <th>varchar(20)</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>foluid</th>
   <th>varchar(20)</th>
   <th></th>
   <th>NULL</th>
   <th></th>
  </tr>
+</table>
+sendMes:
+<table>
  <tr>
-  <th>comments</th>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>s_id</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th>auto_increment</th>
+ </tr>
+ <tr>
+  <th>uid</th>
   <th>varchar(20)</th>
+  <th>MUL</th>
+  <th>NULL</th>
   <th></th>
+ </tr>
+ <tr>
+  <th>s_uid</th>
+  <th>int</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>r_uid</th>
+  <th>int</th>
+  <th>MUL</th>
   <th>NULL</th>
   <th></th>
  </tr>
