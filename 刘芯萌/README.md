@@ -13,3 +13,9 @@
 >sendMes同时可以实现获取用户消息组  
 
 2019.12.4 tbc.
+
+>添加adminuser表，存储后台管理人员  
+>添加carousel表，存储轮播图  
+>添加followUser表，存储关注用户  
+
+2019.12.9 tbc.
