@@ -45,10 +45,11 @@ export default class App extends Component {
   render() {
     return (
       // <Router>
-      <div>
+      <div className='sign-page'>
       <div>
         <form className="sign-form"  onSubmit={this.onSubmit.bind(this)}>
         <p className='sign-p1'></p>
+        <img src={require(`../images/logo.png`)} className='sign-img'/>
         <div className='sign-div'>
           {/* <img src="my-app\src\img\1.jpg" className='sign-img'></img> */}
           <input onChange={this.onChange.bind(this)} className='sign-input1' placeholder="昵称" name="uname"></input>
