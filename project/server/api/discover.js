@@ -23,7 +23,7 @@ router.get('/',async (req,res)=>{
         }
         result[i].img_path = array;
         // 文章的内容
-        result[i].context = result[i].context.slice(0,20);
+        result[i].context = result[i].context.slice(0,20)+'...';
         var userInfo = await query('select uname,headimg from user where uid=?',[result[i].uid]);
         userInfo = JSON.parse(JSON.stringify(userInfo))[0];
         result[i].uname = userInfo.uname;

@@ -24,6 +24,9 @@ var backLogin = require('./api/backLogin');
 var backGetChapter = require('./api/backGetChapter');
 var getUserCount = require('./api/getUserCount');
 var discoverSearch = require('./api/discoverSearch');
+var getMsg = require('./api/getMsg');
+var getMsgList = require('./api/getMsgList');
+var sendMsg = require('./api/sendMsg');
 
 var app = express();
 
@@ -59,6 +62,9 @@ app.use('/getCarousel',getCarousel);// 获取轮播图的api
 app.use('/me',me);// 我页面的 api
 app.use('/getFollowUser',getFollowUser);// 获取关注用户列表
 app.use('/discoverSearch',discoverSearch);// 搜索接口
+app.use('/getMsgList',getMsgList);// 获取消息列表接口
+app.use('/getMsg',getMsg);// 获取对话详情
+app.use('/sendMsg',sendMsg);// 发送消息接口
 
 
 // 后台系统接口
