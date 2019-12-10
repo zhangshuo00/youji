@@ -327,9 +327,7 @@ followUsers:
   <th></th>
  </tr>
 </table>
-
-_sendMes\(旧) _\:
-
+sendMes(旧):
 <table>
  <tr>
   <th>Field</th>
