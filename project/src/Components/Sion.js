@@ -19,7 +19,7 @@ export default class Sion extends Component {
         }
         localStorage.setItem('tags',decodeURI(window.location.search.split('=')[1]))
         // console.log(post);
-        // console.log(localStorage.getItem('tags'))
+        console.log(localStorage)
         fetch('/sion',{
             method:'POST',
             mode:'cors',
@@ -74,17 +74,18 @@ export default class Sion extends Component {
                 {/* <Link className="back">></Link> */}
                 
                             <NavBar
+                            style={{backgroundColor:'#FAA755'}}
                 mode="light"
-                onLeftClick={() => window.location='/sort'}
-                onRightClick={() => window.location='/sionnew'}
+                onLeftClick={() => window.history.back(-1)}
+                // onRightClick={() => window.location='/sionnew'}
                 leftContent={[
-                    <Icon key="0" type="left" style={{ marginLeft: '16px' }} />,
+                    <Icon key="0" type="left" style={{ color:'#FFF'}} />,
                   ]}
                 rightContent={[
-                    <Icon onClick={()=>{window.location='/sionnew'}} key="0" type="plus" style={{ marginRight: '16px' }}></Icon>
+                    <Icon key="0" onClick={()=>{window.location='/sionnew'}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
                     
                   ]}
-                >美食记录</NavBar>
+                >{decodeURI(window.location.search.split('=')[1])}</NavBar>
                 {/* <img src=''></img> */}
                 {/* <link clsaaName='add'>+</link> */}
                 
@@ -92,13 +93,13 @@ export default class Sion extends Component {
             {/* <div>
                 <Grid data={data} columnNum={3} />
             </div> */}
-            <div style={{marginTop:'3%'}}>
+            <div style={{marginTop:'3%',paddingLeft:'3%'}}>
             {/* <WingBlank> 
                 <Flex>   */}
                    
             {this.state.datacopy.map(
                             (item,index)=>(
-                                <WingBlank> 
+                                <WingBlank style={{textAlign:'center'}}> 
                                 <Flex>
                                     {
                                          item.map((ita)=>(

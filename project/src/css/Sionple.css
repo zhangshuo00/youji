@@ -14,3 +14,6 @@ text-align: left;
 font-family: Arial;
 margin-left: 10%;
 }
+.am-navbar-light .am-navbar-title{
+    color: #fff;
+}

@@ -35,7 +35,7 @@ export default class Perpon extends Component {
     }
     render() {
         return (
-            <div>
+            <div  style={{backgroundColor:'#fff'}}>
                 <div>
                             <NavBar
                 style={{backgroundColor:'#FAA755',color:'white'}}
@@ -44,7 +44,7 @@ export default class Perpon extends Component {
                     <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
                   ]}
                   rightContent={[
-                    <Icon onClick={()=>{window.location='/newperpon'}} key="0" type="plus"></Icon>
+                    <Icon key="0" onClick={()=>{window.location='/newperpon'}} key="0" type="plus"></Icon>
                   ]}
                 >个人信息 </NavBar>
                 </div>

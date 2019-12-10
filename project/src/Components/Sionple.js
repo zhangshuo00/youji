@@ -40,7 +40,7 @@ export default class AppHome extends Component {
             <div>
                 <div>
                 <NavBar
-                style={{backgroundColor:'pink',color:'white'}}
+                style={{backgroundColor:'#FAA755',color:'white'}}
                 onLeftClick={() => window.history.back(-1)}
                 leftContent={[
                     <Icon key="0" type="left" style={{ marginLeft: '16px' }} />,

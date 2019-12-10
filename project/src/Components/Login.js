@@ -47,10 +47,10 @@ export default class Login extends Component{
   }
   render(){
     return(
-      <div>
-        <p className = 'log-login'></p>
+      <div className='log-back' style={{width:'100%',height:'100vh',background:"url(" + require("../images/back-login.jpg") + ")"}}>
+        <img className = 'log-login'></img>
         <form id="form" className="log-center" onSubmit={this.onSubmit.bind(this)}>
-            <img className='log-img'></img>
+            {/* <img className='log-img'></img> */}
             <input onChange={this.onChange.bind(this)} type='Email' className='log-email' placeholder='  Email' name="uemail"></input>
             <input onChange={this.onChange.bind(this)} type='password' className='log-email' placeholder='  密码' name="upassword"></input>
             <a className='log-forget' href=''>忘记密码？</a>

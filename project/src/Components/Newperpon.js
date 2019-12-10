@@ -91,7 +91,7 @@ constructor(){
                 >编辑信息 </NavBar>
             </div>
             <div>
-                <List renderHeader={() => 'Format'}>
+                <List>
               {/* <InputItem
                 type="image" value={this.state.img_path} onChange={(e) => this.onChange1(e)}
               >头像</InputItem> */}

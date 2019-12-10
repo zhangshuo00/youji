@@ -9,23 +9,29 @@ background-size: 90% 154px;
     margin:0 auto;
     width:80%;
     margin-top:10%;
+    padding-bottom: 180px;
 }
 .p1{
     margin-left: 10%;
-width: 33px;
-height: 23px;
-color: rgba(16, 16, 16, 1);
-font-size: 16px;
-text-align: left;
-font-family: PingFangSC-regular;
+    width: 33px;
+    height: 23px;
+    color: rgba(16, 16, 16, 1);
+    font-size: 16px;
+    text-align: left;
+    font-family: PingFangSC-regular;
 }
 .but{
-    margin-top:20%;
+    /* color: rgb(165, 162, 162); */
+    padding-top:30%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
 }
 .but1{
-    left: 17px;
-    top: 531px;
-    width: 159px;
+    /* left: 17px;
+    top: 531px; */
+    width: 43%;
     height: 44px;
     line-height: 20px;
     border-radius: 16px;
@@ -35,9 +41,9 @@ font-family: PingFangSC-regular;
     margin-left: 4%;
 }
 .but2{
-    left: 200px;
-    top: 531px;
-    width: 159px;
+    /* left: 200px;
+    top: 531px; */
+    width: 43%;
     height: 44px;
     line-height: 20px;
     border-radius: 16px;
@@ -47,5 +53,5 @@ font-family: PingFangSC-regular;
     font-size: 14px;
     text-align: center;
     font-family: Arial;
-    margin-left: 4%;
+    margin-left: 6%;
 }

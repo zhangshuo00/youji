@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { NavBar, Icon, WingBlank,InputItem,List, TextareaItem,Switch} from 'antd-mobile';
 import { ImagePicker, SegmentedControl } from 'antd-mobile';
+
+
 const data = [{
-    url: '../images/DLW7@W5XOHV9D2ZN3OU1DY3.png',
+    // url: '../images/sort-test1.jpg',
+    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
     id: '2121',
   }]
 export default class Sionnew extends Component {
@@ -20,7 +23,7 @@ export default class Sionnew extends Component {
     //     multiple: false,
     //   }
       onChange = (files, type, index) => {
-        // console.log(files, type, index);
+        console.log(files, type, index);
         this.setState({
           files,
         });
@@ -32,82 +35,89 @@ export default class Sionnew extends Component {
         });
       }
       submitSion = () =>{
+        const title = document.getElementById('title').value;
+        const context = document.getElementById('context').value;
         const post = {
-          uid: localStorage.getItem('uid'),
-          tags: localStorage.getItem('tags'),
-          title :document.getElementById('title').value,
-          context: document.getElementById('context').value,
-          isShare: this.state.checked ? 1 : 0
+          title :title,
+          context: context
         }
-        fetch('/addSionple',{
-          method:'POST',
-          mode:'cors',
-          headers: {'Content-Type': 'application/json'},
-          body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-          console.log(data)
-          if(data.msg === 'success'){
-            // window.location.reload();
-          }
-        })
+        console.log(title,context,this.state.checked)
+        // fetch('',{
+        //   method:'POST',
+        //   mode:'cors',
+        //   headers: {'Content-Type': 'application/json'},
+        //   body:JSON.stringify(post)
+        // })
+        // .then(res=>res.json())
+        // .then(data=>{
+        //   console.log(data)
+        //   console.log(this.state.checked)
+        // })
       }
 
 
     render() {
         const { files } = this.state;
         return (
-            <div>
-            <div>
-                <NavBar
-                mode="light"
-                onLeftClick={() => window.history.back(-1)}
-                // onRightClick={this.submitSion}
-                leftContent={[
-                    <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
-                  ]}
-                  rightContent={[
-                    <span onClick={this.submitSion}>保存</span>
-                  ]}
-                >新建笔记 </NavBar>
-            </div>
-        
-            <div>
-                <InputItem
-                id="title"
-                clear
-                placeholder="点击编辑标题"
-                ref={el => this.autoFocusInst = el}
-                >标题</InputItem>
-                {/* <textarea id="context" cols='50' rows='5' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'168px',width:'100%',border:'0px',lineHeight:'40px'}}>双击编辑文本</textarea> */}
-                <List>
-                <TextareaItem
-                  id="context"
-                  rows={5}
-                  placeholder="点击编辑笔记内容"
-                />
-              </List>
-            </div>
-                <WingBlank>
-                <ImagePicker
-                files={files}
-                onChange={this.onChange}
-                onImageClick={(index, fs) => console.log(index, fs)}
-                selectable={files.length < 1}
-                multiple={this.state.multiple}
-                /><span style={{color:'gray'}}>点击添加图片</span>
-            </WingBlank>
-            <List.Item
-            extra={<Switch
-            checked={this.state.checked}
-            onChange={() => {
-              this.setState({
-                checked: !this.state.checked,
-              });
-            }}
-            />}
-            >是否分享</List.Item>
+            <div style={{width:'100%',height:'100vh',backgroundColor:'#fff'}}>
+                <div>
+                                <NavBar
+                    style={{backgroundColor:'#FAA755'}}
+                    mode="light"
+                    onLeftClick={() => window.history.back(-1)}
+                    // onRightClick={this.submitSion}
+                    leftContent={[
+                        <Icon key="0" type="left" style={{ marginLeft: '1px',color:'#fff'}} />,
+                      ]}
+                      rightContent={[
+                        <span onClick={this.submitSion} style={{color:'#fff'}}>保存</span>
+                      ]}
+                    >新建笔记 </NavBar>
+                </div>
+            
+                <div>
+                    <InputItem
+                    id="title"
+                    clear
+                    placeholder="点击编辑标题"
+                    ref={el => this.autoFocusInst = el}
+                    >标题</InputItem>
+                    {/* <textarea id="context" cols='50' rows='5' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'168px',width:'100%',border:'0px',lineHeight:'40px'}}>双击编辑文本</textarea> */}
+                    <List>
+                    <TextareaItem
+                      id="context"
+                      rows={5}
+                      placeholder="点击编辑笔记内容"
+                    />
+                  </List>
+                </div>
+                    <WingBlank style={{backgroundColor:'#fff',margin:'0'}}>
+                    {/* <ImagePicker
+                    files={files}
+                    onChange={this.onChange}
+                    onImageClick={(index, fs) => console.log(index, fs)}
+                    selectable={files.length < 1}
+                    multiple={this.state.multiple}
+                    /> */}
+                    <ImagePicker
+                    files={files}
+                    onChange={this.onChange}
+                    onImageClick={(index, fs) => console.log(index, fs)}
+                    selectable={files.length < 7}
+                    multiple={this.state.multiple}
+                  />
+                    <span style={{color:'gray'}}>点击添加图片</span>
+                </WingBlank>
+                <List.Item
+                extra={<Switch
+                checked={this.state.checked}
+                onChange={() => {
+                  this.setState({
+                    checked: !this.state.checked,
+                  });
+                }}
+                />}
+                >是否分享</List.Item>
 
             </div>
         )
