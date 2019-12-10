@@ -25,6 +25,10 @@
 
 2019.12.9 tbc.  
 
+>删除receiveMes,privateletter表，私信功能相关表重新整合
+>sendMes表重置
+>添加sendEvent表
+
  ------  
  ## 各表结构 ##
 user:  
@@ -321,7 +325,7 @@ followUsers:
   <th></th>
  </tr>
 </table>
-sendMes:
+_sendMes(旧)_:
 <table>
  <tr>
   <th>Field</th>
