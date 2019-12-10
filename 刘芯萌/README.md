@@ -29,6 +29,8 @@
 >sendMes表重置
 >添加sendEvent表
 
+2019.12.10 ttbc.
+
  ------  
  ## 各表结构 ##
 user:  
@@ -325,7 +327,9 @@ followUsers:
   <th></th>
  </tr>
 </table>
-_sendMes(旧)_:
+
+_sendMes\(旧) _\:
+
 <table>
  <tr>
   <th>Field</th>
