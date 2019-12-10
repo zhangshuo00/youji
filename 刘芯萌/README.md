@@ -25,9 +25,9 @@
 
 2019.12.9 tbc.  
 
->删除receiveMes,privateletter表，私信功能相关表重新整合
->sendMes表重置
->添加sendEvent表
+>删除receiveMes,privateletter表，私信功能相关表重新整合  
+>sendMes表重置  
+>添加sendEvent表  
 
 2019.12.10 ttbc.
 
@@ -361,6 +361,61 @@ sendMes(旧):
   <th>r_uid</th>
   <th>int</th>
   <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+</table>
+receiveMes(已删除):
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>r_uid</th>
+  <th>int</th>
+  <th>PRI</th>
+  <th>NULL</th>
+  <th>auto_increment</th>
+ </tr>
+ <tr>
+  <th>uid</th>
+  <th>varchar(20)</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+</table>
+privateletter(已删除):
+<table>
+ <tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Ertra</th>
+ </tr>
+ <tr>
+  <th>s_id</th>
+  <th>int</th>
+  <th>MUL</th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>pl_info</th>
+  <th>varchar(50)</th>
+  <th></th>
+  <th>NULL</th>
+  <th></th>
+ </tr>
+ <tr>
+  <th>pl_time</th>
+  <th>datetime</th>
+  <th></th>
   <th>NULL</th>
   <th></th>
  </tr>
