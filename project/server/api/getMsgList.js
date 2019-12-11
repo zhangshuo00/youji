@@ -58,6 +58,7 @@ router.post('/',async (req,res)=>{
         // console.log(msg[0]);
         obj.aid = aid;
         obj.context = msg[0].context;
+        obj.sm_date = msg[0].sm_date;
         // console.log(obj)
         msgList[n] = obj;
     }

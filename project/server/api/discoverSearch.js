@@ -20,7 +20,7 @@ router.post('/',async(req,res)=>{
     }
     for(var j=0;j<array.length;j++){
         results[j] = result[array[j]];
-        results[j].context = results[j].context.slice(0,50)
+        results[j].context = results[j].context.slice(0,50)+'...';
     }
 
     res.send(results);
