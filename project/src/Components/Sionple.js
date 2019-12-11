@@ -8,9 +8,71 @@ export default class AppHome extends Component {
     constructor(props){
         super();
         this.state={
-            data:[]
+            data:[],
     }
     }
+      onSubmit2(e){
+        const data2 = document.getElementById('data2').innerHTML;//收藏100
+        const img2 = document.getElementById('img2').src;//收藏空心
+        console.log(this.state.data[0].isCollection);
+        if(this.state.data[0].isCollection==1){
+            const data4 = parseInt(data2)-1;//收藏100
+            document.getElementById('data2').innerHTML=data4;
+            var a= this.state.data;
+            console.log(a)
+            a[0].isCollection = 0;
+            this.setState({
+                data:a
+                // isCollection:0
+            })
+            console.log(data4);
+            const post ={
+                uid: localStorage.getItem('uid'),
+                chid: window.location.search.split('=')[1],
+            }
+            console.log(post);
+            fetch('/cancelCollection',{
+                method:'POST',
+                mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data);
+            })
+        }
+        else if(this.state.data[0].isCollection == 0){
+            const data4 = parseInt(data2)+1;//收藏100
+            document.getElementById('data2').innerHTML=data4;
+            var b= this.state.data;
+            console.log(b);
+            b[0].isCollection = 1;
+            this.setState({
+                data:b
+            })
+            console.log(data4);
+            const post ={
+                uid: localStorage.getItem('uid'),
+                chid: window.location.search.split('=')[1],
+            }
+            console.log(post);
+            fetch('/addFavorites',{
+                method:'POST',
+                mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+            console.log(data);
+            })
+        }
+        
+        
+        
+        
+      }
     componentDidMount(){
         // var storage = window.localStorage;
         const post ={
@@ -25,11 +87,13 @@ export default class AppHome extends Component {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
+            console.log(data[0].isCollection);
             this.setState({
-                data:data
+                data:data,
+                // isCollection:data[0].isCollection
             })
-            // 根据返回的消息，渲染响应的页面
+            console.log(this.state.data[0].isCollection)
+            // console.log(this.state.isCollection)
         })
     }
 
@@ -57,6 +121,13 @@ export default class AppHome extends Component {
                             <p className='p2'>{item.title}</p>
                             <p>{item.context}</p>
                         </div>
+                        {
+                            item.isCollection==1?<div>
+                            <img src={require("../images/exe-collection.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit2()}  id='img2'></img><span id='data2'>{item.favorites}</span>
+                        </div>:<div>
+                            <img src={require("../images/exe-collection1.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit2()}  id='img2'></img><span id='data2'>{item.favorites}</span>
+                        </div>
+                        }
                     </div>
                 ))}
             </div>

@@ -1,7 +1,12 @@
 import React, {Component } from 'react';
 import { NavBar, Icon} from 'antd-mobile';
 import { List, InputItem } from 'antd-mobile';
-
+import { WingBlank} from 'antd-mobile';
+import { ImagePicker} from 'antd-mobile';
+const data = [{
+  url: '../images/DLW7@W5XOHV9D2ZN3OU1DY3.png',
+  id: '2121',
+}]
 export default class AppHome extends Component {
 //个人信息编辑页
 constructor(){
@@ -12,7 +17,8 @@ constructor(){
           signature:'',//签名
           // img_path:'',//图片
           email:'',//邮件
-          usex:''//性别
+          usex:'',//性别
+          files:[],
   }
 }
 // onChange1(e){// 当input内改变时，将value值写入state
@@ -46,12 +52,11 @@ constructor(){
 //   })
 // }
     onSubmit(e){
-      // const labelTitle = document.getElementById('title').innerHTML;
-      //   const labelContext = document.getElementById('context').innerHTML;
-    //     const f=document.getElementsByClassName('path')[0].files[0];
-    // var reader = new FileReader();
-    // const fs = reader.readAsDataURL(f);	
-      //   console.log(labelContext,labelTitle);
+        var filelist = [];
+          this.state.files.map((item)=>{
+            filelist.push(item.url);
+          })
+          console.log(filelist);
         const post ={
           uid:'k3i297def', 
           //img_path:this.state.img_path,
@@ -59,6 +64,7 @@ constructor(){
           signature:document.getElementById('1').value,
           // email:document.getElementById('4').value,
           usex:document.getElementById('3').value,
+          files:filelist,
         }
       console.log(post);
       fetch('/editPerInfo',{
@@ -73,9 +79,25 @@ constructor(){
         })
         // 根据返回的消息，渲染响应的页面
     }
+    state = {
+      files: data,
+    }
+    onChange = (files, type, index) => {
+      console.log(files, type, index);
+      this.setState({
+        files,
+      });
+    }
+    onSegChange = (e) => {
+      const index = e.nativeEvent.selectedSegmentIndex;
+      this.setState({
+        multiple: index === 1,
+      });
+    }
 
 
     render() {
+      const { files } = this.state;
         return (
             <div>
             <div>
@@ -91,10 +113,22 @@ constructor(){
                 >编辑信息 </NavBar>
             </div>
             <div>
-                <List>
+                {/* <List renderHeader={() => 'Format'}> */}
               {/* <InputItem
-                type="image" value={this.state.img_path} onChange={(e) => this.onChange1(e)}
-              >头像</InputItem> */}
+                type="image" 
+                
+              >头像 */}
+              <WingBlank>
+                <ImagePicker
+                files={files}
+                onChange={this.onChange}
+                onImageClick={(index, fs) => console.log(index, fs)}
+                // selectable={files.length < 1}
+                multiple={this.state.multiple}
+                // id="path"
+                /><span style={{color:'gray'}}>点击添加头像</span>
+            </WingBlank>
+            {/* </InputItem> */}
               <InputItem
                 type="text" 
                 placeholder="做一份美食，看一场电影"
@@ -115,7 +149,7 @@ constructor(){
                 placeholder="1062208122@qq.com"
                 id="4"
               >邮箱</InputItem> */}
-            </List>
+            {/* </List> */}
             
             </div>
            

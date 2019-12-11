@@ -6,7 +6,7 @@ import Sion from './Components/Sion';
 import Sionple from './Components/Sionple';
 import Sionnew from './Components/Sionnew';
 import perpon from './Components/Perpon';
-import Newperpon from './Components/Newperpon';
+import Newperpon from './Components/NewPerpon';
 import ListSort from './Components/ListSort';
 import AddTag from './Components/AddTag';
 import UserDetails from './Components/UserDetails';
@@ -17,6 +17,10 @@ import Carousel from './Components/Carousel';
 import Find from './Components/Find';
 import Me from './Components/Me';
 import Tag from './Components/Tag';
+import Email from './Components/Email.js';
+import New from './Components/new.js';
+
+
 
 
 function App() {
@@ -40,6 +44,10 @@ function App() {
           <Route path='/letter' component={PrivateLetter}/>
           <Route path='/find' component={Find}/>
           <Route path='/me' component={Me}/>
+          <Route path='/session' component={Email}/>
+          <Route path='/new' component={New}/>
+
+
       </div>
     </Router>
   );

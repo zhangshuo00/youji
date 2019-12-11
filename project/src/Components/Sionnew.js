@@ -1,27 +1,73 @@
 import React, { Component } from 'react';
-import { NavBar, Icon, WingBlank,InputItem,List, TextareaItem,Switch} from 'antd-mobile';
-import { ImagePicker, SegmentedControl } from 'antd-mobile';
-
-
+import { NavBar, Icon, WingBlank,List,Switch} from 'antd-mobile';
+import { ImagePicker} from 'antd-mobile';
 const data = [{
-    // url: '../images/sort-test1.jpg',
-    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+    url: '../images/DLW7@W5XOHV9D2ZN3OU1DY3.png',
     id: '2121',
   }]
-export default class Sionnew extends Component {
-    constructor(props){
-      super(props);
-      this.state={
-        files: data,
-        multiple: false,
-        checked: false,
-        checked1: true,
-      }
+export default class SionNew extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      uid:'',
+            tags:'',
+            title:'点击添加标题',
+            context:'点击添加文本',
+            files:[],
+            checked: false,
     }
-    // state = {
-    //     files: data,
-    //     multiple: false,
-    //   }
+  }
+  onChange1(e){// 当input内改变时，将value值写入state
+    this.setState({
+      // title:document.getElementById('title').innerHTML
+      title:e.target.value
+    })
+  }
+  onChange2(e){// 当input内改变时，将value值写入state
+    this.setState({
+      // context:document.getElementById('context').innerHTML
+      context:e.target.value
+    })
+  }
+      onSubmit(e){
+        // const labelTitle = document.getElementById('title').innerHTML;
+        //   const labelContext = document.getElementById('context').innerHTML;
+      //     const f=document.getElementsByClassName('path')[0].files[0];
+      // var reader = new FileReader();
+      // const fs = reader.readAsDataURL(f);	
+        //   console.log(labelContext,labelTitle);
+        var filelist = [];
+        this.state.files.map((item)=>{
+          filelist.push(item.url);
+        })
+        console.log(filelist);
+          const post ={
+            uid:localStorage.getItem('uid'),
+            tags:localStorage.getItem('tags'),
+            title:this.state.title,
+            context:this.state.context,
+            files:filelist,
+            isShare: this.state.checked ? 1 : 0
+          }
+        console.log(post);
+        fetch('/addSionple/',{
+          method:'POST',
+          mode:'cors',
+          headers: {'Content-Type': 'application/json'},
+          body:JSON.stringify(post)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data.msg);
+        var storage = window.localStorage;
+        
+          })
+          // 根据返回的消息，渲染响应的页面
+      }
+      state = {
+        files: data,
+      }
       onChange = (files, type, index) => {
         console.log(files, type, index);
         this.setState({
@@ -34,91 +80,52 @@ export default class Sionnew extends Component {
           multiple: index === 1,
         });
       }
-      submitSion = () =>{
-        const title = document.getElementById('title').value;
-        const context = document.getElementById('context').value;
-        const post = {
-          title :title,
-          context: context
-        }
-        console.log(title,context,this.state.checked)
-        // fetch('',{
-        //   method:'POST',
-        //   mode:'cors',
-        //   headers: {'Content-Type': 'application/json'},
-        //   body:JSON.stringify(post)
-        // })
-        // .then(res=>res.json())
-        // .then(data=>{
-        //   console.log(data)
-        //   console.log(this.state.checked)
-        // })
-      }
 
 
     render() {
         const { files } = this.state;
         return (
-            <div style={{width:'100%',height:'100vh',backgroundColor:'#fff'}}>
-                <div>
-                                <NavBar
-                    style={{backgroundColor:'#FAA755'}}
-                    mode="light"
-                    onLeftClick={() => window.history.back(-1)}
-                    // onRightClick={this.submitSion}
-                    leftContent={[
-                        <Icon key="0" type="left" style={{ marginLeft: '1px',color:'#fff'}} />,
-                      ]}
-                      rightContent={[
-                        <span onClick={this.submitSion} style={{color:'#fff'}}>保存</span>
-                      ]}
-                    >新建笔记 </NavBar>
-                </div>
-            
-                <div>
-                    <InputItem
-                    id="title"
-                    clear
-                    placeholder="点击编辑标题"
-                    ref={el => this.autoFocusInst = el}
-                    >标题</InputItem>
-                    {/* <textarea id="context" cols='50' rows='5' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'168px',width:'100%',border:'0px',lineHeight:'40px'}}>双击编辑文本</textarea> */}
-                    <List>
-                    <TextareaItem
-                      id="context"
-                      rows={5}
-                      placeholder="点击编辑笔记内容"
-                    />
-                  </List>
-                </div>
-                    <WingBlank style={{backgroundColor:'#fff',margin:'0'}}>
-                    {/* <ImagePicker
-                    files={files}
-                    onChange={this.onChange}
-                    onImageClick={(index, fs) => console.log(index, fs)}
-                    selectable={files.length < 1}
-                    multiple={this.state.multiple}
-                    /> */}
-                    <ImagePicker
-                    files={files}
-                    onChange={this.onChange}
-                    onImageClick={(index, fs) => console.log(index, fs)}
-                    selectable={files.length < 7}
-                    multiple={this.state.multiple}
-                  />
-                    <span style={{color:'gray'}}>点击添加图片</span>
-                </WingBlank>
-                <List.Item
-                extra={<Switch
-                checked={this.state.checked}
-                onChange={() => {
-                  this.setState({
-                    checked: !this.state.checked,
-                  });
-                }}
-                />}
-                >是否分享</List.Item>
+            <div>
+            <div>
+                            <NavBar
+                style={{backgroundColor:'pink',color:'white'}}
+                onLeftClick={() => window.history.back(-1)}
+                leftContent={[
+                    <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
+                  ]}
+                  rightContent={[
+                    // <span>保存</span>
+                    <span onClick={() => this.onSubmit()} >保存</span>
 
+                  ]}
+                >新建笔记 </NavBar>
+            </div>
+            <div>
+                <textarea cols='20' rows='2' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'38px',width:'100%',border:'0px',lineHeight:'40px'}} id="title" value={this.state.title} onChange={(e) => this.onChange1(e)}>双击编辑标题</textarea>
+            </div>
+            <div>
+                <textarea cols='50' rows='5' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'168px',width:'100%',border:'0px',lineHeight:'40px'}} id="context" value={this.state.context} onChange={(e) => this.onChange2(e)}>双击编辑文本</textarea>
+            </div>
+                    <WingBlank>
+                <ImagePicker
+                files={files}
+                onChange={this.onChange}
+                onImageClick={(index, fs) => console.log(index, fs)}
+                // selectable={files.length < 1}
+                multiple={this.state.multiple}
+                // id="path"
+                /><span style={{color:'gray'}}>点击添加图片</span>
+            </WingBlank>
+            <List.Item
+            extra={<Switch
+            checked={this.state.checked}
+            onChange={() => {
+              this.setState({
+                checked: !this.state.checked,
+              });
+            }}
+            />}
+            >是否分享</List.Item>
             </div>
         )
     }
