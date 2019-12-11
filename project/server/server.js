@@ -27,6 +27,8 @@ var discoverSearch = require('./api/discoverSearch');
 var getMsg = require('./api/getMsg');
 var getMsgList = require('./api/getMsgList');
 var sendMsg = require('./api/sendMsg');
+var addFavorites = require('./api/addFavorites');
+var cancelCollection = require('./api/cancelCollection');
 
 var app = express();
 
@@ -65,6 +67,8 @@ app.use('/discoverSearch',discoverSearch);// 搜索接口
 app.use('/getMsgList',getMsgList);// 获取消息列表接口
 app.use('/getMsg',getMsg);// 获取对话详情
 app.use('/sendMsg',sendMsg);// 发送消息接口
+app.use('/addFavorites',addFavorites);// 添加收藏文章
+app.use('/cancelCollection',cancelCollection);// 取消收藏文章
 
 
 // 后台系统接口
