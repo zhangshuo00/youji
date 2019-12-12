@@ -29,6 +29,8 @@ var getMsgList = require('./api/getMsgList');
 var sendMsg = require('./api/sendMsg');
 var addFavorites = require('./api/addFavorites');
 var cancelCollection = require('./api/cancelCollection');
+var addLike = require('./api/addLike');
+var cancelLike = require('./api/cancelLike');
 
 var app = express();
 
@@ -69,6 +71,8 @@ app.use('/getMsg',getMsg);// 获取对话详情
 app.use('/sendMsg',sendMsg);// 发送消息接口
 app.use('/addFavorites',addFavorites);// 添加收藏文章
 app.use('/cancelCollection',cancelCollection);// 取消收藏文章
+app.use('/addLike',addLike);// 添加喜欢文章
+app.use('/cancelLike',cancelLike);// 取消喜欢文章
 
 
 // 后台系统接口

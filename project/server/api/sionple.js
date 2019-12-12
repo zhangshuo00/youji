@@ -9,6 +9,9 @@ router.post('/',async (req,res)=>{
     const {uid,chid} = req.body;
     // const chid = 2;
     // const uid = 'k3mimknra';
+    // 
+    var uname = await query('select uname from user where uid=?',[uid]);
+    uname = JSON.parse(JSON.stringify(uname))[0].uname;
     // 需要返回的内容有 头图img_path，标题 title，笔记分类tags，
     // 文章内容context，文章内容图片img_path
     var result = await query('select title,tag_id,context,ch_headimg,favorites,likes from chapter where chid=?',[chid]);
@@ -28,8 +31,18 @@ router.post('/',async (req,res)=>{
     var isColle = await query('select colid from userCollection where uid=? and chid=?',[uid,chid]);
     isColle = JSON.parse(JSON.stringify(isColle));
     // console.log(isColle);
-    isColle.length === 0 ? isCollection : isCollection=1
+    isColle.length === 0 ? isCollection : isCollection=1;
     result[0].isCollection = isCollection;
+
+    // 查询该文章是否被当前用户喜欢
+    var isLike = 0;
+    var likeid = await query('select likeid from userLikes where uid=? and chid=?',[uid,chid]);
+    likeid = JSON.parse(JSON.stringify(likeid));
+
+    likeid.length === 0 ? isLike : isLike=1;
+    result[0].isLike = isLike;
+
+    result[0].uname = uname;
     res.send(result);
     // [{"title":"测试文章",
     // "context":"现在一天比一天冷了，出门穿什么这是一个值得深思熟虑的问题，穿少了会着凉，穿多了就显胖，颜色靓丽太惹人眼球，色彩单一又显老气，出门穿什么，这是一个严肃认真的问题，应该细细思考。",
