@@ -15,6 +15,7 @@ export default class UserDetails extends Component {
     componentDidMount(){
         const uid = localStorage.getItem('uid');
         const post = {uid:uid};
+        // console.log(post);
         fetch('/userDetail',{
             method:'POST',
             mode:'cors',
@@ -23,7 +24,7 @@ export default class UserDetails extends Component {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data[0])
+            console.log(data)
             this.setState({
                 data: {
                     headimg:data[0].headimg,
@@ -34,39 +35,41 @@ export default class UserDetails extends Component {
         })
     }
 
-    headingChange=()=> {
-        console.log('x');
-    }
+    // headingChange=()=> {
+    //     window.location='./perpon';
+    // }
     userOut=()=>{
         this.setState({
             data:{heading:'images/timg.jpg',uname:'请登录',uemail:'请登录'}
         })
-        window.location = '/'
+        window.location = '/';
+        const storage = window.localStorage;
+        localStorage.removeItem("uid");
     }
 
     render() {
         return (
             <div>
                 <Icon type="left" onClick={() =>  window.history.back(-1)} style={{marginLeft:'5%',paddingTop:'30px',float:'left'}}/>
-                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => this.headingChange()}></img>
+                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => window.location='/newperpon'}></img>
                 <p className='user-name'>{this.state.data.uname}</p>
                 <p className='user-email'>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
                 <div className='user-type'>
-                    <img src={require("../images/personx.png")}  onClick={() => window.location='/sort'}></img>
-                    <p onClick={() => window.location='/sort'}>个人主页</p>
+                    <img src={require("../images/personx.png")}  onClick={() => window.location='/person'}></img>
+                    <p onClick={() => window.location='/perpon'}>个人主页</p>
                 </div>
                 <div className='user-type'>
-                    <img src={require("../images/infor.png")} onClick={() => window.location='/sort'}></img>
-                    <p onClick={() => window.location='/sort'}> 信息</p>
+                    <img src={require("../images/infor.png")} onClick={() => window.location='/msg'}></img>
+                    <p onClick={() => window.location='/msg'}> 信息</p>
                 </div>
                 <div className='user-type'>
-                    <img src={require("../images/lingdang_2f.png")} onClick={() => window.location='/sort'}></img>
-                    <p onClick={() => window.location='/sort'}>  发现</p>
+                    <img src={require("../images/lingdang_2f.png")} onClick={() => window.location='/find'}></img>
+                    <p onClick={() => window.location='/find'}>  发现</p>
                 </div>
                 <div className='user-type'>
-                    <img src={require("../images/shezhi.png")} onClick={() => window.location='/sort'}></img>
-                    <p onClick={() => window.location='/sort'}>  设置</p>
+                    <img src={require("../images/shezhi.png")} onClick={() => window.location='/me'}></img>
+                    <p onClick={() => window.location='/me'}>  设置</p>
                 </div>
                 <div className='user-mark1'></div>
                 <p className='user-out' onClick={() =>

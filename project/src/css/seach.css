@@ -1,0 +1,99 @@
+.search-list{
+    padding: 0%;
+    margin: 0%;
+    float: left;
+    width: 12%;
+    height: 44px;
+    /* padding-right: 2%; */
+    margin-top: 10px;
+  }
+.search{
+    position: fixed;
+    width: 100%;
+    padding-right: 2%;
+    z-index:9999;
+    background-color: #FAA755;
+    top: 0;
+  }
+.search-result{
+    width: 100%;
+    position: relative;
+    top: 54px;
+    float: left;
+    height:30px;
+    background-color: #fff;
+    font-size: 20px;
+    padding-top: 3px;
+}
+.search-line{
+    width: 100%;
+    position: relative;
+    top: 54px;
+    float: left;
+    background-color: rgb(163, 163, 163);
+    height: 1px;
+}
+.search-heading{
+    position: relative;
+    width: 96%;
+    padding-left: 2%;
+    padding-right: 2%;
+    top: 54px;
+    background-color: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    float: left;
+}
+.search-heading p{
+    margin: 0;
+}
+.search-title{
+    font-size: 16px;
+    width: 80%;
+    margin: 0%;
+    float: left;
+    height: 18px;
+    padding-bottom: 5px;
+}
+.search-time{
+    height: 18px;
+    font-size: 12px;
+    color: rgb(105, 105, 105);
+    width: 20%;
+    float:right;
+    padding-bottom: 5px;
+}
+.search-button{
+    width: 100%;
+    margin-top: 10px;
+    float: left;
+  }
+  .search-img-like{
+    width: auto;
+    float: left;
+    margin-left: 3%;
+    border: none;
+    height: 16px;
+  }
+  .search-img-collect{
+    width: auto;
+    float: left;
+    margin-left: 15%;
+    border: none;
+    height: 16px;
+  }
+  .search-like{
+    margin: 0%;
+    float: left;
+    margin-left: 2%;
+    font-size: 14px;
+    margin-top: 2px;
+  }
+  .search-collect{
+    margin: 0%;
+    margin-left: 2%;
+    float: left;
+    font-size: 14px;
+    margin-top: 2px;
+  }

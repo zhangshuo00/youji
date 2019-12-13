@@ -87,8 +87,8 @@ export default class SionNew extends Component {
         return (
             <div>
             <div>
-                            <NavBar
-                style={{backgroundColor:'pink',color:'white'}}
+              <NavBar
+                style={{backgroundColor:'#faa755',color:'white',width:'100%'}}
                 onLeftClick={() => window.history.back(-1)}
                 leftContent={[
                     <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
@@ -101,12 +101,12 @@ export default class SionNew extends Component {
                 >新建笔记 </NavBar>
             </div>
             <div>
-                <textarea cols='20' rows='2' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'38px',width:'100%',border:'0px',lineHeight:'40px'}} id="title" value={this.state.title} onChange={(e) => this.onChange1(e)}>双击编辑标题</textarea>
+                <textarea cols='20' rows='2' style={{backgroundColor:'#fff',marginBottom:'3px',color:'gray',padding:'0',height:'40px',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="title" value={this.state.title} onChange={(e) => this.onChange1(e)}>双击编辑标题</textarea>
             </div>
             <div>
-                <textarea cols='50' rows='5' style={{backgroundColor:'rgba(245, 245, 249,1)',color:'gray',height:'168px',width:'100%',border:'0px',lineHeight:'40px'}} id="context" value={this.state.context} onChange={(e) => this.onChange2(e)}>双击编辑文本</textarea>
+                <textarea cols='50' rows='5' style={{backgroundColor:'#fff',marginBottom:'3px',color:'gray',height:'168px',padding:'0',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="context" value={this.state.context} onChange={(e) => this.onChange2(e)}>双击编辑文本</textarea>
             </div>
-                    <WingBlank>
+            <WingBlank style={{backgroundColor:'#fff',width:'96%',paddingLeft:'2%',paddingRight:'2%',margin:'0'}}>
                 <ImagePicker
                 files={files}
                 onChange={this.onChange}

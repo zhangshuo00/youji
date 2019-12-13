@@ -5,8 +5,8 @@ import Login from './Components/Login';
 import Sion from './Components/Sion';
 import Sionple from './Components/Sionple';
 import Sionnew from './Components/Sionnew';
-import perpon from './Components/Perpon';
-import Newperpon from './Components/NewPerpon';
+import Perpon from './Components/Perpon';
+import Newperpon from './Components/Newperpon';
 import ListSort from './Components/ListSort';
 import AddTag from './Components/AddTag';
 import UserDetails from './Components/UserDetails';
@@ -17,16 +17,16 @@ import Carousel from './Components/Carousel';
 import Find from './Components/Find';
 import Me from './Components/Me';
 import Tag from './Components/Tag';
+import Seach from './Components/Seach';
 import Email from './Components/Email.js';
 import New from './Components/new.js';
-
 
 
 
 function App() {
   return (
     <Router>
-      <div style={{backgroundColor:'#fff'}}>
+      <div>
           <Route exact path='/' component={Welcome} />
           <Route path='/tag' component={Tag} />
           <Route path='/login' component={Login} />
@@ -35,7 +35,7 @@ function App() {
           <Route path='/sion' component={Sion}/>
           <Route path='/sionple' component={Sionple}/>
           <Route path='/sionnew' component={Sionnew}/>
-          <Route path='/perpon' component={perpon}/>
+          <Route path='/perpon' component={Perpon}/>
           <Route path='/newperpon' component={Newperpon}/>
           <Route path='/sort' component={ListSort}/>
           <Route path='/addTag' component={AddTag}/>
@@ -44,10 +44,9 @@ function App() {
           <Route path='/letter' component={PrivateLetter}/>
           <Route path='/find' component={Find}/>
           <Route path='/me' component={Me}/>
-          <Route path='/session' component={Email}/>
+          <Route path='/seach' component={Seach}/>
+	        <Route path='/session' component={Email}/>
           <Route path='/new' component={New}/>
-
-
       </div>
     </Router>
   );

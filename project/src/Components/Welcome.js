@@ -16,7 +16,7 @@ export default class Welcome extends Component {
         this.setState({
             time1:setInterval(()=>{
                 if(storage.uid){
-                    window.location='./tag'
+                    window.location='./find'
                 }else{
                     window.location='./car'
                 }}
@@ -35,7 +35,7 @@ export default class Welcome extends Component {
         clearInterval(this.state.time2);
         const storage = window.localStorage;
         if(storage.uid){
-            window.location='./tag'
+            window.location='./find'
         }else{
             window.location='./car'
         }

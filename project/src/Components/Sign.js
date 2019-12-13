@@ -45,24 +45,23 @@ export default class App extends Component {
   render() {
     return (
       // <Router>
-      <div className='sign-page'>
       <div>
-        <form className="sign-form"  onSubmit={this.onSubmit.bind(this)}>
-        <p className='sign-p1'></p>
-        <img src={require(`../images/logo.png`)} className='sign-img'/>
-        <div className='sign-div'>
-          {/* <img src="my-app\src\img\1.jpg" className='sign-img'></img> */}
-          <input onChange={this.onChange.bind(this)} className='sign-input1' placeholder="昵称" name="uname"></input>
-          <input onChange={this.onChange.bind(this)} className='sign-input2' placeholder="Email" name="uemail"></input>
-          <input onChange={this.onChange.bind(this)} className='sign-input2' placeholder="密码" name="upassword"></input>
-          <input className='sign-button' type="submit" value="注册"></input>
+        <div className='sign-page'>
+          <form className="sign-form" style={{paddingTop:'50px'}}  onSubmit={this.onSubmit.bind(this)}>
+          <p className='sign-p1'></p>
+          <div className='sign-div'>
+            {/* <img src="my-app\src\img\1.jpg" className='sign-img'></img> */}
+            <input onChange={this.onChange.bind(this)} className='sign-input1' placeholder="昵称" name="uname"></input>
+            <input onChange={this.onChange.bind(this)} className='sign-input2' placeholder="Email" name="uemail"></input>
+            <input onChange={this.onChange.bind(this)} className='sign-input2' placeholder="密码" name="upassword"></input>
+            <input className='sign-button' type="submit" value="注册"></input>
+          </div>
+          </form>
+          <Link to='/login'><p className='sign-p2'>已有账户了，点击登陆</p></Link>
         </div>
-        </form>
-        <Link to='/login'><p className='sign-p2'>已有账户了，点击登陆</p></Link>
-      </div>
-      <div>
-         <Route path={`login`} component={Login} />
-      </div>
+        {/* <div style={{paddingBottom:'35px'}}>
+          <Route path={`login`} component={Login} />
+        </div> */}
       </div>
       // </Router>
     )

@@ -9,7 +9,7 @@ export default class AppTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'blueTab',
+      selectedTab: 'redTab',
     };
   }
   render() {
@@ -42,9 +42,9 @@ export default class AppTab extends React.Component {
                 }
                 selected={this.state.selectedTab === 'blueTab'}
                 onPress={() => {
-                    this.setState({
-                        selectedTab: 'blueTab',
-                    });
+                  this.setState({
+                    selectedTab: 'blueTab',
+                  });             
                 }}
             >
             <Find />
@@ -75,15 +75,6 @@ export default class AppTab extends React.Component {
           >
            <ListSort />
           </TabBar.Item>
-          {/* <TabBar.Item
-          icon={
-            <div style={{
-              width: '40px',
-              height: '40px',
-              background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/-.png") center center /  40px 40px no-repeat` }}
-            />
-          }>
-          </TabBar.Item> */}
           <TabBar.Item
             icon={
               <div style={{

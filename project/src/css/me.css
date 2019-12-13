@@ -37,7 +37,7 @@
 .me-top-email{
     float: left;
     width: 76%;
-    /* margin: 0; */
+    margin: 0;
     text-align: center;
     height: 14px;
     font-size: 12px;
@@ -65,6 +65,25 @@
     width: 71%;
     float: left;
     padding-top: 10px;
+}
+.me-sex{
+    width: 25%;
+    margin: 0;
+    float: left;
+    height: 32px;
+    margin-top: 3px;
+    margin-left: 5%;
+}
+.me-sex p{
+    margin: 0;
+    float: left;
+    font-size: 20px;
+}
+.me-sex img{
+    width: auto;
+    height: 25px;
+    float: left;
+    margin-right: 5%;
 }
 .me-atten{
     margin: 0%;
@@ -114,7 +133,7 @@
 }
 .me-sign{
     background-color: #fff;
-    width: 100%;
+    width: 97%;
     float: left;
     padding-left: 3%;
     position: relative;

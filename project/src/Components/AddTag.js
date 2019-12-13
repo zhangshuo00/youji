@@ -67,12 +67,13 @@ export default class AddTag extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{}}>
+                {/* <div style={{width:'100%',height:'49px',position:'absolute',top:'0',backgroundColor:'#FAA755'}}></div> */}
                 <Icon type="left" className='label-left' onClick={() =>  window.history.back(-1)} 
-                    style={{color:'#000',float: 'left',width: '10%',marginTop:'27px'}}/>
-                <p className='label-title' style={{color:'#000',fontSize:'14px'}}>添加标签</p>
+                    style={{color:'#fff',float: 'left',width: '10%',paddingTop:'20px',backgroundColor:'#FAA755'}}/>
+                <p className='label-title' style={{color:'#fff',fontSize:'14px'}}>添加标签</p>
                 <form className="" onSubmit={this.onSubmit.bind(this)}>
-                    <input type = 'submit' className = 'label-save' value='保存'></input>
+                    <input type = 'submit' className = 'label-save' value='保存' style={{}}></input>
                     <p className='label-name'>标签名称</p>
                     <input type='text' id='label-text' className='label-text' placeholder='  生活记录' name='text'></input>
                     <p className='label-cover'>设置生活记录封面</p>

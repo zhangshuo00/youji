@@ -53,10 +53,11 @@ constructor(){
                   ]}
                 >编辑密码 </NavBar>
             </div>
-            <div>
-                <List renderHeader={() => 'Format'}>
+            <div  style={{overflow:'hidden',opacity:'0.8',position:'absolute',top:'45px',background:"url(" + require("../images/new_back.jpg") + ")",backgroundColor:'none',width:'100%',height:'97vh',backgroundRepeat:'no-repeat',backgroundSize:'100% 100%'}}>
+                <List>
             
               <InputItem
+                style={{background:'none !important'}}
                 type="text" 
                 placeholder="输入密码"
                 id="1"

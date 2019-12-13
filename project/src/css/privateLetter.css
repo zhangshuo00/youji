@@ -7,9 +7,16 @@
     margin-right: 10%;
 }
 .letter-list{
+    position: relative;
+    top:60px;
+    min-height: 86vh;
     width: 100%;
     float: left;
     list-style: none;
+    margin-bottom: 30px;
+    background: url(../images/pl.jpg);
+    background-repeat:repeat !important;
+    background-size: 100% 100% !important;
     /* background-color: #fff; */
 }
 /* .letter-li{
@@ -22,6 +29,18 @@
     float: left;
     border-radius: 23px;
     margin-left: 5%;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+}
+.letter-img1{
+    margin-top: 10px;
+    height: 46px;
+    width: 46px;
+    float: right;
+    border-radius: 23px;
+    margin-right: 5%;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
 }
 .letter-trian{
     margin-left: 1%;
@@ -34,12 +53,35 @@
     border-bottom: 10px solid transparent;
     
 }
+.letter-trian1{
+    margin-right: 1%;
+    margin-top: 23px;
+    width: 0;
+    height: 0;
+    float: right;
+    border-top: 10px solid transparent;
+    border-left: 10px solid white;
+    border-bottom: 10px solid transparent;
+    
+}
 .letter-text{
     margin: 0;
     float: left;
     font-size: 20px;
     margin-top: 20px;
-    width: 60%;
+    max-width: 55%;
+    /* height: 40px; */
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.letter-text1{
+    margin: 0;
+    float: right;
+    font-size: 20px;
+    margin-top: 20px;
+    max-width: 55%;
+    text-align: left;
     /* height: 40px; */
     padding: 8px;
     background-color: #fff;
@@ -53,7 +95,7 @@
     border-radius: 15px;
 }
 .letter-bottom{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 30px;

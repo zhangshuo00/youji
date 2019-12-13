@@ -61,10 +61,10 @@ constructor(){
           uid:'k3i297def', 
           //img_path:this.state.img_path,
           uname:document.getElementById('2').value,
+          usex:document.getElementById('3').value,
           signature:document.getElementById('1').value,
           // email:document.getElementById('4').value,
-          usex:document.getElementById('3').value,
-          files:filelist,
+          imgData:filelist[0],
         }
       console.log(post);
       fetch('/editPerInfo',{
@@ -118,15 +118,15 @@ constructor(){
                 type="image" 
                 
               >头像 */}
-              <WingBlank>
+              <WingBlank style={{backgroundColor:'#fff',width:'96%',paddingLeft:'2%',paddingRight:'2%',margin:'0'}}>
                 <ImagePicker
                 files={files}
                 onChange={this.onChange}
                 onImageClick={(index, fs) => console.log(index, fs)}
-                // selectable={files.length < 1}
+                selectable={files.length < 1}
                 multiple={this.state.multiple}
                 // id="path"
-                /><span style={{color:'gray'}}>点击添加头像</span>
+                /><span style={{color:'gray'}}>点击更改头像</span>
             </WingBlank>
             {/* </InputItem> */}
               <InputItem
@@ -136,7 +136,7 @@ constructor(){
               >签名</InputItem>
               <InputItem
                 type="text" 
-                placeholder="眷恋"
+                placeholder="张三"
                 id="2"
               >昵称</InputItem>
               <InputItem

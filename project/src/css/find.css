@@ -4,13 +4,13 @@
   float: left;
   width: 12%;
   height: 44px;
-  padding-right: 2%;
   margin-top: 10px;
 }
 .find-search-list img{
   /* width: 60%; */
   margin-top: 5px;
-  margin-left: 30%;
+  margin-left: 20%;
+  margin-right: 10%;
   height: 34px;
   display: block;
 }
