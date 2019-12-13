@@ -1,5 +1,6 @@
 var express = require('express');
 var query = require('../db');
+const fs = require('fs');
 const router = express.Router();
 // 修改个人信息页的api
 

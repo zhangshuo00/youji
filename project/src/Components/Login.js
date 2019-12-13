@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom'
-import '../css/login.css';
+import '../css/Login.css';
 // import store from './UserId';
 //登录页
 
