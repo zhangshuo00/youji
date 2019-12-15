@@ -57,14 +57,14 @@ export default class Me extends Component {
             <div>
                 <div className='me-top'>
                     <div className='me-top-list'>
-                        <img src={`${require('../images/category.png')}`} onClick={() => window.location='/details'} />
+                        <img src={`${require('../images/category.png')}`}  onClick={() => window.location='/details'} />
                     </div>
                     <p className='me-top-user'>{this.state.data.uname}</p>
                     <p className='me-top-email'>{this.state.data.uemail}</p>
                     {/* <div className='me-top-line'></div> */}
                 </div>
                 <div className='me-title'>
-                    <img className='me-head' src={require("../" +this.state.data.headimg)}></img>
+                    <img className='me-head' src={require("../" +this.state.data.headimg)} onClick={()=>window.location='/perpon?uid='+localStorage.getItem('uid')}></img>
                     <div className='me-num'>
                         <div className='me-sex'>
                             <img src={require("../"+this.state.seximg)}></img>
