@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/ListSort.css';
+import '../css/listSort.css';
 import { NavBar,TabBar} from 'antd-mobile';
 //笔记分类页
 
@@ -9,8 +9,8 @@ export default class ListSort extends Component {
         this.state={
             selectedTab: 'blueTab',
             datas:[
-                {img_path:'images/sort-test1.jpg',tags:'美食'},           
-                {img_path:'images/sort-test2.jpg',tags:'旅行'},
+                // {img_path:'images/sort-test1.jpg',tags:'美食'},           
+                // {img_path:'images/sort-test2.jpg',tags:'旅行'},
             ],
         }
     }
@@ -77,9 +77,9 @@ export default class ListSort extends Component {
                 ]}
                 rightContent={[
                     <img key='0' className='sort-header-add' onClick={() => window.location='/addTag'}></img>
-                ]}  style={{paddingTop:'10px',width:'100%',backgroundColor:'#FAA755',color:'#fff'}}
+                ]}  style={{paddingTop:'10px',width:'100%',backgroundColor:'#FAA755',color:'#fff',position:'fixed',top:'0',zIndex:'99'}}
                 >笔记分类</NavBar>
-                <div className='sort-center'>
+                <div className='sort-center' style={{position:'relative',top:'55px'}}>
                 {
                     this.state.datas.map((tag,idx)=>
                     <li key={idx} className="sort-li" style={{background:"url(" + require("../" +tag.img_path) + ")"}} onClick={this.jumpToSion}>

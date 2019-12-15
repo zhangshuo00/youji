@@ -99,7 +99,7 @@ export default class Me extends Component {
                 {
                     this.state.datas.map((note,id)=>
                     <div key={id} className='find-heading' >
-                        <img className='find-head' src={require("../" +note.headimg)}></img>
+                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='/perpon?uid='+note.uid}></img>
                         <p className='find-author'>{note.uname}</p>
                         <p className='find-time'>{note.chdate}</p>
                         <div className='find-essay' onClick={()=>window.location='/sionple?chid='+note.chid}>

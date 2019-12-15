@@ -15,9 +15,11 @@ export default class Perpon extends Component {
     }
 
     componentDidMount(){
+        // console.log(window.location.search.split('=')[1])
         const post ={
-            uid:'k3i297def',
+            uid:window.location.search.split('=')[1]
         }
+        console.log(post)
         fetch('/personal',{
             method:'POST',
             mode:'cors',

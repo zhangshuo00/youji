@@ -42,7 +42,7 @@ export default class UserDetails extends Component {
         this.setState({
             data:{heading:'images/timg.jpg',uname:'请登录',uemail:'请登录'}
         })
-        window.location = '/';
+        window.location = '/login';
         const storage = window.localStorage;
         localStorage.removeItem("uid");
     }
@@ -56,8 +56,8 @@ export default class UserDetails extends Component {
                 <p className='user-email'>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
                 <div className='user-type'>
-                    <img src={require("../images/personx.png")}  onClick={() => window.location='/person'}></img>
-                    <p onClick={() => window.location='/perpon'}>个人主页</p>
+                    <img src={require("../images/personx.png")}  onClick={() => window.location='/perpon?uid='+localStorage.getItem('uid')}></img>
+                    <p onClick={() => window.location='/perpon?uid='+localStorage.getItem('uid')}>个人主页</p>
                 </div>
                 <div className='user-type'>
                     <img src={require("../images/infor.png")} onClick={() => window.location='/msg'}></img>
@@ -68,8 +68,8 @@ export default class UserDetails extends Component {
                     <p onClick={() => window.location='/find'}>  发现</p>
                 </div>
                 <div className='user-type'>
-                    <img src={require("../images/shezhi.png")} onClick={() => window.location='/me'}></img>
-                    <p onClick={() => window.location='/me'}>  设置</p>
+                    <img src={require("../images/shezhi.png")} onClick={() => window.location='/newperpon'}></img>
+                    <p onClick={() => window.location='/newperpon'}>  设置</p>
                 </div>
                 <div className='user-mark1'></div>
                 <p className='user-out' onClick={() =>

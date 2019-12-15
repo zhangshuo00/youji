@@ -164,8 +164,8 @@ export default class Find extends Component {
                 <div className='find-center' style={{position:'relative',top:'45px'}}>
                 {
                     this.state.datas.map((note,id)=>
-                    <div key={id} className='find-heading' onClick={()=>console.log('a')}>
-                        <img className='find-head' src={require("../" +note.headimg)}></img>
+                    <div key={id} className='find-heading'>
+                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='/perpon?uid='+note.uid}></img>
                         <p className='find-author'>{note.uname}</p>
                         <p className='find-time'>{note.chdate}</p>
                         <div className='find-essay' onClick={()=>window.location='/sionple?chid='+note.chid}>
@@ -190,9 +190,8 @@ export default class Find extends Component {
                 </div>
                 <div style={{ 
             position: 'fixed', 
-            height: '100%', 
             width: '100%', 
-            top: 0 
+            bottom: '0' 
         }}>
             <TabBar
             unselectedTintColor="#949494"

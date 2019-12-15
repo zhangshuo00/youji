@@ -71,9 +71,9 @@ export default class MessageList extends Component {
                 leftContent={[
                     <img key='0' className='msg-title'></img>
                 ]}
-                style={{paddingTop:'10px',width:'100%',backgroundColor:'#FAA755',color:'#fff'}}
+                style={{paddingTop:'10px',width:'100%',backgroundColor:'#FAA755',color:'#fff',position:'fixed',top:'0',zIndex:'99'}}
                 >消息列表</NavBar>
-                <div className='msg-list'>
+                <div className='msg-list' style={{position:'relative',top:'55px'}}>
                 {
                     this.state.data.map((tag,idx)=>
                     <li key={idx} className='msg-li' style={{width:'100%',height:'66px'}} onClick={() => window.location='/letter/'+tag.uid}>
