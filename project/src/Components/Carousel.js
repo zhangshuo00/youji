@@ -11,7 +11,7 @@ export default class Carousels extends React.Component {
     // }else{
     //   window.location='./sort'
     // }
-    window.location='./login';
+    window.location='./index.html#/login';
   }
 
   render() {

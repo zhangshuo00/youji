@@ -24,10 +24,10 @@ export default class Login extends Component{
       upassword:this.state.upassword
     }
     console.log(post);
-    fetch('/login',{
+    fetch('http://localhost:8080/login',{
       method:'POST',
-      mode:'cors',
-      headers: {'Content-Type': 'application/json'},
+      // mode:'cors',
+      headers: {'Content-Type': 'application/json;charset=utf-8'},
       body:JSON.stringify(post)
     })
     .then(res=>res.json())
@@ -36,7 +36,7 @@ export default class Login extends Component{
       console.log(data);
       if(data.msg === 'success'){
         localStorage.setItem('uid',data.uid);
-        window.location = '/sort';
+        window.location = './index.html#/sort';
       }else if(data.msg === 'pwdErr'){
         alert('密码错误');
       }else{

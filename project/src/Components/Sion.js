@@ -20,9 +20,9 @@ export default class Sion extends Component {
         localStorage.setItem('tags',decodeURI(window.location.search.split('=')[1]))
         // console.log(post);
         console.log(localStorage)
-        fetch('/sion',{
+        fetch('http://localhost:8080/sion',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })

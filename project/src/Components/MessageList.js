@@ -19,9 +19,9 @@ export default class MessageList extends Component {
         const post ={
             uid:storage.uid
         }
-        fetch('/getMsgList',{
+        fetch('http://localhost:8080/getMsgList',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })

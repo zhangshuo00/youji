@@ -67,9 +67,9 @@ constructor(){
           imgData:filelist[0],
         }
       console.log(post);
-      fetch('/editPerInfo',{
+      fetch('http://localhost:8080/editPerInfo',{
         method:'POST',
-        mode:'cors',
+        // mode:'cors',
         headers: {'Content-Type': 'application/json'},
         body:JSON.stringify(post)
     })

@@ -31,9 +31,9 @@ export default class AppHome extends Component {
                 chid: window.location.search.split('=')[1],
             }
             console.log(post);
-            fetch('/cancelCollection',{
+            fetch('http://localhost:8080/cancelCollection',{
                 method:'POST',
-                mode:'cors',
+                // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
                 body:JSON.stringify(post)
             })
@@ -57,9 +57,9 @@ export default class AppHome extends Component {
                 chid: window.location.search.split('=')[1],
             }
             console.log(post);
-            fetch('/addFavorites',{
+            fetch('http://localhost:8080/addFavorites',{
                 method:'POST',
-                mode:'cors',
+                // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
                 body:JSON.stringify(post)
             })
@@ -89,9 +89,9 @@ export default class AppHome extends Component {
                 chid: window.location.search.split('=')[1],
             }
             console.log(post);
-            fetch('/cancelLike',{
+            fetch('http://localhost:8080/cancelLike',{
                 method:'POST',
-                mode:'cors',
+                // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
                 body:JSON.stringify(post)
             })
@@ -115,9 +115,9 @@ export default class AppHome extends Component {
                 chid: window.location.search.split('=')[1],
             }
             console.log(post);
-            fetch('/addLike',{
+            fetch('http://localhost:8080/addLike',{
                 method:'POST',
-                mode:'cors',
+                // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
                 body:JSON.stringify(post)
             })
@@ -134,9 +134,9 @@ export default class AppHome extends Component {
             uid: localStorage.getItem('uid'),
             chid: window.location.search.split('=')[1]
         }
-        fetch('/sionple',{
+        fetch('http://localhost:8080/sionple',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })

@@ -16,9 +16,9 @@ export default class UserDetails extends Component {
         const uid = localStorage.getItem('uid');
         const post = {uid:uid};
         // console.log(post);
-        fetch('/userDetail',{
+        fetch('http://localhost:8080/userDetail',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })

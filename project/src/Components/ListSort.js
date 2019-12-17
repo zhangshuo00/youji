@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/listSort.css';
+import '../css/ListSort.css';
 import { NavBar,TabBar} from 'antd-mobile';
 //笔记分类页
 
@@ -21,9 +21,9 @@ export default class ListSort extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('/listSort',{
+        fetch('http://localhost:8080/listSort',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })

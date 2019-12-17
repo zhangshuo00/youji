@@ -20,9 +20,9 @@ export default class Perpon extends Component {
             uid:window.location.search.split('=')[1]
         }
         console.log(post)
-        fetch('/personal',{
+        fetch('http://localhost:8080/personal',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })

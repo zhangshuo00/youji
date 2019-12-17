@@ -34,9 +34,9 @@ export default class AddTag extends Component {
             img:imgFile
           }	
           console.log(post);
-          fetch('/addTag',{
+          fetch('http://localhost:8080/addTag',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
           })
@@ -52,9 +52,9 @@ export default class AddTag extends Component {
           img:'images/sort-test1.jpg'
         }	
         console.log(post);
-        fetch('/addTag',{
+        fetch('http://localhost:8080/addTag',{
           method:'POST',
-          mode:'cors',
+          // mode:'cors',
           headers: {'Content-Type': 'application/json'},
           body:JSON.stringify(post)
         })

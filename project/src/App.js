@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router,Route} from 'react-router-dom';
+import {HashRouter as Router,Route} from 'react-router-dom';
 import Sign from './Components/Sign';
 import Login from './Components/Login';
 import Sion from './Components/Sion';
@@ -25,7 +25,7 @@ import New from './Components/new.js';
 
 function App() {
   return (
-    <Router>
+    <Router basename="./index.html#">
       <div>
           <Route exact path='/' component={Welcome} />
           <Route path='/tag' component={Tag} />

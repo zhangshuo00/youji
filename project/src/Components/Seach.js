@@ -15,9 +15,9 @@ export default class Seach extends Component {
             keywords:decodeURI(window.location.search.split('=')[1])
         }
         // console.log(post);
-        fetch('/discoverSearch',{
+        fetch('http://localhost:8080/discoverSearch',{
             method:'POST',
-            mode:'cors',
+            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })
