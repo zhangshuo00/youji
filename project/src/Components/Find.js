@@ -117,7 +117,7 @@ export default class Find extends Component {
     }
     seach(e){
         console.log(e);
-        window.location= './seach?value='+e;
+        window.location= './index.html#/seach?value='+e;
     }
 
     render() {
@@ -125,7 +125,7 @@ export default class Find extends Component {
             <div>
                 <div className='find-search'>
                     <div className='find-search-list'>
-                        <img src={`${require('../images/category.png')}`} onClick={() => window.location='/details'} />
+                        <img src={`${require('../images/category.png')}`} onClick={() => window.location='./index.html#/details'} />
                     </div>
                     <SearchBar placeholder="输入关键字搜索" maxLength={8} onSubmit={this.seach.bind(this)} style={{paddingRight:'2%'}}/>
                 </div>
@@ -165,10 +165,10 @@ export default class Find extends Component {
                 {
                     this.state.datas.map((note,id)=>
                     <div key={id} className='find-heading'>
-                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='/perpon?uid='+note.uid}></img>
+                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='./index.html#/perpon?uid='+note.uid}></img>
                         <p className='find-author'>{note.uname}</p>
                         <p className='find-time'>{note.chdate}</p>
-                        <div className='find-essay' onClick={()=>window.location='/sionple?chid='+note.chid}>
+                        <div className='find-essay' onClick={()=>window.location='./index.html#/sionple?chid='+note.chid}>
                             <p className='find-title'>{note.context}</p>
                             <img className='find-img1' src={require("../" +note.img_path[0])} ></img>
                             <img className='find-img2' src={require("../" +note.img_path[1])} ></img>
@@ -215,7 +215,7 @@ export default class Find extends Component {
                     }
                     selected={this.state.selectedTab === 'blueTab'}
                     onPress={() => {
-                        window.location='./find'          
+                        window.location='./index.html#/find'          
                     }}
             >
             </TabBar.Item>
@@ -237,7 +237,7 @@ export default class Find extends Component {
                 title="笔记"
                 key="note"
                 onPress={() => {
-                    window.location='./sort'   
+                    window.location='./index.html#/sort'   
                 }}
             >
             </TabBar.Item>
@@ -259,7 +259,7 @@ export default class Find extends Component {
                 title="消息"
                 key="msg"
                 onPress={() => {
-                    window.location='./msg'   
+                    window.location='./index.html#/msg'   
                 }}
             >
             </TabBar.Item>
@@ -269,7 +269,7 @@ export default class Find extends Component {
                 title="我的"
                 key="my"
                 onPress={() => {
-                    window.location='./me'
+                    window.location='./index.html#/me'
                 }}
             >
             </TabBar.Item>
