@@ -67,7 +67,7 @@ export default class MessageList extends Component {
                 </div> */}
                 <NavBar
                 mode="light"
-                onLeftClick={() => window.location='/details'}
+                onLeftClick={() => window.location='./index.html#/details'}
                 leftContent={[
                     <img key='0' className='msg-title'></img>
                 ]}
@@ -76,7 +76,7 @@ export default class MessageList extends Component {
                 <div className='msg-list' style={{position:'relative',top:'55px'}}>
                 {
                     this.state.data.map((tag,idx)=>
-                    <li key={idx} className='msg-li' style={{width:'100%',height:'66px'}} onClick={() => window.location='/letter/'+tag.uid}>
+                    <li key={idx} className='msg-li' style={{width:'100%',height:'66px'}} onClick={() => window.location='./index.html#/letter/'+tag.uid}>
                         <div className="msg-img" style={{background:"url(" + require("../" +tag.headimg) + ")"}}></div>
                         <p className='msg-time'>{tag.sm_date}</p>
                         <p className='msg-text'>{tag.uname}</p>
@@ -106,7 +106,7 @@ export default class MessageList extends Component {
                         />
                         }
                         onPress={() => {
-                            window.location='./find'          
+                            window.location='./index.html#/find'          
                         }}
                 >
                 </TabBar.Item>
@@ -128,7 +128,7 @@ export default class MessageList extends Component {
                     title="笔记"
                     key="note"
                     onPress={() => {
-                        window.location='./sort'   
+                        window.location='./index.html#/sort'   
                     }}
                 >
                 </TabBar.Item>
@@ -151,7 +151,7 @@ export default class MessageList extends Component {
                     key="msg"
                     selected={this.state.selectedTab === 'blueTab'}
                     onPress={() => {
-                        window.location='./msg'   
+                        window.location='./index.html#/msg'   
                     }}
                 >
                 </TabBar.Item>
@@ -161,7 +161,7 @@ export default class MessageList extends Component {
                         title="我的"
                         key="my"
                         onPress={() => {
-                            window.location='./me'
+                            window.location='./index.html#/me'
                         }}
                     >
                     </TabBar.Item>

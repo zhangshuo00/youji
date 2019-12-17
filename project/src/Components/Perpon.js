@@ -46,7 +46,7 @@ export default class Perpon extends Component {
                     <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
                   ]}
                   rightContent={[
-                    <Icon key="0" onClick={()=>{window.location='/newperpon'}} key="0" type="plus"></Icon>
+                    <Icon key="0" onClick={()=>{window.location='./index.html#/newperpon'}} key="0" type="plus"></Icon>
                   ]}
                 >个人信息 </NavBar>
                 </div>

@@ -18,7 +18,7 @@ export default class Sion extends Component {
             tags:decodeURI(window.location.search.split('=')[1])
         }
         localStorage.setItem('tags',decodeURI(window.location.search.split('=')[1]))
-        // console.log(post);
+        console.log(decodeURI(window.location));
         console.log(localStorage)
         fetch('http://localhost:8080/sion',{
             method:'POST',
@@ -63,7 +63,7 @@ export default class Sion extends Component {
         // 跳转到笔记详情页，获取点击文章的chid
         const chid = e.target.getAttribute('data-index');
         // console.log(e.target.getAttribute('data-index'))
-        window.location = '/sionple?chid=' + chid;
+        window.location = './index.html#/sionple?chid=' + chid;
     }
 
 
@@ -82,7 +82,7 @@ export default class Sion extends Component {
                     <Icon key="0" type="left" style={{ color:'#FFF'}} />,
                   ]}
                 rightContent={[
-                    <Icon key="0" onClick={()=>{window.location='/sionnew'}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
+                    <Icon key="0" onClick={()=>{window.location='./index.html#/sionnew'}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
                     
                   ]}
                 >{decodeURI(window.location.search.split('=')[1])}</NavBar>

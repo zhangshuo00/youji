@@ -32,7 +32,7 @@ export default class Seach extends Component {
     }
     seach(e){
         console.log(e);
-        window.location= './seach?value='+e;
+        window.location= './index.html#/seach?value='+e;
     }
     render() {
         return (
@@ -50,7 +50,7 @@ export default class Seach extends Component {
                 <div className='search-line'></div>
                { 
                this.state.data.map((note,id)=>
-                <div key={id} className='search-heading' onClick={()=>window.location='/sionple?chid='+note.chid}>
+                <div key={id} className='search-heading' onClick={()=>window.location='./index.html#/sionple?chid='+note.chid}>
                     <p className='search-title'>{note.title}</p>
                     <p className='search-time'>{note.chdate}</p>
                     <p className='search-text'>{'  '+note.context}</p>
