@@ -7,9 +7,9 @@ export default class Carousels extends React.Component {
   skip(){
     // const Storage=window.localStorage;
     // if(Storage.uid){
-    //   window.location='./login'
+    //   window.location='./index.html#/login'
     // }else{
-    //   window.location='./sort'
+    //   window.location='./index.html#/sort'
     // }
     window.location='./index.html#/login';
   }

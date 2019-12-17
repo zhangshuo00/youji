@@ -57,14 +57,14 @@ export default class Me extends Component {
             <div>
                 <div className='me-top'>
                     <div className='me-top-list'>
-                        <img src={`${require('../images/category.png')}`}  onClick={() => window.location='/details'} />
+                        <img src={`${require('../images/category.png')}`}  onClick={() => window.location='/index.html#/details'} />
                     </div>
                     <p className='me-top-user'>{this.state.data.uname}</p>
                     <p className='me-top-email'>{this.state.data.uemail}</p>
                     {/* <div className='me-top-line'></div> */}
                 </div>
                 <div className='me-title'>
-                    <img className='me-head' src={require("../" +this.state.data.headimg)} onClick={()=>window.location='/perpon?uid='+localStorage.getItem('uid')}></img>
+                    <img className='me-head' src={require("../" +this.state.data.headimg)} onClick={()=>window.location='/index.html#/perpon?uid='+localStorage.getItem('uid')}></img>
                     <div className='me-num'>
                         <div className='me-sex'>
                             <img src={require("../"+this.state.seximg)}></img>
@@ -83,7 +83,7 @@ export default class Me extends Component {
                             <img src={require("../images/set.png")}></img>
                         </button> */}
                     </div>
-                    <div className='me-edit' onClick={()=>window.location='./newperpon'}>
+                    <div className='me-edit' onClick={()=>window.location='./index.html#/newperpon'}>
                         编辑资料
                     </div>
                 </div>
@@ -99,10 +99,10 @@ export default class Me extends Component {
                 {
                     this.state.datas.map((note,id)=>
                     <div key={id} className='find-heading' >
-                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='/perpon?uid='+note.uid}></img>
+                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='/index.html#/perpon?uid='+note.uid}></img>
                         <p className='find-author'>{note.uname}</p>
                         <p className='find-time'>{note.chdate}</p>
-                        <div className='find-essay' onClick={()=>window.location='/sionple?chid='+note.chid}>
+                        <div className='find-essay' onClick={()=>window.location='/index.html#/sionple?chid='+note.chid}>
                             <p className='find-title'>{note.context}</p>
                             <img className='find-img1' src={require("../" +note.ch_headimg)}></img>
                             <img className='find-img2' src={require("../" +note.ch_headimg)}></img>
@@ -139,7 +139,7 @@ export default class Me extends Component {
                         />
                         }
                         onPress={() => {
-                            window.location='./find'          
+                            window.location='./index.html#/find'          
                         }}
                 >
                 </TabBar.Item>
@@ -161,7 +161,7 @@ export default class Me extends Component {
                     title="笔记"
                     key="note"
                     onPress={() => {
-                        window.location='./sort'   
+                        window.location='./index.html#/sort'   
                     }}
                 >
                 </TabBar.Item>
@@ -183,7 +183,7 @@ export default class Me extends Component {
                     title="消息"
                     key="msg"
                     onPress={() => {
-                        window.location='./msg'   
+                        window.location='./index.html#/msg'   
                     }}
                 >
                 </TabBar.Item>
@@ -194,7 +194,7 @@ export default class Me extends Component {
                         key="my"
                         selected={this.state.selectedTab === 'blueTab'}
                         onPress={() => {
-                            window.location='./me'
+                            window.location='./index.html#/me'
                         }}
                     >
                     </TabBar.Item>

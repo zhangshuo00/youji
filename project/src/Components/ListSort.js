@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/ListSort.css';
+import '../css/listSort.css';
 import { NavBar,TabBar} from 'antd-mobile';
 //笔记分类页
 
@@ -63,7 +63,7 @@ export default class ListSort extends Component {
         console.log(e.target.innerHTML.slice(3,-4));
         const clickTag = e.target.innerHTML.slice(3,-4);
         // 跳转到点击笔记标签的列表页
-        window.location.href = '/Sion?tags=' + encodeURI(clickTag);
+        window.location.href = './index.html#/Sion?tags=' + encodeURI(clickTag);
     }
 
     render() {
@@ -71,12 +71,12 @@ export default class ListSort extends Component {
             <div>
                 <NavBar
                 mode="light"
-                onLeftClick={() => window.location='/details'}
+                onLeftClick={() => window.location='/index.html#/details'}
                 leftContent={[
                     <img key='0' className='sort-header-person'></img>
                 ]}
                 rightContent={[
-                    <img key='0' className='sort-header-add' onClick={() => window.location='/addTag'}></img>
+                    <img key='0' className='sort-header-add' onClick={() => window.location='/index.html#/addTag'}></img>
                 ]}  style={{paddingTop:'10px',width:'100%',backgroundColor:'#FAA755',color:'#fff',position:'fixed',top:'0',zIndex:'99'}}
                 >笔记分类</NavBar>
                 <div className='sort-center' style={{position:'relative',top:'55px'}}>
@@ -84,7 +84,7 @@ export default class ListSort extends Component {
                     this.state.datas.map((tag,idx)=>
                     <li key={idx} className="sort-li" style={{background:"url(" + require("../" +tag.img_path) + ")"}} onClick={this.jumpToSion}>
                     {/* <li key={idx} className="sort-li" style={{background:"url(" + require('../images/sort-test1.jpg') + ")"}} 
-                    onClick={() => window.location='/'} >  */}
+                    onClick={() => window.location='/index.html#/'} >  */}
                         <p>{tag.tags}</p>
                     </li>)
                 }
@@ -112,7 +112,7 @@ export default class ListSort extends Component {
                         />
                         }
                         onPress={() => {
-                            window.location='./find'          
+                            window.location='./index.html#/find'          
                         }}
                 >
                 </TabBar.Item>
@@ -135,7 +135,7 @@ export default class ListSort extends Component {
                     key="note"
                     selected={this.state.selectedTab === 'blueTab'}
                     onPress={() => {
-                        window.location='./sort'   
+                        window.location='./index.html#/sort'   
                     }}
                 >
                 </TabBar.Item>
@@ -157,7 +157,7 @@ export default class ListSort extends Component {
                     title="消息"
                     key="msg"
                     onPress={() => {
-                        window.location='./msg'   
+                        window.location='./index.html#/msg'   
                     }}
                 >
                 </TabBar.Item>
@@ -167,7 +167,7 @@ export default class ListSort extends Component {
                     title="我的"
                     key="my"
                     onPress={() => {
-                        window.location='./me'
+                        window.location='./index.html#/me'
                     }}
                 >
                 </TabBar.Item>

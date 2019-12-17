@@ -15,10 +15,10 @@ export default class Sion extends Component {
     componentDidMount(){
         const post ={
             uid:localStorage.getItem('uid'),
-            tags:decodeURI(window.location.search.split('=')[1])
+            tags:decodeURI(window.location.hash.split('=')[1])
         }
-        localStorage.setItem('tags',decodeURI(window.location.search.split('=')[1]))
-        // console.log(post);
+        // localStorage.setItem('tags',decodeURI(window.location.hash.split('=')[1]))
+        console.log(post);
         console.log(localStorage)
         fetch('http://localhost:8080/sion',{
             method:'POST',
@@ -63,7 +63,7 @@ export default class Sion extends Component {
         // 跳转到笔记详情页，获取点击文章的chid
         const chid = e.target.getAttribute('data-index');
         // console.log(e.target.getAttribute('data-index'))
-        window.location = '/sionple?chid=' + chid;
+        window.location = './index.html#/sionple?chid=' + chid;
     }
 
 
@@ -77,15 +77,15 @@ export default class Sion extends Component {
                             style={{backgroundColor:'#FAA755'}}
                 mode="light"
                 onLeftClick={() => window.history.back(-1)}
-                // onRightClick={() => window.location='/sionnew'}
+                // onRightClick={() => window.location='/index.html#/sionnew'}
                 leftContent={[
                     <Icon key="0" type="left" style={{ color:'#FFF'}} />,
                   ]}
                 rightContent={[
-                    <Icon key="0" onClick={()=>{window.location='/sionnew'}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
+                    <Icon key="0" onClick={()=>{window.location='/index.html#/sionnew'}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
                     
                   ]}
-                >{decodeURI(window.location.search.split('=')[1])}</NavBar>
+                >{decodeURI(window.location.hash.split('=')[1])}</NavBar>
                 {/* <img src=''></img> */}
                 {/* <link clsaaName='add'>+</link> */}
                 
@@ -178,9 +178,9 @@ export default class Sion extends Component {
 //                 <div className='sort-center'>
 //                 {
 //                     this.state.data.map((tag,idx)=>
-//                     <li key={idx} className="sort-li" style={{background:"url(" + require("../" +tag.img_path) + ")"}} onClick={() => window.location='/'}>
+//                     <li key={idx} className="sort-li" style={{background:"url(" + require("../" +tag.img_path) + ")"}} onClick={() => window.location='/index.html#/'}>
 //                     {/* <li key={idx} className="sort-li" style={{background:"url(" + require('../images/sort-test1.jpg') + ")"}} 
-//                     onClick={() => window.location='/'} >  */}
+//                     onClick={() => window.location='/index.html#/'} >  */}
 //                         <p>{tag.item}</p>
 //                     <>)
 //                 }

@@ -11,10 +11,11 @@ export default class Seach extends Component {
     }
     componentDidMount(){
         // console.log()
+        console.log(window.location)
         const post ={
-            keywords:decodeURI(window.location.search.split('=')[1])
+            keywords:decodeURI(window.location.hash.split('=')[1])
         }
-        // console.log(post);
+        console.log(post);
         fetch('http://localhost:8080/discoverSearch',{
             method:'POST',
             // mode:'cors',
@@ -42,7 +43,7 @@ export default class Seach extends Component {
                         <Icon type="left"  onClick={() =>  window.history.back(-1)} 
                         style={{color:'#fff',float: 'left',width: '100%',height:'35px',marginTop:'5px'}}/>
                     </div>
-                    <SearchBar placeholder={decodeURI(window.location.search.split('=')[1])} maxLength={8} onSubmit={this.seach.bind(this)} style={{paddingRight:'2%'}}/>
+                    <SearchBar placeholder={decodeURI(window.location.hash.split('=')[1])} maxLength={8} onSubmit={this.seach.bind(this)} style={{paddingRight:'2%'}}/>
                 </div>
                 <div className='search-result'>
                     搜索结果>
@@ -50,7 +51,7 @@ export default class Seach extends Component {
                 <div className='search-line'></div>
                { 
                this.state.data.map((note,id)=>
-                <div key={id} className='search-heading' onClick={()=>window.location='/sionple?chid='+note.chid}>
+                <div key={id} className='search-heading' onClick={()=>window.location='/index.html#/sionple?chid='+note.chid}>
                     <p className='search-title'>{note.title}</p>
                     <p className='search-time'>{note.chdate}</p>
                     <p className='search-text'>{'  '+note.context}</p>
