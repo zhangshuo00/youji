@@ -125,7 +125,7 @@ export default class Find extends Component {
             <div>
                 <div className='find-search'>
                     <div className='find-search-list'>
-                        <img src={`${require('../images/category.png')}`} onClick={() => window.location='./index.html#/details'} />
+                        <img src={`${require('../images/category.png')}`} onClick={() => window.location='/index.html#/details'} />
                     </div>
                     <SearchBar placeholder="输入关键字搜索" maxLength={8} onSubmit={this.seach.bind(this)} style={{paddingRight:'2%'}}/>
                 </div>
@@ -165,10 +165,10 @@ export default class Find extends Component {
                 {
                     this.state.datas.map((note,id)=>
                     <div key={id} className='find-heading'>
-                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='./index.html#/perpon?uid='+note.uid}></img>
+                        <img className='find-head' src={require("../" +note.headimg)} onClick={()=>window.location='/index.html#/perpon?uid='+note.uid}></img>
                         <p className='find-author'>{note.uname}</p>
                         <p className='find-time'>{note.chdate}</p>
-                        <div className='find-essay' onClick={()=>window.location='./index.html#/sionple?chid='+note.chid}>
+                        <div className='find-essay' onClick={()=>window.location='/index.html#/sionple?chid='+note.chid}>
                             <p className='find-title'>{note.context}</p>
                             <img className='find-img1' src={require("../" +note.img_path[0])} ></img>
                             <img className='find-img2' src={require("../" +note.img_path[1])} ></img>

@@ -71,12 +71,12 @@ export default class ListSort extends Component {
             <div>
                 <NavBar
                 mode="light"
-                onLeftClick={() => window.location='./index.html#/details'}
+                onLeftClick={() => window.location='/index.html#/details'}
                 leftContent={[
                     <img key='0' className='sort-header-person'></img>
                 ]}
                 rightContent={[
-                    <img key='0' className='sort-header-add' onClick={() => window.location='./index.html#/addTag'}></img>
+                    <img key='0' className='sort-header-add' onClick={() => window.location='/index.html#/addTag'}></img>
                 ]}  style={{paddingTop:'10px',width:'100%',backgroundColor:'#FAA755',color:'#fff',position:'fixed',top:'0',zIndex:'99'}}
                 >笔记分类</NavBar>
                 <div className='sort-center' style={{position:'relative',top:'55px'}}>
@@ -84,7 +84,7 @@ export default class ListSort extends Component {
                     this.state.datas.map((tag,idx)=>
                     <li key={idx} className="sort-li" style={{background:"url(" + require("../" +tag.img_path) + ")"}} onClick={this.jumpToSion}>
                     {/* <li key={idx} className="sort-li" style={{background:"url(" + require('../images/sort-test1.jpg') + ")"}} 
-                    onClick={() => window.location='/'} >  */}
+                    onClick={() => window.location='/index.html#/'} >  */}
                         <p>{tag.tags}</p>
                     </li>)
                 }

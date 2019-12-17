@@ -61,13 +61,13 @@ export default class MessageList extends Component {
         return (
             <div>
                 {/* <div style={{width:'100%',backgroundColor:'#F8F8F8',height:'60px'}}>
-                    <Icon type="nordered-list" className='msg-left' onClick={() => window.location='/details'} 
+                    <Icon type="nordered-list" className='msg-left' onClick={() => window.location='/index.html#/details'} 
                         style={{color:'#000',float: 'left',width: '10%',marginTop:'27px'}}/>
                     <p className='msg-title' style={{color:'#000',fontSize:'16px'}}>消息列表</p>
                 </div> */}
                 <NavBar
                 mode="light"
-                onLeftClick={() => window.location='./index.html#/details'}
+                onLeftClick={() => window.location='/index.html#/details'}
                 leftContent={[
                     <img key='0' className='msg-title'></img>
                 ]}
@@ -76,7 +76,7 @@ export default class MessageList extends Component {
                 <div className='msg-list' style={{position:'relative',top:'55px'}}>
                 {
                     this.state.data.map((tag,idx)=>
-                    <li key={idx} className='msg-li' style={{width:'100%',height:'66px'}} onClick={() => window.location='./index.html#/letter/'+tag.uid}>
+                    <li key={idx} className='msg-li' style={{width:'100%',height:'66px'}} onClick={() => window.location='/index.html#/letter/'+tag.uid}>
                         <div className="msg-img" style={{background:"url(" + require("../" +tag.headimg) + ")"}}></div>
                         <p className='msg-time'>{tag.sm_date}</p>
                         <p className='msg-text'>{tag.uname}</p>

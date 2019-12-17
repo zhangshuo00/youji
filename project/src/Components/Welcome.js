@@ -16,9 +16,13 @@ export default class Welcome extends Component {
         this.setState({
             time1:setInterval(()=>{
                 if(storage.uid){
-                    window.location='./index.html#/find'
+                    window.location='./index.html#/find';
+                    clearInterval(this.state.time1);
+                    clearInterval(this.state.time2);
                 }else{
-                    window.location='./index.html#/car'
+                    window.location='./index.html#/car';
+                    clearInterval(this.state.time1);
+                    clearInterval(this.state.time2);
                 }}
             ,5000),
             time2:setInterval(()=>{

@@ -36,7 +36,7 @@ export default class UserDetails extends Component {
     }
 
     // headingChange=()=> {
-    //     window.location='./perpon';
+    //     window.location='./index.html#/perpon';
     // }
     userOut=()=>{
         this.setState({
@@ -51,25 +51,25 @@ export default class UserDetails extends Component {
         return (
             <div>
                 <Icon type="left" onClick={() =>  window.history.back(-1)} style={{marginLeft:'5%',paddingTop:'30px',float:'left'}}/>
-                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => window.location='./index.html#/newperpon'}></img>
+                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => window.location='/index.html#/newperpon'}></img>
                 <p className='user-name'>{this.state.data.uname}</p>
                 <p className='user-email'>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
                 <div className='user-type'>
-                    <img src={require("../images/personx.png")}  onClick={() => window.location='./index.html#/perpon?uid='+localStorage.getItem('uid')}></img>
-                    <p onClick={() => window.location='./index.html#/perpon?uid='+localStorage.getItem('uid')}>个人主页</p>
+                    <img src={require("../images/personx.png")}  onClick={() => window.location='/index.html#/perpon?uid='+localStorage.getItem('uid')}></img>
+                    <p onClick={() => window.location='/index.html#/perpon?uid='+localStorage.getItem('uid')}>个人主页</p>
                 </div>
                 <div className='user-type'>
-                    <img src={require("../images/infor.png")} onClick={() => window.location='./index.html#/msg'}></img>
-                    <p onClick={() => window.location='./index.html#/msg'}> 信息</p>
+                    <img src={require("../images/infor.png")} onClick={() => window.location='/index.html#/msg'}></img>
+                    <p onClick={() => window.location='/index.html#/msg'}> 信息</p>
                 </div>
                 <div className='user-type'>
-                    <img src={require("../images/lingdang_2f.png")} onClick={() => window.location='./index.html#/find'}></img>
-                    <p onClick={() => window.location='./index.html#/find'}>  发现</p>
+                    <img src={require("../images/lingdang_2f.png")} onClick={() => window.location='/index.html#/find'}></img>
+                    <p onClick={() => window.location='/index.html#/find'}>  发现</p>
                 </div>
                 <div className='user-type'>
-                    <img src={require("../images/shezhi.png")} onClick={() => window.location='./index.html#/newperpon'}></img>
-                    <p onClick={() => window.location='./index.html#/newperpon'}>  设置</p>
+                    <img src={require("../images/shezhi.png")} onClick={() => window.location='/index.html#/newperpon'}></img>
+                    <p onClick={() => window.location='/index.html#/newperpon'}>  设置</p>
                 </div>
                 <div className='user-mark1'></div>
                 <p className='user-out' onClick={() =>

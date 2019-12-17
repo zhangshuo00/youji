@@ -15,9 +15,9 @@ export default class Perpon extends Component {
     }
 
     componentDidMount(){
-        // console.log(window.location.search.split('=')[1])
+        // console.log(window.location.hash.split('=')[1])
         const post ={
-            uid:window.location.search.split('=')[1]
+            uid:window.location.hash.split('=')[1]
         }
         console.log(post)
         fetch('http://localhost:8080/personal',{
@@ -46,7 +46,7 @@ export default class Perpon extends Component {
                     <Icon key="0" type="left" style={{ marginLeft: '1px' }} />,
                   ]}
                   rightContent={[
-                    <Icon key="0" onClick={()=>{window.location='./index.html#/newperpon'}} key="0" type="plus"></Icon>
+                    <Icon key="0" onClick={()=>{window.location='/index.html#/newperpon'}} key="0" type="plus"></Icon>
                   ]}
                 >个人信息 </NavBar>
                 </div>

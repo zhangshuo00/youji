@@ -57,7 +57,7 @@ export default class App extends Component {
             <input className='sign-button' type="submit" value="注册"></input>
           </div>
           </form>
-          <Link to='/login'><p className='sign-p2'>已有账户了，点击登陆</p></Link>
+          <Link to='/index.html#/login'><p className='sign-p2'>已有账户了，点击登陆</p></Link>
         </div>
         {/* <div style={{paddingBottom:'35px'}}>
           <Route path={`login`} component={Login} />

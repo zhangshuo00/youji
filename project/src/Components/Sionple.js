@@ -28,7 +28,7 @@ export default class AppHome extends Component {
             console.log(data4);
             const post ={
                 uid: localStorage.getItem('uid'),
-                chid: window.location.search.split('=')[1],
+                chid: window.location.hash.split('=')[1],
             }
             console.log(post);
             fetch('http://localhost:8080/cancelCollection',{
@@ -54,7 +54,7 @@ export default class AppHome extends Component {
             console.log(data4);
             const post ={
                 uid: localStorage.getItem('uid'),
-                chid: window.location.search.split('=')[1],
+                chid: window.location.hash.split('=')[1],
             }
             console.log(post);
             fetch('http://localhost:8080/addFavorites',{
@@ -86,7 +86,7 @@ export default class AppHome extends Component {
             console.log(data4);
             const post ={
                 uid: localStorage.getItem('uid'),
-                chid: window.location.search.split('=')[1],
+                chid: window.location.hash.split('=')[1],
             }
             console.log(post);
             fetch('http://localhost:8080/cancelLike',{
@@ -112,7 +112,7 @@ export default class AppHome extends Component {
             console.log(data4);
             const post ={
                 uid: localStorage.getItem('uid'),
-                chid: window.location.search.split('=')[1],
+                chid: window.location.hash.split('=')[1],
             }
             console.log(post);
             fetch('http://localhost:8080/addLike',{
@@ -132,8 +132,9 @@ export default class AppHome extends Component {
         // var storage = window.localStorage;
         const post ={
             uid: localStorage.getItem('uid'),
-            chid: window.location.search.split('=')[1]
+            chid: window.location.hash.split('=')[1]
         }
+        console.log(post)
         fetch('http://localhost:8080/sionple',{
             method:'POST',
             // mode:'cors',
