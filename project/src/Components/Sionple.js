@@ -31,7 +31,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://148.70.244.132:8080/cancelCollection',{
+            fetch('http://majia.hbsdduckhouse.club/cancelCollection',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -57,7 +57,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://148.70.244.132:8080/addFavorites',{
+            fetch('http://majia.hbsdduckhouse.club/addFavorites',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -89,7 +89,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://148.70.244.132:8080/cancelLike',{
+            fetch('http://majia.hbsdduckhouse.club/cancelLike',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -115,7 +115,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://148.70.244.132:8080/addLike',{
+            fetch('http://majia.hbsdduckhouse.club/addLike',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -135,7 +135,7 @@ export default class AppHome extends Component {
             chid: window.location.hash.split('=')[1]
         }
         console.log(post)
-        fetch('http://148.70.244.132:8080/sionple',{
+        fetch('http://majia.hbsdduckhouse.club/sionple',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

@@ -20,7 +20,7 @@ export default class Sion extends Component {
         // localStorage.setItem('tags',decodeURI(window.location.hash.split('=')[1]))
         console.log(post);
         console.log(localStorage)
-        fetch('http://148.70.244.132:8080/sion',{
+        fetch('http://majia.hbsdduckhouse.club/sion',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

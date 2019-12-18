@@ -24,7 +24,7 @@ export default class Login extends Component{
       upassword:this.state.upassword
     }
     console.log(post);
-    fetch('http://148.70.244.132:8080/login',{
+    fetch('http://majia.hbsdduckhouse.club/login',{
       method:'POST',
       // mode:'cors',
       headers: {'Content-Type': 'application/json;charset=utf-8'},

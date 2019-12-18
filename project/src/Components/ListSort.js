@@ -21,7 +21,7 @@ export default class ListSort extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('http://148.70.244.132:8080/listSort',{
+        fetch('http://majia.hbsdduckhouse.club/listSort',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
