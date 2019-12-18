@@ -15,13 +15,13 @@ constructor(){
           var name2=document.getElementById('2').value;
           if(name1==name2){
               const post ={
-                uid:'k3i297def', 
-                name1:document.getElementById('1').value,
+                uid: localStorage.getItem('uid'),
+                upassword:document.getElementById('1').value,
                 }
             console.log(post);
-            fetch('https://majia.hbsdduckhouse.club/editPerInfo',{
+            fetch('/modifyPwd',{
                 method:'POST',
-                // mode:'cors',
+                mode:'cors',
                 headers: {'Content-Type': 'application/json'},
                 body:JSON.stringify(post)
             })

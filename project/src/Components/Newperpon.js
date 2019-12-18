@@ -19,38 +19,9 @@ constructor(){
           email:'',//邮件
           usex:'',//性别
           files:[],
+          upassword:'',//密码
   }
 }
-// onChange1(e){// 当input内改变时，将value值写入state
-//   this.setState({
-//     // title:document.getElementById('title').innerHTML
-//     img_path:e.target.value
-//   })
-// }
-// onChange2(e){// 当input内改变时，将value值写入state
-//   this.setState({
-//     // context:document.getElementById('context').innerHTML
-//     context:e.target.value
-//   })
-// }
-// onChange3(e){// 当input内改变时，将value值写入state
-//   this.setState({
-//     // context:document.getElementById('context').innerHTML
-//     name:e.target.value
-//   })
-// }
-// onChange4(e){// 当input内改变时，将value值写入state
-//   this.setState({
-//     // context:document.getElementById('context').innerHTML
-//     exc:e.target.value
-//   })
-// }
-// onChange5(e){// 当input内改变时，将value值写入state
-//   this.setState({
-//     // context:document.getElementById('context').innerHTML
-//     email:e.target.value
-//   })
-// }
     onSubmit(e){
         var filelist = [];
           this.state.files.map((item)=>{
@@ -58,7 +29,7 @@ constructor(){
           })
           console.log(filelist);
         const post ={
-          uid:'k3i297def', 
+          uid: localStorage.getItem('uid'),
           //img_path:this.state.img_path,
           uname:document.getElementById('2').value,
           usex:document.getElementById('3').value,
@@ -67,9 +38,9 @@ constructor(){
           imgData:filelist[0],
         }
       console.log(post);
-      fetch('https://majia.hbsdduckhouse.club/editPerInfo',{
+      fetch('/editPerInfo',{
         method:'POST',
-        // mode:'cors',
+        mode:'cors',
         headers: {'Content-Type': 'application/json'},
         body:JSON.stringify(post)
     })
@@ -79,6 +50,27 @@ constructor(){
         })
         // 根据返回的消息，渲染响应的页面
     }
+
+    onSubmit2(e){
+      
+      const post ={
+        uid: localStorage.getItem('uid'),
+        upassword:document.getElementById('4').value,
+      }
+    console.log(post);
+    fetch('/modifyPwd',{
+      method:'POST',
+      mode:'cors',
+      headers: {'Content-Type': 'application/json'},
+      body:JSON.stringify(post)
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data);
+      })
+      // 根据返回的消息，渲染响应的页面
+  }
+
     state = {
       files: data,
     }
@@ -144,13 +136,15 @@ constructor(){
                 placeholder="男"
                 id="3"
               >性别</InputItem>
-              {/* <InputItem
-                type="email" 
-                placeholder="1062208122@qq.com"
-                id="4"
-              >邮箱</InputItem> */}
-            {/* </List> */}
             
+              <div>
+                <div>
+                  <input id="4" className='sign-input2' style={{marginLeft:'10%',width:'80%'}} placeholder="密码" name="upassword"></input>
+                  <input className='sign-button' style={{marginLeft:'25%',marginTop:'5%',width:'50%'}}  onClick={() => this.onSubmit2()} type="submit" value="修改密码"></input>
+                </div>
+              </div>
+
+
             </div>
            
 
