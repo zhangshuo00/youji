@@ -31,7 +31,7 @@ export default class AddTag extends Component {
           const post ={
             uid:storage.uid,
             tagName:labelText.value,
-            img:imgFile
+            imgData:imgFile
           }	
           console.log(post);
           fetch('/addTag',{
@@ -49,7 +49,7 @@ export default class AddTag extends Component {
         const post ={
           uid:storage.uid,
           tagName:labelText.value,
-          img:'images/sort-test1.jpg'
+          imgData:'images/sort-test1.jpg'
         }	
         console.log(post);
         fetch('/addTag',{

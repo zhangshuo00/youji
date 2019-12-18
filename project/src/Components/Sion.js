@@ -82,7 +82,7 @@ export default class Sion extends Component {
                     <Icon key="0" type="left" style={{ color:'#FFF'}} />,
                   ]}
                 rightContent={[
-                    <Icon key="0" onClick={()=>{window.location='/index.html#/sionnew'}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
+                    <Icon key="0" onClick={()=>{window.location='/index.html#/sionnew?tags='+decodeURI(window.location.hash.split('=')[1])}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
                     
                   ]}
                 >{decodeURI(window.location.hash.split('=')[1])}</NavBar>

@@ -24,14 +24,17 @@ export default class UserDetails extends Component {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
-            this.setState({
-                data: {
-                    headimg:data[0].headimg,
-                    uname:data[0].uname,
-                    uemail:data[0].uemail
-                }
-            })
+            console.log(data);
+            if(data[0]){
+                this.setState({
+                    data: {
+                        headimg:data[0].headimg,
+                        uname:data[0].uname,
+                        uemail:data[0].uemail
+                    }
+                })
+            }
+            
         })
     }
 
@@ -46,14 +49,24 @@ export default class UserDetails extends Component {
         const storage = window.localStorage;
         localStorage.removeItem("uid");
     }
+    uname(){
+        if(this.state.data.uname == '请登录'){
+            window.location='./index.html#/login'
+        }
+    }
+    uemail(){
+        if(this.state.data.uemail == '请登录'){
+            window.location='./index.html#/login'
+        }
+    }
 
     render() {
         return (
             <div>
                 <Icon type="left" onClick={() =>  window.history.back(-1)} style={{marginLeft:'5%',paddingTop:'30px',float:'left'}}/>
-                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => window.location='/index.html#/newperpon'}></img>
-                <p className='user-name'>{this.state.data.uname}</p>
-                <p className='user-email'>{this.state.data.uemail}</p>
+                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => window.location='/index.html#/login'}></img>
+                <p className='user-name' onClick={()=> this.uname()}>{this.state.data.uname}</p>
+                <p className='user-email' onClick={()=> this.uemail()}>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
                 <div className='user-type'>
                     <img src={require("../images/personx.png")}  onClick={() => window.location='/index.html#/perpon?uid='+localStorage.getItem('uid')}></img>

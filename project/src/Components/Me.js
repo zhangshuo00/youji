@@ -60,14 +60,14 @@ export default class Me extends Component {
                         <img src={`${require('../images/category.png')}`}  onClick={() => window.location='/index.html#/details'} />
                     </div>
                     <p className='me-top-user'>{this.state.data.uname}</p>
-                    <p className='me-top-email'>{this.state.data.uemail}</p>
+                    <p className='me-top-email'>{this.state.data.uid}</p>
                     {/* <div className='me-top-line'></div> */}
                 </div>
                 <div className='me-title'>
                     <img className='me-head' src={require("../" +this.state.data.headimg)} onClick={()=>window.location='/index.html#/perpon?uid='+localStorage.getItem('uid')}></img>
                     <div className='me-num'>
                         <div className='me-sex'>
-                            <img src={require("../"+this.state.seximg)}></img>
+                            <img style={{width:'15px',height:'15px'}} src={require("../"+this.state.seximg)}></img>
                             <p>{this.state.data.usex}</p>
                         </div>
                         <div className='me-atten'>

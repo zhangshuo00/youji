@@ -31,7 +31,7 @@
     text-align: center;
     height: 20px;
     padding-top: 10px;
-    font-size: 15px;
+    font-size: 20px;
     color: #fff;
 }
 .me-top-email{
@@ -43,6 +43,7 @@
     font-size: 12px;
     margin-bottom: 1px;
     color: #929191;
+    padding-top: 5px;
 }
 .me-title{
     width: 100%;
@@ -50,8 +51,8 @@
     height: 105px;
     top: 55px;
     background-color: #fff;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 28px;
+    padding-bottom: 18px;
 }
 .me-head{
     width: 25%;
@@ -62,12 +63,13 @@
     float: left;
 }
 .me-num{
-    width: 71%;
+    width: 50%;
     float: left;
     padding-top: 10px;
+    margin-left: 20px;
 }
 .me-sex{
-    width: 25%;
+    width: 20%;
     margin: 0;
     float: left;
     height: 32px;
@@ -77,7 +79,7 @@
 .me-sex p{
     margin: 0;
     float: left;
-    font-size: 20px;
+    font-size: 12px;
 }
 .me-sex img{
     width: auto;
@@ -120,10 +122,11 @@
 }
 .me-edit{
     float: left;
-    width: 68%;
+    width: 50%;
     margin-right: 2%;
     text-align: center;
     margin-top: 5px;
+    margin-left: 10px;
     /* padding-top: 12px; */
     /* height: 25px; */
     padding-top: 15px;
@@ -139,7 +142,7 @@
     position: relative;
     top: 55px;
     padding-top: 5px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 .me-line{
     width: 100%;

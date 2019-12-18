@@ -22,8 +22,10 @@ router.post('/',async (req,res)=>{
     // console.log(existEmail)
     // console.log(uname,uemail,upassword)
     var uid = GenNonDuplicateID(1);
+    // 设置用户的默认头像
+    var headimg = 'images/chapterImg4.jpg';
     // 向数据库的 userStore表中写入数据，uid统一使用时间戳生成
-    await query('INSERT INTO user(uid,uemail,uname,upassword) VALUES(?,?,?,?)',[uid,uemail,uname,upassword]);
+    await query('INSERT INTO user(uid,uemail,uname,headimg,upassword) VALUES(?,?,?,?,?)',[uid,uemail,uname,headimg,upassword]);
     return res.send({msg:'signSuccess'});
 })
 module.exports = router;

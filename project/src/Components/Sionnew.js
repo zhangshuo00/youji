@@ -44,14 +44,14 @@ export default class SionNew extends Component {
         console.log(filelist);
           const post ={
             uid:localStorage.getItem('uid'),
-            tags:localStorage.getItem('tags'),
+            tags:decodeURI(window.location.hash.split('=')[1]),
             title:this.state.title,
             context:this.state.context,
-            files:filelist,
+            imgData:filelist,
             isShare: this.state.checked ? 1 : 0
           }
         console.log(post);
-        fetch('/addSionple/',{
+        fetch('/addSionple',{
           method:'POST',
           // mode:'cors',
           headers: {'Content-Type': 'application/json'},
@@ -101,7 +101,7 @@ export default class SionNew extends Component {
                 >新建笔记 </NavBar>
             </div>
             <div>
-                <textarea cols='20' rows='2' style={{backgroundColor:'#fff',marginBottom:'3px',color:'gray',padding:'0',height:'40px',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="title" value={this.state.title} onChange={(e) => this.onChange1(e)}>双击编辑标题</textarea>
+                <textarea cols='20' rows='2' style={{marginTop:'10px',fontSize:'18px',backgroundColor:'#fff',marginBottom:'3px',color:'gray',padding:'0',height:'50px',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="title" value={this.state.title} onChange={(e) => this.onChange1(e)}>双击编辑标题</textarea>
             </div>
             <div>
                 <textarea cols='50' rows='5' style={{backgroundColor:'#fff',marginBottom:'3px',color:'gray',height:'168px',padding:'0',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="context" value={this.state.context} onChange={(e) => this.onChange2(e)}>双击编辑文本</textarea>

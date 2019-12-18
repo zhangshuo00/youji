@@ -8,6 +8,7 @@ router.post('/',async (req,res)=>{
     // 前端发起请求的参数中包括：uid（即当前用户id），tagName（即用户键入的笔记名）
     // imgPath（目前先不用）
     const{uid,tagName,imgData} = req.body;
+    // console.log(imgData)
     // const uid = 'k3i297def';
     // const tagName = '测试4';
     var a = 0;
