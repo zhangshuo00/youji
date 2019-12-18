@@ -25,7 +25,7 @@ export default class Me extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('http://localhost:8080/me',{
+        fetch('http://148.70.244.132:8080/me',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

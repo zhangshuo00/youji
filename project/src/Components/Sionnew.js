@@ -51,7 +51,7 @@ export default class SionNew extends Component {
             isShare: this.state.checked ? 1 : 0
           }
         console.log(post);
-        fetch('http://localhost:8080/addSionple/',{
+        fetch('http://148.70.244.132:8080/addSionple/',{
           method:'POST',
           // mode:'cors',
           headers: {'Content-Type': 'application/json'},

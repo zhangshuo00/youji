@@ -19,7 +19,7 @@ constructor(){
                 name1:document.getElementById('1').value,
                 }
             console.log(post);
-            fetch('http://localhost:8080/editPerInfo',{
+            fetch('http://148.70.244.132:8080/editPerInfo',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},

@@ -22,7 +22,7 @@ export default class PrivateLetter extends Component {
         }
          //获取对话的编号
         // console.log(con_id);
-        fetch('http://localhost:8080/getMsg',{
+        fetch('http://148.70.244.132:8080/getMsg',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -58,7 +58,7 @@ export default class PrivateLetter extends Component {
         }
          //获取对话的编号
         // console.log(con_id);
-        fetch('http://localhost:8080/getMsg',{
+        fetch('http://148.70.244.132:8080/getMsg',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -92,7 +92,7 @@ export default class PrivateLetter extends Component {
                 ruid:con_id,
                 msg:text.value
             }
-            fetch('http://localhost:8080/sendMsg',{
+            fetch('http://148.70.244.132:8080/sendMsg',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},

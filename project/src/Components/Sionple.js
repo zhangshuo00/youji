@@ -31,7 +31,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://localhost:8080/cancelCollection',{
+            fetch('http://148.70.244.132:8080/cancelCollection',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -57,7 +57,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://localhost:8080/addFavorites',{
+            fetch('http://148.70.244.132:8080/addFavorites',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -89,7 +89,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://localhost:8080/cancelLike',{
+            fetch('http://148.70.244.132:8080/cancelLike',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -115,7 +115,7 @@ export default class AppHome extends Component {
                 chid: window.location.hash.split('=')[1],
             }
             console.log(post);
-            fetch('http://localhost:8080/addLike',{
+            fetch('http://148.70.244.132:8080/addLike',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -135,7 +135,7 @@ export default class AppHome extends Component {
             chid: window.location.hash.split('=')[1]
         }
         console.log(post)
-        fetch('http://localhost:8080/sionple',{
+        fetch('http://148.70.244.132:8080/sionple',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

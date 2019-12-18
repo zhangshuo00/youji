@@ -24,7 +24,7 @@ export default class Find extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('http://localhost:8080/discover',{
+        fetch('http://148.70.244.132:8080/discover',{
             method:'GET',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -55,7 +55,7 @@ export default class Find extends Component {
             // 根据返回的消息，渲染响应的页面
         });
 
-        fetch('http://localhost:8080/getCarousel',{
+        fetch('http://148.70.244.132:8080/getCarousel',{
             method:'GET',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
