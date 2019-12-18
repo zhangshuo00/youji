@@ -51,7 +51,7 @@ export default class SionNew extends Component {
             isShare: this.state.checked ? 1 : 0
           }
         console.log(post);
-        fetch('http://majia.hbsdduckhouse.club/addSionple/',{
+        fetch('https://majia.hbsdduckhouse.club/addSionple/',{
           method:'POST',
           // mode:'cors',
           headers: {'Content-Type': 'application/json'},

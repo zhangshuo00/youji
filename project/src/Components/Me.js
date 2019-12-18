@@ -25,7 +25,7 @@ export default class Me extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('http://majia.hbsdduckhouse.club/me',{
+        fetch('https://majia.hbsdduckhouse.club/me',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

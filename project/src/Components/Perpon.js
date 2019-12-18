@@ -20,7 +20,7 @@ export default class Perpon extends Component {
             uid:window.location.hash.split('=')[1]
         }
         console.log(post)
-        fetch('http://majia.hbsdduckhouse.club/personal',{
+        fetch('https://majia.hbsdduckhouse.club/personal',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

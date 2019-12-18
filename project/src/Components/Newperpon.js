@@ -67,7 +67,7 @@ constructor(){
           imgData:filelist[0],
         }
       console.log(post);
-      fetch('http://majia.hbsdduckhouse.club/editPerInfo',{
+      fetch('https://majia.hbsdduckhouse.club/editPerInfo',{
         method:'POST',
         // mode:'cors',
         headers: {'Content-Type': 'application/json'},

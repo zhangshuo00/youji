@@ -16,7 +16,7 @@ export default class UserDetails extends Component {
         const uid = localStorage.getItem('uid');
         const post = {uid:uid};
         // console.log(post);
-        fetch('http://majia.hbsdduckhouse.club/userDetail',{
+        fetch('https://majia.hbsdduckhouse.club/userDetail',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

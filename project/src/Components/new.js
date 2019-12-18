@@ -19,7 +19,7 @@ constructor(){
                 name1:document.getElementById('1').value,
                 }
             console.log(post);
-            fetch('http://majia.hbsdduckhouse.club/editPerInfo',{
+            fetch('https://majia.hbsdduckhouse.club/editPerInfo',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},
