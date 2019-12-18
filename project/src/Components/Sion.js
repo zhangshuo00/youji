@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { NavBar, Icon, Tabs, WingBlank, Flex} from 'antd-mobile';
+import { NavBar, Icon, Tabs, WingBlank, Flex,Modal} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom'; 
-import Sionple from './Sionple'
+import Sionple from './Sionple';
+const alert = Modal.alert;
+let press;
 
 export default class Sion extends Component {
     constructor(props){
@@ -61,9 +63,46 @@ export default class Sion extends Component {
 
     jumpToSionple = (e) =>{
         // 跳转到笔记详情页，获取点击文章的chid
-        const chid = e.target.getAttribute('data-index');
+        // const chid = e.target.getAttribute('data-index');
         // console.log(e.target.getAttribute('data-index'))
-        window.location = './index.html#/sionple?chid=' + chid;
+        window.location = './index.html#/sionple?chid=' + e;
+    }
+    handleTouchEnd(){
+        clearTimeout(press)
+    }
+
+    touchStart(e){
+        const that = this;
+        press = setTimeout(function(){
+            alert('是否删除该分类', '并删除该分类下所有笔记', [
+                { text: '取消', onPress: () => console.log('cancel') },
+                { text: '确定', onPress: () => that.delTags(e)},
+                ])
+        }, 500);
+    }
+    delTags=(e)=>{
+        // console.log(e)
+        const storage = window.localStorage;
+        const post ={
+            uid:storage.uid,
+            chid:e
+        }
+        console.log(post);
+        fetch('/delSionple',{
+            method:'POST',
+            // mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            window.location.reload(); //重新刷新该页面
+            // this.setState({
+            //     datas:data
+            // })
+            // 根据返回的消息，渲染响应的页面
+        })
     }
 
 
@@ -95,31 +134,28 @@ export default class Sion extends Component {
             </div> */}
             <div style={{marginTop:'3%',paddingLeft:'3%'}}>
             {/* <WingBlank> 
-                <Flex>   */}
-                   
+                <Flex>   */}                   
             {this.state.datacopy.map(
-                            (item,index)=>(
-                                <WingBlank style={{textAlign:'center'}}> 
-                                <Flex>
-                                    {
-                                         item.map((ita)=>(
-                                            <Flex.Item> 
-                                                <div>
-                                                    <img data-index={ita.chid} onClick={this.jumpToSionple} src={require("../" +ita.ch_headimg)} style={{height:'120px',width:'150px',borderRadius: '10px'}}></img>
-                                                    <p>{ita.chdate}</p>
-                                                    <p>{ita.title}</p>
-                                                </div>
-                                            </Flex.Item>
-                                        ))
-                                    }
-                                </Flex> 
-                                </WingBlank> 
-                            )
-                                    
-                               
-                            
-                            )}
-                            <div>
+                (item,index)=>(
+                    <WingBlank style={{textAlign:'center'}}> 
+                    <Flex>
+                        {
+                        item.map((ita)=>(
+                            <Flex.Item style={{backgroundColor:'#fff',paddingLeft:'2%',paddingTop:'5px',borderRadius:'2px',marginBottom:'5px'
+                            }} onTouchStart={()=>this.touchStart(ita.chid)} onTouchEnd={this.handleTouchEnd}> 
+                                <div onClick={()=>this.jumpToSionple(ita.chid)}>
+                                    <img data-index={ita.chid} src={require("../" +ita.ch_headimg)} style={{height:'120px',width:'150px',borderRadius: '10px'}}></img>
+                                    <p>{ita.chdate}</p>
+                                    <p style={{marginBottom:'5px'}}>{ita.title}</p>
+                                </div>
+                            </Flex.Item>
+                        ))
+                        }
+                    </Flex> 
+                    </WingBlank> 
+                )
+            )}
+            <div>
         <Route path={`sionple`} component={Sionple} />
       </div>
             {/* )} */}

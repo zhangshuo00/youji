@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/privateLetter.css';
 import {Icon} from 'antd-mobile';
-import store from './UserId';
+// import store from './UserId';
 
 export default class PrivateLetter extends Component {
     constructor(props){

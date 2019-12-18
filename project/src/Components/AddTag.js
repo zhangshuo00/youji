@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../css/addTag.css';
-import {Icon} from 'antd-mobile';
+import {Icon,Modal} from 'antd-mobile';
+const alert = Modal.alert;
 //新建标签页
 
 
@@ -23,6 +24,7 @@ export default class AddTag extends Component {
       const storage = window.localStorage;
       const labelText = document.getElementById('label-text');
       const f=document.getElementsByClassName('label-image')[0].files[0];
+      // console.log(f)
       if(f){
         var reader = new FileReader();
         reader.readAsDataURL(f);	
@@ -36,16 +38,27 @@ export default class AddTag extends Component {
           console.log(post);
           fetch('/addTag',{
             method:'POST',
-            // mode:'cors',
+            mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
           })
           .then(res=>res.json())
           .then(data=>{
             console.log(data);
+            if(data.msg==='success' ){
+              alert('保存成功','', [
+                { text: '确定', onPress: () => console.log('cancel') },
+                ])
+            }
           })  
         }     
       }else{
+        // var image = require('../images/sort-test1.jpg')
+        // console.log(image);
+        // var reader = new FileReader();
+        // reader.readAsDataURL(f);	
+        // reader.onloadend = function(e) {		
+        //   const imgFile = e.target.result;	}
         const post ={
           uid:storage.uid,
           tagName:labelText.value,
@@ -54,7 +67,7 @@ export default class AddTag extends Component {
         console.log(post);
         fetch('/addTag',{
           method:'POST',
-          // mode:'cors',
+          mode:'cors',
           headers: {'Content-Type': 'application/json'},
           body:JSON.stringify(post)
         })

@@ -1,8 +1,9 @@
 import React, {Component } from 'react';
 import { NavBar, Icon} from 'antd-mobile';
-import { List, InputItem } from 'antd-mobile';
+import { List, InputItem,Modal } from 'antd-mobile';
 import { WingBlank} from 'antd-mobile';
 import { ImagePicker} from 'antd-mobile';
+const alert = Modal.alert;
 const data = [{
   url: '../images/DLW7@W5XOHV9D2ZN3OU1DY3.png',
   id: '2121',
@@ -47,29 +48,34 @@ constructor(){
     .then(res=>res.json())
     .then(data=>{
       console.log(data);
-        })
+      if(data.msg==='success' ){
+        alert('保存成功','', [
+          { text: '确定', onPress: () => console.log('cancel') },
+          ])
+      }
+    })
         // 根据返回的消息，渲染响应的页面
     }
 
-    onSubmit2(e){
+  //   onSubmit2(e){
       
-      const post ={
-        uid: localStorage.getItem('uid'),
-        upassword:document.getElementById('4').value,
-      }
-    console.log(post);
-    fetch('/modifyPwd',{
-      method:'POST',
-      mode:'cors',
-      headers: {'Content-Type': 'application/json'},
-      body:JSON.stringify(post)
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    console.log(data);
-      })
-      // 根据返回的消息，渲染响应的页面
-  }
+  //     const post ={
+  //       uid: localStorage.getItem('uid'),
+  //       upassword:document.getElementById('4').value,
+  //     }
+  //   console.log(post);
+  //   fetch('/modifyPwd',{
+  //     method:'POST',
+  //     mode:'cors',
+  //     headers: {'Content-Type': 'application/json'},
+  //     body:JSON.stringify(post)
+  // })
+  // .then(res=>res.json())
+  // .then(data=>{
+  //   console.log(data);
+  //     })
+  //     // 根据返回的消息，渲染响应的页面
+  // }
 
     state = {
       files: data,
@@ -91,7 +97,7 @@ constructor(){
     render() {
       const { files } = this.state;
         return (
-            <div>
+            <div style={{backgroundColor:'#fff',height:'100vh'}}>
             <div>
                             <NavBar
                 style={{backgroundColor:'#FAA755',color:'white'}}
@@ -136,17 +142,16 @@ constructor(){
                 placeholder="男"
                 id="3"
               >性别</InputItem>
-            
-              <div>
+              {/* <div>
                 <div>
                   <input id="4" className='sign-input2' style={{marginLeft:'10%',width:'80%'}} placeholder="密码" name="upassword"></input>
                   <input className='sign-button' style={{marginLeft:'25%',marginTop:'5%',width:'50%'}}  onClick={() => this.onSubmit2()} type="submit" value="修改密码"></input>
                 </div>
-              </div>
-
-
+              </div> */}
             </div>
-           
+            <div style={{backgroundColor:'#fff',width:'100%',position:'absolute',bottom:'0'}} onClick={()=> window.location='./index.html#/new?uid='+localStorage.getItem('uid')}>
+                <p style={{textAlign:'center',color:'rgba(0,0,0,0.7)'}}>是否修改密码？</p>
+            </div>
 
             </div>
         )

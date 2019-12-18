@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { NavBar, Icon, WingBlank,List,Switch} from 'antd-mobile';
+import { NavBar, Icon, WingBlank,List,Switch,Modal} from 'antd-mobile';
 import { ImagePicker} from 'antd-mobile';
+const alert = Modal.alert;
 const data = [{
     url: '../images/DLW7@W5XOHV9D2ZN3OU1DY3.png',
     id: '2121',
@@ -51,7 +52,7 @@ export default class SionNew extends Component {
             isShare: this.state.checked ? 1 : 0
           }
         console.log(post);
-        fetch('/addSionple',{
+        fetch('/addSionple/',{
           method:'POST',
           // mode:'cors',
           headers: {'Content-Type': 'application/json'},
@@ -61,7 +62,11 @@ export default class SionNew extends Component {
       .then(data=>{
         console.log(data.msg);
         var storage = window.localStorage;
-        
+        if(data.msg==='success' ){
+          alert('保存成功','', [
+            { text: '确定', onPress: () => console.log('cancel') },
+            ])
+        }
           })
           // 根据返回的消息，渲染响应的页面
       }
@@ -101,7 +106,7 @@ export default class SionNew extends Component {
                 >新建笔记 </NavBar>
             </div>
             <div>
-                <textarea cols='20' rows='2' style={{marginTop:'10px',fontSize:'18px',backgroundColor:'#fff',marginBottom:'3px',color:'gray',padding:'0',height:'50px',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="title" value={this.state.title} onChange={(e) => this.onChange1(e)}>双击编辑标题</textarea>
+                <textarea cols='20' rows='2' style={{backgroundColor:'#fff',marginBottom:'3px',color:'gray',padding:'0',height:'40px',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="title" value={this.state.title} onChange={(e) => this.onChange1(e)}>双击编辑标题</textarea>
             </div>
             <div>
                 <textarea cols='50' rows='5' style={{backgroundColor:'#fff',marginBottom:'3px',color:'gray',height:'168px',padding:'0',width:'96%',paddingLeft:'2%',paddingRight:'2%',border:'0px',lineHeight:'40px'}} id="context" value={this.state.context} onChange={(e) => this.onChange2(e)}>双击编辑文本</textarea>

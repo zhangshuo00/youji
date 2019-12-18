@@ -96,14 +96,16 @@ export default class MessageList extends Component {
                     icon={<div style={{
                     width: '22px',
                     height: '22px',
-                    background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/home2.png") center center /  21px 21px no-repeat` }}
-                    />
+                    background:"url(" + require("../images/home2.png") + ") center center /  21px 21px no-repeat " ,
+                        // background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/home2.png") center center /  21px 21px no-repeat` 
+                    }} />
                     }
                     selectedIcon={<div style={{
                         width: '22px',
                         height: '22px',
-                        background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/home3.png") center center /  21px 21px no-repeat` }}
-                        />
+                        background:"url(" + require("../images/home3.png") + ") center center /  21px 21px no-repeat" ,
+                        // background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/home3.png") center center /  21px 21px no-repeat` 
+                    }}/>
                         }
                         onPress={() => {
                             window.location='./index.html#/find'          
@@ -115,15 +117,17 @@ export default class MessageList extends Component {
                     <div style={{
                         width: '22px',
                         height: '22px',
-                        background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/note.png") center center /  21px 21px no-repeat` }}
-                    />
+                        background:"url(" + require("../images/note.png") + ") center center /  21px 21px no-repeat " ,
+                        // background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/note.png") center center /  21px 21px no-repeat` 
+                    }}/>
                     }
                     selectedIcon={
                     <div style={{
                         width: '22px',
                         height: '22px',
-                        background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/note1.png") center center /  21px 21px no-repeat` }}
-                    />
+                        background:"url(" + require("../images/note1.png") + ") center center /  21px 21px no-repeat " ,
+                        // background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/note1.png") center center /  21px 21px no-repeat` }}
+                    }}/>
                     }
                     title="笔记"
                     key="note"
@@ -137,15 +141,17 @@ export default class MessageList extends Component {
                     <div style={{
                         width: '22px',
                         height: '22px',
-                        background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/msg.png") center center /  21px 21px no-repeat` }}
-                    />
+                        background:"url(" + require("../images/msg.png") + ") center center /  21px 21px no-repeat " ,
+                        // background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/msg.png") center center /  21px 21px no-repeat` }}
+                    }}/>
                     }
                     selectedIcon={
                     <div style={{
                         width: '22px',
                         height: '22px',
-                        background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/msg1.png") center center /  21px 21px no-repeat` }}
-                    />
+                        background:"url(" + require("../images/msg1.png") + ") center center /  21px 21px no-repeat " ,
+                        // background: `url("https://raw.githubusercontent.com/zhangwenkang6/React/master/images/msg1.png") center center /  21px 21px no-repeat` }}
+                    }}/>
                     }
                     title="消息"
                     key="msg"
@@ -156,8 +162,8 @@ export default class MessageList extends Component {
                 >
                 </TabBar.Item>
                     <TabBar.Item
-                        icon={{ uri:`https://raw.githubusercontent.com/zhangwenkang6/React/master/images/me.png`}}
-                        selectedIcon={{ uri:`https://raw.githubusercontent.com/zhangwenkang6/React/master/images/me1.png` }}
+                        icon={{uri:require("../images/me.png")}}
+                        selectedIcon={{ uri:require("../images/me1.png")}}
                         title="我的"
                         key="my"
                         onPress={() => {

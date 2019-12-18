@@ -16,7 +16,7 @@ export default class UserDetails extends Component {
         const uid = localStorage.getItem('uid');
         const post = {uid:uid};
         // console.log(post);
-        fetch('/userDetail',{
+        fetch('http://localhost:8080/userDetail',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -64,7 +64,7 @@ export default class UserDetails extends Component {
         return (
             <div>
                 <Icon type="left" onClick={() =>  window.history.back(-1)} style={{marginLeft:'5%',paddingTop:'30px',float:'left'}}/>
-                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => window.location='/index.html#/login'}></img>
+                <img src={require("../" +this.state.data.headimg)} className='user-heading' onClick={() => window.location='/index.html#/newperpon'}></img>
                 <p className='user-name' onClick={()=> this.uname()}>{this.state.data.uname}</p>
                 <p className='user-email' onClick={()=> this.uemail()}>{this.state.data.uemail}</p>
                 <div className='user-mark'></div>
