@@ -31,6 +31,10 @@ var addFavorites = require('./api/addFavorites');
 var cancelCollection = require('./api/cancelCollection');
 var addLike = require('./api/addLike');
 var cancelLike = require('./api/cancelLike');
+var modifyPwd = require('./api/editPerInfo');
+var forgetPwd = require('./api/forgetPwd');
+var delTags = require('./api/delTags');
+var delSionple = require('./api/delSionple');
 
 var app = express();
 
@@ -41,8 +45,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By", ' 3.2.1')
     res.header("Content-Type", "application/json;charset=utf-8");
@@ -74,6 +77,10 @@ app.use('/addFavorites',addFavorites);// 添加收藏文章
 app.use('/cancelCollection',cancelCollection);// 取消收藏文章
 app.use('/addLike',addLike);// 添加喜欢文章
 app.use('/cancelLike',cancelLike);// 取消喜欢文章
+app.use('/modifyPwd',modifyPwd);// 修改密码
+app.use('/forgetPwd',forgetPwd);// 忘记密码
+app.use('/delTags',delTags);// 删除分类
+app.use('/delSionple',delSionple);// 删除文章
 
 
 // 后台系统接口

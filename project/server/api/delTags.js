@@ -10,8 +10,16 @@ router.post('/',async (req,res)=>{
     var tag_id = await query('select tag_id from tagsName where tags=?',[tags]);
     tag_id = JSON.parse(JSON.stringify(tag_id))[0].tag_id;
 
-    // 删除该分类下的所有文章
+    // 删除该分类下的所有文章及相应的图片
+    var chid = await query('select chid from chapter where uid=? and tag_id=?',[uid,tag_id]);
+    chid = JSON.parse(JSON.stringify(chid));
+    for(var i=0;i<chid.length;i++){
+        await query('delete from images where chid=?',[chid[i].chid]);
+        await query('delete from userCollection where chid=?',[chid[i].chid]);
+        await query('delete from userLikes where chid=?',[chid[i].chid]);
+    }
     await query('delete from chapter where uid=? and tag_id=?',[uid,tag_id]);
+
     // 删除该登录用户下的该分类
     await query('delete from userTags where uid=? and tag_id=?',[uid,tag_id]);
     res.send({msg:'success'});
