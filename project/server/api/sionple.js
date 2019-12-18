@@ -10,7 +10,10 @@ router.post('/',async (req,res)=>{
     // const chid = 2;
     // const uid = 'k3mimknra';
     // 
-    var uname = await query('select uname from user where uid=?',[uid]);
+    var uuid = await query('select uid from chapter where chid=?',[chid]);
+    uuid = JSON.parse(JSON.stringify(uuid))[0].uid;
+
+    var uname = await query('select uname from user where uid=?',[uuid]);
     uname = JSON.parse(JSON.stringify(uname))[0].uname;
     // 需要返回的内容有 头图img_path，标题 title，笔记分类tags，
     // 文章内容context，文章内容图片img_path

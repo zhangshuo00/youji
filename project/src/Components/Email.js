@@ -1,7 +1,7 @@
 import React, {Component } from 'react';
 import { NavBar, Icon} from 'antd-mobile';
 import { List, InputItem } from 'antd-mobile';
-import { WingBlank} from 'antd-mobile';
+import { WingBlank, WhiteSpace} from 'antd-mobile';
 import { ImagePicker} from 'antd-mobile';
 
 const data = [
@@ -42,8 +42,8 @@ export default class AppHome extends Component {
                 	data:data
             	}
         	},()=>{
-           		if(data==='success'){
-               		window.location='/new';
+           		if(data.msg==='success'){
+               		window.location='index.html#/new';
            		}else{
                		alert('验证失败');
            		}
@@ -85,22 +85,24 @@ export default class AppHome extends Component {
                 >信息验证 </NavBar>
             </div>
             <div>
-            
-              <InputItem
+            <WhiteSpace size="lg"/>
+              <InputItem 
                 type="email" 
-                placeholder="电子邮箱"
+                placeholder=""
                 id="1"
               >邮箱</InputItem>
+              <WhiteSpace size="md"/>
               <InputItem
                 type="text" 
-                placeholder="张三"
+                placeholder=""
                 id="2"
               >昵称</InputItem>
+              <WhiteSpace size="md"/>
               <InputItem
                 type="text" 
-                placeholder="uid"
+                placeholder=""
                 id="3"
-              >uid</InputItem>
+              >用户ID</InputItem>
 
             </div>
            

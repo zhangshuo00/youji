@@ -8,7 +8,7 @@ router.get('/',async (req,res)=>{
     // 需要返回的有：轮播图的img_path，每个文章的块（uid，uname，headimg，
     // context的前20个字符，两个文章的img_path，该文章的喜欢数和收藏数
 
-    var result = await query('select * from chapter where isShare=?',[1]);
+    var result = await query('select * from chapter where isShare=? order by chid desc',[1]);
     result = JSON.parse(JSON.stringify(result));
     // 截取context的前二十个字符
     for(var i=0;i<result.length;i++){

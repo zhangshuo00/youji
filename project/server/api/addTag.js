@@ -44,17 +44,22 @@ router.post('/',async (req,res)=>{
     }
     if(b === 0){// 该uid下没有该笔记分类
         // 接收base64格式的图片保存到本地 images路径下，并将路径写入数据库相应位置
-        var img_path = 'images/'+uid+tagName+'.jpg';
-        var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
-        var dataBuffer = Buffer.from(base64Data,'base64');
-        fs.writeFileSync('../src/images/'+uid+tagName+'.jpg',dataBuffer);
-
-        await query('insert into images (img_path) values(?)',[img_path]);
-
-        var img_id = await query('select img_id from images where img_path=?',[img_path]);
-        img_id = JSON.parse(JSON.stringify(img_id))[0].img_id;
-        // console.log(img_id);
-
+        if(imgData === 'images/sort-test1.jpg'){
+            // 用户没有设置分类的图片，系统设置为默认
+            var img_id = 1;
+        }else{// 用户设置了图片
+            var img_path = 'images/'+uid+tagName+'.jpg';
+            var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+            var dataBuffer = Buffer.from(base64Data,'base64');
+            fs.writeFileSync('../src/images/'+uid+tagName+'.jpg',dataBuffer);
+    
+            await query('insert into images (img_path) values(?)',[img_path]);
+    
+            var img_id = await query('select img_id from images where img_path=?',[img_path]);
+            img_id = JSON.parse(JSON.stringify(img_id))[0].img_id;
+            // console.log(img_id);
+        }
+        
         await query('insert into userTags (uid,tag_id,img_id) values(?,?,?)',[uid,tag_id,img_id]);
 
         return res.send({msg:'success'});

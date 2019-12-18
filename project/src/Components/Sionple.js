@@ -180,16 +180,16 @@ export default class AppHome extends Component {
                                 <img src={require("../" +val.img_path)} style={{width:'100%'}}></img>
                             ))}
                         </div>
-                        <div style={{position:'fixed',bottom:'0',width:'90%',paddingLeft:'5%',paddingRight:'5%',backgroundColor:'#fff',zIndex:'99'}}>
+                        <div style={{position:'fixed',bottom:'0',width:'90%',height:'40px',paddingLeft:'5%',paddingRight:'5%',backgroundColor:'#fff',zIndex:'99'}}>
                         {
                             item.isLike ==1 ? 
-                            <div style={{width:'30%',margin:'0',float:'left'}}>
+                            <div style={{width:'30%',margin:'0',float:'left',marginTop:'10px'}}>
                                 <img src={require("../images/like.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit3()}  id='img2'></img>
                                 <span id='data3'>{item.likes}</span>
                                 {/* <img src={require("../images/exe-collection.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit2()}  id='img2'></img>
                                 <span id='data2'>{item.favorites}</span> */}
                             </div>  :
-                            <div style={{width:'30%',margin:'0',float:'left'}}>
+                            <div style={{width:'30%',margin:'0',float:'left',marginTop:'10px'}}>
                                 <img src={require("../images/like1.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit3()}  id='img2'></img>
                                 <span id='data3'>{item.likes}</span>
                                 {/* <img src={require("../images/exe-collection1.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit2()}  id='img2'></img>
@@ -197,13 +197,13 @@ export default class AppHome extends Component {
                             </div>}
                         {
                             item.isCollection==1    ?
-                            <div style={{width:'30%',margin:'0',float:'left'}}>
+                            <div style={{width:'30%',margin:'0',float:'left',marginTop:'10px'}}>
                                 {/* <img src={require("../images/like.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit3()}  id='img2'></img>
                                 <span id='data3'>{item.likes}</span> */}
                                 <img src={require("../images/exe-collection.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit2()}  id='img2'></img>
                                 <span id='data2'>{item.favorites}</span>
                             </div>  :
-                            <div style={{width:'30%',margin:'0',float:'left'}}>
+                            <div style={{width:'30%',margin:'0',float:'left',marginTop:'10px'}}>
                                 {/* <img src={require("../images/like1.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit3()}  id='img2'></img>
                                 <span id='data3'>{item.likes}</span> */}
                                 <img src={require("../images/exe-collection1.png")} style={{width:'20px',height:'20px',marginLeft:'10%',marginRight:'5%'}} onClick={() => this.onSubmit2()}  id='img2'></img>
