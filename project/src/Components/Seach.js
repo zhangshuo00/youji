@@ -16,7 +16,7 @@ export default class Seach extends Component {
             keywords:decodeURI(window.location.hash.split('=')[1])
         }
         console.log(post);
-        fetch('https://majia.hbsdduckhouse.club/discoverSearch',{
+        fetch('/discoverSearch',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

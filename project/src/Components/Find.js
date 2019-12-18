@@ -24,7 +24,7 @@ export default class Find extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('https://majia.hbsdduckhouse.club/discover',{
+        fetch('/discover',{
             method:'GET',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -55,7 +55,7 @@ export default class Find extends Component {
             // 根据返回的消息，渲染响应的页面
         });
 
-        fetch('https://majia.hbsdduckhouse.club/getCarousel',{
+        fetch('/getCarousel',{
             method:'GET',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

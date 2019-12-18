@@ -22,7 +22,7 @@ export default class PrivateLetter extends Component {
         }
          //获取对话的编号
         // console.log(con_id);
-        fetch('https://majia.hbsdduckhouse.club/getMsg',{
+        fetch('/getMsg',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -58,7 +58,7 @@ export default class PrivateLetter extends Component {
         }
          //获取对话的编号
         // console.log(con_id);
-        fetch('https://majia.hbsdduckhouse.club/getMsg',{
+        fetch('/getMsg',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -92,7 +92,7 @@ export default class PrivateLetter extends Component {
                 ruid:con_id,
                 msg:text.value
             }
-            fetch('https://majia.hbsdduckhouse.club/sendMsg',{
+            fetch('/sendMsg',{
                 method:'POST',
                 // mode:'cors',
                 headers: {'Content-Type': 'application/json'},

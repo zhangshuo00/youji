@@ -19,7 +19,7 @@ export default class MessageList extends Component {
         const post ={
             uid:storage.uid
         }
-        fetch('https://majia.hbsdduckhouse.club/getMsgList',{
+        fetch('/getMsgList',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
