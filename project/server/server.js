@@ -35,6 +35,7 @@ var modifyPwd = require('./api/modifyPwd');
 var forgetPwd = require('./api/forgetPwd');
 var delTags = require('./api/delTags');
 var delSionple = require('./api/delSionple');
+var getCarouselContext = require('./api/getCarouselContext');
 
 var app = express();
 
@@ -81,6 +82,7 @@ app.use('/modifyPwd',modifyPwd);// 修改密码
 app.use('/forgetPwd',forgetPwd);// 忘记密码
 app.use('/delTags',delTags);// 删除分类
 app.use('/delSionple',delSionple);// 删除文章
+app.use('/getCarouselContext',getCarouselContext);// 获取轮播图文章详情
 
 
 // 后台系统接口
