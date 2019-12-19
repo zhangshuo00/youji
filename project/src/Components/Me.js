@@ -25,7 +25,7 @@ export default class Me extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('/me',{
+        fetch('https://majia.hbsdduckhouse.club/me',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -50,6 +50,26 @@ export default class Me extends Component {
             }
             // 根据返回的消息，渲染响应的页面
         })
+    }
+    follow(){
+        let orange = document.getElementById('me-essay-orange')
+        orange.style.display='none';
+        let center = document.getElementById('find-center');
+        center.style.display='none';
+        let orange1 =document.getElementById('me-follow-orange');
+        orange1.style.display='block'
+        let center1 = document.getElementById('follow-center');
+        center1.style.display='block'
+    }
+    essay(){
+        let orange = document.getElementById('me-essay-orange')
+        orange.style.display='block';
+        let center = document.getElementById('find-center');
+        center.style.display='block';
+        let orange1 =document.getElementById('me-follow-orange');
+        orange1.style.display='none';
+        let center1 = document.getElementById('follow-center');
+        center1.style.display='none'
     }
 
     render() {
@@ -91,11 +111,14 @@ export default class Me extends Component {
                     个性签名：{this.state.data.signature?this.state.data.signature:'你还没有个性签名'}
                 </div>
                 <div className='me-line'></div>
-                <div className='me-essay'>收藏列表
-                    <div className='me-orange'></div>
+                <div className='me-essay' onClick={()=>this.essay()}>收藏列表
+                    <div className='me-essay-orange' id='me-essay-orange'></div>
+                </div>
+                <div className='me-follow' onClick={()=>this.follow()}>关注列表
+                    <div className='me-follow-orange' id='me-follow-orange'></div>
                 </div>
                 <div className='me-line'></div>
-                <div className='find-center' style={{position:'relative',top:'55px',float:'left'}}>
+                <div className='find-center' id='find-center' style={{position:'relative',top:'55px',float:'left'}}>
                 {
                     this.state.datas.map((note,id)=>
                     <div key={id} className='find-heading' >
@@ -116,6 +139,9 @@ export default class Me extends Component {
                     </div>
                     )
                 }   
+                </div>
+                <div className='me-follow-center' id='follow-center' style={{position:'relative',top:'55px',float:'left',display:'none'}}>
+                    sss
                 </div>
                 <div style={{position:'fixed',bottom:'0',width:'100%'}}>
                     <TabBar

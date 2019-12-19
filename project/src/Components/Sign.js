@@ -26,7 +26,7 @@ export default class App extends Component {
       upassword:this.state.upassword
     }
     console.log(post);
-    fetch('/sign',{
+    fetch('https://majia.hbsdduckhouse.club/sign',{
       method:'POST',// 发起post请求
       // mode:'cors',// 跨域请求模式
       headers: {'Content-Type': 'application/json'},

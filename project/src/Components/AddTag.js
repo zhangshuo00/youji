@@ -36,7 +36,7 @@ export default class AddTag extends Component {
             imgData:imgFile
           }	
           console.log(post);
-          fetch('/addTag',{
+          fetch('https://majia.hbsdduckhouse.club/addTag',{
             method:'POST',
             mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -65,7 +65,7 @@ export default class AddTag extends Component {
           imgData:'images/sort-test1.jpg'
         }	
         console.log(post);
-        fetch('/addTag',{
+        fetch('https://majia.hbsdduckhouse.club/addTag',{
           method:'POST',
           mode:'cors',
           headers: {'Content-Type': 'application/json'},

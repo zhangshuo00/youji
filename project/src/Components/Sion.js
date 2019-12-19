@@ -22,7 +22,7 @@ export default class Sion extends Component {
         // localStorage.setItem('tags',decodeURI(window.location.hash.split('=')[1]))
         console.log(post);
         console.log(localStorage)
-        fetch('/sion',{
+        fetch('https://majia.hbsdduckhouse.club/sion',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -88,7 +88,7 @@ export default class Sion extends Component {
             chid:e
         }
         console.log(post);
-        fetch('/delSionple',{
+        fetch('https://majia.hbsdduckhouse.club/delSionple',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

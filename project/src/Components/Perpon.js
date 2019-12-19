@@ -9,18 +9,46 @@ export default class Perpon extends Component {
         super();
         this.state={
             data:[
-                // {url_image:'images/timg.jpg',word:'',title:'眷恋'}, //url_image用户头像，word签名，title昵称
-            ],
+                {uname: "李四", headimg: "images/lisi.jpg", signature: "这个人很懒，什么都没有写", isCol: 1}],
         }
     }
 
     componentDidMount(){
         // console.log(window.location.hash.split('=')[1])
         const post ={
-            uid:window.location.hash.split('=')[1]
+            uid:window.localStorage.uid,
+            ruid:window.location.hash.split('=')[1]
         }
         console.log(post)
-        fetch('/personal',{
+        fetch('https://majia.hbsdduckhouse.club/personal',{
+            method:'POST',
+            // mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            // console.log(data);
+            this.setState({
+                data:data
+            })
+            console.log(this.state.data)
+            // 根据返回的消息，渲染响应的页面
+        })
+    }
+    newletter(){
+        const ruid=window.location.hash.split('=')[1];
+        if(window.localStorage.uid !== ruid){
+            window.location='./index.html#/letter/'+ruid;
+        }
+    }
+    followUser(){
+        const post ={
+            uid:window.localStorage.uid,
+            ruid:window.location.hash.split('=')[1]
+        }
+        console.log(post)
+        fetch('https://majia.hbsdduckhouse.club/followUser',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -29,12 +57,30 @@ export default class Perpon extends Component {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            this.setState({
-                data:data
-            })
+            window.location.reload();
             // 根据返回的消息，渲染响应的页面
         })
     }
+    cancelFollow(){
+        const post ={
+            uid:window.localStorage.uid,
+            ruid:window.location.hash.split('=')[1]
+        }
+        console.log(post)
+        fetch('https://majia.hbsdduckhouse.club/cancelFollowUser',{
+            method:'POST',
+            // mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            window.location.reload();
+            // 根据返回的消息，渲染响应的页面
+        })
+    }
+
     render() {
         return (
             <div  style={{backgroundColor:'#fff'}}>
@@ -55,7 +101,7 @@ export default class Perpon extends Component {
             {this.state.data.map(
                             (item,index)=>(
             <div className="p">
-    <img src={require("../" +item.headimg)} style={{width: '50px',height: '50px',borderRadius: '100px'}}></img><span className="p1">{item.uname}</span>
+                <img src={require("../" +item.headimg)} style={{width: '50px',height: '50px',borderRadius: '100px'}}></img><span className="p1">{item.uname}</span>
                 <p style={{marginTop:'20%'}}>
                     {item.signature}
                     {/* 做一份美食，看一场电影，<br></br>
@@ -69,8 +115,12 @@ export default class Perpon extends Component {
             )}
             
            <div className="but">
-                <button className="but1">关注</button>
-                <button className="but2">私信</button>
+               {
+                   this.state.data[0].isCol == 1 ?
+                    <button className="but3" onClick={()=>this.cancelFollow()}>已关注</button>  
+                    :<button className="but1" onClick={()=>this.followUser()}>关注</button>
+               }
+                <button className="but2" onClick={()=>this.newletter()}>私信</button>
            </div>
                 
             </div>

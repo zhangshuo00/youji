@@ -21,6 +21,9 @@ background-size: 90% 154px;
     font-size: 16px;
     text-align: left;
     font-family: PingFangSC-regular;
+    float: right;
+    margin-top: 15px;
+    padding-right: 50%;
 }
 .but{
     /* color: rgb(165, 162, 162); */
@@ -32,6 +35,18 @@ background-size: 90% 154px;
     background-color: #fff;
 }
 .but1{
+    /* left: 17px;
+    top: 531px; */
+    width: 43%;
+    height: 44px;
+    line-height: 20px;
+    border-radius: 16px;
+    border:0px;
+    background-color: rgba(250, 167, 85, 1);
+    text-align: center;
+    margin-left: 4%;
+}
+.but3{
     /* left: 17px;
     top: 531px; */
     width: 43%;

@@ -39,7 +39,7 @@ constructor(){
           imgData:filelist[0],
         }
       console.log(post);
-      fetch('/editPerInfo',{
+      fetch('https://majia.hbsdduckhouse.club/editPerInfo',{
         method:'POST',
         mode:'cors',
         headers: {'Content-Type': 'application/json'},
@@ -64,7 +64,7 @@ constructor(){
   //       upassword:document.getElementById('4').value,
   //     }
   //   console.log(post);
-  //   fetch('/modifyPwd',{
+  //   fetch('https://majia.hbsdduckhouse.club/modifyPwd',{
   //     method:'POST',
   //     mode:'cors',
   //     headers: {'Content-Type': 'application/json'},

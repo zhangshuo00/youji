@@ -20,7 +20,7 @@ constructor(){
                 upassword:document.getElementById('1').value,
                 }
             console.log(post);
-            fetch('/modifyPwd',{
+            fetch('https://majia.hbsdduckhouse.club/modifyPwd',{
                 method:'POST',
                 mode:'cors',
                 headers: {'Content-Type': 'application/json'},

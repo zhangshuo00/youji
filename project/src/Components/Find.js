@@ -24,7 +24,7 @@ export default class Find extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('/discover',{
+        fetch('https://majia.hbsdduckhouse.club/discover',{
             method:'GET',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -55,7 +55,7 @@ export default class Find extends Component {
             // 根据返回的消息，渲染响应的页面
         });
 
-        fetch('/getCarousel',{
+        fetch('https://majia.hbsdduckhouse.club/getCarousel',{
             method:'GET',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -78,7 +78,7 @@ export default class Find extends Component {
     //         uid:storage.uid
     //     }
     //     // console.log(post);
-    //     fetch('/discover',{
+    //     fetch('https://majia.hbsdduckhouse.club/discover',{
     //         method:'GET',
     //         mode:'cors',
     //         headers: {'Content-Type': 'application/json'},
@@ -93,7 +93,7 @@ export default class Find extends Component {
     //         // 根据返回的消息，渲染响应的页面
     //     });
 
-    //     fetch('/getCarousel',{
+    //     fetch('https://majia.hbsdduckhouse.club/getCarousel',{
     //         method:'GET',
     //         mode:'cors',
     //         headers: {'Content-Type': 'application/json'},

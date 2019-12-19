@@ -156,10 +156,11 @@
     background-color: #f0f0f0;
 }
 .me-essay{
-    width: 100%;
+    width: 40%;
     font-size: 18px;
     /* height: 20px; */
-    text-align: center;
+    padding-right: 10%;
+    text-align: right;
     position: relative;
     top: 55px;
     float: left;
@@ -167,10 +168,31 @@
     padding-bottom: 10px; 
     background-color: #fff;
 }
-.me-orange{
-    width: 20%;
+.me-follow{
+    width: 40%;
+    padding-left: 10%;
+    font-size: 18px;
+    /* height: 20px; */
+    text-align: left;
+    position: relative;
+    top: 55px;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    background-color: #fff;
+}
+.me-essay-orange{
+    width: 40%;
     height: 3px;
-    margin-left: 40%;
-    margin-right: 40%;
+    margin-left: 50%;
+    margin-right: 10%;
     background-color: #FAA755;
+}
+.me-follow-orange{
+    width: 40%;
+    height: 3px;
+    margin-left: 6%;
+    margin-right: 54%;
+    background-color: #FAA755;
+    display: none;
 }

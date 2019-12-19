@@ -24,7 +24,7 @@ constructor(){
           uid:document.getElementById('3').value,
         }
       console.log(post);
-      fetch('/forgetPwd',{
+      fetch('https://majia.hbsdduckhouse.club/forgetPwd',{
         method:'POST',
         mode:'cors',
         headers: {'Content-Type': 'application/json'},

@@ -9,6 +9,7 @@ export default class ListSort extends Component {
     constructor(props){
         super(props)
         this.state={
+            selectedTab: 'blueTab',
             datas:[
                 // {img_path:'images/sort-test1.jpg',tags:'美食'},           
                 // {img_path:'images/sort-test2.jpg',tags:'旅行'},
@@ -22,7 +23,7 @@ export default class ListSort extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('/listSort',{
+        fetch('https://majia.hbsdduckhouse.club/listSort',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -44,7 +45,7 @@ export default class ListSort extends Component {
     //         uid:storage.uid
     //     }
     //     // console.log(post);
-    //     fetch('/listSort',{
+    //     fetch('https://majia.hbsdduckhouse.club/listSort',{
     //         method:'POST',
     //         mode:'cors',
     //         headers: {'Content-Type': 'application/json'},
@@ -88,7 +89,7 @@ export default class ListSort extends Component {
             tags:e
         }
         console.log(post);
-        fetch('/delTags',{
+        fetch('https://majia.hbsdduckhouse.club/delTags',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
