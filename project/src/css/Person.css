@@ -9,7 +9,9 @@ background-size: 90% 154px;
     margin:0 auto;
     width:80%;
     margin-top:10%;
-    padding-bottom: 180px;
+    min-height: 60vh;
+    max-height: 100vh;
+    /* padding-bottom: 180px; */
 }
 .p1{
     margin-left: 10%;
@@ -22,9 +24,10 @@ background-size: 90% 154px;
 }
 .but{
     /* color: rgb(165, 162, 162); */
-    padding-top:30%;
+    /* padding-top:30%; */
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
+    padding-bottom: 15px;
     width: 100%;
     background-color: #fff;
 }
