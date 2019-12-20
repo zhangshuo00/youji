@@ -15,7 +15,8 @@ export default class Me extends Component {
                 // {ch_headimg:'images/sort-test1.jpg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'},
                 // {ch_headimg:'images/sort-test2.jpg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'},
                 // {ch_headimg:'images/sort-test3.jpeg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'}
-            ]
+            ],
+            dataa:[]
         }
     }
 
@@ -25,7 +26,7 @@ export default class Me extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('https://majia.hbsdduckhouse.club/me',{
+        fetch('/me',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -50,6 +51,19 @@ export default class Me extends Component {
             }
             // 根据返回的消息，渲染响应的页面
         })
+        fetch('/getFollowUser',{
+            method:'POST',
+            // mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            this.setState({
+                dataa:data
+            })
+        })
     }
     follow(){
         let orange = document.getElementById('me-essay-orange')
@@ -59,7 +73,7 @@ export default class Me extends Component {
         let orange1 =document.getElementById('me-follow-orange');
         orange1.style.display='block'
         let center1 = document.getElementById('follow-center');
-        center1.style.display='block'
+        center1.style.display='block';
     }
     essay(){
         let orange = document.getElementById('me-essay-orange')
@@ -140,8 +154,14 @@ export default class Me extends Component {
                     )
                 }   
                 </div>
-                <div className='me-follow-center' id='follow-center' style={{position:'relative',top:'55px',float:'left',display:'none'}}>
-                    sss
+                <div className='me-follow-center' id='follow-center' style={{position:'relative',top:'55px',float:'left',display:'none',width:'100%'}}>
+                {
+                    this.state.dataa.map((note,id)=>
+                        <div key={id} style={{width:'100%',height:'54px',marginBottom:'5px',backgroundColor:'#fff'}}>
+                            <img src={require("../" +note.headimg)} style={{float:'left',marginLeft:'5%',width:'12%',height:'44px',borderRadius:'25px',marginTop:'5px'}}></img>
+                            <div style={{width:'77%',paddingLeft:'3%',paddingTop:'18px',margin:'none',float:'left',fontSize:'15px',opacity:'0.5'}}>{note.uname}</div>
+                        </div>)
+                }
                 </div>
                 <div style={{position:'fixed',bottom:'0',width:'100%'}}>
                     <TabBar

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/listSort.css';
+import '../css/ListSort.css';
 import { NavBar,TabBar,Modal} from 'antd-mobile';
 const alert = Modal.alert;
 let press;
@@ -23,7 +23,7 @@ export default class ListSort extends Component {
             uid:storage.uid
         }
         // console.log(post);
-        fetch('https://majia.hbsdduckhouse.club/listSort',{
+        fetch('/listSort',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -89,7 +89,7 @@ export default class ListSort extends Component {
             tags:e
         }
         console.log(post);
-        fetch('https://majia.hbsdduckhouse.club/delTags',{
+        fetch('/delTags',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

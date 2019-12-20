@@ -24,7 +24,7 @@ export default class Login extends Component{
       upassword:this.state.upassword
     }
     console.log(post);
-    fetch('https://majia.hbsdduckhouse.club/login',{
+    fetch('/login',{
       method:'POST',
       // mode:'cors',
       headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -53,7 +53,7 @@ export default class Login extends Component{
             {/* <img className='log-img'></img> */}
             <input onChange={this.onChange.bind(this)} type='Email' className='log-email' placeholder='  Email' name="uemail"></input>
             <input onChange={this.onChange.bind(this)} type='password' className='log-email' placeholder='  密码' name="upassword"></input>
-            <a className='log-forget' href='/index.html#/session'>忘记密码？</a>
+            <a className='log-forget' href='./index.html#/session'>忘记密码？</a>
             <input onClick={this.get} type = 'submit' className = 'log-submit' value='登录'></input>
         </form> 
         <a className='log-reg' href='/index.html#/sign'>新用户？点击这里注册</a>

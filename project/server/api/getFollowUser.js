@@ -2,9 +2,9 @@ var express = require('express');
 var query = require('../db');
 const router = express.Router();
 
-router.get('/',async (req,res)=>{
-    // const {uid} = req.body;
-    const uid = 'k3i297def';
+router.post('/',async (req,res)=>{
+    const {uid} = req.body;
+    // const uid = 'k3i297def';
     var array = new Array();
 
     var result = await query('select foluid from followUsers where uid=?',[uid]);

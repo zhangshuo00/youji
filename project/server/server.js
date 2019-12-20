@@ -36,6 +36,8 @@ var forgetPwd = require('./api/forgetPwd');
 var delTags = require('./api/delTags');
 var delSionple = require('./api/delSionple');
 var getCarouselContext = require('./api/getCarouselContext');
+var followUser = require('./api/followUser');
+var cancelFollowUser = require('./api/cancelFollowUser');
 
 var app = express();
 
@@ -83,6 +85,8 @@ app.use('/forgetPwd',forgetPwd);// 忘记密码
 app.use('/delTags',delTags);// 删除分类
 app.use('/delSionple',delSionple);// 删除文章
 app.use('/getCarouselContext',getCarouselContext);// 获取轮播图文章详情
+app.use('/followUser',followUser);// 关注用户
+app.use('/cancelFollowUser',cancelFollowUser);// 取消关注用户
 
 
 // 后台系统接口

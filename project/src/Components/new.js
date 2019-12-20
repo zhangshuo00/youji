@@ -20,7 +20,7 @@ constructor(){
                 upassword:document.getElementById('1').value,
                 }
             console.log(post);
-            fetch('https://majia.hbsdduckhouse.club/modifyPwd',{
+            fetch('/modifyPwd',{
                 method:'POST',
                 mode:'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -30,8 +30,8 @@ constructor(){
             .then(data=>{
               console.log(data);
               if(data.msg==='success' ){
-                alert('保存成功','', '',[
-                  { text: '确定', onPress: () => console.log('cancel') },
+                alert('保存成功','',[
+                  { text: '确定', onPress: () => window.location = '/index.html#/login' },
                   ])
               }
             })

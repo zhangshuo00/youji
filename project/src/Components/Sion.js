@@ -22,7 +22,7 @@ export default class Sion extends Component {
         // localStorage.setItem('tags',decodeURI(window.location.hash.split('=')[1]))
         console.log(post);
         console.log(localStorage)
-        fetch('https://majia.hbsdduckhouse.club/sion',{
+        fetch('/sion',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -88,7 +88,7 @@ export default class Sion extends Component {
             chid:e
         }
         console.log(post);
-        fetch('https://majia.hbsdduckhouse.club/delSionple',{
+        fetch('/delSionple',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -109,11 +109,11 @@ export default class Sion extends Component {
     render() {
         return (
             <div>
-            <div>
+            <div style={{background:require('../images/back.jpg')}}>
                 {/* <Link className="back">></Link> */}
                 
-                            <NavBar
-                            style={{backgroundColor:'#FAA755'}}
+                <NavBar
+                style={{backgroundColor:'#FAA755'}}
                 mode="light"
                 onLeftClick={() => window.history.back(-1)}
                 // onRightClick={() => window.location='/index.html#/sionnew'}
@@ -121,7 +121,7 @@ export default class Sion extends Component {
                     <Icon key="0" type="left" style={{ color:'#FFF'}} />,
                   ]}
                 rightContent={[
-                    <Icon key="0" onClick={()=>{window.location='/index.html#/sionnew?tags='+decodeURI(window.location.hash.split('=')[1])}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
+                    <Icon key="0" onClick={()=>{window.location='./index.html#/sionnew?tags='+decodeURI(window.location.hash.split('=')[1])}} key="0" type="plus" style={{ marginRight: '16px',color:'#FFF'}}></Icon>
                     
                   ]}
                 >{decodeURI(window.location.hash.split('=')[1])}</NavBar>
@@ -141,7 +141,7 @@ export default class Sion extends Component {
                     <Flex>
                         {
                         item.map((ita)=>(
-                            <Flex.Item style={{backgroundColor:'#fff',paddingLeft:'2%',paddingTop:'5px',borderRadius:'2px',marginBottom:'5px'
+                            <Flex.Item style={{paddingLeft:'2%',paddingTop:'5px',borderRadius:'2px',marginBottom:'5px'
                             }} onTouchStart={()=>this.touchStart(ita.chid)} onTouchEnd={this.handleTouchEnd}> 
                                 <div onClick={()=>this.jumpToSionple(ita.chid)}>
                                     <img data-index={ita.chid} src={require("../" +ita.ch_headimg)} style={{height:'120px',width:'150px',borderRadius: '10px'}}></img>

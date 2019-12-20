@@ -20,7 +20,7 @@ export default class Perpon extends Component {
             ruid:window.location.hash.split('=')[1]
         }
         console.log(post)
-        fetch('https://majia.hbsdduckhouse.club/personal',{
+        fetch('/personal',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -48,7 +48,7 @@ export default class Perpon extends Component {
             ruid:window.location.hash.split('=')[1]
         }
         console.log(post)
-        fetch('https://majia.hbsdduckhouse.club/followUser',{
+        fetch('/followUser',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},
@@ -67,7 +67,7 @@ export default class Perpon extends Component {
             ruid:window.location.hash.split('=')[1]
         }
         console.log(post)
-        fetch('https://majia.hbsdduckhouse.club/cancelFollowUser',{
+        fetch('/cancelFollowUser',{
             method:'POST',
             // mode:'cors',
             headers: {'Content-Type': 'application/json'},

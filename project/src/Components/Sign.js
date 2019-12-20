@@ -26,7 +26,7 @@ export default class App extends Component {
       upassword:this.state.upassword
     }
     console.log(post);
-    fetch('https://majia.hbsdduckhouse.club/sign',{
+    fetch('/sign',{
       method:'POST',// 发起post请求
       // mode:'cors',// 跨域请求模式
       headers: {'Content-Type': 'application/json'},
@@ -54,7 +54,7 @@ export default class App extends Component {
             <input className='sign-button' type="submit" value="注册"></input>
           </div>
           </form>
-          <Link to='/index.html#/login'><p className='sign-p2'>已有账户了，点击登陆</p></Link>
+          <Link to='/login'><p className='sign-p2'>已有账户了，点击登陆</p></Link>
         </div>
         {/* <div style={{paddingBottom:'35px'}}>
           <Route path={`login`} component={Login} />

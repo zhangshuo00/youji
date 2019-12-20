@@ -71,7 +71,7 @@
   }
   .log-forget{
     float: left;
-    margin-left: 27%;
+    margin-left: 40%;
     width: auto;
     height: 23px;
     line-height: 17px;
@@ -81,6 +81,7 @@
     text-align: left;
     font-family: Arial;
     margin-bottom: 15px;
+    font-size: 15px;
   }
   .log-img{
     content:url(../images/2-191015104P02N.jpg);

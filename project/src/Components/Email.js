@@ -24,7 +24,7 @@ constructor(){
           uid:document.getElementById('3').value,
         }
       console.log(post);
-      fetch('https://majia.hbsdduckhouse.club/forgetPwd',{
+      fetch('/forgetPwd',{
         method:'POST',
         mode:'cors',
         headers: {'Content-Type': 'application/json'},
@@ -39,7 +39,7 @@ constructor(){
             }
         },()=>{
            if(data.msg==='success'){
-               window.location='/index.html#/new?uid='+post.uid;
+               window.location='./index.html#/new?uid='+post.uid;
            }else{
                alert('验证失败');
            }
