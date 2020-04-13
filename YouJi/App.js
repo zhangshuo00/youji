@@ -22,6 +22,7 @@ const App = () => {
       <Modal hideNavBar>
         <Tabs activeTintColor='red' inactiveTintColor='grey'>
           <Scene key='home' title='首页' 
+              headerMode="none"
               icon={({focused})=>
                   <Icon name="home" color={focused?'red':'rgb(250, 167, 85)'} size={28} />
               }>
