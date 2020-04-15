@@ -5,7 +5,7 @@ import { Card, WhiteSpace, WingBlank } from '@ant-design/react-native'
 const ListCard = () => {
     return (
         <View style={styles.card}>
-            <WingBlank size="lg">
+            {/* <WingBlank size="lg"> */}
                 <Card>
                     <Card.Header
                         title="有纪"
@@ -30,7 +30,7 @@ const ListCard = () => {
                         }
                     />
                 </Card>
-            </WingBlank>
+            {/* </WingBlank> */}
         </View>
     )
 }
@@ -39,7 +39,8 @@ export default ListCard
 
 const styles = StyleSheet.create({
     card: {
-        paddingTop: 30
+        paddingTop: 3,
+        margin:0
     },
     cardTitle: {
 
