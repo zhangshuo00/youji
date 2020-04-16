@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View,Dimensions,Image, FlatList, TouchableOpacity,Alert, ScrollView} from 'react-native'
-import { Actions } from 'react-native-router-flux'
+import { Text, View,Dimensions,Image,StyleSheet, FlatList, TouchableOpacity,Alert, ScrollView} from 'react-native'
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/AntDesign';
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 
@@ -71,45 +72,72 @@ export default class Sion extends Component {
             })
         })  
     }
+
+    head(){
+        Actions.pop()
+    }
+
     render() {
         return (
             <ScrollView>
-            <View style={{
-                flexDirection: 'row',
-                alignItems: 'center'}}>
-                    <FlatList
-                       numColumns='2'
-                       data={this.state.datas}
-                       renderItem={({item})=>{
-                           return(
-                            <TouchableOpacity 
-                                onLongPress={()=>this.touchStart(item)}
-                                onPress={this.jumpToSionple}
-                            style={{
-                                paddingTop:40*s,
-                                width:'50%',
-                                flexDirection:'column',
-                                alignItems:'center',
-                                }}>
-                            <View style={{flexDirection:'column',alignItems:'center',}}>
-                                <Image 
-                                    // 从服务器获取图片 source={require("\'/"+item.ch_headimg+"\'")}
-                                  source={require('./images/dangao.jpg')} 
-                                  style={{height:120*s,width:150*s,borderRadius: 10*s}}/>
-                                <Text  style={{marginBottom:5*s}}>{item.title}</Text>
-                                <Text>{item.chdate}</Text>
-                            </View>
-                            </TouchableOpacity>
-                           )
-                        }}
-                        />
-                {/* {
-                   this.state.datas.map((item)=>(
-                       
-                   ))
-                } */}
-            </View>
+                <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <Text style={styles.headText}>{this.props.tag}</Text>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='plus' color={'white'} size={28}></Icon></TouchableOpacity>
+                 </View>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center'}}>
+                        <FlatList
+                        numColumns='2'
+                        data={this.state.datas}
+                        renderItem={({item})=>{
+                            return(
+                                <TouchableOpacity 
+                                    onLongPress={()=>this.touchStart(item)}
+                                    onPress={this.jumpToSionple}
+                                style={{
+                                    paddingTop:40*s,
+                                    width:'50%',
+                                    flexDirection:'column',
+                                    alignItems:'center',
+                                    }}>
+                                <View style={{flexDirection:'column',alignItems:'center',}}>
+                                    <Image 
+                                        // 从服务器获取图片 source={require("\'/"+item.ch_headimg+"\'")}
+                                    source={require('../images/dangao.jpg')} 
+                                    style={{height:120*s,width:150*s,borderRadius: 10*s}}/>
+                                    <Text  style={{marginBottom:5*s}}>{item.title}</Text>
+                                    <Text>{item.chdate}</Text>
+                                </View>
+                                </TouchableOpacity>
+                            )
+                            }}
+                            />
+                    {/* {
+                    this.state.datas.map((item)=>(
+                        
+                    ))
+                    } */}
+                </View>
             </ScrollView>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    headText:{
+        marginRight:width*0.12,
+        width:width*0.54,
+        textAlign:'center',
+        fontSize:22,
+        color:'white'
+    },
+    headIcon:{
+        marginLeft:width*0.02,
+        width:width*0.2,
+    },
+    msgList:{
+        width: width,
+    },
+})

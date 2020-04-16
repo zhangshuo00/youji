@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import {View, Text, Button,TextInput,StyleSheet,Image } from 'react-native';
+import {View, Text,Dimensions, Button,TextInput,StyleSheet,Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ImagePicker from 'react-native-image-picker';
+import { Actions } from 'react-native-router-flux';
+
+const {height,width} = Dimensions.get('window');
 
 // const alert = Modal.alert;
 // const data = [{
@@ -9,30 +12,25 @@ import ImagePicker from 'react-native-image-picker';
 //     id:'2121',
 // }]
 
-const options = {
-    title: 'Select Avatar',
-    customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+// const options = {
+//     title: 'Select Avatar',
+//     customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+//     storageOptions: {
+//       skipBackup: true,
+//       path: 'images',
+//     },
+//   };
+  const options = {
+    title: '选择来源',
+    cancelButtonTitle:'取消',
+    takePhotoButtonTitle:'拍照',
+    chooseFromLibraryButtonTitle:'相册图片',
     storageOptions: {
       skipBackup: true,
       path: 'images',
     },
   };
-
-  ImagePicker.showImagePicker(options, (response) => {
-    if (response.didCancel) {
-      return;
-    } else if (response.error) {
-      console.log('Error:', response.error);
-    } else if (response.customButton) {
-      console.log('custom:', response.customButton);
-    } else {
-        
-      const source = { uri: response.uri };
-      this.setState({
-        avatarSource: source,
-      });
-    }
-  });
+    
 export default class Edit extends Component{
     constructor(){
         super();
@@ -45,6 +43,24 @@ export default class Edit extends Component{
             files:[],
             upassword:'',
         }
+    }
+
+    changeHead=()=>{
+      ImagePicker.showImagePicker(options, (response) => {
+        if (response.didCancel) {
+          return;
+        } else if (response.error) {
+          console.log('Error:', response.error);
+        } else if (response.customButton) {
+          console.log('custom:', response.customButton);
+        } else {
+            
+          const source = { uri: response.uri };
+          this.setState({
+            avatarSource: source,
+          });
+        }
+      });
     }
 
     // onSubmit(e){
@@ -96,19 +112,14 @@ export default class Edit extends Component{
         const { files } = this.state;
         return(
             <View>
-                <View style={{backgroundColor:'#faa755'}}>
-                <Icon style={{
-                            color:'#fff',
-                            marginTop:20,
-                            marginLeft:10                              
-                            }} size={30} name="left"
-                 / >
-                <Text style={styles.top}>编辑信息</Text>
+                <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <Text style={styles.headText}>编辑信息</Text>
                 </View>
-                <View>
+                <TouchableOpacity onPress={()=>{this.changeHead()}}>
                     <Image source={this.state.avatarSource} style={styles.img} />
                     <Text>点击更改头像</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.inp}>
                     <TextInput style={styles.tinp} type="text" placeholder="做一份美食，看一场电影">签名 </TextInput>
                     <TextInput style={styles.tinp} type="text" placeholder="张三">昵称 </TextInput>
@@ -123,12 +134,23 @@ export default class Edit extends Component{
     }
 }
 const styles = StyleSheet.create({
-    top:{
-        color:'#fff',
-        fontSize:20,
-        marginLeft:190,
-        marginTop:-10
-    },
+  headText:{
+    marginRight:width*0.22,
+    width:width*0.56,
+    textAlign:'center',
+    fontSize:22,
+    color:'white'
+  },
+  headIcon:{
+      marginLeft:width*0.02,
+      width:width*0.2,
+  },
+    // top:{
+    //     color:'#fff',
+    //     fontSize:20,
+    //     marginLeft:190,
+    //     marginTop:-10
+    // },
     img:{
         width: 100,
         height: 100,

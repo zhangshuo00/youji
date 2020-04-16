@@ -10,12 +10,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@ant-design/react-native": "^3.3.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-button": "^3.0.1",
     "react-native-image-picker": "^2.3.1",
     "react-native-router-flux": "4.0.6",
     "react-native-splash-screen": "^3.2.0",
+    "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {

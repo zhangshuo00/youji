@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import {View, Text, Button,TextInput,StyleSheet,Image,ScrollView } from 'react-native';
+import React, { Component } from 'react';
+import {View, Text, Button,TouchableOpacity,StyleSheet,Image } from 'react-native';
+import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from '../components/ListCard';
 
@@ -89,7 +90,7 @@ export default class Me extends Component {
     // }
     render(){
         return(
-            <ScrollView>
+            <View>
                 <View style={styles.me_top}>
                         <View style={styles.me_top_list}>
                             <Icon style={{
@@ -97,7 +98,7 @@ export default class Me extends Component {
                             marginTop:20,
                             marginLeft:10                              
                             }} size={30} name="bars"
-                 / >
+                        />
                         </View>
                         <Text style={styles.me_top_user}>张三</Text>
                         <Text style={styles.me_top_email}>zhangsan@qq.com</Text>
@@ -118,25 +119,97 @@ export default class Me extends Component {
                             <Text>收藏</Text>
                         </View>
                     </View>
-                    <Button title="编辑资料" color="#faa755" />
+                </View>
+                <View style={styles.me_btn}>
+                        <Button title="编辑资料" color="#faa755" onPress={()=>Actions.edit()}/>
                 </View>
                 <View style={styles.me_sign}>
                     <Text>个性签名：这个人很懒，什么都没有写</Text>
                 </View>
-                <View style={styles.me_essay}><Text>收藏列表</Text>
-                    <ListCard/>
+                <View style={styles.me_nav}>
+                    <TouchableOpacity style={styles.me_essay}>
+                        <Text>收藏列表</Text> 
+                        <ListCard/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.me_follow}>
+                        <Text>关注列表</Text>
+                        <ListCard/>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.me_follow}><Text>关注列表</Text>
-                    <ListCard/>
-                </View>
+                {/* <Router>
+                    <Modal>
+                        <screen key='myEssay' component={ListCard}>
+                            <Text>收藏列表</Text> 
+                            <ListCard/>
+                        </screen>
+                        <screen key='myFollow' component={ListCard}>
+                            <Text>关注列表</Text> 
+                            <ListCard/>
+                        </screen>
+                    </Modal>
+                </Router> */}
+                
+
+                
                 {/* <View style={styles.find_center}></View>
                 <View style={styles.me_follow_center}></View> */}
-            </ScrollView>
+            </View>
         )
     }
 }
 const styles = StyleSheet.create({
+    me_top:{
+        backgroundColor:'#faa755'
+    },
+    me_top_user:{
+        color:'#fff',
+        marginLeft:220
+    },
+    me_top_email:{
+        marginLeft:180,
+    },
+    me_title:{
+        flex:1,
+        flexDirection: 'row',
+        flexWrap:'wrap'
+    },
     me_head:{
         borderRadius:55,
+        width:100,
+        height:100
+    },
+    me_num:{
+        flex:1,
+        flexDirection: 'row',
+        width:300,
+        marginLeft:40,
+        marginTop:10,
+        textAlign:'center',
+        alignItems:'center'
+    },
+    me_sex:{
+        width:100
+    },
+    me_atten:{
+        width:100
+    },
+    me_collect:{
+        width:100
+    },
+    me_btn:{
+        width:250,
+        borderRadius:30,
+        marginTop:80,
+        marginLeft:130
+    },
+    me_sign:{
+        marginLeft:10,
+        marginTop:30
+    },
+    me_nav:{
+        height:75,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop:120
     }
 })
