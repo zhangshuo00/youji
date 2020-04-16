@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Text, View, AsyncStorage } from 'react-native';
-import {Router,Scene,Tabs,Modal,Actions} from 'react-native-router-flux';
+import {Router,Scene,Tabs,Modal,Actions,Drawer} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Home from './src/home/Home';
 import Msg from './src/msg/Msg';
@@ -16,6 +16,8 @@ import Login from './src/login/Login';
 import Sign from './src/login/Sign';
 import Test from './src/login/Test';
 import Edit from './src/my/Edit';
+import Sider from './src/components/Sider'
+import Search from './src/components/Search'
 import AddTag from './src/list/AddTag';
 
 console.disableYellowBox = true; //取消显示黄框
@@ -30,6 +32,11 @@ const App = () => {
 
 	return (
     <Router>
+      <Drawer
+        drawerPosition="left"
+        drawerWidth={230}
+        contentComponent={Sider}
+      >
       <Modal hideNavBar>
         <Tabs activeTintColor='rgb(250, 167, 85)' inactiveTintColor='rgb(148, 148, 148)'>
           <Scene key='home' title='首页' 
@@ -38,8 +45,8 @@ const App = () => {
                   <Icon name="home" color={focused?'rgb(250, 167, 85)':'rgb(148, 148, 148)'} size={28} />
               }>
     
-              <Scene key='home' component={Home}></Scene>
-
+              <Scene key='home' initial={true} component={Home}></Scene>
+              <Scene key='search' component={Search}/>
           </Scene>
           <Scene key='list' title='笔记'
                 icon={({focused})=>
@@ -74,6 +81,7 @@ const App = () => {
         <Scene key='sign' component={Sign} hideTabBar={true} hideNavBar></Scene>
         <Scene key='test' component={Test} hideTabBar={true} hideNavBar></Scene>
       </Modal>
+      </Drawer>
     </Router>
 	);
 };

@@ -1,34 +1,20 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity,
-        StyleSheet, FlatList, TextInput, Image, Dimensions, ScrollView } from 'react-native'
-import { Carousel} from '@ant-design/react-native'
+import { Text, View, StyleSheet, FlatList, TextInput, Image, Dimensions, ScrollView } from 'react-native'
+import { Carousel, Icon } from '@ant-design/react-native'
 import ListCard from '../components/ListCard'
-import Icon from 'react-native-vector-icons/AntDesign';
+import { Actions } from 'react-native-router-flux'
 
-const { swidth, sheight } = Dimensions.get('window');
-const {width} = Dimensions.get('window');
+const { swidth, sheight } = Dimensions.get('window')
 
 export default class Home extends Component {
-
-    head(){
-        console.log(1)
-    }
-
-    search(){
-        console.log(2)
-    }
     render() {
         return (
             <ScrollView>
                 <View style={styles.head}>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}>
-                        <Icon name='bars' color={'white'} size={28}></Icon>
-                    </TouchableOpacity>
-                    <TextInput placeholder="请输入您要搜索的关键字" onFocus={()=>{this.search()}}
-                        placeholderTextColor="#a5a5a5" style={styles.search}/>
-                    <Icon style={{position:'absolute',right:45,top:12}} name="search1" color={'white'} size={28}/>
+                    <TextInput placeholder="请输入您要搜索的关键字" style={styles.search} onFocus={()=>{Actions.search()}}/>
+                    <Icon style={{position:'absolute',right:45,top:12}} name="search"/>
                 </View>
-                <View style={{width:width}}>
+                <View>
                     <Carousel 
                         autoplay
                         infinite
@@ -58,7 +44,7 @@ export default class Home extends Component {
                     </Carousel>
                 </View>
 
-                <View style={{width:width}}>
+                <View>
                     {/* <FlatList
                         renderItem={()=>(
                             <ListCard/>
@@ -73,7 +59,7 @@ export default class Home extends Component {
 }
 const styles = StyleSheet.create({
     wrapper: {
-        height: 250,
+        height: 200,
         justifyContent:'center',
         alignItems:'center',
         borderRadius: 15
@@ -82,31 +68,21 @@ const styles = StyleSheet.create({
         color:'gray'
     },
     wrapperImage: {
-        width:width,
-        height: 250,
-        resizeMode:'stretch'
-        // borderRadius: 20
+        width: 320,
+        height: 200,
+        borderRadius: 20
     },
     search: {
-        width:width*0.8,
-        height:38,
+        width:'85%',
+        height:40,
+        marginTop:5,
         backgroundColor:'#eeeeee',
         borderRadius:10,
-        marginTop:10,
-        // opacity:0.8
-    },
-    headIcon:{
-        marginLeft:width*0.02,
-        // width:width*0.2,
-        marginRight:width*0.04
     },
     head: {
         height:50,
-        // justifyContent:'center',
+        justifyContent:'center',
         flexDirection:'row',
         flexWrap:'wrap',
-        alignItems:'center',
-        width:width,
-        backgroundColor:'rgb(250, 167, 85)'
     }
 })
