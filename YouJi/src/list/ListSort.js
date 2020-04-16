@@ -90,6 +90,10 @@ export default class ListSort extends Component {
         // window.location.href = './index.html#/Sion?tags=' + encodeURI(clickTag);
     }
 
+    head(){
+        console.log(1)
+    }
+
     render() {
         return (
             <ScrollView>
