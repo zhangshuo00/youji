@@ -1,49 +1,77 @@
 import React, {Component} from 'react';
-import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackground,StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackground,ToastAndroid,StyleSheet} from 'react-native';
+import { Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
-import {myFetch} from './index';
-
+// import {myFetch} from '../utils'
 export default class Login extends Component {
   //登陆页
     constructor(){
         super();
         this.state = {
-            username:'',
-            pwd:'',
+            uemail:'',
+            upassword:'',
             isloading:false
         }
     }
-    userhandle = (text)=>{
-        this.setState({username:text})
+    emailhandle = (text)=>{
+        this.setState({uemail:text})
     }
     pwdhandle = (text)=>{
-        this.setState({pwd:text})
+        this.setState({upassword:text})
     }
     login = ()=>{
-        // myFetch.get('/topics',{limit:4,user:'sss'})
-        //     .then(res=>console.log(res))
         this.setState({isloading:true})
-        myFetch.post('/login',{
-            username:this.state.username,
-            pwd:this.state.pwd}
-        ).then(res=>{
-            // 根据返回状态进行判断，正确时跳转首页
-            // if(res){
 
-            // }
-            AsyncStorage.setItem('user',JSON.stringify(res.data))
-                .then(()=>{
-                    console.log(JSON.stringify(res.data))
-                    this.setState({isloading:false})
-                    // Actions.homePage();
-                })
+        const post ={
+          uemail:this.state.uemail,
+          upassword:this.state.upassword
+        }
+        console.log(post);
+
+        fetch('http://majia.hbsdduckhouse.club/login',{
+          method:'POST',
+          headers: {'Content-Type': 'application/json;charset=utf-8'},
+          body:JSON.stringify(post)
         })
+        .then(res=>res.json())
+        .then(data=>{
+          // 返回数据格式：{msg: "success/pwdErr/notExist"}
+          console.log(data);
+          if(data.msg === 'success'){
+            AsyncStorage.setItem('uid',data.uid)
+                .then(()=>{
+                    console.log(JSON.stringify(data.uid))
+                    this.setState({isloading:false})
+                    Actions.homePage();
+                })
+          }else if(data.msg === 'pwdErr'){
+            ToastAndroid.show('密码不正确',100)
+            this.setState({isloading:false})
+          }else{
+            ToastAndroid.show('用户不存在',100)
+            this.setState({isloading:false})
+          }
+        })
+        // myFetch.post('/login',{
+        //     email:this.state.email,
+        //     pwd:this.state.pwd}
+        // ).then(res=>{
+        //     // 根据返回状态进行判断，正确时跳转首页
+        //     // if(res){
+
+        //     // }
+        //     AsyncStorage.setItem('user',JSON.stringify(res.data))
+        //         .then(()=>{
+        //             console.log(JSON.stringify(res.data))
+        //             this.setState({isloading:false})
+        //             Actions.homePage();
+        //         })
+        // })
     } 
   render() {
     return (
       <ImageBackground 
-      source={require("../images/back-login.jpg")} 
+      source={require("../../images/back-login.jpg")} 
       style={{width: '100%', height: '100%'}}
   >
  
@@ -52,13 +80,13 @@ export default class Login extends Component {
           style={{ alignItems: 'center'}}>
             <Image
             style={{marginBottom:'5%'}}
-            source={require('../images/logo.png')}
+            source={require('../../images/logo.png')}
           />
           <View
             style={styles.email}>
 
             <TextInput placeholder="Email" 
-                onChangeText={this.userhandle}
+                onChangeText={this.emailhandle}
             />
           </View>
           <View
@@ -73,8 +101,7 @@ export default class Login extends Component {
 
           <TouchableOpacity 
                 style={{marginLeft:'-50%'}}
-                onPress={()=>Actions.test()}
-                >
+                onPress={()=>Actions.Test()}>
                 <Text style={{fontSize:12}}>忘记密码?</Text>
           </TouchableOpacity>
 
@@ -82,7 +109,7 @@ export default class Login extends Component {
             <TouchableOpacity 
                 style={styles.loginp}
                 onPress={this.login}>
-                <Text style={{color:'white'}}>登录</Text>
+                <Text>登录</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -92,8 +119,7 @@ export default class Login extends Component {
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}
-                onPress={()=>Actions.sign()}
-                >
+                onPress={()=>Actions.Sign()}>
                 <Text>新用户？点击这里注册</Text>
             </TouchableOpacity>
         </View>
@@ -126,7 +152,7 @@ const styles = StyleSheet.create({
     width: '65%',
     height: '9%',       
     marginLeft: '5%',
-    backgroundColor: 'blue',
+    backgroundColor: '#ccc',
     marginTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
@@ -134,7 +160,6 @@ const styles = StyleSheet.create({
     borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
-    opacity:0.6,
 }
   
 });
