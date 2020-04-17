@@ -1,14 +1,26 @@
 # youji
 
+## 项目简介
+
+有纪是一款帮助您记录生活中各种美好瞬间的App，您还可以把这些美好瞬间发布到社区，和大家分享。
+
+## 项目成员
+
+张朔、张文康、邵贶、刘芯萌、杨帆
+
+### 共享文档
+
 基础颜色：rgb(250, 167, 85)  橙色的
 
 小图标：react-native-vector-icons/AntDesign
+
+### 接口文档
 
 ------
 
 ### 第九周
 
-本周目标：
+#### 本周目标：
 
 1. 登录注册板块、首页板块、笔记板块、我的信息、消息板块的重构
 2. 项目的整合和消息私信功能的后台连接
@@ -16,7 +28,7 @@
 
 
 
-目标完成情况：
+#### 目标完成情况：
 
 1. 项目组件初步整合完成
 2. 颜色、边距等样式统一
@@ -24,7 +36,7 @@
 
 
 
-个人完成情况：
+#### 个人完成情况：
 
 ​	邵贶：笔记板块的路由及数据渲染
 
@@ -38,7 +50,7 @@
 
 
 
-下周目标：
+#### 下周目标：
 
 1. 各版块新增功能的完善
 2. 修改图片的存储问题
@@ -56,7 +68,7 @@
 
 
 
-本周立会：
+#### 本周立会：
 
 1. https://space.dingtalk.com/s/gwHOAauWIwLOIy5-8QPaACAyOGY5ODg1NjVjOGE0OTVhOWI0YTMxZWI5ODY5M2I3YQ 密码: 
 2. https://space.dingtalk.com/s/gwHOAauWJgLOIy5-8QPaACA1ZWZiMmM5ZGEyOGM0ZGRjYTk5NjVkM2RlOTA3ZTRhMQ 密码: 
@@ -65,18 +77,18 @@
 
 ### 第八周：
 
-本周目标：
+#### 本周目标：
 
 1. 确定代码规范、scrum敏捷开发规范
 2. 登录注册板块、首页板块、笔记板块、我的信息、消息板块的重构
 
-目标完成情况：
+#### 目标完成情况：
 
 1. 所有重构页面基本完成，样式有待优化
 2. 使用领歌实现scrum敏捷开发
 3. 制定了代码规范
 
-下周目标：
+#### 下周目标：
 
 1. 新功能的原型设计
 2. 已完成重构页面的路由设计
@@ -87,7 +99,7 @@
 
 
 
-任务分工：
+#### 任务分工：
 
 ​	邵贶：笔记板块的重构
 
@@ -99,7 +111,7 @@
 
 ​	张朔：首页板块的重构
 
-个人完成情况：
+#### 个人完成情况：
 
 ​	邵贶：笔记分类、新增分类、上传笔记页面的重构
 
@@ -111,7 +123,7 @@
 
 ​	张朔：首页轮播图、信息长列表、侧边栏的重构
 
-本周立会：
+#### 本周立会：
 
 1. https://space.dingtalk.com/s/gwHOAZpXOQLOIy5-8QPaACA0NDY1Zjk5MGI2Y2E0NDY4YjVjZGYxMDIyZTA0N2FjNA 密码: 
 2. https://space.dingtalk.com/s/gwHOAZpXOgLOIy5-8QPaACBjMGVjNTViMjY3YmI0MzA4YmUyZDJiNDNjMjhkN2ExYw 密码: 
