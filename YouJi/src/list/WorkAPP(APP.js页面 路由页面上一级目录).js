@@ -13,6 +13,8 @@ import sionple from './youji/Sionple';
 import sionnew from './youji/Sionnew';
 import AddTag from './youji/AddTag';
 
+console.disableYellowBox = true; //取消显示黄框
+
 export default class WorkAPP extends Component {
     componentDidMount(){
         SplashScreen.hide();
@@ -52,7 +54,7 @@ export default class WorkAPP extends Component {
 
 
                 {/* 笔记*/}
-                    <Scene key='list' 
+                    <Scene key='listsort' 
                         initial='true'//默认显示笔记页
                         titleStyle={{flex:1,textAlign:'center',color:'#fff'}}
                         renderRightButton={()=><Icon name="tago" onPress={this.jumpToAddTag} size={30} color='#fff'/>}
@@ -68,6 +70,7 @@ export default class WorkAPP extends Component {
                         back='true'
                         backButtonTintColor='#fff'
                         hideTabBar
+                        title='页面内容'
                         renderRightButton={()=><View></View>}  
                         component={sionple}
                         />
@@ -83,7 +86,7 @@ export default class WorkAPP extends Component {
                         backButtonTintColor='#fff'
                         hideTabBar
                         title='添加标签'
-                        renderRightButton={()=><View><Text style={{fontSize:20,color:'#fff'}}>保存</Text></View>}
+                        renderRightButton={()=><View></View>}
                         component={AddTag}
                         />
 					</Scene>
