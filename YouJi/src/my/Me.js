@@ -14,22 +14,6 @@ export default class Me extends Component {
           data:{uname:'张三',uemail:'zhangsan@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
         };
       }
-    // constructor(){
-    //     super();
-    //     this.state = {
-    //         selectedTab: 'blueTab',
-    //         // data: ['e_02', 'e_02', 'e_02','e_02'],
-    //         data:{uname:'张三',uemail:'11111111@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
-    //         seximg:'images/nan.png',
-    //         imgHeight: 200,
-    //         datas:[
-    //             // {ch_headimg:'images/sort-test1.jpg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'},
-    //             // {ch_headimg:'images/sort-test2.jpg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'},
-    //             // {ch_headimg:'images/sort-test3.jpeg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'}
-    //         ],
-    //         dataa:[]
-    //     }
-    // }
 
     // componentDidMount(){
     //     const storage = window.localStorage;
@@ -101,8 +85,12 @@ export default class Me extends Component {
                             }} size={30} name="bars"
                         />
                         </View>
-                        <Text style={styles.me_top_user}>{this.state.data.uname}</Text>
-                        <Text style={styles.me_top_email}>{this.state.data.uemail}</Text>
+                        <View style={styles.me_top_user}>
+                            <Text style={{color:'#fff'}}>{this.state.data.uname}</Text>
+                        </View>
+                        <View style={styles.me_top_email}>
+                            <Text>{this.state.data.uemail}</Text>
+                        </View>
                 </View>
                 <View style={styles.me_title}>
                     <Image style={styles.me_head} source={require('../images/pic1.jpg')}/>
@@ -160,11 +148,17 @@ const styles = StyleSheet.create({
         backgroundColor:'#faa755'
     },
     me_top_user:{
-        color:'#fff',
-        marginLeft:220
+        flex:1,
+        marginLeft:220,
+        marginBottom:20,
+        position:"absolute",
+        top:20
     },
     me_top_email:{
+        flex:1,
         marginLeft:180,
+        position:"absolute",
+        top:40
     },
     me_title:{
         flex:1,
