@@ -38,6 +38,7 @@ var delSionple = require('./api/delSionple');
 var getCarouselContext = require('./api/getCarouselContext');
 var followUser = require('./api/followUser');
 var cancelFollowUser = require('./api/cancelFollowUser');
+var getCode = require('./api/getVerifCode')
 
 var app = express();
 
@@ -87,7 +88,7 @@ app.use('/delSionple',delSionple);// 删除文章
 app.use('/getCarouselContext',getCarouselContext);// 获取轮播图文章详情
 app.use('/followUser',followUser);// 关注用户
 app.use('/cancelFollowUser',cancelFollowUser);// 取消关注用户
-
+app.use('/getCode',getCode);// 获取验证码
 
 // 后台系统接口
 app.use('/backLogin',backLogin);// 后台登录接口

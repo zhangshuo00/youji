@@ -4,10 +4,20 @@ const router = express.Router();
 // 修改密码的api
 
 router.post('/',async (req,res)=>{
-    const {uid,upassword} = req.body;
+    const { uemail,upassword,vcode } = req.body;
 
-    await query('update user set upassword=? where uid=?',[upassword,uid]);
-    res.send({msg:'success'});
+    // 对比用户发送验证码与数据库中验证码
+    var dataCode = await query('SELECT Vcode FROM user WHERE uemail=?',[uemail])
+    dataCode = JSON.parse(JSON.stringify(dataCode))[0].Vcode
+    console.log(dataCode)
+
+    if(dataCode === vcode){
+        await query('update user set upassword=?,Vcode=? where uemail=?',[upassword,'',uemail]);
+        res.send({msg:'success'});
+    }else{
+        res.send({msg:'vcode error'})
+    }
+    
 });
 
 module.exports = router;
