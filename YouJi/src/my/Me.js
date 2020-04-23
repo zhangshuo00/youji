@@ -7,6 +7,12 @@ import ListCard from '../components/ListCard';
 
 
 export default class Me extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          selectedTab: 'redTab',
+        };
+      }
     // constructor(){
     //     super();
     //     this.state = {
@@ -89,6 +95,18 @@ export default class Me extends Component {
     //     let center1 = document.getElementById('follow-center');
     //     center1.style.display='none'
     // }
+    onChangeTab(tabName) {
+        this.setState({
+          selectedTab: tabName,
+        });
+    }
+    renderContent(pageText) {
+        return (
+          <View style={styles.me_card}>   
+            <ListCard/>
+          </View>
+        );
+      }
     render(){
         return(
             <View>
@@ -128,14 +146,27 @@ export default class Me extends Component {
                     <Text>个性签名：这个人很懒，什么都没有写</Text>
                 </View>
                 <View style={styles.me_nav}>
-                    <TabBar style={styles.me_nav}>
-                    <TabBar.Item title="收藏列表" style={styles.me_essay}>
-                        <ListCard/>
-                    </TabBar.Item>
-                    <TabBar.Item title="收藏列表" style={styles.me_follow}>
-                        <ListCard/>
-                    </TabBar.Item>
-                </TabBar>
+                    <TabBar style={styles.me_bar}
+                        unselectedTintColor="#949494"
+                        tintColor="#faa755"
+                >
+                        <TabBar.Item title="收藏列表" 
+                                    style={styles.me_essay}
+                                    selected={this.state.selectedTab === 'Tab1'}
+                                    onPress={() => this.onChangeTab('Tab1')}
+                        >
+                            {this.renderContent(<ListCard/>)}                
+                        </TabBar.Item>
+
+                        <TabBar.Item title="关注列表" 
+                                    style={styles.me_follow}
+                                    selected={this.state.selectedTab === 'Tab2'}
+                                    onPress={() => this.onChangeTab('Tab2')}
+                        >
+                            {this.renderContent(<ListCard/>)} 
+                            {/* <Text>zhangsan</Text> */}
+                        </TabBar.Item>
+                    </TabBar>
                 </View>
 
             </View>
@@ -192,9 +223,14 @@ const styles = StyleSheet.create({
         marginTop:30
     },
     me_nav:{
-        height:75,
+        height:150,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop:120
+        
+    },
+    me_card:{ 
+        flex: 1,  
+        backgroundColor: 'white',
+        marginTop:50
     }
 })
