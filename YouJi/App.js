@@ -19,16 +19,37 @@ import Edit from './src/my/Edit';
 import Sider from './src/components/Sider'
 import Search from './src/components/Search'
 import AddTag from './src/list/AddTag';
+import SwipePage from './src/login/SwiperPage'
 
 console.disableYellowBox = true; //取消显示黄框
 
 
 const App = () => {
-    
+
   let [isLogin,setLogin] = useState(true);
+  let [isInstall,setInstall] = useState(true);
   useEffect(()=>{
-    SplashScreen.hide();
+    // AsyncStorage.clear();
+    AsyncStorage.getItem('isInstall')
+      .then(res=>{
+          if(res){
+            setInstall(false);
+          }
+          console.log(res);
+          SplashScreen.hide();
+      })
   },[])
+
+
+  let afterInstall=()=>{
+    setInstall(false);
+  }
+  if(isInstall){
+      return<View style={{flex:1}}>
+          <SwipePage afterInstall = {afterInstall}/>
+      </View>
+  }
+  
 
 	return (
     <Router>
@@ -80,6 +101,7 @@ const App = () => {
         <Scene initial={!isLogin} key='login' component={Login} hideTabBar={true} hideNavBar></Scene>
         <Scene key='sign' component={Sign} hideTabBar={true} hideNavBar></Scene>
         <Scene key='test' component={Test} hideTabBar={true} hideNavBar></Scene>
+        <Scene key='sider' component={Sider} hideTabBar={true} hideNavBar></Scene>
       </Modal>
       </Drawer>
     </Router>

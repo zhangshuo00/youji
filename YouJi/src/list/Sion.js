@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View,Dimensions,Image,StyleSheet, FlatList, TouchableOpacity,Alert, ScrollView} from 'react-native'
-import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { Text, View,Dimensions,Image, FlatList, TouchableOpacity,Alert, ScrollView,AsyncStorage} from 'react-native'
+import { Actions } from 'react-native-router-flux'
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 
@@ -9,7 +8,8 @@ export default class Sion extends Component {
     constructor(){
         super();
         this.state={
-            datas:[]
+            datas:[],
+            chid:'',
         }
     }
     //长按删除
@@ -48,96 +48,74 @@ export default class Sion extends Component {
         // })
     }
 
-    //跳转相信分类
-    jumpToSionple = (e)=>{
-        console.log('跳转到子夜')
-        Actions.sionple()
-    }
-
-    componentDidMount(){
+    async componentDidMount(){
+        // AsyncStorage.setItem('chid',"20")
         const post ={
-            // uid:localStorage.getItem('uid'),
-            uid:'k3i297def'
+            uid:await AsyncStorage.getItem('uid').then(res=>res),
+            tags:await AsyncStorage.getItem('tags').then(res=>res),
         }
-        fetch('https://www.fastmock.site/mock/afe15e7a06ced2a28a4349cff024b576/HomeWork/sion',{
+        fetch('http://majia.hbsdduckhouse.club/Sion',{
             method:'POST',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data,'返回的分类数据'),
+            console.log(data,'返回的单页数据'),
             this.setState({
-                datas:data
+                datas:data,
             })
         })  
     }
 
-    head(){
-        Actions.pop()
-    }
+
+    
+    //跳转相信分类
+    jumpToSionple =(item)=>{
+        AsyncStorage.setItem('chid',""+item.chid+"")
+        console.log('跳转到子页',item.chid)
+        Actions.sionple()
+     }
+    
 
     render() {
         return (
             <ScrollView>
-                <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
-                    <Text style={styles.headText}>{this.props.tag}</Text>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='plus' color={'white'} size={28}></Icon></TouchableOpacity>
-                 </View>
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center'}}>
-                        <FlatList
-                        numColumns='2'
-                        data={this.state.datas}
-                        renderItem={({item})=>{
-                            return(
-                                <TouchableOpacity 
-                                    onLongPress={()=>this.touchStart(item)}
-                                    onPress={this.jumpToSionple}
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center'}}>
+                    <FlatList
+                       numColumns='2'
+                       data={this.state.datas}
+                       renderItem={({item})=>{
+                           return(
+                            <TouchableOpacity 
+                                onLongPress={()=>this.touchStart(item)}
+                                onPress={()=>this.jumpToSionple(item)}
                                 style={{
                                     paddingTop:40*s,
                                     width:'50%',
                                     flexDirection:'column',
                                     alignItems:'center',
-                                    }}>
-                                <View style={{flexDirection:'column',alignItems:'center',}}>
-                                    <Image 
-                                        // 从服务器获取图片 source={require("\'/"+item.ch_headimg+"\'")}
-                                    source={require('../images/dangao.jpg')} 
-                                    style={{height:120*s,width:150*s,borderRadius: 10*s}}/>
-                                    <Text  style={{marginBottom:5*s}}>{item.title}</Text>
-                                    <Text>{item.chdate}</Text>
-                                </View>
-                                </TouchableOpacity>
-                            )
-                            }}
-                            />
-                    {/* {
-                    this.state.datas.map((item)=>(
-                        
-                    ))
-                    } */}
-                </View>
+                                }}>
+                            <View style={{flexDirection:'column',alignItems:'center',}}>
+                                <Image 
+                                  source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + item.ch_headimg}}
+                                  style={{height:120*s,width:150*s,borderRadius: 10*s}}/>
+                                <Text  style={{marginBottom:5*s}}>{item.title}</Text>
+                                <Text>{item.chdate}</Text>
+                            </View>
+                            </TouchableOpacity>
+                           )
+                        }}
+                        />
+                {/* {
+                   this.state.datas.map((item)=>(
+                       
+                   ))
+                } */}
+            </View>
             </ScrollView>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    headText:{
-        marginRight:width*0.12,
-        width:width*0.54,
-        textAlign:'center',
-        fontSize:22,
-        color:'white'
-    },
-    headIcon:{
-        marginLeft:width*0.02,
-        width:width*0.2,
-    },
-    msgList:{
-        width: width,
-    },
-})

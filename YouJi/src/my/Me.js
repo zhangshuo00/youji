@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import {View, Text, Button,TouchableOpacity,StyleSheet,Image } from 'react-native';
 import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
+import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from '../components/ListCard';
 
 
 export default class Me extends Component {
-    // constructor(){
-    //     super();
-    //     this.state = {
-    //         selectedTab: 'blueTab',
-    //         // data: ['e_02', 'e_02', 'e_02','e_02'],
-    //         data:{uname:'张三',uemail:'11111111@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
-    //         seximg:'images/nan.png',
-    //         imgHeight: 200,
-    //         datas:[
-    //             // {ch_headimg:'images/sort-test1.jpg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'},
-    //             // {ch_headimg:'images/sort-test2.jpg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'},
-    //             // {ch_headimg:'images/sort-test3.jpeg',headimg:'images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20'}
-    //         ],
-    //         dataa:[]
-    //     }
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+          selectedTab: 'redTab',
+          data:{uname:'张三',uemail:'zhangsan@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
+        };
+      }
 
     // componentDidMount(){
     //     const storage = window.localStorage;
@@ -68,26 +60,19 @@ export default class Me extends Component {
     //         })
     //     })
     // }
-    // follow(){
-    //     let orange = document.getElementById('me-essay-orange')
-    //     orange.style.display='none';
-    //     let center = document.getElementById('find-center');
-    //     center.style.display='none';
-    //     let orange1 =document.getElementById('me-follow-orange');
-    //     orange1.style.display='block'
-    //     let center1 = document.getElementById('follow-center');
-    //     center1.style.display='block';
-    // }
-    // essay(){
-    //     let orange = document.getElementById('me-essay-orange')
-    //     orange.style.display='block';
-    //     let center = document.getElementById('find-center');
-    //     center.style.display='block';
-    //     let orange1 =document.getElementById('me-follow-orange');
-    //     orange1.style.display='none';
-    //     let center1 = document.getElementById('follow-center');
-    //     center1.style.display='none'
-    // }
+
+    onChangeTab(tabName) {
+        this.setState({
+          selectedTab: tabName,
+        });
+    }
+    renderContent(pageText) {
+        return (
+          <View style={styles.me_card}>   
+            <ListCard/>
+          </View>
+        );
+      }
     render(){
         return(
             <View>
@@ -100,22 +85,26 @@ export default class Me extends Component {
                             }} size={30} name="bars"
                         />
                         </View>
-                        <Text style={styles.me_top_user}>张三</Text>
-                        <Text style={styles.me_top_email}>zhangsan@qq.com</Text>
+                        <View style={styles.me_top_user}>
+                            <Text style={{color:'#fff'}}>{this.state.data.uname}</Text>
+                        </View>
+                        <View style={styles.me_top_email}>
+                            <Text>{this.state.data.uemail}</Text>
+                        </View>
                 </View>
                 <View style={styles.me_title}>
                     <Image style={styles.me_head} source={require('../images/pic1.jpg')}/>
                     <View style={styles.me_num}>
                         <View style={styles.me_sex}>
                             {/* <Image></Image> */}
-                            <Text>女</Text>
+                            <Text>{this.state.data.usex}</Text>
                         </View>
                         <View style={styles.me_atten}>
-                            <Text>1</Text>
+                            <Text>{this.state.data.userCounts}</Text>
                             <Text>关注</Text>
                         </View>
                         <View style={styles.me_collect}>
-                            <Text>20</Text>
+                            <Text>{this.state.data.chapterCounts}</Text>
                             <Text>收藏</Text>
                         </View>
                     </View>
@@ -124,35 +113,32 @@ export default class Me extends Component {
                         <Button title="编辑资料" color="#faa755" onPress={()=>Actions.edit()}/>
                 </View>
                 <View style={styles.me_sign}>
-                    <Text>个性签名：这个人很懒，什么都没有写</Text>
+                    <Text>个性签名：{this.state.data.signature?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
                 </View>
                 <View style={styles.me_nav}>
-                    <TouchableOpacity style={styles.me_essay}>
-                        <Text>收藏列表</Text> 
-                        <ListCard/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.me_follow}>
-                        <Text>关注列表</Text>
-                        <ListCard/>
-                    </TouchableOpacity>
-                </View>
-                {/* <Router>
-                    <Modal>
-                        <screen key='myEssay' component={ListCard}>
-                            <Text>收藏列表</Text> 
-                            <ListCard/>
-                        </screen>
-                        <screen key='myFollow' component={ListCard}>
-                            <Text>关注列表</Text> 
-                            <ListCard/>
-                        </screen>
-                    </Modal>
-                </Router> */}
-                
+                    <TabBar style={styles.me_bar}
+                        unselectedTintColor="#949494"
+                        tintColor="#faa755"
+                >
+                        <TabBar.Item title="收藏列表" 
+                                    style={styles.me_essay}
+                                    selected={this.state.selectedTab === 'Tab1'}
+                                    onPress={() => this.onChangeTab('Tab1')}
+                        >
+                            {this.renderContent(<ListCard/>)}                
+                        </TabBar.Item>
 
-                
-                {/* <View style={styles.find_center}></View>
-                <View style={styles.me_follow_center}></View> */}
+                        <TabBar.Item title="关注列表" 
+                                    style={styles.me_follow}
+                                    selected={this.state.selectedTab === 'Tab2'}
+                                    onPress={() => this.onChangeTab('Tab2')}
+                        >
+                            {this.renderContent(<ListCard/>)} 
+                            {/* <Text>zhangsan</Text> */}
+                        </TabBar.Item>
+                    </TabBar>
+                </View>
+
             </View>
         )
     }
@@ -162,11 +148,17 @@ const styles = StyleSheet.create({
         backgroundColor:'#faa755'
     },
     me_top_user:{
-        color:'#fff',
-        marginLeft:220
+        flex:1,
+        marginLeft:220,
+        marginBottom:20,
+        position:"absolute",
+        top:20
     },
     me_top_email:{
+        flex:1,
         marginLeft:180,
+        position:"absolute",
+        top:40
     },
     me_title:{
         flex:1,
@@ -207,9 +199,14 @@ const styles = StyleSheet.create({
         marginTop:30
     },
     me_nav:{
-        height:75,
+        height:150,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop:120
+        
+    },
+    me_card:{ 
+        flex: 1,  
+        backgroundColor: 'white',
+        marginTop:50
     }
 })
