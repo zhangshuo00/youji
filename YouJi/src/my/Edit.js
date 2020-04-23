@@ -116,14 +116,14 @@ export default class Edit extends Component{
                     <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
                     <Text style={styles.headText}>编辑信息</Text>
                 </View>
-                <TouchableOpacity onPress={()=>{this.changeHead()}}>
+                <TouchableOpacity onPress={()=>{this.changeHead()}} style={styles.imag}>
                     <Image source={this.state.avatarSource} style={styles.img} />
-                    <Text>点击更改头像</Text>
+                    <Text style={{color:'#72777b'}}>点击更改头像</Text>
                 </TouchableOpacity>
                 <View style={styles.inp}>
-                    <TextInput style={styles.tinp} type="text" placeholder="做一份美食，看一场电影">签名 </TextInput>
-                    <TextInput style={styles.tinp} type="text" placeholder="张三">昵称 </TextInput>
-                    <TextInput style={styles.tinp} type="text" placeholder="男">性别 </TextInput>
+                    <TextInput style={styles.tinp} placeholder="做一份美食，看一场电影">签名 </TextInput>
+                    <TextInput style={styles.tinp} placeholder="张三">昵称 </TextInput>
+                    <TextInput style={styles.tinp} placeholder="男">性别 </TextInput>
                 </View>
                 <View style={styles.btw}>
                     <Button title="保存" color="#faa755" />
@@ -135,15 +135,13 @@ export default class Edit extends Component{
 }
 const styles = StyleSheet.create({
   headText:{
-    marginRight:width*0.22,
-    width:width*0.56,
+    flex:1,
+    marginTop:20,
     textAlign:'center',
-    fontSize:22,
     color:'white'
   },
   headIcon:{
-      marginLeft:width*0.02,
-      width:width*0.2,
+      marginLeft:10,
   },
     // top:{
     //     color:'#fff',
@@ -151,18 +149,28 @@ const styles = StyleSheet.create({
     //     marginLeft:190,
     //     marginTop:-10
     // },
+    imag:{
+      borderWidth:1,
+      borderRadius:55,
+      borderColor:'#d3d7d4',
+      width:100,
+      height:100,
+      marginTop:20,
+      marginLeft:200
+    },
     img:{
         width: 100,
         height: 100,
         borderRadius:55
     },
     inp:{
-        marginTop:20,
+        marginTop:30,
+        marginLeft:10
     },
     tinp:{
         fontSize:20
     },
     btw:{
-        marginTop:20
+        marginTop:30,
     }
 })
