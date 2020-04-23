@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, Button,TouchableOpacity,StyleSheet,Image } from 'react-native';
 import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
+import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from '../components/ListCard';
 
@@ -127,32 +128,16 @@ export default class Me extends Component {
                     <Text>个性签名：这个人很懒，什么都没有写</Text>
                 </View>
                 <View style={styles.me_nav}>
-                    <TouchableOpacity style={styles.me_essay}>
-                        <Text>收藏列表</Text> 
+                    <TabBar style={styles.me_nav}>
+                    <TabBar.Item title="收藏列表" style={styles.me_essay}>
                         <ListCard/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.me_follow}>
-                        <Text>关注列表</Text>
+                    </TabBar.Item>
+                    <TabBar.Item title="收藏列表" style={styles.me_follow}>
                         <ListCard/>
-                    </TouchableOpacity>
+                    </TabBar.Item>
+                </TabBar>
                 </View>
-                {/* <Router>
-                    <Modal>
-                        <screen key='myEssay' component={ListCard}>
-                            <Text>收藏列表</Text> 
-                            <ListCard/>
-                        </screen>
-                        <screen key='myFollow' component={ListCard}>
-                            <Text>关注列表</Text> 
-                            <ListCard/>
-                        </screen>
-                    </Modal>
-                </Router> */}
-                
 
-                
-                {/* <View style={styles.find_center}></View>
-                <View style={styles.me_follow_center}></View> */}
             </View>
         )
     }
