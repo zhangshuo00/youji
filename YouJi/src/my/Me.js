@@ -14,52 +14,36 @@ export default class Me extends Component {
           data:{uname:'张三',uemail:'zhangsan@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
         };
       }
-
-    // componentDidMount(){
-    //     const storage = window.localStorage;
-    //     const post ={
-    //         uid:storage.uid
-    //     }
-    //     // console.log(post);
-    //     fetch('/me',{
-    //         method:'POST',
-    //         // mode:'cors',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body:JSON.stringify(post)
-    //     })
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //         this.setState({
-    //             data:data[0],
-    //             datas:data[1]
-    //         })
-    //         if(data[0].usex == '男'){
-    //             this.setState({
-    //                 seximg:'images/nan.png'
-    //             })
-    //         }
-    //         else{
-    //             this.setState({
-    //                 seximg:'images/nv.png'
-    //             })
-    //         }
-    //         // 根据返回的消息，渲染响应的页面
-    //     })
-    //     fetch('/getFollowUser',{
-    //         method:'POST',
-    //         // mode:'cors',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body:JSON.stringify(post)
-    //     })
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //         this.setState({
-    //             dataa:data
-    //         })
-    //     })
-    // }
+    
+    async componentDidMount(){
+        const post ={
+            uid:this.state.uid
+        }
+        // console.log(post);
+        fetch('http://majia.hbsdduckhouse.club/me',{
+            method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            this.setState({
+                data:data[0],
+                datas:data[1]
+            })
+            if(data[0].usex == '男'){
+                this.setState({
+                    seximg:'images/nan.png'
+                })
+            }
+            else{
+                this.setState({
+                    seximg:'images/nv.png'
+                })
+            }
+        })
+    }
 
     onChangeTab(tabName) {
         this.setState({
@@ -96,7 +80,7 @@ export default class Me extends Component {
                     <Image style={styles.me_head} source={require('../images/pic1.jpg')}/>
                     <View style={styles.me_num}>
                         <View style={styles.me_sex}>
-                            {/* <Image></Image> */}
+                            <Image style={styles.me_imgsex} source={require("../"+this.state.seximg)}/>
                             <Text>{this.state.data.usex}</Text>
                         </View>
                         <View style={styles.me_atten}>
@@ -181,6 +165,10 @@ const styles = StyleSheet.create({
     },
     me_sex:{
         width:100
+    },
+    me_imgsex:{
+        width:20,
+        height:20
     },
     me_atten:{
         width:100
