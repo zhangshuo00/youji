@@ -14,6 +14,7 @@ export default class Sign extends Component {
             uemail:'',
             issigning:false,
             CodeValidate:true,
+            checking:true,
         }
     }
     userhandle = (text)=>{
@@ -33,6 +34,7 @@ export default class Sign extends Component {
       }
       else { 
         ToastAndroid.show('用户名不能超过7个汉字或14个字符',100);
+        this.setState({checking:false})
       }
     }
     checkPassword = ()=>{
@@ -43,6 +45,7 @@ export default class Sign extends Component {
       }
       else {
         ToastAndroid.show('密码在8-14位',100);
+        this.setState({checking:false})
       }
     }
     checkEmail = ()=>{
@@ -52,29 +55,35 @@ export default class Sign extends Component {
       }
       else {
         ToastAndroid.show('邮箱格式不正确',100);
+        this.setState({checking:false})
       }
     }
     sign = ()=>{
-        this.setState({issigning:true})
+        if(this.state.checking==false){
+          ToastAndroid.show('输入不符合规范',100);
+        }else{
+          this.setState({issigning:true})
 
-        const post ={
-          uname:this.state.uname,
-          uemail:this.state.uemail,
-          upassword:this.state.upassword
+          const post ={
+            uname:this.state.uname,
+            uemail:this.state.uemail,
+            upassword:this.state.upassword
+          }
+          console.log(post);
+
+          fetch('http://majia.hbsdduckhouse.club/sign',{
+            method:'POST',// 发起post请求
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            console.log(data);
+            this.setState({issigning:false})
+            Actions.login();
+          })
         }
-        console.log(post);
-
-        fetch('http://majia.hbsdduckhouse.club/sign',{
-          method:'POST',// 发起post请求
-          headers: {'Content-Type': 'application/json'},
-          body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-          console.log(data);
-          this.setState({issigning:false})
-          Actions.login();
-        })
+        
 
         // myFetch.post('/sign',{
         //     username:this.state.username,

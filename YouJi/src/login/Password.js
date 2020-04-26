@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackground,StyleSheet } from 'react-native';
+import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackground,ToastAndroid,response,StyleSheet } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
-import {myFetch} from '../utils'
+import {myFetch} from '../utils';
+import { regExp } from "../network/RegExp";
 export default class Sign extends Component {
   //修改密码页
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            username:'',
-            pwd:'',
+            username:'',//密码
+            uemail:props.uemail,//邮箱
+            // uemail:'1062208122@qq.com',
+            upassword:'',//密码
             issigning:false
         }
     }
@@ -17,21 +20,53 @@ export default class Sign extends Component {
         this.setState({username:text})
     }
     pwdhandle = (text)=>{
-        this.setState({pwd:text})
+        this.setState({upassword:text})
+    }
+    checkPassword1 = ()=>{
+      if (regExp.Reg_PassWord.test(this.state.username)) {
+        console.log('ok')
+        //ToastAndroid.show('ok',100);
+
+      }
+      else {
+        ToastAndroid.show('密码在8-14位',100);
+      }
+    }
+    checkPassword2 = ()=>{
+      if (regExp.Reg_PassWord.test(this.state.upassword)) {
+        console.log('ok')
+        //ToastAndroid.show('ok',100);
+
+      }
+      else {
+        ToastAndroid.show('密码在8-14位',100);
+      }
     }
     sign = ()=>{
-        this.setState({issigning:true})
-        myFetch.post('/sign',{
-            username:this.state.username,
-            pwd:this.state.pwd}
-        ).then(res=>{
-            AsyncStorage.setItem('usersign',JSON.stringify(res.data))
-                .then(()=>{
-                    console.log(JSON.stringify(res.data))
-                    this.setState({issigning:false})
-                    Actions.login();
-                })
-        })
+        if(this.state.username!=this.state.upassword){
+          ToastAndroid.show('密码不一致',100);
+        }else{
+          this.setState({issigning:true})
+
+          const post ={
+            uemail:this.state.uemail,
+            upassword:this.state.upassword
+          }
+          console.log(post);
+
+          fetch('http://majia.hbsdduckhouse.club/modifyPwd',{
+            method:'POST',// 发起post请求
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            console.log(data);
+            this.setState({issigning:false})
+            Actions.login();
+          })
+        }
+        
     } 
   render() {
     return (
@@ -48,7 +83,8 @@ export default class Sign extends Component {
             style={styles.email}>
 
             <TextInput 
-                onChangeText={this.pwdhandle}
+                onChangeText={this.userhandle}
+                onBlur={this.checkPassword1}
                 placeholder="新密码" 
                 secureTextEntry={true}
             />
@@ -58,7 +94,9 @@ export default class Sign extends Component {
             style={styles.email}>
 
             <TextInput placeholder="再次输入密码" 
-                onChangeText={this.userhandle}
+                onChangeText={this.pwdhandle}
+                onBlur={this.checkPassword2}
+                secureTextEntry={true}
             />
           </View>
 
@@ -112,3 +150,4 @@ const styles = StyleSheet.create({
   }
   
 });
+
