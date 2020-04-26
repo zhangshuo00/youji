@@ -71,7 +71,7 @@ export default class Sign extends Component {
   render() {
     return (
       <ImageBackground 
-      source={require("../../images/sign.jpg")} 
+      source={require("../images/sign.jpg")} 
       style={{width: '100%', height: '100%'}}
   >
  

@@ -29,7 +29,7 @@ export default class Sign extends Component {
   // } 
   vode = () => {
     this.setState({ isding: false })
-    
+    //this.setState((state)=>{ return { isding: false }})
     var num = 60;
       var timer = setInterval( () =>{
           
@@ -96,7 +96,7 @@ export default class Sign extends Component {
   render() {
     return (
       <ImageBackground
-        source={require("../../images/sign.jpg")}
+        source={require("../images/sign.jpg")}
         style={{ width: '100%', height: '100%' }}
       >
 

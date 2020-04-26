@@ -71,7 +71,7 @@ export default class Login extends Component {
   render() {
     return (
       <ImageBackground 
-      source={require("../../images/back-login.jpg")} 
+      source={require("../images/back-login.jpg")} 
       style={{width: '100%', height: '100%'}}
   >
  
@@ -80,7 +80,7 @@ export default class Login extends Component {
           style={{ alignItems: 'center'}}>
             <Image
             style={{marginBottom:'5%'}}
-            source={require('../../images/logo.png')}
+            source={require('../images/logo.png')}
           />
           <View
             style={styles.email}>
