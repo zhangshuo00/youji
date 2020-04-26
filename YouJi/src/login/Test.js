@@ -29,7 +29,6 @@ export default class Sign extends Component {
   // } 
   vode = () => {
     this.setState({ isding: false })
-    //this.setState((state)=>{ return { isding: false }})
     var num = 60;
       var timer = setInterval( () =>{
           
