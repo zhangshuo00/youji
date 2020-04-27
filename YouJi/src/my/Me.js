@@ -3,7 +3,7 @@ import {View, Text, Button,TouchableOpacity,StyleSheet,Image } from 'react-nativ
 import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
 import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import ListCard from '../components/ListCard';
+import ListCard from './ListCard';
 
 
 export default class Me extends Component {
@@ -80,7 +80,8 @@ export default class Me extends Component {
                     <Image style={styles.me_head} source={require('../images/pic1.jpg')}/>
                     <View style={styles.me_num}>
                         <View style={styles.me_sex}>
-                            <Image style={styles.me_imgsex} source={require("../"+this.state.seximg)}/>
+                            {/* <Image style={styles.me_imgsex} source={require('./'+this.state.seximg)}/> */}
+                            <Image style={styles.me_imgsex} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' +this.state.seximg}}/>
                             <Text>{this.state.data.usex}</Text>
                         </View>
                         <View style={styles.me_atten}>
