@@ -89,7 +89,7 @@
 
 
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity,
+import { Text, View, TouchableOpacity,ImageBackground,
         StyleSheet, FlatList, TextInput, Image, Dimensions, ScrollView } from 'react-native'
 import { Carousel} from '@ant-design/react-native'
 import ListCard from '../components/ListCard'
@@ -100,6 +100,37 @@ const { swidth, sheight } = Dimensions.get('window');
 const {width} = Dimensions.get('window');
 
 export default class Home extends Component {
+
+    constructor(){
+        super();
+        this.state = {
+            selectedTab: 'blueTab',
+            data:[{car_imgpath:"images/carousel1.jpg",car_context:''},
+                {car_imgpath:"images/carousel2.jpg",car_context:''},
+                {car_imgpath:"images/carousel3.jpg",car_context:''}],
+        }
+    }
+
+    componentDidMount(){
+        const post ={
+            uid:'k3i297def'
+        }
+        // console.log(post);
+        fetch('http://majia.hbsdduckhouse.club/getCarousel',{
+            method:'GET',
+            // mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            // body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            // console.log(data);
+            this.setState({
+                data:data
+            })
+            console.log(this.state.data)
+        })
+    }
 
     head(){
         Actions.sider();
@@ -129,17 +160,23 @@ export default class Home extends Component {
                         <View
                             style={styles.wrapper}
                         >
-                            <Image source={{uri: 'https://i.loli.net/2020/04/13/LYeRrldPFcamun7.jpg'}} style={styles.wrapperImage}/>
+                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[0].car_imgpath}} style={styles.wrapperImage}/>
+                            <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
+                            <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[0].car_context}</Text>
                         </View>
                         <View
                             style={styles.wrapper}
                         >
-                            <Image source={{uri: 'https://i.loli.net/2020/04/13/2FAVtm34ND7hy8J.jpg'}} style={styles.wrapperImage}/>
+                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[1].car_imgpath}} style={styles.wrapperImage}/>
+                            <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
+                            <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[1].car_context}</Text>
                         </View>
                         <View
                             style={styles.wrapper}
                         >
-                            <Image source={{uri: 'https://i.loli.net/2020/04/13/zC749iu1kr3lnJs.jpg'}} style={styles.wrapperImage}/>
+                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[2].car_imgpath}} style={styles.wrapperImage}/>
+                            <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
+                            <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[2].car_context}</Text>
                         </View>
                         <View
                             style={styles.wrapper}
@@ -155,7 +192,6 @@ export default class Home extends Component {
                             <ListCard/>
                         )}
                     /> */}
-                    <ListCard/>
                     <ListCard/>
                 </View>
             </ScrollView>
