@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, Image,AsyncStorage,Dimensions,ScrollView} from 'react-native'
-
+import { Text,TouchableOpacity, View,StyleSheet, Image,AsyncStorage,Dimensions,ScrollView} from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign';
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 console.disableYellowBox = true; //取消显示黄框
@@ -37,32 +37,54 @@ export default class Sionple extends Component {
     render() {
         return (
             <ScrollView>
-            <View>
-                {
-                    this.state.data.map((item)=>(
-                        <View>
-                        <View>
-                            <Image style={{height:196*s,width:'100%'}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + item.ch_headimg}}/>
-                        </View>
-                        <View style={{marginLeft:"10%",marginRight:"10%",flexDirection:'row'}}>
-                            <Text style={{marginTop:40*s,fontSize:30*s}}>{item.tags}</Text>
-                            <Text style={{marginLeft:"30%",marginTop:40*s,fontSize:30*s,marginBottom:20*s}}>By</Text>
-                            <Text style={{marginLeft:"5%",marginTop:40*s,fontSize:30*s,marginBottom:20*s}}>{item.uname}</Text>
-                        </View>
-                        <View style={{marginLeft:"10%",marginRight:"10%",}}>
-                            <Text style={{marginTop:40*s,fontSize:40*s,marginBottom:20*s}}>{item.title}</Text>
-                            <Text style={{marginTop:40*s,fontSize:30*s,marginBottom:20*s}}>{item.context}</Text>
-                            {
-                                item.imgPath.map(val=>(
-                                    <Image style={{height:200*s,width:"100%",marginBottom:20*s}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + val.img_path}}/>
-                                ))
-                            }
-                        </View>
-                        </View>
-                    ))
-                }
-            </View>
+                 <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <Text style={styles.headText}>笔记内容</Text>
+                </View>
+                <View>
+                    {
+                        this.state.data.map((item)=>(
+                            <View>
+                            <View>
+                                <Image style={{height:300*s,width:'100%'}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + item.ch_headimg}}/>
+                            </View>
+                            <View style={{marginLeft:"10%",marginRight:"10%",flexDirection:'row'}}>
+                                <Text style={{marginTop:40*s,fontSize:30*s}}>{item.tags}</Text>
+                                <Text style={{marginLeft:"65%",marginTop:40*s,fontSize:30*s,marginBottom:20*s,color:'#969696'}}>By</Text>
+                                <Text style={{marginLeft:"2%",marginTop:50*s,fontSize:20*s,marginBottom:20*s}}>{item.uname}</Text>
+                            </View>
+                            <View style={{marginLeft:"10%",marginRight:"10%",}}>
+                                <Text style={{marginTop:20*s,fontSize:40*s,marginBottom:20*s}}>{item.title}</Text>
+                                <Text style={{marginTop:20*s,fontSize:30*s,marginBottom:20*s}}>{item.context}</Text>
+                                {
+                                    item.imgPath.map(val=>(
+                                        <Image style={{height:200*s,width:"100%",marginBottom:20*s}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + val.img_path}}/>
+                                    ))
+                                }
+                            </View>
+                            </View>
+                        ))
+                    }
+                </View>
             </ScrollView>
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    headText:{
+        marginRight:width*0.12,
+        width:width*0.54,
+        textAlign:'center',
+        fontSize:22,
+        color:'white'
+    },
+    headIcon:{
+        marginLeft:width*0.02,
+        width:width*0.2,
+    },
+    msgList:{
+        width: width,
+    },
+})

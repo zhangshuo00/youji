@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, TextInput,Dimensions,StyleSheet,TouchableOpacity,Image,AsyncStorage} from 'react-native'
 import ImagePicker from 'react-native-image-picker';
 import Button from 'react-native-button';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
@@ -20,27 +21,12 @@ export default class AddTag extends Component {
         super();
         this.state = {
             datas:[],
-            imageUrl:"",
+            imageUrl:require('../images/setBack.png'),
             textInput:'',
         }
     }
     //获得本地存储的uri
-  async  componentDidMount(){
-        // AsyncStorage.clear()
-      await  AsyncStorage.getItem('im')
-        .then((res)=>{
-            if(res==null){
-                this.setState({
-                    imageUrl: require('./images/kouhong.jpg')
-                  })
-            }else{
-                console.log(res)
-                this.setState({
-                    imageUrl: { uri: res }
-                  })
-            }
-        })
-    }
+    async  componentDidMount(){}
     takephoto = ()=>{
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
@@ -50,10 +36,15 @@ export default class AddTag extends Component {
             } else if (response.customButton) {
               console.log('custom:', response.customButton);
             } else {
-              const source = { uri: response.uri };
-              AsyncStorage.setItem('im',response.uri)
+              // const source = { uri: response.uri };
+              // AsyncStorage.setItem('im',response.uri)
+              // this.setState({
+              //   imageUrl: source
+              // });
+              const source = { uri: 'data:image/jpeg;base64,' + response.data };
               this.setState({
-                imageUrl: source
+                  imageUrl: source,
+                  imgData:response.data
               });
             }
           });
@@ -63,50 +54,42 @@ export default class AddTag extends Component {
         // e.preventDefault();
         const post ={
           uid:await   AsyncStorage.getItem('uid').then(res=>res),
-          tags:await AsyncStorage.getItem('tags').then(res=>res),
           tagName:this.state.textInput,
-          imgData:'images/sort-test1.jpg'
+          imgData:this.state.imgData
         }	
-        console.log(post,'存储的数据');
-          fetch('http://majia.hbsdduckhouse.club/addTag',{
-            method:'POST',
-            mode:'cors',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-          })
-          .then(res=>res.json())
-          .then(data=>{
-            console.log(data);
-            if(data.msg==='success' ){
-              alert('保存成功','', [
-                { text: '确定', onPress: () => console.log('cancel') },
-                ]),
-
-                fetch('http://majia.hbsdduckhouse.club/Sion',{
-                  method:'POST',
-                  headers: {'Content-Type': 'application/json'},
-                  body:JSON.stringify(post)
-                })
-                .then(res=>res.json())
-                .then(data=>{
-                    this.setState({
-                        datas:data,
-                    })
-                })
-                // Actions.pop({refresh: ({data:this.state.datas})}) 
-                Actions.refresh(listsort)
-              }
+        // console.log(post,'存储的数据');
+        fetch('http://majia.hbsdduckhouse.club/addTag',{
+          method:'POST',
+          mode:'cors',
+          headers: {'Content-Type': 'application/json'},
+          body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data);
+          if(data.msg==='success' ){
+            alert('保存成功','', [
+              { text: '确定', onPress: () => console.log('cancel') },
+              ]);
+          }
           })  
       }
 
     render() {
         return (
             <View>
+                <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <Text style={styles.headText}>添加标签</Text>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>{this.addTag()}}>
+                        <Text style={{color:'white',fontSize:18}}>保存</Text>
+                    </TouchableOpacity>
+                </View>
                 <View
                     style={{
                         flexDirection:'row',
                         justifyContent:'center',
-                        marginTop:100*s
+                        marginTop:30*s
                     }}
                 >
                     <Text style={styles.TextStyle}>标签名称</Text>
@@ -158,5 +141,24 @@ const styles =StyleSheet.create({
         marginTop:50*s,
         marginLeft:"14%",
         borderRadius:20*s
-    }
+    },
+    TextStyle:{
+      marginTop:20*s,
+      marginRight:30*s,
+      fontSize:30*s
+    },
+    headText:{
+        marginRight:width*0.12,
+        width:width*0.54,
+        textAlign:'center',
+        fontSize:22,
+        color:'white'
+    },
+    headIcon:{
+        marginLeft:width*0.02,
+        width:width*0.2,
+    },
+    msgList:{
+        width: width,
+    },
 })
