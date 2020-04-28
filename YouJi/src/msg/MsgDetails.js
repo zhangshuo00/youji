@@ -85,7 +85,7 @@ export default class MsgDetails extends Component {
 
         if(this.state.text != ''){
             const post={
-                uid:'k3i297def',
+                uid:await AsyncStorage.getItem('uid').then(res=>res),
                 ruid:this.props.ruid,
                 msg:this.state.text
             }
