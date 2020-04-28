@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackground,ToastAndroid,StyleSheet} from 'react-native';
-import { Icon } from '@ant-design/react-native';
+import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackground,StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
-// import {myFetch} from '../utils'
+import {myFetch} from './index';
+
 export default class Login extends Component {
   //登陆页
     constructor(){
-        super();
-        this.state = {
-            uemail:'',
-            upassword:'',
-            isloading:false
-        }
+      super();
+      this.state = {
+          uemail:'',
+          upassword:'',
+          isloading:false
+      }
     }
     emailhandle = (text)=>{
         this.setState({uemail:text})
@@ -20,53 +21,38 @@ export default class Login extends Component {
         this.setState({upassword:text})
     }
     login = ()=>{
-        this.setState({isloading:true})
+      this.setState({isloading:true})
 
-        const post ={
-          uemail:this.state.uemail,
-          upassword:this.state.upassword
+      const post ={
+        uemail:this.state.uemail,
+        upassword:this.state.upassword
+      }
+      console.log(post);
+
+      fetch('http://majia.hbsdduckhouse.club/login',{
+        method:'POST',
+        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        body:JSON.stringify(post)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        // 返回数据格式：{msg: "success/pwdErr/notExist"}
+        console.log(data);
+        if(data.msg === 'success'){
+          AsyncStorage.setItem('uid',data.uid)
+              .then(()=>{
+                  console.log(JSON.stringify(data.uid))
+                  this.setState({isloading:false})
+                  Actions.home();
+              })
+        }else if(data.msg === 'pwdError'){
+          ToastAndroid.show('密码不正确',100)
+          this.setState({isloading:false})
+        }else{
+          ToastAndroid.show('用户不存在',100)
+          this.setState({isloading:false})
         }
-        console.log(post);
-
-        fetch('http://majia.hbsdduckhouse.club/login',{
-          method:'POST',
-          headers: {'Content-Type': 'application/json;charset=utf-8'},
-          body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-          // 返回数据格式：{msg: "success/pwdErr/notExist"}
-          console.log(data);
-          if(data.msg === 'success'){
-            AsyncStorage.setItem('uid',data.uid)
-                .then(()=>{
-                    console.log(JSON.stringify(data.uid))
-                    this.setState({isloading:false})
-                    Actions.homePage();
-                })
-          }else if(data.msg === 'pwdError'){
-            ToastAndroid.show('密码不正确',100)
-            this.setState({isloading:false})
-          }else{
-            ToastAndroid.show('用户不存在',100)
-            this.setState({isloading:false})
-          }
-        })
-        // myFetch.post('/login',{
-        //     email:this.state.email,
-        //     pwd:this.state.pwd}
-        // ).then(res=>{
-        //     // 根据返回状态进行判断，正确时跳转首页
-        //     // if(res){
-
-        //     // }
-        //     AsyncStorage.setItem('user',JSON.stringify(res.data))
-        //         .then(()=>{
-        //             console.log(JSON.stringify(res.data))
-        //             this.setState({isloading:false})
-        //             Actions.homePage();
-        //         })
-        // })
+      })
     } 
   render() {
     return (
@@ -101,7 +87,8 @@ export default class Login extends Component {
 
           <TouchableOpacity 
                 style={{marginLeft:'-50%'}}
-                onPress={()=>Actions.Test()}>
+                onPress={()=>Actions.test()}
+                >
                 <Text style={{fontSize:12}}>忘记密码?</Text>
           </TouchableOpacity>
 
@@ -109,7 +96,7 @@ export default class Login extends Component {
             <TouchableOpacity 
                 style={styles.loginp}
                 onPress={this.login}>
-                <Text>登录</Text>
+                <Text style={{color:'white'}}>登录</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -119,7 +106,8 @@ export default class Login extends Component {
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}
-                onPress={()=>Actions.Sign()}>
+                onPress={()=>Actions.sign()}
+                >
                 <Text>新用户？点击这里注册</Text>
             </TouchableOpacity>
         </View>
@@ -152,7 +140,7 @@ const styles = StyleSheet.create({
     width: '65%',
     height: '9%',       
     marginLeft: '5%',
-    backgroundColor: '#ccc',
+    backgroundColor: 'blue',
     marginTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
@@ -160,6 +148,7 @@ const styles = StyleSheet.create({
     borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
+    opacity:0.6,
 }
   
 });

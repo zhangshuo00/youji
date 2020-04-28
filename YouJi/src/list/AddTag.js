@@ -57,7 +57,7 @@ export default class AddTag extends Component {
           tagName:this.state.textInput,
           imgData:this.state.imgData
         }	
-        // console.log(post,'存储的数据');
+        console.log(post.uid,'存储的数据');
         fetch('http://majia.hbsdduckhouse.club/addTag',{
           method:'POST',
           mode:'cors',

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {View, Text, Button,TouchableOpacity,StyleSheet,Image } from 'react-native';
+import {View, Text, Button,TouchableOpacity,StyleSheet,Image,AsyncStorage} from 'react-native';
 import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
 import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from './ListCard';
-
 
 export default class Me extends Component {
     constructor(props) {
@@ -17,7 +16,7 @@ export default class Me extends Component {
     
     async componentDidMount(){
         const post ={
-            uid:this.state.uid
+            uid:await AsyncStorage.getItem('uid').then(res=>res),
         }
         // console.log(post);
         fetch('http://majia.hbsdduckhouse.club/me',{
@@ -67,6 +66,7 @@ export default class Me extends Component {
                             marginTop:20,
                             marginLeft:10                              
                             }} size={30} name="bars"
+                            onPress={()=>Actions.sider()}
                         />
                         </View>
                         <View style={styles.me_top_user}>
@@ -137,18 +137,20 @@ const styles = StyleSheet.create({
         marginLeft:220,
         marginBottom:20,
         position:"absolute",
-        top:20
+        top:10
     },
     me_top_email:{
         flex:1,
-        marginLeft:180,
+        marginLeft:200,
         position:"absolute",
-        top:40
+        top:30
     },
     me_title:{
         flex:1,
         flexDirection: 'row',
-        flexWrap:'wrap'
+        flexWrap:'wrap',
+        marginLeft:20,
+        marginTop:10
     },
     me_head:{
         borderRadius:55,
@@ -181,11 +183,11 @@ const styles = StyleSheet.create({
         width:250,
         borderRadius:30,
         marginTop:80,
-        marginLeft:130
+        marginLeft:145
     },
     me_sign:{
-        marginLeft:10,
-        marginTop:30
+        marginLeft:15,
+        marginTop:20
     },
     me_nav:{
         height:150,

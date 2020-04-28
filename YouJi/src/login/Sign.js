@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackground,ToastAndroid,StyleSheet } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
-// import {myFetch} from '../utils';
-import { regExp } from "../network/RegExp";
+import { regExp } from './RegExp'
+
 export default class Sign extends Component {
   //注册页
     constructor(){
@@ -143,7 +143,7 @@ export default class Sign extends Component {
             <TouchableOpacity 
                 style={styles.signp}
                 onPress={this.sign}>
-                <Text>注册</Text>
+                <Text style={{color:'white',fontSize:20}}>注册</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -174,14 +174,15 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     marginTop:'5%',
     lineHeight: 20,
-    opacity: 0.5,
+    opacity: 0.8,
     borderRadius: 20,
     textAlign:'left',
     fontSize: 20,
     marginBottom: 10,
-    borderColor: "green",
+    borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
+    backgroundColor:'white'
   },
   signp:{
     width: '65%',
@@ -192,9 +193,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    borderColor: "green",
-    borderStyle: "solid",
-    borderWidth: 1,
+    // borderColor: "blue",
+    // borderStyle: "solid",
+    // borderWidth: 1,
+    backgroundColor: 'blue',
+    opacity:0.6
   }
   
 });

@@ -89,13 +89,12 @@
 
 
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity,ImageBackground,
+import { Text, View, TouchableOpacity,ImageBackground,AsyncStorage,
         StyleSheet, FlatList, TextInput, Image, Dimensions, ScrollView } from 'react-native'
 import { Carousel} from '@ant-design/react-native'
 import ListCard from '../components/ListCard'
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
-
 const { swidth, sheight } = Dimensions.get('window');
 const {width} = Dimensions.get('window');
 
@@ -113,7 +112,7 @@ export default class Home extends Component {
 
     componentDidMount(){
         const post ={
-            uid:'k3i297def'
+            uid: AsyncStorage.getItem('uid').then(res=>res)
         }
         // console.log(post);
         fetch('http://majia.hbsdduckhouse.club/getCarousel',{

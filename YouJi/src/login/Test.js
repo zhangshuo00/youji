@@ -136,18 +136,18 @@ export default class Sign extends Component {
                 ? <TouchableOpacity
                   style={styles.signp2}
                   onPress={this.vode}>
-                  <Text>获取验证码</Text>
+                  <Text style={{marginTop:8}}>获取验证码</Text>
                 </TouchableOpacity>
                 : <View
                   style={styles.signp1}
-            ><Text>倒计时{this.state.number}</Text></View>
+            ><Text style={{marginTop:8}}>倒计时{this.state.number}</Text></View>
             }
 
 
             <TouchableOpacity
               style={styles.signp}
               onPress={this.voded}>
-              <Text>验证</Text>
+              <Text style={{color:'white'}}>验证</Text>
             </TouchableOpacity>
 
 
@@ -169,14 +169,15 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     marginTop: '5%',
     lineHeight: 20,
-    opacity: 0.5,
+    opacity: 0.8,
     borderRadius: 20,
     textAlign: 'left',
     fontSize: 20,
     marginBottom: 10,
-    borderColor: "green",
+    borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
+    backgroundColor:'white'
   },
   email2: {
     width: '45%',
@@ -184,27 +185,29 @@ const styles = StyleSheet.create({
     marginLeft: '-20%',
     marginTop: '5%',
     lineHeight: 20,
-    opacity: 0.5,
+    opacity: 0.8,
     borderRadius: 20,
     textAlign: 'left',
     fontSize: 20,
     marginBottom: 10,
-    borderColor: "green",
+    borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
+    backgroundColor:'white'
   },
   signp: {
     width: '65%',
     height: '9%',
     marginLeft: '5%',
-    backgroundColor: '#ccc',
+    backgroundColor: 'blue',
     marginTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    borderColor: "green",
+    borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
+    opacity:0.7
   },
   signp2: {
     width: '20%',
@@ -215,9 +218,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    borderColor: "green",
+    borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
+    // opacity: 0.5,
   },
   signp1: {
     width: '20%',
@@ -228,7 +232,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    borderColor: "green",
+    borderColor: "blue",
     borderStyle: "solid",
     borderWidth: 1,
   }

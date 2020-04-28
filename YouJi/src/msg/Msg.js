@@ -13,58 +13,63 @@ export default class Msg extends Component {
             data:[
                 {img_path:require('../images/sort-test1.jpg'),other:'有纪团队',con_id:'001',time:'12:21',last:'你好'},           
                 {img_path:require('../images/sort-test2.jpg'),other:'tangtang',con_id:'002',time:'5:06',last:'hello world'},
+                // {img_path:'images/sort-test1.jpg',other:'有纪团队',con_id:'001',time:'12:21',last:'你好'},           
+                // {img_path:'images/sort-test2.jpg',other:'tangtang',con_id:'002',time:'5:06',last:'hello world'},
             ],
         }
     }
 
-    //暂时不用
     async componentDidMount(){
-    //     await AsyncStorage.getItem('uid')
-    //     .then((res)=>{
-    //         this.setState({ uid:res.uid })
-    //     })
-    //     const post={
-    //         uid:this.state.uid
-    //     }
-    //     fetch('/getMsgList',{
-    //         method:'POST',
-    //         // mode:'cors',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body:JSON.stringify(post)
-    //     })
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //         for(var a=0;a<data.length;a++){
-    //             if(! data[a].headimg){
-    //                 data[a].headimg = 'images/zhangsan.jpg'
-    //             }
-    //             data[a].sm_date=data[a].sm_date.slice(11,16);
-    //             // console.log(data[a].sm_date)
-    //             let c = data[a].sm_date.slice(0,2)*1;
-    //             // console.log(c);
-    //             let b = data[a].sm_date.slice(2,5);
-    //             if(c<16){
-    //                 c=c+8;
-    //                 data[a].sm_date=c+b;
-    //             }else if(c>16 || c==16){
-    //                 c=c-16;
-    //                 data[a].sm_date=c+b;
-    //             }
-    //             if(data[a].context.length>18){
-    //                 data[a].context=data[a].context.slice(0,17)+'...';
-    //                 // console.log(data[a].context.length)
-    //             }
-    //         }
-    //         this.setState({
-    //             data:data
-    //         })
-    //         // 根据返回的消息，渲染响应的页面
-    //     })
+        //     await AsyncStorage.getItem('uid')
+        //     .then((res)=>{
+        //         this.setState({ uid:res.uid })
+        //     })
+        //     const post={
+        //         uid:this.state.uid
+        //     }
+        const post ={
+            uid: await AsyncStorage.getItem('uid').then(res=>res),
+        }
+        fetch('http://majia.hbsdduckhouse.club/getMsgList',{
+            method:'POST',
+            // mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            // console.log(data);
+            for(var a=0;a<data.length;a++){
+                if(! data[a].headimg){
+                    data[a].headimg = 'images/zhangsan.jpg'
+                }
+                data[a].sm_date=data[a].sm_date.slice(11,16);
+                // console.log(data[a].sm_date)
+                let c = data[a].sm_date.slice(0,2)*1;
+                // console.log(c);
+                let b = data[a].sm_date.slice(2,5);
+                if(c<16){
+                    c=c+8;
+                    data[a].sm_date=c+b;
+                }else if(c>16 || c==16){
+                    c=c-16;
+                    data[a].sm_date=c+b;
+                }
+                if(data[a].context.length>10){
+                    data[a].context=data[a].context.slice(0,9)+'...';
+                    // console.log(data[a].context.length)
+                }
+            }
+            console.log(data);
+            this.setState({
+                data:data
+            })
+            // 根据返回的消息，渲染响应的页面
+        })
     }
 
     head(){
-        console.log(1)
+        Actions.sider();
     }
 
     render() {
@@ -74,18 +79,30 @@ export default class Msg extends Component {
                     <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='bars' color={'white'} size={28}></Icon></TouchableOpacity>
                     <Text style={styles.headText}>消息列表</Text>
                  </View>
+                 {/* <Image style={{width:width,height:50}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.pic}}/> */}
                 <View style={styles.msgList}>
                 {
-                    this.state.data.map((tag,idx)=>
-                    <TouchableOpacity key={idx} style={styles.msgLi} onPress={() =>  Actions.msgDetails({ruid:tag.other})}>
+                    
+                    this.state.data.map((tag,idx)=>(
+                    // <TouchableOpacity key={idx} style={styles.msgLi} onPress={() =>  Actions.msgDetails({ruid:tag.other})}>
+                    //     {/* <View className="msg-img" style={{background:"url(" + require("../" +tag.headimg) + ")"}}></View> */}
+                    //     <Image source={tag.img_path} style={styles.msgImg} ></Image>
+                    //     <View style={styles.msgBox}>
+                    //         <Text style={styles.msgText}>{tag.other}</Text>
+                    //         <Text style={styles.msgTime}>{tag.time}</Text>  
+                    //         <Text style={styles.msgLast}>{tag.last}</Text>      
+                    //     </View>   
+                    // </TouchableOpacity>))
+                    <TouchableOpacity key={idx} style={styles.msgLi} onPress={() =>  Actions.msgDetails({rname:tag.uname,ruid:tag.uid})}>
                         {/* <View className="msg-img" style={{background:"url(" + require("../" +tag.headimg) + ")"}}></View> */}
-                        <Image source={tag.img_path} style={styles.msgImg} ></Image>
+                        <Image source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + tag.headimg}} 
+                            style={styles.msgImg} ></Image>
                         <View style={styles.msgBox}>
-                            <Text style={styles.msgText}>{tag.other}</Text>
-                            <Text style={styles.msgTime}>{tag.time}</Text>  
-                            <Text style={styles.msgLast}>{tag.last}</Text>      
+                            <Text style={styles.msgText}>{tag.uname}</Text>
+                            <Text style={styles.msgTime}>{tag.sm_date}</Text>  
+                            <Text style={styles.msgLast}>{tag.context}</Text>      
                         </View>   
-                    </TouchableOpacity>)
+                    </TouchableOpacity>))
                 }
                 </View>
             </ScrollView>

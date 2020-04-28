@@ -3,7 +3,8 @@ import {View, Text, Image, TextInput, AsyncStorage, TouchableOpacity,ImageBackgr
 import { Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 import {myFetch} from '../utils';
-import { regExp } from "../network/RegExp";
+import { regExp } from "./RegExp";
+
 export default class Sign extends Component {
   //修改密码页
     constructor(props){
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     marginTop:'5%',
     lineHeight: 20,
-    opacity: 0.5,
+    opacity: 0.8,
     borderRadius: 20,
     textAlign:'left',
     fontSize: 20,
@@ -134,6 +135,7 @@ const styles = StyleSheet.create({
     borderColor: "green",
     borderStyle: "solid",
     borderWidth: 1,
+    backgroundColor:'white'
   },
   signp:{
     width: '65%',

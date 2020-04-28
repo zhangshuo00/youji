@@ -1,39 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, AsyncStorage,TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const Sider = () => {
 
     let [datas,setdatas] = useState(
-        {headimg:'https://zhangshuo00.github.io/youji/YouJi/src/images/timg.jpg',uname:'未登录',uemail:'未登录'}
+        {headimg:'images/timg.jpg',uname:'未登录',uemail:'未登录'}
     );
 
     useEffect(()=>{
-        const uid = 'k3i297def';
-        const post = {uid:uid};
+        // const post = {uid:AsyncStorage.getItem('uid').then(res=>res)}
+        AsyncStorage.getItem('uid').then(res=>{
+            const post = {uid:res}
+            console.log(post);
+            fetch('http://majia.hbsdduckhouse.club/userDetail',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+                setdatas(data[0])
+            })
+        })
+        // const post = {uid:'k3i297def'}
         // console.log(post);
-        fetch('http://majia.hbsdduckhouse.club/userDetail',{
-            method:'POST',
-            // mode:'cors',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            // console.log(data);
-            // if(data[0]){
-            //     this.setState({
-            //         data: {
-            //             headimg:data[0].headimg,
-            //             uname:data[0].uname,
-            //             uemail:data[0].uemail
-            //         }
-            //     })
-            // }
-            setdatas(data[0])
-        })
-    })
+    },[])
+
+    toExit=()=>{
+        // console.log(1);
+        AsyncStorage.removeItem('uid')
+          .then(()=>{
+            Actions.home();
+          })
+    }
+
     return (
         <View>
             <Icon name='left' size={24}  style={{marginBottom:80,marginTop:10,marginLeft:10}} onPress={()=>Actions.pop()}></Icon>
@@ -60,6 +64,11 @@ const Sider = () => {
                     <Text style={styles.siderTabsText}>设置</Text>
                 </View>
             </View>
+            <TouchableOpacity style={{width:'100%',alignItems:'center',marginTop:150}} onPress={()=>toExit()}>
+                <Text style={{fontSize:18,color:'#4B4B4B',opacity:0.8}}>
+                    退出登录
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -75,7 +84,8 @@ const styles = StyleSheet.create({
     siderAvatar:{
         width: 80,
         height: 80,
-        marginTop: 80
+        marginTop: 80,
+        borderRadius:40 ,
     },
     siderName: {
         fontSize: 18,
