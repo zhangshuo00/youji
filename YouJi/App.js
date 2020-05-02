@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Text, View, AsyncStorage } from 'react-native';
-import {Router,Scene,Tabs,Modal,Actions,Drawer} from 'react-native-router-flux';
+import {Router,Scene,Tabs,Modal,Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Home from './src/home/Home';
 import Msg from './src/msg/Msg';
@@ -14,19 +14,20 @@ import SplashScreen from 'react-native-splash-screen';
 import MsgDetails from './src/msg/MsgDetails';
 import Login from './src/login/Login';
 import Sign from './src/login/Sign';
+import Password from './src/login/Password';
 import Test from './src/login/Test';
 import Edit from './src/my/Edit';
-import Sider from './src/components/Sider'
-import Search from './src/components/Search'
 import AddTag from './src/list/AddTag';
-import SwipePage from './src/login/SwiperPage'
+import SwipePage from './src/login/SwiperPage';
+import Search from './src/components/Search';
+import Sider from './src/components/Sider';
 
 console.disableYellowBox = true; //取消显示黄框
 
 
 const App = () => {
-
-  let [isLogin,setLogin] = useState(true);
+    
+  let [isLogin,setLogin] = useState(false);
   let [isInstall,setInstall] = useState(true);
   useEffect(()=>{
     // AsyncStorage.clear();
@@ -38,11 +39,26 @@ const App = () => {
           console.log(res);
           SplashScreen.hide();
       })
+    AsyncStorage.getItem('uid')
+      .then(res=>{
+        let user = res;
+        console.log(user)
+        if(!user){
+          SplashScreen.hide();
+        }
+        if(user){
+          setLogin(true);
+          SplashScreen.hide();
+        }
+      })
   },[])
 
 
   let afterInstall=()=>{
     setInstall(false);
+  }
+  let afterExit=()=>{
+    setLogin(false);
   }
   if(isInstall){
       return<View style={{flex:1}}>
@@ -53,21 +69,17 @@ const App = () => {
 
 	return (
     <Router>
-      <Drawer
-        drawerPosition="left"
-        drawerWidth={230}
-        contentComponent={Sider}
-      >
       <Modal hideNavBar>
         <Tabs activeTintColor='rgb(250, 167, 85)' inactiveTintColor='rgb(148, 148, 148)'>
-          <Scene key='home' title='首页' 
+          <Scene key='homePage' title='首页' 
               headerMode="none"
               icon={({focused})=>
                   <Icon name="home" color={focused?'rgb(250, 167, 85)':'rgb(148, 148, 148)'} size={28} />
               }>
     
-              <Scene key='home' initial={true} component={Home}></Scene>
-              <Scene key='search' component={Search}/>
+              <Scene key='home' component={Home}></Scene>
+              <Scene key='search' component={Search}></Scene>
+              <Scene key='sider' component={Sider}  hideTabBar={true} hideNavBar></Scene>
           </Scene>
           <Scene key='list' title='笔记'
                 icon={({focused})=>
@@ -101,9 +113,8 @@ const App = () => {
         <Scene initial={!isLogin} key='login' component={Login} hideTabBar={true} hideNavBar></Scene>
         <Scene key='sign' component={Sign} hideTabBar={true} hideNavBar></Scene>
         <Scene key='test' component={Test} hideTabBar={true} hideNavBar></Scene>
-        <Scene key='sider' component={Sider} hideTabBar={true} hideNavBar></Scene>
+        <Scene key='Password' component={Password} hideTabBar={true} hideNavBar></Scene>
       </Modal>
-      </Drawer>
     </Router>
 	);
 };

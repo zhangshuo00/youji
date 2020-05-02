@@ -43,7 +43,7 @@ export default class Login extends Component {
               .then(()=>{
                   console.log(JSON.stringify(data.uid))
                   this.setState({isloading:false})
-                  Actions.home();
+                  Actions.homePage();
               })
         }else if(data.msg === 'pwdError'){
           ToastAndroid.show('密码不正确',100)

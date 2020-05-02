@@ -40,6 +40,9 @@ var followUser = require('./api/followUser');
 var cancelFollowUser = require('./api/cancelFollowUser');
 var getCode = require('./api/getVerifCode');
 var verifyCode = require('./api/verifyCode');
+var getSearchHistory = require('./api/getSearchHistory');
+var addSearchHistory = require('./api/addSearchHistory');
+var delSearchHistory = require('./api/delSearchHistory');
 
 var app = express();
 
@@ -91,6 +94,9 @@ app.use('/followUser',followUser);// 关注用户
 app.use('/cancelFollowUser',cancelFollowUser);// 取消关注用户
 app.use('/getCode',getCode);// 获取验证码
 app.use('/verifyCode',verifyCode);// 校验验证码
+app.use('/getSearchHistory',getSearchHistory);// 获取用户的搜索历史
+app.use('/addSearchHistory',addSearchHistory);// 为用户添加搜索历史
+app.use('/delSearchHistory',delSearchHistory);// 删除用户指定搜索历史
 
 // 后台系统接口
 app.use('/backLogin',backLogin);// 后台登录接口
