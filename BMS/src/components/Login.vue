@@ -9,7 +9,7 @@
                     <el-input style="width:90%;float:left" placeholder="请输入密码" v-model="password" show-password></el-input>
                 </el-form-item>
             </el-form>
-            <el-button style="width:120px" type="primary" round>登 录</el-button>
+            <el-button style="width:120px" type="primary" @click="login()" round>登 录</el-button>
         </div>
     </div>
 </template>
@@ -21,6 +21,24 @@ export default {
         return {
             name: '',
             password: ''
+        }
+    },
+    methods: {
+        login: function(){
+            this.axios.get('/backLogin',{
+                params:{
+                    user: this.name,
+                    password: this.password
+                }
+            })
+            .then(res=>{
+                console.log(res);
+                if(res.msg === 'success'){
+                    // 跳转进主页
+                }else{
+                    // 返回具体信息
+                }
+            })
         }
     }
 }
