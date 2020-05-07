@@ -53,7 +53,7 @@ export default class Sion extends Component {
         // AsyncStorage.setItem('chid',"20")
         const post ={
             uid:await AsyncStorage.getItem('uid').then(res=>res),
-            tags:await AsyncStorage.getItem('tags').then(res=>res),
+            tags:this.state.tag
         }
         fetch('http://majia.hbsdduckhouse.club/Sion',{
             method:'POST',

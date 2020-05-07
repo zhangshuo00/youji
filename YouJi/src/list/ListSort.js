@@ -23,7 +23,7 @@ export default class ListSort extends Component {
         // AsyncStorage.setItem('uid',"k3i297def")
         this.setState({
             uid:await   AsyncStorage.getItem('uid').then(res=>res),
-            tags:await   AsyncStorage.getItem('tags').then(res=>res),
+            // tags:await   AsyncStorage.getItem('tags').then(res=>res),
         })
         const post ={
             uid:this.state.uid
@@ -82,9 +82,6 @@ export default class ListSort extends Component {
     jumpToSion = (item)=>{
         // AsyncStorage.setItem('tags',item.tags)
         Actions.sion({tag:item.tags})
-        // console.log(e.target.innerHTML.slice(3,-4));
-        // const clickTag = e.target.innerHTML.slice(3,-4);
-        // // 跳转到点击笔记标签的列表页
     }
 
     head = ()=>{
