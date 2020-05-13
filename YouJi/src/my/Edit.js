@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import {View, Text,Dimensions, Button,TextInput,StyleSheet,Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ImagePicker from 'react-native-image-picker';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 
-const {height,width} = Dimensions.get('window');
 
 // const alert = Modal.alert;
 // const data = [{
@@ -62,7 +61,47 @@ export default class Edit extends Component{
         }
       });
     }
+    
+    handwrite = (text) => {
+      this.setState({signature:text})
+    }
+    nickname = (text) => {
+      this.setState({uname:text})
+    }
+    sexhandle = (text) => {
+      this.setState({usex:text})
+    }
 
+    save = () => {
+      var filelist = [];
+        this.state.files.map((item)=>{
+            filelist.push(item.url);
+        })
+        console.log(filelist);
+        const post={
+            uid:this.state.uid,
+            uname:this.state.uname,
+            usex:dthis.state.usex,
+            signature:this.state.signature,
+            imgData:filelist[0],
+        }
+        console.log(post);
+      fetch('http://majia.hbsdduckhouse.club/editPerInfo',{
+            method:'POST',
+            mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.msg === 'success' ){
+                alert('保存成功~\(≥▽≤)/~','', [
+                { text: '确定', onPress: () => console.log('cancel') },
+                ])
+            }
+        })
+    }
     // onSubmit(e){
     //     var filelist = [];
     //     this.state.files.map((item)=>{
@@ -77,7 +116,7 @@ export default class Edit extends Component{
     //         imgData:filelist[0],
     //     }
     //     console.log(post);
-    //     fetch('/editPerInfo',{
+    //     fetch('http://majia.hbsdduckhouse.club/editPerInfo',{
     //         method:'POST',
     //         mode:'cors',
     //         headers: {'Content-Type': 'application/json'},
@@ -121,14 +160,21 @@ export default class Edit extends Component{
                     <Text style={{color:'#72777b'}}>点击更改头像</Text>
                 </TouchableOpacity>
                 <View style={styles.inp}>
-                    <TextInput style={styles.tinp} placeholder="做一份美食，看一场电影">签名 </TextInput>
-                    <TextInput style={styles.tinp} placeholder="张三">昵称 </TextInput>
-                    <TextInput style={styles.tinp} placeholder="男">性别 </TextInput>
+                    <TextInput onChangeText={this.handwrite} style={styles.tinp} placeholder="做一份美食，看一场电影">签名： </TextInput>
+                    <TextInput onChangeText={this.nickname} style={styles.tinp} placeholder="张三">昵称： </TextInput>
+                    <TextInput onChangeText={this.sexhandle} style={styles.tinp} placeholder="男">性别： </TextInput>
                 </View>
-                <View style={styles.btw}>
-                    <Button title="保存" color="#faa755" />
-                </View>
-                
+                <TouchableOpacity 
+                  style={styles.btw}
+                  onPress={this.save}>
+                    <Text>保存(๑¯◡¯๑)</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity 
+                  style={styles.pwd}
+                  onPress={()=>Actions.test()}
+                  >
+                  <Text style={{color:'#8a8c8e'}}>修改密码|д･)っ</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -165,12 +211,31 @@ const styles = StyleSheet.create({
     },
     inp:{
         marginTop:30,
-        marginLeft:10
+        marginLeft:10,
+        marginRight:10
     },
     tinp:{
-        fontSize:20
+        fontSize:20,
+        borderWidth: 1,
+        borderColor:'#d3d7d4',
+        borderStyle: "solid",
+        marginTop:5
     },
     btw:{
+        width:'50%',
+        height: '8%', 
+        marginLeft: '25%',
         marginTop:30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor:"#faa755",
+        borderRadius: 25,
+        borderStyle: "solid",
+        borderWidth: 1,
+    },
+    pwd:{
+      color:'#d3d7d4',
+      marginLeft: '42%',
+      marginTop:260
     }
 })
