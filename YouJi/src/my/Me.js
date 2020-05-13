@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import {View, Text, Button,TouchableOpacity,StyleSheet,Image,AsyncStorage} from 'react-native';
+import {View, Text,TouchableOpacity,StyleSheet,Image,AsyncStorage,Dimensions} from 'react-native';
 import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
 import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import ListCard from './ListCard';
+import Button from 'react-native-button';
+import SaveList from './SaveList';
+
+const {width} = Dimensions.get('window');
 
 export default class Me extends Component {
     constructor(props) {
         super(props);
         this.state = {
           selectedTab: 'redTab',
+          display:1,
           data:{uname:'张三',uemail:'zhangsan@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
+          datas:''
         };
       }
     
@@ -26,7 +31,7 @@ export default class Me extends Component {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
+            console.log(data[0]);
             this.setState({
                 data:data[0],
                 datas:data[1]
@@ -44,18 +49,31 @@ export default class Me extends Component {
         })
     }
 
-    onChangeTab(tabName) {
+    // onChangeTab(tabName) {
+    //     this.setState({
+    //       selectedTab: tabName,
+    //     });
+    // }
+    // renderContent(pageText) {
+    //     return (
+    //       <View style={styles.me_card}>   
+    //         <ListCard/>
+    //       </View>
+    //     );
+    //   }
+
+    saveList=()=>{
         this.setState({
-          selectedTab: tabName,
-        });
+            display:1
+        })
     }
-    renderContent(pageText) {
-        return (
-          <View style={styles.me_card}>   
-            <ListCard/>
-          </View>
-        );
-      }
+
+    followList=()=>{
+        this.setState({
+            display:0
+        })
+    }
+
     render(){
         return(
             <View>
@@ -76,31 +94,51 @@ export default class Me extends Component {
                             <Text>{this.state.data.uemail}</Text>
                         </View>
                 </View>
-                <View style={styles.me_title}>
-                    <Image style={styles.me_head} source={require('../images/pic1.jpg')}/>
-                    <View style={styles.me_num}>
-                        <View style={styles.me_sex}>
-                            {/* <Image style={styles.me_imgsex} source={require('./'+this.state.seximg)}/> */}
-                            <Image style={styles.me_imgsex} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' +this.state.seximg}}/>
-                            <Text>{this.state.data.usex}</Text>
-                        </View>
-                        <View style={styles.me_atten}>
-                            <Text>{this.state.data.userCounts}</Text>
-                            <Text>关注</Text>
-                        </View>
-                        <View style={styles.me_collect}>
-                            <Text>{this.state.data.chapterCounts}</Text>
-                            <Text>收藏</Text>
+                <View style={{backgroundColor:'white'}}>
+                    <View style={styles.me_title}>
+                        <Image style={styles.me_head} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' +this.state.data.headimg}}/>
+                        <View style={styles.me_num}>
+                            <View style={styles.me_sex}>
+                                {/* <Image style={styles.me_imgsex} source={require('./'+this.state.seximg)}/> */}
+                                <Image style={styles.me_imgsex} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' +this.state.seximg}}/>
+                                <Text style={{fontSize:18}}>{this.state.data.usex}</Text>
+                            </View>
+                            <View style={styles.me_atten}>
+                                <Text style={{fontSize:18}}>   {this.state.data.userCounts}</Text>
+                                <Text style={{fontSize:18}}>关注</Text>
+                            </View>
+                            <View style={styles.me_collect}>
+                                <Text style={{fontSize:18}}>   {this.state.data.chapterCounts}</Text>
+                                <Text style={{fontSize:18}}>收藏</Text>
+                            </View>
                         </View>
                     </View>
+                    <Button style={styles.me_btn} onPress={()=>Actions.edit()}>编辑资料</Button>
+                    <Text style={styles.me_sign}>个性签名：{this.state.data.signature?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
                 </View>
-                <View style={styles.me_btn}>
-                        <Button title="编辑资料" color="#faa755" onPress={()=>Actions.edit()}/>
+                <View style={{backgroundColor:'grey',width:width,height:1}}></View>
+                <View style={{backgroundColor:'white',paddingBottom:10}}>
+                    <View style={{width:width*0.6,marginLeft:width*0.2,flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'}}>
+                        <TouchableOpacity onPress={()=>this.saveList()}>
+                            <Text style={{fontSize:22,marginTop:12}} >收藏列表</Text>
+                            <View style={{height:4,width:'100%',backgroundColor:'#faa755',display:this.state.display==1?'flex':'none'}}></View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.followList()}>
+                            <Text style={{fontSize:22,marginTop:12}}>关注列表</Text>
+                            <View style={{height:4,width:'100%',backgroundColor:'#faa755',display:this.state.display==0?'flex':'none'}}></View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={styles.me_sign}>
-                    <Text>个性签名：{this.state.data.signature?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
+                <View style={{backgroundColor:'black',width:width,height:1}}></View>
+                <View>
+                {
+                    this.state.display == 1 ?
+                        <SaveList/>
+                    :
+                    <View></View>
+                }
                 </View>
-                <View style={styles.me_nav}>
+                {/* <View style={styles.me_nav}>
                     <TabBar style={styles.me_bar}
                         unselectedTintColor="#949494"
                         tintColor="#faa755"
@@ -119,10 +157,9 @@ export default class Me extends Component {
                                     onPress={() => this.onChangeTab('Tab2')}
                         >
                             {this.renderContent(<ListCard/>)} 
-                            {/* <Text>zhangsan</Text> */}
                         </TabBar.Item>
                     </TabBar>
-                </View>
+                </View> */}
 
             </View>
         )
@@ -141,7 +178,7 @@ const styles = StyleSheet.create({
     },
     me_top_email:{
         flex:1,
-        marginLeft:200,
+        marginLeft:180,
         position:"absolute",
         top:30
     },
@@ -150,7 +187,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap:'wrap',
         marginLeft:20,
-        marginTop:10
+        marginTop:10,
+        width:width,
+        // height:300,
+        backgroundColor:'white'
     },
     me_head:{
         borderRadius:55,
@@ -160,9 +200,9 @@ const styles = StyleSheet.create({
     me_num:{
         flex:1,
         flexDirection: 'row',
-        width:300,
+        width:width-100,
         marginLeft:40,
-        marginTop:10,
+        marginTop:-30,
         textAlign:'center',
         alignItems:'center'
     },
@@ -180,14 +220,21 @@ const styles = StyleSheet.create({
         width:100
     },
     me_btn:{
-        width:250,
-        borderRadius:30,
-        marginTop:80,
-        marginLeft:145
+        paddingTop:5,
+        width:270,
+        borderRadius:18,
+        marginTop:70,
+        marginLeft:145,
+        color:'white',
+        backgroundColor:"#faa755",
+        height:36
     },
     me_sign:{
         marginLeft:15,
-        marginTop:20
+        marginTop:10,
+        fontSize:18,
+        color:'grey',
+        marginBottom:10
     },
     me_nav:{
         height:150,
