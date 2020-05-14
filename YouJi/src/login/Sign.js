@@ -30,7 +30,7 @@ export default class Sign extends Component {
   checkUname = () => {
     if (regExp.Reg_Uname.test(this.state.uname)) {
       console.log('ok')
-      // ToastAndroid.show('ok',100);
+      
 
     }
     else {
@@ -41,7 +41,7 @@ export default class Sign extends Component {
   checkPassword = () => {
     if (regExp.Reg_PassWord.test(this.state.upassword)) {
       console.log('ok')
-      // ToastAndroid.show('ok',100);
+      
 
     }
     else {
@@ -52,7 +52,7 @@ export default class Sign extends Component {
   checkEmail = () => {
     if (regExp.Reg_email.test(this.state.uemail)) {
       console.log('ok')
-      // ToastAndroid.show('ok',100);
+      
     }
     else {
       ToastAndroid.show('邮箱格式不正确', 100);
