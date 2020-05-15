@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, AsyncStorage,TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/AntDesign'
+import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
 
 const Sider = () => {
 
-    let [datas,setdatas] = useState(
-        {headimg:'images/timg.jpg',uname:'未登录',uemail:'未登录',registration_date:'2020-4-13',diffDate:200}
-    );
+    let [datas,setdatas] = useState({
+        headimg:'images/timg.jpg',
+        uname:'未登录',
+        uemail:'未登录'
+    });
     const [diffDate, setDiffDate] = useState('1');
+    const isDarkMode = useDarkMode();
+    const stylesBlack = useDynamicStyleSheet(dynamicStyles);
 
     useEffect(()=>{
         // const post = {uid:AsyncStorage.getItem('uid').then(res=>res)}
@@ -23,8 +28,8 @@ const Sider = () => {
             })
             .then(res=>res.json())
             .then(data=>{
-                console.log(data);
-                setdatas(data[0]) 
+                // console.log(data);
+                setdatas(data[0])
                 forwardTiming(data[0].registration_date)
             })
         })
@@ -33,6 +38,7 @@ const Sider = () => {
         
         // const post = {uid:'k3i297def'}
         // console.log(post);
+        console.log(isDarkMode)
     },[])
 
 
@@ -57,35 +63,38 @@ const Sider = () => {
     }
 
     return (
-        <View>
+        <View style={{ backgroundColor: isDarkMode ? 'black' : 'white'}}>
             <Icon name='left' size={24}  style={{marginBottom:80,marginTop:10,marginLeft:10}} onPress={()=>Actions.pop()}></Icon>
-            <View style={styles.siderTitle}>
-                <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/'+datas.headimg}} style={styles.siderAvatar}/>
-                <Text style={styles.siderName}>{datas.uname}</Text>
-                <Text style={styles.siderEmail}>{datas.uemail}</Text>
+            <View style={stylesBlack.siderTitle}>
+                <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/'+datas.headimg}} style={stylesBlack.siderAvatar}/>
+                <Text style={stylesBlack.siderName}>{datas.uname}</Text>
+                <Text style={stylesBlack.siderEmail}>{datas.uemail}</Text>
             </View>
-            <View style={styles.siderTabs}>
-                <View style={styles.siderTabItem}>
-                    <Image source={require('../assets/personx.png')} style={styles.siderTabsIcon}/>
-                    <Text onPress={()=>Actions.my()} style={styles.siderTabsText}>主页</Text>
+            <View style={stylesBlack.siderTabs}>
+                <View style={stylesBlack.siderTabItem}>
+                    <Image source={require('../assets/personx.png')} style={stylesBlack.siderTabsIcon}/>
+                    <Text onPress={()=>Actions.my()} style={stylesBlack.siderTabsText}>主页</Text>
                 </View>
-                <View style={styles.siderTabItem}>
-                    <Image source={require('../assets/infor.png')} style={styles.siderTabsIcon}/>
-                    <Text  onPress={()=>Actions.msg()} style={styles.siderTabsText}>消息</Text>
+                <View style={stylesBlack.siderTabItem}>
+                    <Image source={require('../assets/infor.png')} style={stylesBlack.siderTabsIcon}/>
+                    <Text  onPress={()=>Actions.msg()} style={stylesBlack.siderTabsText}>消息</Text>
                 </View>
-                <View style={styles.siderTabItem}>
-                    <Image source={require('../assets/lingdang_2f.png')} style={styles.siderTabsIcon}/>
-                    <Text onPress={()=>Actions.home()} style={styles.siderTabsText}>发现</Text>
+                <View style={stylesBlack.siderTabItem}>
+                    <Image source={require('../assets/lingdang_2f.png')} style={stylesBlack.siderTabsIcon}/>
+                    <Text onPress={()=>Actions.home()} style={stylesBlack.siderTabsText}>发现</Text>
                 </View>
-                <View style={styles.siderTabItem}>
-                    <Image source={require('../assets/shezhi.png')} style={styles.siderTabsIcon}/>
-                    <Text style={styles.siderTabsText}>设置</Text>
+                <View style={stylesBlack.siderTabItem}>
+                    <Image source={require('../assets/shezhi.png')} style={stylesBlack.siderTabsIcon}/>
+                    <Text style={stylesBlack.siderTabsText}>设置</Text>
+                </View>
+                <View style={stylesBlack.siderTabItem}>
+                    <Text style={stylesBlack.siderTabsText}>你已来到有纪 {diffDate} 天</Text>
                 </View>
                 <View style={styles.siderTabItem}>
                     <Text style={styles.siderTabsText}>你已经来到有纪{diffDate}天了！</Text>
                 </View>
             </View>
-            <TouchableOpacity style={{width:'100%',alignItems:'center',marginTop:150}} onPress={()=>toExit()}>
+            <TouchableOpacity style={{width:'100%',alignItems:'center',marginTop:50}} onPress={()=>toExit()}>
                 <Text style={{fontSize:18,color:'#4B4B4B',opacity:0.8}}>
                     退出登录
                 </Text>
@@ -96,7 +105,10 @@ const Sider = () => {
 
 export default Sider
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
+    container: {
+        backgroundColor: new DynamicValue('white', 'black')
+    },
     siderTitle:{
         display:'flex',
         alignItems:'center',
@@ -105,15 +117,16 @@ const styles = StyleSheet.create({
     siderAvatar:{
         width: 80,
         height: 80,
-        marginTop: 80,
+        marginTop: 10,
         borderRadius:40 ,
     },
     siderName: {
+        color: new DynamicValue('black', 'white'),
         fontSize: 18,
         marginTop: 10
     },
     siderEmail: {
-        color: '#909399',
+        color: new DynamicValue('#909399', 'white'),
         marginTop: 5
     },
     siderTabs: {
@@ -131,7 +144,8 @@ const styles = StyleSheet.create({
         height: 20
     },
     siderTabsText: {
+        color: new DynamicValue('black', 'white'),
         fontSize: 16,
         marginLeft: 10
     }
-})
+});
