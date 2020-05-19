@@ -26,7 +26,10 @@ router.post('/',async (req,res)=>{
         var img_path = 'images/'+uid+tags+title+'0.jpg';
         var base64Data = imgData[0].replace(/^data:image\/\w+;base64,/,"");
         var dataBuffer = Buffer.from(base64Data,'base64');
-        fs.writeFileSync('../src/images/'+uid+tags+title+'0.jpg',dataBuffer);
+        fs.writeFileSync('../build/images/'+uid+tags+title+'0.jpg',dataBuffer);
+        fs.writeFile('../build/images/'+uid+tags+title+'0.jpg',dataBuffer,function (err){
+            if(err) throw err;
+        })
         
         await query('insert into chapter (uid,title,tag_id,context,chdate,isShare,ch_headimg) values(?,?,?,?,?,?,?)',[uid,title,tag_id,context,chdate,isShare,img_path]);
         return res.send({msg:'success'});
@@ -35,7 +38,7 @@ router.post('/',async (req,res)=>{
         var img_path = 'images/'+uid+tags+title+'0.jpg';
         var base64Data = imgData[0].replace(/^data:image\/\w+;base64,/,"");
         var dataBuffer = Buffer.from(base64Data,'base64');
-        fs.writeFileSync('../src/images/'+uid+tags+title+'0.jpg',dataBuffer);
+        fs.writeFileSync('../build/images/'+uid+tags+title+'0.jpg',dataBuffer);
         
         await query('insert into chapter (uid,title,tag_id,context,chdate,isShare,ch_headimg) values(?,?,?,?,?,?,?)',[uid,title,tag_id,context,chdate,isShare,img_path]);
         // 获取新增文章的chid
@@ -46,7 +49,7 @@ router.post('/',async (req,res)=>{
             var imgs_path = 'images/'+uid+tags+title+[j]+'.jpg';
             base64Data = imgData[j].replace(/^data:image\/\w+;base64,/,"");
             dataBuffer = Buffer.from(base64Data,'base64');
-            fs.writeFileSync('../src/images/'+uid+tags+title+[j]+'.jpg',dataBuffer);
+            fs.writeFileSync('../build/images/'+uid+tags+title+[j]+'.jpg',dataBuffer);
 
             await query('insert into images (img_path,chid) values(?,?)',[imgs_path,chid]);
         }

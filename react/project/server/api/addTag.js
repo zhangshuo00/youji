@@ -51,7 +51,7 @@ router.post('/',async (req,res)=>{
             var img_path = 'images/'+uid+tagName+'.jpg';
             var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
             var dataBuffer = Buffer.from(base64Data,'base64');
-            fs.writeFileSync('../src/images/'+uid+tagName+'.jpg',dataBuffer);
+            fs.writeFileSync('../build/images/'+uid+tagName+'.jpg',dataBuffer);
     
             await query('insert into images (img_path) values(?)',[img_path]);
     
