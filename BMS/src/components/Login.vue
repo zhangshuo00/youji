@@ -1,7 +1,7 @@
 <template>
     <div id="login">
         <div class="login-form">
-            <el-form style="margin-top:15%" :label-position="left" label-width="80px" :model="formLabelAlign">
+            <el-form style="margin-top:15%" label-width="80px">
                 <el-form-item label="账 号：">
                     <el-input style="width:90%;float:left" v-model="name"></el-input>
                 </el-form-item>
@@ -25,11 +25,10 @@ export default {
     },
     methods: {
         login: function(){
-            this.axios.get('/backLogin',{
-                params:{
-                    user: this.name,
-                    password: this.password
-                }
+            console.log('login')
+            this.axios.post('/backLogin',{
+                aduser: this.name,
+                adpassword: this.password
             })
             .then(res=>{
                 console.log(res);
@@ -38,6 +37,8 @@ export default {
                 }else{
                     // 返回具体信息
                 }
+            }).catch(err =>{
+                console.log(err)
             })
         }
     }
