@@ -43,6 +43,7 @@ var verifyCode = require('./api/verifyCode');
 var getSearchHistory = require('./api/getSearchHistory');
 var addSearchHistory = require('./api/addSearchHistory');
 var delSearchHistory = require('./api/delSearchHistory');
+var getTopics = require('./api/getTopics');
 
 var app = express();
 
@@ -97,6 +98,7 @@ app.use('/verifyCode',verifyCode);// 校验验证码
 app.use('/getSearchHistory',getSearchHistory);// 获取用户的搜索历史
 app.use('/addSearchHistory',addSearchHistory);// 为用户添加搜索历史
 app.use('/delSearchHistory',delSearchHistory);// 删除用户指定搜索历史
+app.use('/getTopics',getTopics);// 获取所有的话题
 
 // 后台系统接口
 app.use('/backLogin',backLogin);// 后台登录接口

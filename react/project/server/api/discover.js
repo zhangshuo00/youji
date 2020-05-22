@@ -28,6 +28,16 @@ router.get('/',async (req,res)=>{
         userInfo = JSON.parse(JSON.stringify(userInfo))[0];
         result[i].uname = userInfo.uname;
         result[i].headimg = userInfo.headimg;
+
+        // 文章的话题
+        if(result[i].topic_id){// 非空
+            var topicName = await query('SELECT topic_name FROM topic WHERE topic_id=?',[result[i].topic_id]);
+            topicName = JSON.parse(JSON.stringify(topicName))[0];
+            result[i].topic_id = topicName.topic_name;
+        }else{
+            result[i].topic_id = 'null'
+        }
+
     }
 
     // 获取当前文章的用户信息
