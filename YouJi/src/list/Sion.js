@@ -26,35 +26,37 @@ export default class Sion extends Component {
     }
     delTags=(e)=>{
         console.log(e)
-        //本次用户用李四来做实现 uid是：k3mimknra
-        // const post ={
-        //     uid:k3mimknra,
-        //     tags:e
-        // }
-        // console.log(post);
-        // fetch('/delTags',{
-        //     method:'POST',
-        //     // mode:'cors',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body:JSON.stringify(post)
-        // })
-        // .then(res=>res.json())
-        // .then(data=>{
-        //     console.log(data);
-        //     window.location.reload(); //重新刷新该页面
-        //     // this.setState({
-        //     //     datas:data
-        //     // })
-        //     // 根据返回的消息，渲染响应的页面
-        // })
+        const post ={
+            uid:k3mimknra,
+            tags:e
+        }
+        console.log(post);
+        fetch('/delTags',{
+            method:'POST',
+            // mode:'cors',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(post)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            window.location.reload(); //重新刷新该页面
+            // this.setState({·
+            //     datas:data
+            // })
+            // 根据返回的消息，渲染响应的页面
+        })
     }
 
     async componentDidMount(){
         // AsyncStorage.setItem('chid',"20")
         const post ={
             uid:await AsyncStorage.getItem('uid').then(res=>res),
-            tags:this.state.tag
+            tags:this.props.tag
+            // tags:await AsyncStorage.getItem('tags').then(res=>res),
+            // tags:"美食",
         }
+        AsyncStorage.setItem('tags',this.props.tag)
         fetch('http://majia.hbsdduckhouse.club/Sion',{
             method:'POST',
             headers: {'Content-Type': 'application/json'},
@@ -106,7 +108,7 @@ export default class Sion extends Component {
                                     }}>
                                 <View style={{flexDirection:'column',alignItems:'center',}}>
                                     <Image 
-                                    source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + item.ch_headimg}}
+                                    source={{uri:'https://www.hbsdduckhouse.club/' + item.ch_headimg}}
                                     style={{height:120*s,width:150*s,borderRadius: 10*s}}/>
                                     <Text  style={{marginBottom:5*s}}>{item.title}</Text>
                                     <Text>{item.chdate}</Text>
@@ -115,11 +117,6 @@ export default class Sion extends Component {
                             )
                             }}
                             />
-                    {/* {
-                    this.state.datas.map((item)=>(
-                        
-                    ))
-                    } */}
                 </View>
             </ScrollView>
         )

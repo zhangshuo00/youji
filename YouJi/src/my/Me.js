@@ -4,7 +4,7 @@ import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 're
 import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from './ListCard';
-import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
+// import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
 
 
 const Me = () => {
@@ -132,86 +132,86 @@ const Me = () => {
 
 export default Me
 
-const dynamicStyles = new DynamicStyleSheet({
-    me_top:{
-        backgroundColor: new DynamicValue('#faa755','black')
-    },
-    me_top_user:{
-        flex:1,
-        marginLeft:220,
-        marginBottom:20,
-        position:"absolute",
-        top:10
-    },
-    me_top_email:{
-        flex:1,
-        marginLeft:180,
-        position:"absolute",
-        top:30
-    },
-    me_title:{
-        flex:1,
-        flexDirection: 'row',
-        flexWrap:'wrap',
-        marginLeft:20,
-        marginTop:10,
-        width:width,
-        // height:300,
-        backgroundColor:'white'
-    },
-    me_head:{
-        borderRadius:55,
-        width:100,
-        height:100
-    },
-    me_num:{
-        flex:1,
-        flexDirection: 'row',
-        width:width-100,
-        marginLeft:40,
-        marginTop:-30,
-        textAlign:'center',
-        alignItems:'center'
-    },
-    me_sex:{
-        width:100
-    },
-    me_imgsex:{
-        width:20,
-        height:20
-    },
-    me_atten:{
-        width:100
-    },
-    me_collect:{
-        width:100
-    },
-    me_btn:{
-        paddingTop:5,
-        width:270,
-        borderRadius:18,
-        marginTop:70,
-        marginLeft:145,
-        color:'white',
-        backgroundColor:"#faa755",
-        height:36
-    },
-    me_sign:{
-        marginLeft:15,
-        marginTop:10,
-        fontSize:18,
-        color:'grey',
-        marginBottom:10
-    },
-    me_nav:{
-        height:150,
-        flexDirection: 'row',
-        alignItems: 'center',
+// const dynamicStyles = new DynamicStyleSheet({
+//     me_top:{
+//         backgroundColor: new DynamicValue('#faa755','black')
+//     },
+//     me_top_user:{
+//         flex:1,
+//         marginLeft:220,
+//         marginBottom:20,
+//         position:"absolute",
+//         top:10
+//     },
+//     me_top_email:{
+//         flex:1,
+//         marginLeft:180,
+//         position:"absolute",
+//         top:30
+//     },
+//     me_title:{
+//         flex:1,
+//         flexDirection: 'row',
+//         flexWrap:'wrap',
+//         marginLeft:20,
+//         marginTop:10,
+//         width:width,
+//         // height:300,
+//         backgroundColor:'white'
+//     },
+//     me_head:{
+//         borderRadius:55,
+//         width:100,
+//         height:100
+//     },
+//     me_num:{
+//         flex:1,
+//         flexDirection: 'row',
+//         width:width-100,
+//         marginLeft:40,
+//         marginTop:-30,
+//         textAlign:'center',
+//         alignItems:'center'
+//     },
+//     me_sex:{
+//         width:100
+//     },
+//     me_imgsex:{
+//         width:20,
+//         height:20
+//     },
+//     me_atten:{
+//         width:100
+//     },
+//     me_collect:{
+//         width:100
+//     },
+//     me_btn:{
+//         paddingTop:5,
+//         width:270,
+//         borderRadius:18,
+//         marginTop:70,
+//         marginLeft:145,
+//         color:'white',
+//         backgroundColor:"#faa755",
+//         height:36
+//     },
+//     me_sign:{
+//         marginLeft:15,
+//         marginTop:10,
+//         fontSize:18,
+//         color:'grey',
+//         marginBottom:10
+//     },
+//     me_nav:{
+//         height:150,
+//         flexDirection: 'row',
+//         alignItems: 'center',
         
-    },
-    me_card:{ 
-        flex: 1,  
-        backgroundColor: 'white',
-        marginTop:50
-    }
-})
+//     },
+//     me_card:{ 
+//         flex: 1,  
+//         backgroundColor: 'white',
+//         marginTop:50
+//     }
+// })

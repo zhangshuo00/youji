@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text,TouchableOpacity, View,StyleSheet, Image,AsyncStorage,Dimensions,ScrollView} from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign';
+import { Actions } from 'react-native-router-flux';
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 console.disableYellowBox = true; //取消显示黄框
@@ -46,7 +47,7 @@ export default class Sionple extends Component {
                         this.state.data.map((item)=>(
                             <View>
                             <View>
-                                <Image style={{height:300*s,width:'100%'}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + item.ch_headimg}}/>
+                                <Image style={{height:300*s,width:'100%'}} source={{uri:'https://www.hbsdduckhouse.club/' + item.ch_headimg}}/>
                             </View>
                             <View style={{marginLeft:"10%",marginRight:"10%",flexDirection:'row'}}>
                                 <Text style={{marginTop:40*s,fontSize:30*s}}>{item.tags}</Text>
@@ -58,7 +59,7 @@ export default class Sionple extends Component {
                                 <Text style={{marginTop:20*s,fontSize:30*s,marginBottom:20*s}}>{item.context}</Text>
                                 {
                                     item.imgPath.map(val=>(
-                                        <Image style={{height:200*s,width:"100%",marginBottom:20*s}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + val.img_path}}/>
+                                        <Image style={{height:200*s,width:"100%",marginBottom:20*s}} source={{uri:'https://www.hbsdduckhouse.club/' + val.img_path}}/>
                                     ))
                                 }
                             </View>
