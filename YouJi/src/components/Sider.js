@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, AsyncStorage,TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
+// import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
 
 const Sider = () => {
 
@@ -105,47 +105,47 @@ const Sider = () => {
 
 export default Sider
 
-const dynamicStyles = new DynamicStyleSheet({
-    container: {
-        backgroundColor: new DynamicValue('white', 'black')
-    },
-    siderTitle:{
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    siderAvatar:{
-        width: 80,
-        height: 80,
-        marginTop: 10,
-        borderRadius:40 ,
-    },
-    siderName: {
-        color: new DynamicValue('black', 'white'),
-        fontSize: 18,
-        marginTop: 10
-    },
-    siderEmail: {
-        color: new DynamicValue('#909399', 'white'),
-        marginTop: 5
-    },
-    siderTabs: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    siderTabItem: {
-        display:'flex',
-        flexDirection: 'row',
-        marginTop: 25
-    },
-    siderTabsIcon: {
-        width: 20,
-        height: 20
-    },
-    siderTabsText: {
-        color: new DynamicValue('black', 'white'),
-        fontSize: 16,
-        marginLeft: 10
-    }
-});
+// const dynamicStyles = new DynamicStyleSheet({
+//     container: {
+//         backgroundColor: new DynamicValue('white', 'black')
+//     },
+//     siderTitle:{
+//         display:'flex',
+//         alignItems:'center',
+//         justifyContent:'center'
+//     },
+//     siderAvatar:{
+//         width: 80,
+//         height: 80,
+//         marginTop: 10,
+//         borderRadius:40 ,
+//     },
+//     siderName: {
+//         color: new DynamicValue('black', 'white'),
+//         fontSize: 18,
+//         marginTop: 10
+//     },
+//     siderEmail: {
+//         color: new DynamicValue('#909399', 'white'),
+//         marginTop: 5
+//     },
+//     siderTabs: {
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center'
+//     },
+//     siderTabItem: {
+//         display:'flex',
+//         flexDirection: 'row',
+//         marginTop: 25
+//     },
+//     siderTabsIcon: {
+//         width: 20,
+//         height: 20
+//     },
+//     siderTabsText: {
+//         color: new DynamicValue('black', 'white'),
+//         fontSize: 16,
+//         marginLeft: 10
+//     }
+// });

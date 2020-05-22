@@ -40,6 +40,8 @@ target 'YouJi' do
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'YouJiTests' do
     inherit! :search_paths
     # Pods for testing

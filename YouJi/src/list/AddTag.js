@@ -41,10 +41,10 @@ export default class AddTag extends Component {
               // this.setState({
               //   imageUrl: source
               // });
-              const source = { uri: 'data:image/jpeg;base64,' + response.data };
+              const source  = 'data:image/jpeg;base64,' + response.data
               this.setState({
-                  imageUrl: source,
-                  imgData:response.data
+                  imageUrl: response.data,
+                  imgData:source,
               });
             }
           });
@@ -57,13 +57,14 @@ export default class AddTag extends Component {
           tagName:this.state.textInput,
           imgData:this.state.imgData
         }	
-        console.log(post.uid,'存储的数据');
+        console.log(post,'存储的数据');
         fetch('http://majia.hbsdduckhouse.club/addTag',{
           method:'POST',
           mode:'cors',
           headers: {'Content-Type': 'application/json'},
           body:JSON.stringify(post)
         })
+        
         .then(res=>res.json())
         .then(data=>{
           console.log(data);

@@ -79,7 +79,7 @@ const App = () => {
     
               <Scene key='home' component={Home}></Scene>
               <Scene key='search' component={Search}></Scene>
-              <Scene key='sider' component={Sider}  hideTabBar={true} hideNavBar></Scene>
+              {/* <Scene key='sider' component={Sider}  hideTabBar={true} hideNavBar></Scene> */}
           </Scene>
           <Scene key='list' title='笔记'
                 icon={({focused})=>
