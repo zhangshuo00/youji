@@ -5,10 +5,10 @@ import qs from 'qs'
 
 Vue.use(VueAxios,axios);
 
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 axios.defaults.timeout = 1000 * 10; 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-axios.defaults.baseURL = 'http://majia.hbsdduckhouse.club/'
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.baseURL = 'http://majia.hbsdduckhouse.club'
 
 axios.interceptors.request.use((config) => {
   if(config.method  === 'post'){

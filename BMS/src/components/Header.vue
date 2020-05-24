@@ -6,10 +6,10 @@
 
         <div class="header-right">
             <el-menu router="true" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                <el-menu-item style="margin-left:30px;font-size:16px" index="/home">首页</el-menu-item>
+                <el-menu-item style="margin-left:30px;font-size:16px" index="/home/echarts">首页</el-menu-item>
                 <el-menu-item style="margin-left:30px;font-size:16px" index="/home/user">用户</el-menu-item>
                 <el-menu-item style="margin-left:30px;font-size:16px" index="/home/essay">文章</el-menu-item>
-                <el-menu-item style="margin-left:30px;font-size:16px" index="/home/essay">评论</el-menu-item>
+                <el-menu-item style="margin-left:30px;font-size:16px" index="/home/comments">评论</el-menu-item>
             </el-menu>
         </div>
     </div>

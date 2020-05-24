@@ -25,15 +25,18 @@ export default {
     },
     methods: {
         login: function(){
-            console.log('login')
-            this.axios.post('/backLogin',{
-                aduser: this.name,
-                adpassword: this.password
+            console.log('login');
+            this.axios.get('/backLogin',{
+                params:{
+                    aduser: this.name,
+                    adpassword: this.password
+                }
             })
             .then(res=>{
                 console.log(res);
-                if(res.msg === 'success'){
+                if(res.data.msg === 'success'){
                     // 跳转进主页
+                    this.$router.push('/home/echarts')
                 }else{
                     // 返回具体信息
                 }
