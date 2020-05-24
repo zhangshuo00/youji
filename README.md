@@ -90,6 +90,7 @@
 #### 本周立会：
 
 1.  第一次立会：https://space.dingtalk.com/s/gwHOAct-1ALOIy5-8QPaACBhNjI4YzQ5OWNmZGE0M2M4OWFlNzBhYTA1YTU1YzVjMA 密码: 
+2.  第二次立会：https://space.dingtalk.com/s/gwHOAc6ftQLOIy5-8QPaACBmOGZhZDhkZmUzZWY0YWNjYWM2ZDQxY2UzMjZhNGE2MQ 密码:  
 
 ---
 
