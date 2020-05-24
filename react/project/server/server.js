@@ -44,6 +44,7 @@ var getSearchHistory = require('./api/getSearchHistory');
 var addSearchHistory = require('./api/addSearchHistory');
 var delSearchHistory = require('./api/delSearchHistory');
 var getTopics = require('./api/getTopics');
+var getAmount = require('./api/getAmount');
 
 var app = express();
 
@@ -105,6 +106,7 @@ app.use('/backLogin',backLogin);// 后台登录接口
 app.use('/backGetUsers',backGetUsers);// 获取所有用户的信息
 app.use('/backGetChapter',backGetChapter);// 获取所有文章的信息
 app.use('/getUserCount',getUserCount);// 获取用户数量、文章数量，分享的文章数量
+app.use('/getAmount',getAmount);// 获取用户数量
 
 // catch 404 and forward to error handler
 // app.use(function(req,res,next){
