@@ -1,30 +1,17 @@
-# bms
+# 有纪后台管理系统
 
-> A Vue.js project
+管理员登录后可对用户、笔记、分类、评论等内容进行审核及修改。
 
-## Build Setup
+使用echarts实现数据可视化，对分析用户数量、日活跃度、用户存量提供直观的数据。
 
-``` bash
-# install dependencies
-npm install
+---
 
-# serve with hot reload at localhost:8080
-npm run dev
+使用 vue 对后台管理系统进行重构
 
-# build for production with minification
-npm run build
+技术栈：vue+vuex+element+axios+echarts
 
-# build for production and view the bundle analyzer report
-npm run build --report
+---
 
-# run unit tests
-npm run unit
+评论、分类相关功能待更新...
 
-# run e2e tests
-npm run e2e
 
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
