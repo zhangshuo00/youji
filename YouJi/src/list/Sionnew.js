@@ -21,6 +21,8 @@ export default class Sionnew extends Component {
             checked: false,
             lists:[],
             uplists:[],
+            dropDown_box: false,   // 下拉菜单 显隐状态
+            dropDown_box_Text: '全部' // 传值
         }
     }
 
@@ -107,7 +109,36 @@ export default class Sionnew extends Component {
             })
       }
 
+          // 下拉菜单 显隐状态
+    dropDown_box_Toggle() {
+        this.setState({
+            dropDown_box: !this.state.dropDown_box,
+        })
+    }
 
+    dropDown_box_Fun(){
+        if(this.state.dropDown_box === true) {
+            return(
+                <View style={{borderRadius: 4,borderWidth: 1,borderColor: '#ccc'}}>
+                    <TouchableOpacity onPress={()=>this.setState({dropDown_box_Text: '美食',dropDown_box: false})}>
+                        <Text>美食</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.setState({dropDown_box_Text: '风景',dropDown_box: false})}>
+                        <Text>风景</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.setState({dropDown_box_Text: '成长历程',dropDown_box: false})}>
+                        <Text>成长历程</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.setState({dropDown_box_Text: '琐碎生活',dropDown_box: false})}>
+                        <Text>琐碎生活</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.setState({dropDown_box_Text: '心得',dropDown_box: false})}>
+                        <Text>心得</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        }
+    }
 
     render() {
         return (
@@ -130,6 +161,15 @@ export default class Sionnew extends Component {
                           })
                         }}
                         style={{ fontSize:30*s,  borderStyle: "solid",width:"100%",height: 80*s,padding: 0,marginBottom:20,paddingLeft: 10,backgroundColor:'#fff'}}/>
+                    <View>                
+                        <TouchableOpacity
+                        style={{ fontSize:30*s,  width:"100%",padding: 0,marginBottom:20,paddingLeft: 10,backgroundColor:'#fff'}}
+
+                        onPress={()=>this.dropDown_box_Toggle()}>
+                            <Text>选择文章所属于的话题：#{this.state.dropDown_box_Text}#</Text>
+                        </TouchableOpacity>
+                            {this.dropDown_box_Fun()}
+                    </View>
                     <TextInput 
                         placeholder='点击添加内容'
                         textAlignVertical="top"

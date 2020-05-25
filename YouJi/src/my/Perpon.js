@@ -1,8 +1,10 @@
 import React, { Component, useEffect, useState } from 'react';
-import {View, Text, Button,TouchableOpacity,StyleSheet,Image,AsyncStorage} from 'react-native';
+import {View, Text,TouchableOpacity,StyleSheet,Image,AsyncStorage,Dimensions} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Button from 'react-native-button';
+const {width} = Dimensions.get('window');
 
 export default class Perpon extends Component {
     constructor(props){
@@ -23,7 +25,7 @@ export default class Perpon extends Component {
         const post ={
             uid: await AsyncStorage.getItem('uid').then(res=>res),
             // ruid:window.location.hash.split('=')[1]
-            ruid:this.props.ruid
+            ruid:await AsyncStorage.getItem('uid').then(res=>res),
         }
         console.log(post)
         fetch('http://majia.hbsdduckhouse.club/personal',{
@@ -36,14 +38,14 @@ export default class Perpon extends Component {
         .then(data=>{
             console.log(data);
             this.setState({
-                data:data})
+                data:data[0]})
         })
     }
 
     async newletter(){
-        // const ruid=window.location.hash.split('=')[1];
-        const ruid=this.props.ruid;
-        if(AsyncStorage.uid !== ruid){
+        const uid=await AsyncStorage.getItem('uid').then(res=>res);
+        const ruid=await AsyncStorage.getItem('uid').then(res=>res);
+        if(uid !== ruid){
             // window.location='./index.html#/letter/'+ruid;
         }
     }
@@ -51,7 +53,7 @@ export default class Perpon extends Component {
     async followUser(){
         const post ={
             uid: await AsyncStorage.getItem('uid').then(res=>res),
-            ruid:this.props.ruid
+            ruid:await AsyncStorage.getItem('uid').then(res=>res),
         }
         console.log(post)
         fetch('http://majia.hbsdduckhouse.club/followUser',{
@@ -63,7 +65,7 @@ export default class Perpon extends Component {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            window.location.reload();
+            this.componentDidMount();
             // 根据返回的消息，渲染响应的页面
         })
     }
@@ -71,7 +73,7 @@ export default class Perpon extends Component {
     async cancelFollow(){
         const post ={
             uid: await AsyncStorage.getItem('uid').then(res=>res),
-            ruid:this.props.ruid
+            ruid:await AsyncStorage.getItem('uid').then(res=>res),
         }
         console.log(post)
         fetch('http://majia.hbsdduckhouse.club/cancelFollowUser',{
@@ -83,19 +85,19 @@ export default class Perpon extends Component {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            // window.location.reload();
+            this.componentDidMount();
             // 根据返回的消息，渲染响应的页面
         })
     }
 
     render(){
         return (
-            <View style={styles.per}>
-                    <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
-                        <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+            <View style={{backgroundColor:'white',height:'100%'}}>
+                    <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10,paddingLeft:10}}>
+                        <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={22}></Icon></TouchableOpacity>
                         <Text style={styles.per_headText}>个人信息</Text>
                     </View>
-                    <View style={{height:300}}>
+                    <View style={{height:200}}>
                         <Image source={require("../images/topimg.jpg")} style={styles.per_pic}/>
                     </View>
                     <View style={styles.per_infor}>
@@ -103,21 +105,21 @@ export default class Perpon extends Component {
                             <Image style={styles.per_headimg} source={require('../images/pic1.jpg')}/>
                         </View>
                         <View  style={styles.per_infor_r}>
-                            <Text  style={{fontSize:18}}>{this.state.data.uname}</Text>
-                            {/* <Text style={{fontSize:18}}>李四</Text> */}
+                            <Text  style={{fontSize:24}}>{this.state.data.uname}</Text>
                         </View>
                         <View style={styles.per_infor_tex}>
-                            <Text>{this.state.data.signature?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
+                            <Text  style={{fontSize:20}}>{this.state.data.signature?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
                         </View>
                         
                     </View>
                     <View style={styles.per_btw}>
-                        <View style={styles.per_btw_l}>
-                            <Button title="关注" color="#faa755"/>
-                        </View>
-                        <View style={styles.per_btw_r}>
-                            <Button title="私信" color="#faa755" onPress={()=>Actions.msgDetails()}/>
-                        </View>
+                        {/* <Button style={styles.per_btw_l}>关注</Button> */}
+                        {
+                            this.state.data.isCol == 1 ?
+                            <Button style={styles.per_btw_l} onPress={()=>this.cancelFollow()}>已关注</Button>  
+                            :<Button style={styles.per_btw_ll} onPress={()=>this.followUser()}>关注</Button>
+                        }
+                        <Button style={styles.per_btw_r} onPress={()=>this.newletter()}>私信</Button>
                     </View>
             </View>
         )
@@ -126,13 +128,14 @@ export default class Perpon extends Component {
 const styles = StyleSheet.create({
     per_headText:{
         flex:1,
-        marginTop:20,
+        fontSize:20,
         textAlign:'center',
         color:'white',
+        paddingRight:'5%'
     },
     per_pic:{
         width:'100%',
-        height:'65%',
+        height:'100%',
         resizeMode:'stretch',
         overflow: 'hidden'
     },
@@ -140,15 +143,13 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection: 'row',
         flexWrap:'wrap',
-        marginTop:'-10%'
+        marginTop:10
     },
     per_infor_l:{
-        width:220,
         paddingTop:5,
-        // backgroundColor:'red',
     },
     per_infor_r:{
-        width:60,
+        marginLeft:width*0.1,
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor:'green',
@@ -168,22 +169,37 @@ const styles = StyleSheet.create({
         // backgroundColor:'blue'
     },
     per_btw:{
-        marginTop:'65%',
-        width:500,
-        paddingLeft:'10%',
-        paddingRight:'10%',
-        // backgroundColor:'black',
+        position:'absolute',
+        bottom:20,
+        width:"100%",
+        flexDirection:'row'
     },
     per_btw_l:{
-        position:'absolute',
-        left:'10%',
-        width:'45%',
-        // backgroundColor:'black',
+        marginLeft:width*0.05,
+        width:width*0.4,
+        backgroundColor:"#faa755",
+        height:40,
+        color:'white',
+        borderRadius:20,
+        paddingTop:8
+    },
+    per_btw_ll:{
+        marginLeft:width*0.05,
+        width:width*0.4,
+        backgroundColor:"grey",
+        height:40,
+        color:'white',
+        borderRadius:20,
+        paddingTop:8
     },
     per_btw_r:{
-        position:'absolute',
-        left:'65%',
-        width:'45%',
-        // backgroundColor:'black',
+        marginLeft:width*0.075,
+        width:width*0.4,
+        backgroundColor:"grey",
+        height:40,
+        color:'white',
+        borderRadius:20,
+        paddingTop:8,
+        opacity:0.8
     },
 })

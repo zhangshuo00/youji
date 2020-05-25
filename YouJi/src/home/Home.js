@@ -97,6 +97,11 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
 const { swidth, sheight } = Dimensions.get('window');
 const {width} = Dimensions.get('window');
+import ViewList from './ViewList';
+import FoodList from './FoodList';
+import LifeList from './LifeList';
+import StudyList from './StudyList';
+import InsList from './InsList';
 
 export default class Home extends Component {
 
@@ -106,7 +111,14 @@ export default class Home extends Component {
             selectedTab: 'blueTab',
             data:[{car_imgpath:"images/carousel1.jpg",car_context:''},
                 {car_imgpath:"images/carousel2.jpg",car_context:''},
-                {car_imgpath:"images/carousel3.jpg",car_context:''}],
+                {car_imgpath:"images/carousel3.jpg",car_context:''}
+            ],
+            topic:[{item:'发现',selected:1},
+                {item:'风景',selected:0},
+                {item:'学习',selected:0},
+                {item:'美食',selected:0},
+                {item:'琐碎生活',selected:0},
+                {item:'心得',selected:0},]
         }
     }
 
@@ -138,6 +150,23 @@ export default class Home extends Component {
     search(){
         Actions.search();
     }
+
+    select(key){
+        console.log(key);
+        for(let i=0;i<this.state.topic.length;i++){
+            let a = this.state.topic;
+            a[i].selected = 0;
+            this.setState({
+                topic:a
+            })
+        };
+        let b = this.state.topic;
+        b[key].selected = 1;
+        this.setState({
+            topic:b
+        })
+    }
+
     render() {
         return (
             <ScrollView>
@@ -149,49 +178,69 @@ export default class Home extends Component {
                         placeholderTextColor="#a5a5a5" style={styles.search}/>
                     <Icon style={{position:'absolute',right:45,top:12}} name="search1" color={'white'} size={28}/>
                 </View>
-                <View style={{width:width}}>
-                    <Carousel 
-                        autoplay
-                        infinite
-                        selectedIndex={0}
-                        autoplayInterval={3000}
-                    >
-                        <View
-                            style={styles.wrapper}
-                        >
-                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[0].car_imgpath}} style={styles.wrapperImage}/>
-                            <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
-                            <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[0].car_context}</Text>
-                        </View>
-                        <View
-                            style={styles.wrapper}
-                        >
-                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[1].car_imgpath}} style={styles.wrapperImage}/>
-                            <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
-                            <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[1].car_context}</Text>
-                        </View>
-                        <View
-                            style={styles.wrapper}
-                        >
-                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[2].car_imgpath}} style={styles.wrapperImage}/>
-                            <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
-                            <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[2].car_context}</Text>
-                        </View>
-                        <View
-                            style={styles.wrapper}
-                        >
-                            <Text style={styles.wrapperText}>广告收入不易，请您理解</Text>
-                        </View>
-                    </Carousel>
+                <View style={{paddingTop:5,paddingBottom:1,width:width,paddingRight:width*0.02,paddingLeft:width*0.02,flex:1,flexDirection:'row',backgroundColor:'white',justifyContent:'space-between'}}>
+                    {
+                        this.state.topic.map((topics,key)=>
+                            <TouchableOpacity  onPress={()=>this.select(key)}>
+                                <Text style={{textAlign:'center',color:'grey',fontSize:20}}>{topics.item}</Text>   
+                                <View style={{height:4,width:'100%',backgroundColor:'#faa755',display:topics.selected == 1?'flex':'none'}}></View>
+                            </TouchableOpacity> 
+                        )
+                    }
                 </View>
-
+                
+                <View style={{width:width,display:this.state.topic[0].selected == 1?'flex':'none'}}>
                 <View style={{width:width}}>
-                    {/* <FlatList
-                        renderItem={()=>(
-                            <ListCard/>
-                        )}
-                    /> */}
+                        <Carousel 
+                            autoplay
+                            infinite
+                            selectedIndex={0}
+                            autoplayInterval={3000}
+                        >
+                            <View
+                                style={styles.wrapper}
+                            >
+                                <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[0].car_imgpath}} style={styles.wrapperImage}/>
+                                <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
+                                <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[0].car_context}</Text>
+                            </View>
+                            <View
+                                style={styles.wrapper}
+                            >
+                                <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[1].car_imgpath}} style={styles.wrapperImage}/>
+                                <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
+                                <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[1].car_context}</Text>
+                            </View>
+                            <View
+                                style={styles.wrapper}
+                            >
+                                <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data[2].car_imgpath}} style={styles.wrapperImage}/>
+                                <View style={{backgroundColor:'rgba(165,162,162,0.3)',position:'absolute',top:200,width:width,height:65}}></View>
+                                <Text style={{color:'black',position:'absolute',top:200,fontSize:24,opacity:0.8}}>{this.state.data[2].car_context}</Text>
+                            </View>
+                            <View
+                                style={styles.wrapper}
+                            >
+                                <Text style={styles.wrapperText}>广告收入不易，请您理解</Text>
+                            </View>
+                        </Carousel>
+                    </View>
                     <ListCard/>
+                </View>
+                <View style={{width:width,display:this.state.topic[1].selected == 1?'flex':'none'}}>
+                    <ViewList/>
+                </View>
+                <View style={{width:width,display:this.state.topic[2].selected == 1?'flex':'none'}}>
+                    <StudyList/>
+                </View>
+                <View style={{width:width,display:this.state.topic[3].selected == 1?'flex':'none'}}>
+                    <FoodList/>
+                </View>
+                <View style={{width:width,display:this.state.topic[4].selected == 1?'flex':'none'}}>
+                    <LifeList/>
+                </View>
+                <View style={{width:width,display:this.state.topic[5].selected == 1?'flex':'none'}}>
+                    <InsList/>
                 </View>
             </ScrollView>
         )

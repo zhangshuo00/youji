@@ -109,7 +109,7 @@ export default class ListSort extends Component {
                                 >
                                 <ImageBackground 
                                     imageStyle={{borderRadius:20*s}}
-                                    source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + item.img_path}}
+                                    source={{uri:'https://www.hbsdduckhouse.club/' + item.img_path}}
                                     style={{height:180*s,borderRadius:20*s}}
                                 >
                                     <Text style={{color:"orange",fontSize:30*s,marginLeft:20*s,marginTop:10*s}}>

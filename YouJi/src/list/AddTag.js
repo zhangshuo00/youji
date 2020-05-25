@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput,Dimensions,StyleSheet,TouchableOpacity,Image,AsyncStorage} from 'react-native'
+import { Text, View, TextInput,Dimensions,StyleSheet,TouchableOpacity,Image,AsyncStorage,Alert} from 'react-native'
 import ImagePicker from 'react-native-image-picker';
 import Button from 'react-native-button';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -36,14 +36,10 @@ export default class AddTag extends Component {
             } else if (response.customButton) {
               console.log('custom:', response.customButton);
             } else {
-              // const source = { uri: response.uri };
-              // AsyncStorage.setItem('im',response.uri)
-              // this.setState({
-              //   imageUrl: source
-              // });
+              const source1 = { uri: response.uri}
               const source  = 'data:image/jpeg;base64,' + response.data
               this.setState({
-                  imageUrl: response.data,
+                  imageUrl: source1,
                   imgData:source,
               });
             }
@@ -57,7 +53,7 @@ export default class AddTag extends Component {
           tagName:this.state.textInput,
           imgData:this.state.imgData
         }	
-        console.log(post,'存储的数据');
+        // console.log(post,'存储的数据');
         fetch('http://majia.hbsdduckhouse.club/addTag',{
           method:'POST',
           mode:'cors',
@@ -68,19 +64,21 @@ export default class AddTag extends Component {
         .then(res=>res.json())
         .then(data=>{
           console.log(data);
-          if(data.msg==='success' ){
-            alert('保存成功','', [
-              { text: '确定', onPress: () => console.log('cancel') },
-              ]);
+          if(data.msg == 'success' ){
+            Alert.alert('保存成功','是否继续添加',
+              [
+                { text: '是', onPress: () => this.setState({}) },
+                { text: '否', onPress: () => Actions.listSion()}
+              ])
           }
-          })  
+        })  
       }
 
     render() {
         return (
             <View>
                 <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.listSion()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
                     <Text style={styles.headText}>添加标签</Text>
                     <TouchableOpacity style={styles.headIcon} onPress={()=>{this.addTag()}}>
                         <Text style={{color:'white',fontSize:18}}>保存</Text>

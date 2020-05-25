@@ -21,6 +21,7 @@ import AddTag from './src/list/AddTag';
 import SwipePage from './src/login/SwiperPage';
 import Search from './src/components/Search';
 import Sider from './src/components/Sider';
+import Person from './src/my/Perpon';
 
 console.disableYellowBox = true; //取消显示黄框
 
@@ -107,6 +108,7 @@ const App = () => {
 
                 <Scene key='my' component={My}></Scene>
                 <Scene key='edit' component={Edit}></Scene>
+                <Scene key='person' component={Person}></Scene>
           </Scene>
         </Tabs> 
         <Scene key='msgDetails' component={MsgDetails}></Scene>
@@ -114,6 +116,7 @@ const App = () => {
         <Scene key='sign' component={Sign} hideTabBar={true} hideNavBar></Scene>
         <Scene key='test' component={Test} hideTabBar={true} hideNavBar></Scene>
         <Scene key='Password' component={Password} hideTabBar={true} hideNavBar></Scene>
+        <Scene key='sider' component={Sider} hideTabBar={true} hideNavBar></Scene>
       </Modal>
     </Router>
 	);

@@ -17,34 +17,29 @@ export default class Sion extends Component {
     touchStart(e){
         let that=this;
             Alert.alert('提示',
-                '是否删除该分类，并删除该分类下所有笔记?', 
+                '是否删除这篇笔记?', 
                 [
                 { text: '取消', onPress: () => console.log('cancel') },
                 { text: '确定', onPress: () => that.delTags(e)
                 },
                 ])
     }
-    delTags=(e)=>{
+     delTags= async(e)=>{
         console.log(e)
         const post ={
-            uid:k3mimknra,
-            tags:e
+            uid:await AsyncStorage.getItem('uid').then(res=>res),
+            chid:e.chid
         }
         console.log(post);
-        fetch('/delTags',{
+        fetch('http://majia.hbsdduckhouse.club/delSionple',{
             method:'POST',
-            // mode:'cors',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(post)
         })
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            window.location.reload(); //重新刷新该页面
-            // this.setState({·
-            //     datas:data
-            // })
-            // 根据返回的消息，渲染响应的页面
+            this.componentDidMount()
         })
     }
 
@@ -53,8 +48,6 @@ export default class Sion extends Component {
         const post ={
             uid:await AsyncStorage.getItem('uid').then(res=>res),
             tags:this.props.tag
-            // tags:await AsyncStorage.getItem('tags').then(res=>res),
-            // tags:"美食",
         }
         AsyncStorage.setItem('tags',this.props.tag)
         fetch('http://majia.hbsdduckhouse.club/Sion',{

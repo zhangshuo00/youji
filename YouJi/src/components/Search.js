@@ -203,7 +203,7 @@ export default class Search extends Component {
                             ))
                         }
                     </View>
-                    <View style={styles.history}>
+                    {/* <View style={styles.history}>
                         {
                             this.state.history.map((item)=>(
                                 <View style={{ padding: 10,marginLeft:10 }}>
@@ -213,7 +213,7 @@ export default class Search extends Component {
                                 </View>
                             ))
                         }
-                    </View>
+                    </View> */}
                 </View>
             )
         }
