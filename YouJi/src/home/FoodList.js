@@ -50,6 +50,7 @@ const FoodList = () => {
 
     return (
         <View style={styles.card}>
+        <Image source={require('../images/foodList.jpeg')} style={{width:width,height:260}}></Image>  
         {
             datas.map(card=>
                 <Card>

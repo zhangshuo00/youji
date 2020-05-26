@@ -51,6 +51,7 @@ const StudyList = () => {
 
     return (
         <View style={styles.card}>
+        <Image source={require('../images/studyList.jpeg')} style={{width:width,height:260}}></Image>
         {
             datas.map(card=>
                 <Card>

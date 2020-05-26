@@ -51,6 +51,7 @@ const LifeList = () => {
 
     return (
         <View style={styles.card}>
+        <Image source={require('../images/lifeList.jpeg')} style={{width:width,height:260}}></Image>
         {
             datas.map(card=>
                 <Card>

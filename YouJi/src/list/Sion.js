@@ -78,9 +78,9 @@ export default class Sion extends Component {
         return (
             <ScrollView>
                 <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.listSion()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
                         <Text style={styles.headText}>{this.props.tag}</Text>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.sionnew()}><Icon name='plus' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.sionnew({tag:this.props.tag})}><Icon name='plus' color={'white'} size={28}></Icon></TouchableOpacity>
                 </View>
                 <View style={{
                     flexDirection: 'row',
