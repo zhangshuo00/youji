@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Text, View, AsyncStorage } from 'react-native';
 import {Router,Scene,Tabs,Modal,Actions} from 'react-native-router-flux';
+import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Home from './src/home/Home';
 import Msg from './src/msg/Msg';
@@ -22,6 +23,8 @@ import SwipePage from './src/login/SwiperPage';
 import Search from './src/components/Search';
 import Sider from './src/components/Sider';
 import Person from './src/my/Perpon';
+import OtherSionple from './src/components/OtherSionple';
+import OtherPerpon from './src/components/OtherPerpon';
 
 console.disableYellowBox = true; //取消显示黄框
 
@@ -30,6 +33,9 @@ const App = () => {
     
   let [isLogin,setLogin] = useState(false);
   let [isInstall,setInstall] = useState(true);
+  const isDarkMode = useDarkMode();
+  // const stylesBlack = useDynamicStyleSheet(dynamicStyles);
+
   useEffect(()=>{
     // AsyncStorage.clear();
     AsyncStorage.getItem('isInstall')
@@ -71,7 +77,7 @@ const App = () => {
 	return (
     <Router>
       <Modal hideNavBar>
-        <Tabs activeTintColor='rgb(250, 167, 85)' inactiveTintColor='rgb(148, 148, 148)'>
+       <Tabs activeBackgroundColor={isDarkMode?'black':'white'} inactiveBackgroundColor={isDarkMode?'black':'white'} activeTintColor='rgb(250, 167, 85)' inactiveTintColor='rgb(148, 148, 148)'>
           <Scene key='homePage' title='首页' 
               headerMode="none"
               icon={({focused})=>
@@ -80,6 +86,8 @@ const App = () => {
     
               <Scene key='home' component={Home}></Scene>
               <Scene key='search' component={Search}></Scene>
+              <Scene key='otherSionple' component ={OtherSionple}></Scene>
+              <Scene key='otherPerson' component ={OtherPerpon}></Scene>
               {/* <Scene key='sider' component={Sider}  hideTabBar={true} hideNavBar></Scene> */}
           </Scene>
           <Scene key='list' title='笔记'

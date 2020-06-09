@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import {View, Text,TouchableOpacity,StyleSheet,Image,AsyncStorage,Dimensions} from 'react-native';
+import {View, Text,TouchableOpacity,StyleSheet,Image,AsyncStorage,Dimensions, Alert} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import { TabBar } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -25,7 +25,7 @@ export default class Perpon extends Component {
         const post ={
             uid: await AsyncStorage.getItem('uid').then(res=>res),
             // ruid:window.location.hash.split('=')[1]
-            ruid:await AsyncStorage.getItem('uid').then(res=>res),
+            ruid:this.props.ruid,
         }
         console.log(post)
         fetch('http://majia.hbsdduckhouse.club/personal',{
@@ -37,6 +37,7 @@ export default class Perpon extends Component {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
+            data[0].headimg = 'https://www.hbsdduckhouse.club/'+data[0].headimg;
             this.setState({
                 data:data[0]})
         })
@@ -44,16 +45,20 @@ export default class Perpon extends Component {
 
     async newletter(){
         const uid=await AsyncStorage.getItem('uid').then(res=>res);
-        const ruid=await AsyncStorage.getItem('uid').then(res=>res);
+        const ruid=this.props.ruid;
         if(uid !== ruid){
             // window.location='./index.html#/letter/'+ruid;
+            Actions.msgDetails({rname:this.state.data.uname,ruid:this.props.ruid})
+        }
+        else{
+            alert('不能向自己私信')
         }
     }
 
     async followUser(){
         const post ={
             uid: await AsyncStorage.getItem('uid').then(res=>res),
-            ruid:await AsyncStorage.getItem('uid').then(res=>res),
+            ruid:this.props.ruid,
         }
         console.log(post)
         fetch('http://majia.hbsdduckhouse.club/followUser',{
@@ -73,7 +78,7 @@ export default class Perpon extends Component {
     async cancelFollow(){
         const post ={
             uid: await AsyncStorage.getItem('uid').then(res=>res),
-            ruid:await AsyncStorage.getItem('uid').then(res=>res),
+            ruid:this.props.ruid,
         }
         console.log(post)
         fetch('http://majia.hbsdduckhouse.club/cancelFollowUser',{
@@ -94,7 +99,7 @@ export default class Perpon extends Component {
         return (
             <View style={{backgroundColor:'white',height:'100%'}}>
                     <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10,paddingLeft:10}}>
-                        <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={22}></Icon></TouchableOpacity>
+                        <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.home()}><Icon name='left' color={'white'} size={22}></Icon></TouchableOpacity>
                         <Text style={styles.per_headText}>个人信息</Text>
                     </View>
                     <View style={{height:200}}>
@@ -102,13 +107,13 @@ export default class Perpon extends Component {
                     </View>
                     <View style={styles.per_infor}>
                         <View  style={styles.per_infor_l}>
-                            <Image style={styles.per_headimg} source={require('../images/pic1.jpg')}/>
+                            <Image style={styles.per_headimg} source={{uri:this.state.data.headimg}}/>
                         </View>
                         <View  style={styles.per_infor_r}>
                             <Text  style={{fontSize:24}}>{this.state.data.uname}</Text>
                         </View>
                         <View style={styles.per_infor_tex}>
-                            <Text  style={{fontSize:20}}>{this.state.data.signature?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
+                            <Text  style={{fontSize:20}}>{this.state.data.signature != "" ?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
                         </View>
                         
                     </View>

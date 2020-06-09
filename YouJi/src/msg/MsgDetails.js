@@ -3,6 +3,7 @@ import { Text, View,StyleSheet,ScrollView,ImageBackground,AsyncStorage,
     Dimensions,TouchableOpacity,TextInput, Image, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Button from 'react-native-button';
+import Emoji from 'react-native-emoji';
 
 const {height,width} = Dimensions.get('window');
 
@@ -14,6 +15,9 @@ export default class MsgDetails extends Component {
             // other:'有纪团队',
             data:{msg:[],ruidInfo:{uname:''}},    
             text:'',
+            x1:'你好',
+            x2:'smile',
+            x3:''
             // data:{
             //     ruidInfo:{headimg:require("../images/lisi.jpg"), uid:"k3mimknra",uname:"李四"},
             //     uidInfo:{headimg:require("../images/k3i297defyouji.jpg"), uid:"k3i297def",uname:"有纪"},
@@ -116,6 +120,12 @@ export default class MsgDetails extends Component {
         this.scrollview.scrollToEnd({animated:false});
     }
 
+    emojiAdd = ()=>{
+        var newText = this.state.text + '[smile]';
+        console.log(newText);
+        this.setState({text:newText});
+    }
+
     render() {
         return (
             <View style={{flex:1}}>
@@ -138,30 +148,50 @@ export default class MsgDetails extends Component {
                             <Text style={styles.headText}>{this.props.rname}</Text>
                         </View>
                             <View style={{paddingBottom:50}}>
+                                <View style={styles.letterLi1}>
+                                        {/* <View style={styles.letterImg1} 
+                                        style={{background:"url(" + require("../" +this.state.data.uidInfo.headimg) + ")"}}></View> */}
+                                        <Image style={styles.letterImg1}  source={{uri:'https://www.hbsdduckhouse.club/images/k3mimknra杰尼龟.jpg'}}></Image>
+                                        <View style={styles.letterTrian1}></View>
+                                        <Text style = {styles.letterText1}>
+                                            {this.state.x1}
+                                            <Emoji name ={this.state.x2} style = {{fontSize:20}} />
+                                            {this.state.x1}
+                                            <Emoji name ={this.state.x2} style = {{fontSize:20}} />
+                                            {this.state.x1}
+                                            <Emoji name ={this.state.x2} style = {{fontSize:20}} />
+                                        </Text>
+                                        {/* <Emoji name ='smile' style = {styles.letterText1}/> */}
+                                </View>
                             {
                                 this.state.data.msg.map((tag,idx)=>
                                 tag.sender == 'me'?
-                                <View key={idx} style={styles.letterLi1}>
+                                (<View key={idx} style={styles.letterLi1}>
                                     {/* <View style={styles.letterImg1} 
                                     style={{background:"url(" + require("../" +this.state.data.uidInfo.headimg) + ")"}}></View> */}
-                                    <Image style={styles.letterImg1}  source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data.uidInfo.headimg}}></Image>
+                                    <Image style={styles.letterImg1}  source={{uri:'https://www.hbsdduckhouse.club/' + this.state.data.uidInfo.headimg}}></Image>
                                     <View style={styles.letterTrian1}></View>
                                     <Text style={styles.letterText1}>{tag.context}</Text>
-                                </View>:<View key={idx} style={styles.letterLi}>
+                                </View>)
+                                :
+                                (<View key={idx} style={styles.letterLi}>
                                     {/* <View style={styles.letterImg} style={{background:"url(" + require("../" +this.state.data.ruidInfo.headimg) + ")"}}></View> */}
-                                    <Image style={styles.letterImg}  source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.data.ruidInfo.headimg}}></Image>
+                                    <Image style={styles.letterImg}  source={{uri:'https://www.hbsdduckhouse.club/' + this.state.data.ruidInfo.headimg}}></Image>
                                     <View style={styles.letterTrian}></View>
                                     <Text style={styles.letterText}>{tag.context}</Text>
-                                </View>)
+                                </View>))
                                 // <Link to={'/topics/'+item.id}>{item.title}</Link>
                             }
                         </View>
                     </ScrollView>
                 </ImageBackground>
                 <View style={styles.letterBoxs}>
+                    <TouchableOpacity onPress={() => this.emojiAdd()}>
+                        <Emoji name ='smile' style = {{fontSize:20}} />
+                    </TouchableOpacity>
                     <TextInput style={styles.letterInput} multiline={true} value = {this.state.text}
                         keyboardType = 'default' onChangeText={this.texthandle}></TextInput>
-                        <Button style={styles.letterButton} onPress={() => this.textAdd()}>发送</Button>
+                    <Button style={styles.letterButton} onPress={() => this.textAdd()}>发送</Button>
                 </View> 
             </View>
         )

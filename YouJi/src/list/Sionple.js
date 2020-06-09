@@ -11,15 +11,119 @@ export default class Sionple extends Component {
         super();
         this.state={
             data:[],
+            uid:'',
+            chid:'',
+
     }
+    }
+    Clickfavorites=()=>{
+        if(this.state.data[0].isCollection==0){
+            var c =this.state.data;
+            c[0].isCollection = 1;
+            c[0].favorites+=1;
+            this.setState({
+                data:c
+            })
+            const post={
+                uid:this.state.uid,
+                chid:this.state.chid
+            }
+            console.log(post)
+            fetch('http://majia.hbsdduckhouse.club/addFavorites',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+            })
+        }else if(this.state.data[0].isCollection==1){
+            var d =this.state.data;
+            d[0].isCollection = 0;
+            d[0].favorites-=1;
+            this.setState({
+                data:d
+            })
+            const post={
+                uid:this.state.uid,
+                chid:this.state.chid
+            }
+            console.log(post);
+            fetch('http://majia.hbsdduckhouse.club/cancelCollection',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data);
+            })
+        }
+    }
+
+     Clicklike =()=>{
+        if(this.state.data[0].isLike==0){
+            var b =this.state.data;
+            b[0].isLike = 1;
+            b[0].likes += 1;
+            this.setState({
+                data:b
+            })
+            const post={
+                uid:this.state.uid,
+                chid:this.state.chid
+            }
+            console.log(post)
+            fetch('http://majia.hbsdduckhouse.club/addLike',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+                Actions.refresh()
+            })
+        }else if(this.state.data[0].isLike==1){
+            var a =this.state.data;
+            a[0].isLike = 0;
+            a[0].likes -= 1;
+            this.setState({
+                data:a
+            })
+            const post={
+                uid:this.state.uid,
+                chid:this.state.chid
+            }
+            console.log(post);
+            fetch('http://majia.hbsdduckhouse.club/cancelLike',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data);
+            })
+        }
     }
 
     async componentDidMount(){
         const post ={
-            uid: await   AsyncStorage.getItem('uid ').then(res=>res),
+            uid: this.props.uid,
             chid:await   AsyncStorage.getItem('chid').then(res=>res),
         }
-        console.log(post)
+        this.setState({
+            uid:post.uid,
+            chid:post.chid
+        })
+        console.log(post,'上传的数据')
+        console.log(this.state.uid,'看uid')
         fetch('http://majia.hbsdduckhouse.club/sionple',{
             method:'POST',
             // mode:'cors',
@@ -28,7 +132,6 @@ export default class Sionple extends Component {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data,'获取到值');
             this.setState({
                 data:data,
             })
@@ -37,7 +140,8 @@ export default class Sionple extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <View flexDirection='column' justifyContent='space-between'>
+            <ScrollView style={{height:'93%'}}>
                  <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
                     <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.pop()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
                     <Text style={styles.headText}>笔记内容</Text>
@@ -47,7 +151,7 @@ export default class Sionple extends Component {
                         this.state.data.map((item)=>(
                             <View>
                             <View>
-                                <Image style={{height:300*s,width:'100%'}} source={{uri:'https://www.hbsdduckhouse.club/' + item.ch_headimg}}/>
+                            <Image style={{height:300*s,width:'100%'}} source={{uri:'https://www.hbsdduckhouse.club/' + item.ch_headimg}}/>
                             </View>
                             <View style={{marginLeft:"10%",marginRight:"10%",flexDirection:'row'}}>
                                 <Text style={{marginTop:40*s,fontSize:30*s}}>{item.tags}</Text>
@@ -68,6 +172,43 @@ export default class Sionple extends Component {
                     }
                 </View>
             </ScrollView>
+            <View style={{backgroundColor:'#fff',width:'100%',height:'7%'}}>
+                {
+                    this.state.data.map((item)=>(
+                        <View flexDirection='row' style={{marginTop:20*s}}>
+                        <TouchableOpacity onPress={this.Clicklike.bind(this)}>  
+                        {
+                            item.isLike ==0 ? 
+                                <View  style={styles.likeView}>
+                                <Icon name='staro' color={'rgb(250, 167, 85)'}  size={28}/>
+                                <Text style={styles.likeText}>{item.likes==null?0:item.likes}</Text>
+                                </View> :
+                                <View  style={styles.likeView}>
+                                <Icon name='star' color={'rgb(250, 167, 85)'}  size={28}/>
+                                <Text  style={styles.likeText}>{item.likes==null?1:item.likes}</Text>
+                                </View>
+                        }
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.Clickfavorites.bind(this)}> 
+                        {
+                            item.isCollection==0 ?
+                                <View style={styles.likeView}>
+                                <Icon name='hearto' color={'rgb(250, 167, 85)'}  size={28}/>
+                                <Text style={styles.likeText}>{item.favorites==null?0:item.favorites}</Text>
+                                </View> :
+                                <View style={styles.likeView}>
+                                <Icon name='heart' color={'rgb(250, 167, 85)'}  size={28}/>
+                                <Text style={styles.likeText}>{item.favorites==null?1:item.favorites}</Text>
+                                </View>
+                        }
+                        </TouchableOpacity>
+                        </View>
+                    
+                    ))
+                }
+                    
+            </View>
+            </View>
         )
     }
 }
@@ -88,4 +229,14 @@ const styles = StyleSheet.create({
     msgList:{
         width: width,
     },
+    likeText:{
+        marginLeft:20*s,
+        textAlign:'center' ,
+        textAlignVertical:'center'
+    },
+    likeView:{
+        marginLeft:50*s,
+        marginRight:100*s,
+        flexDirection:'row'
+    }
 })

@@ -1,17 +1,20 @@
 import React,{useState,useEffect} from 'react'
-import { View, Text, StyleSheet, Image,Dimensions } from 'react-native'
+import { View, Text, stylesBlackheet, Image,Dimensions } from 'react-native'
 import { Card, WhiteSpace, WingBlank } from '@ant-design/react-native'
+import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
 
 const {width} = Dimensions.get('window');
 
 const ViewList = () => {
 
     let [datas,setdatas] = useState([
-        // {headimg:'https://zhangshuo00.github.io/youji/YouJi/src/images/timg.jpg',uname:'有纪',chdate:'2019-11-28',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20',img_path:['images/sort-test1.jpg','images/sort-test2.jpg']},
-        // {headimg:'https://zhangshuo00.github.io/youji/YouJi/src/images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20',img_path:['images/sort-test1.jpg','images/sort-test2.jpg']},
-        // {headimg:'https://zhangshuo00.github.io/youji/YouJi/src/images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20',img_path:['images/sort-test1.jpg','images/sort-test2.jpg']}
+        // {headimg:'https://www.hbsdduckhouse.club/images/timg.jpg',uname:'有纪',chdate:'2019-11-28',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20',img_path:['images/sort-test1.jpg','images/sort-test2.jpg']},
+        // {headimg:'https://www.hbsdduckhouse.club/images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20',img_path:['images/sort-test1.jpg','images/sort-test2.jpg']},
+        // {headimg:'https://www.hbsdduckhouse.club/images/timg.jpg',uname:'有纪',chdate:'12月6日',context:'今天周末不用上班，做了一直想吃的奶油面包！',likes:'60',favorites:'20',img_path:['images/sort-test1.jpg','images/sort-test2.jpg']}
     ]);
     let [dataList,setdataList] = useState([]);
+    const isDarkMode = useDarkMode();
+    const stylesBlack = useDynamicStyleSheet(dynamicStyles);
 
     useEffect(()=>{
         fetch('http://majia.hbsdduckhouse.club/getViewList',{
@@ -24,7 +27,7 @@ const ViewList = () => {
         .then(data=>{
             // console.log(data[0]);
             for(var a=0;a<data.length;a++){
-                data[a].headimg = 'https://zhangshuo00.github.io/youji/YouJi/src/'+data[a].headimg;
+                data[a].headimg = 'https://www.hbsdduckhouse.club/'+data[a].headimg;
                 for(var b=0;b<2;b++){
                     if(! data[a].img_path[b]){
                         data[a].img_path[b] = 'images/sort-test1.jpg'
@@ -50,7 +53,7 @@ const ViewList = () => {
     },[])
 
     return (
-        <View style={styles.card}>
+        <View style={stylesBlack.card}>
         <Image source={require('../images/viewList.jpg')} style={{width:width,height:260}}></Image>
         {
             datas.map(card=>
@@ -59,21 +62,22 @@ const ViewList = () => {
                         title={card.uname}
                         thumb={card.headimg}
                         thumbStyle={{width: 30,height: 30,borderRadius:15}}
+                        style={{backgroundColor:isDarkMode ? 'black' : 'white'}}
                     />
-                    <Card.Body>
-                        <Text style={{position:'relative',bottom:30,left:width*0.8}}>{card.chdate}</Text>
-                        <Text style={{marginLeft: 30,marginTop:-20}}>{card.context}</Text>
-                        <View style={styles.cardContext}>
-                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/'+card.img_path[0]}} style={styles.cardContextImg}/>
-                            <Image source={{uri: 'https://zhangshuo00.github.io/youji/YouJi/src/'+card.img_path[1]}} style={styles.cardContextImg}/>
+                    <Card.Body style={{backgroundColor:isDarkMode ? 'black' : 'white'}}>
+                        <Text style={{position:'relative',bottom:30,left:width*0.8,color:isDarkMode ? 'white' : 'balck'}}>{card.chdate}</Text>
+                        <Text style={{marginLeft: 30,marginTop:-20,color:isDarkMode ? 'white' : 'black'}}>{card.context}</Text>
+                        <View style={stylesBlack.cardContext}>
+                            <Image source={{uri: 'https://www.hbsdduckhouse.club/'+card.img_path[0]}} style={stylesBlack.cardContextImg}/>
+                            <Image source={{uri: 'https://www.hbsdduckhouse.club/'+card.img_path[1]}} style={stylesBlack.cardContextImg}/>
                         </View>
                     </Card.Body>
                     <Card.Footer
                         content={
                             <View style={{display: 'flex',flexDirection: 'row',marginTop: 15}}>
-                                <Image source={{uri: 'https://i.loli.net/2020/04/13/cWKiSzxOIo8fhtv.png'}} style={styles.cardBottomImage}/>
+                                <Image source={{uri: 'https://i.loli.net/2020/04/13/cWKiSzxOIo8fhtv.png'}} style={stylesBlack.cardBottomImage}/>
                                 <Text>  {card.favorites}</Text>
-                                <Image source={{uri: 'https://i.loli.net/2020/04/13/kbr2KtWGMfvl51E.png'}} style={styles.cardBottomImage}/>
+                                <Image source={{uri: 'https://i.loli.net/2020/04/13/kbr2KtWGMfvl51E.png'}} style={stylesBlack.cardBottomImage}/>
                                 <Text>  {card.likes}</Text>
                             </View>
                         }
@@ -87,7 +91,7 @@ const ViewList = () => {
 
 export default ViewList
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
     card: {
         paddingTop: 3,
         margin:0

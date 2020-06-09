@@ -20,7 +20,6 @@ export default class ListSort extends Component {
     }
 
    async componentDidMount(){
-        // AsyncStorage.setItem('uid',"k3i297def")
         this.setState({
             uid:await   AsyncStorage.getItem('uid').then(res=>res),
             tags:await   AsyncStorage.getItem('tags').then(res=>res),

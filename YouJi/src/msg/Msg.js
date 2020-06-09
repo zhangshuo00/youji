@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View,ScrollView,StyleSheet,Dimensions,TouchableOpacity,AsyncStorage,Image} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
+import Emoji from 'react-native-emoji';
 
 const {width} = Dimensions.get('window');
 
@@ -75,11 +76,13 @@ export default class Msg extends Component {
     render() {
         return (
             <ScrollView style={{width:width}}>
+                <Text style={{margin:0}}>微笑</Text>
+                <Emoji name ='smile' style = {{fontSize:20}} />
                  <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
                     <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='bars' color={'white'} size={28}></Icon></TouchableOpacity>
                     <Text style={styles.headText}>消息列表</Text>
                  </View>
-                 {/* <Image style={{width:width,height:50}} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + this.state.pic}}/> */}
+                 {/* <Image style={{width:width,height:50}} source={{uri:'https://www.hbsdduckhouse.club/' + this.state.pic}}/> */}
                 <View style={styles.msgList}>
                 {
                     
@@ -95,7 +98,7 @@ export default class Msg extends Component {
                     // </TouchableOpacity>))
                     <TouchableOpacity key={idx} style={styles.msgLi} onPress={() =>  Actions.msgDetails({rname:tag.uname,ruid:tag.uid})}>
                         {/* <View className="msg-img" style={{background:"url(" + require("../" +tag.headimg) + ")"}}></View> */}
-                        <Image source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' + tag.headimg}} 
+                        <Image source={{uri:'https://www.hbsdduckhouse.club/' + tag.headimg}} 
                             style={styles.msgImg} ></Image>
                         <View style={styles.msgBox}>
                             <Text style={styles.msgText}>{tag.uname}</Text>

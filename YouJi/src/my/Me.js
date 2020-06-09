@@ -85,7 +85,7 @@
 //                 <View style={stylesBlack.me_num}>
 //                     <View style={stylesBlack.me_sex}>
 //                         {/* <Image style={stylesBlack.me_imgsex} source={require('./'+seximg)}/> */}
-//                         <Image style={stylesBlack.me_imgsex} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' +data.seximg}}/>
+//                         <Image style={stylesBlack.me_imgsex} source={{uri:'https://www.hbsdduckhouse.club/' +data.seximg}}/>
 //                         <Text style={{color: isDarkMode ? '#fff':'black'}}>{data.usex}</Text>
 //                     </View>
 //                     <View style={stylesBlack.me_atten}>
@@ -235,11 +235,16 @@ export default class Me extends Component {
           selectedTab: 'redTab',
           display:1,
           data:{uname:'张三',uemail:'zhangsan@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
-          datas:''
+          datas:'',
+          uid:''
         };
       }
     
     async componentDidMount(){
+        this.setState({
+            uid: await AsyncStorage.getItem('uid').then(res=>res)
+        })
+        // console.log(this.state.uid);
         const post ={
             uid:await AsyncStorage.getItem('uid').then(res=>res),
         }
@@ -251,7 +256,7 @@ export default class Me extends Component {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data[0]);
+            // console.log(data[0]);
             this.setState({
                 data:data[0],
                 datas:data[1]
@@ -316,13 +321,13 @@ export default class Me extends Component {
                 </View>
                 <View style={{backgroundColor:'white'}}>
                     <View style={styles.me_title}>
-                        <TouchableOpacity  onPress={()=>Actions.person()} >
+                        <TouchableOpacity  onPress={()=>Actions.person({ruid:this.state.uid}) }>
                             <Image style={styles.me_head} source={{uri:'https://www.hbsdduckhouse.club/' +this.state.data.headimg}}/>
                         </TouchableOpacity>
                         <View style={styles.me_num}>
                             <View style={styles.me_sex}>
                                 {/* <Image style={styles.me_imgsex} source={require('./'+this.state.seximg)}/> */}
-                                <Image style={styles.me_imgsex} source={{uri:'https://zhangshuo00.github.io/youji/YouJi/src/' +this.state.seximg}}/>
+                                <Image style={styles.me_imgsex} source={{uri:'https://www.hbsdduckhouse.club/' +this.state.seximg}}/>
                                 <Text style={{fontSize:18}}>{this.state.data.usex}</Text>
                             </View>
                             <View style={styles.me_atten}>

@@ -79,7 +79,7 @@ export default class Search extends Component {
             keywords:this.state.value
         }
         // setDisplay(false)
-        // console.log(post);
+        console.log(post);
         fetch('http://majia.hbsdduckhouse.club/discoverSearch',{
             method:'POST',
             // mode:'cors',
@@ -89,7 +89,7 @@ export default class Search extends Component {
         .then(res=>res.json())
         .then(data=>{
             for(var a=0;a<data.length;a++){
-                data[a].ch_headimg = 'https://zhangshuo00.github.io/youji/YouJi/src/'+data[a].ch_headimg;
+                data[a].ch_headimg = 'https://www.hbsdduckhouse.club/'+data[a].ch_headimg;
                 if(!data[a].favorites){
                     data[a].favorites = 0
                 }
@@ -97,11 +97,18 @@ export default class Search extends Component {
                     data[a].likes = 0
                 }
             }
-            // console.log(data);
+            console.log(data);
             // setdatas(data);
-            this.setState({
-                datas:data
-            })
+            if(data != []){
+                this.setState({
+                    datas:data
+                })
+            }
+            else{
+                this.setState({
+                    datas:false
+                }) 
+            }
             // 根据返回的消息，渲染响应的页面
         })
     }
@@ -116,7 +123,7 @@ export default class Search extends Component {
             keywords:this.state.value
         }
         // setDisplay(false)
-        // console.log(post);
+        console.log(post);
         fetch('http://majia.hbsdduckhouse.club/discoverSearch',{
             method:'POST',
             // mode:'cors',
@@ -126,7 +133,7 @@ export default class Search extends Component {
         .then(res=>res.json())
         .then(data=>{
             for(var a=0;a<data.length;a++){
-                data[a].ch_headimg = 'https://zhangshuo00.github.io/youji/YouJi/src/'+data[a].ch_headimg;
+                data[a].ch_headimg = 'https://www.hbsdduckhouse.club/'+data[a].ch_headimg;
                 if(!data[a].favorites){
                     data[a].favorites = 0
                 }
@@ -134,7 +141,7 @@ export default class Search extends Component {
                     data[a].likes = 0
                 }
             }
-            // console.log(data);
+            console.log(data);
             // setdatas(data);
             this.setState({
                 datas:data
@@ -165,7 +172,7 @@ export default class Search extends Component {
             keyword:this.state.value
         }
         // setDisplay(false)
-        // console.log(post);
+        console.log(post);
         fetch('http://majia.hbsdduckhouse.club/delSearchHistory',{
             method:'POST',
             // mode:'cors',
@@ -231,7 +238,7 @@ export default class Search extends Component {
                             </View>
                     <View style={styles.card}>
                     {
-                        this.state.datas ? 
+                        this.state.datas == false ?
                         (<View style={{width:width,justifyContent:'center', flexDirection:'row',flexWrap:'wrap',}}> 
                             <Text style={{fontSize:20,marginTop:50}}>未查询到相关内容</Text> 
                         </View>)

@@ -11,6 +11,7 @@ export default class Sion extends Component {
         this.state={
             datas:[],
             chid:'',
+            uid:''
         }
     }
     //长按删除
@@ -49,6 +50,10 @@ export default class Sion extends Component {
             uid:await AsyncStorage.getItem('uid').then(res=>res),
             tags:this.props.tag
         }
+        this.setState({
+            uid:post.uid
+        })
+        console.log(post,'看uid')
         AsyncStorage.setItem('tags',this.props.tag)
         fetch('http://majia.hbsdduckhouse.club/Sion',{
             method:'POST',
@@ -68,9 +73,11 @@ export default class Sion extends Component {
     
     //跳转相信分类
     jumpToSionple =(item)=>{
+        var uid = this.state.uid
         AsyncStorage.setItem('chid',""+item.chid+"")
         console.log('跳转到子页',item.chid)
-        Actions.sionple()
+        console.log(this.state.uid)
+        Actions.sionple({uid})
      }
     
 
