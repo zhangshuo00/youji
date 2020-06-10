@@ -7,6 +7,7 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon4 from 'react-native-vector-icons/Entypo'
 import Icon6 from 'react-native-vector-icons/Fontisto'
 import geolocation from "@react-native-community/geolocation"
+import { List, Switch } from '@ant-design/react-native';
 
 const {width,scale,height} = Dimensions.get('window');
 const s = width / 640;
@@ -29,7 +30,12 @@ export default class Sionnew extends Component {
             longitude: '',//经度
             latitude: '',//纬度
             position: undefined,//位置名称
-        }
+        };
+        this.onSwitchChange = value => {
+            this.setState({
+              checked: value,
+            });
+          };
     }
 
 
@@ -157,20 +163,6 @@ export default class Sionnew extends Component {
         }
     }
 
-    share=()=>{
-        console.log(this.state.checked)
-        if(!this.state.checked){
-            this.setState({
-                checked:true
-            })
-            alert('成功分享')
-        }
-        if(this.state.checked){
-            alert('成功分享')
-        }
-    }
-
-
     getPositions = () => {//定位
         return new Promise(() => {
             /** 获取当前位置信息 */
@@ -292,14 +284,25 @@ export default class Sionnew extends Component {
                                     />
                                 )}
                                 /> 
-                    <View flexDirection='row'justifyContent='space-between' style={{backgroundColor:'#fff'}}>
+                    <View 
+                    style={{backgroundColor:'#fff',width:'100%'}}
+                    >
                         <TouchableOpacity  onPress={this.getPositions}>
                             <Text style={styles.PositionStyle}>获取定位:</Text>
                             <Text>{this.state.position}</Text>
                         </TouchableOpacity> 
-                        <TouchableOpacity onPress={this.share}>
-                            <Text  style={styles.PositionStyle}>点击分享</Text>
-                        </TouchableOpacity>
+                        <List>
+                        <List.Item
+                            style={{marginRight:400*s}}
+                            extra={
+                                <Switch
+                                    checked={this.state.checked}
+                                    onChange={this.onSwitchChange}
+                                />}>
+                        <Text  style={[styles.PositionStyle,{marginLeft:-20*s}]}>是否分享：</Text>
+                        {/* <Text style={{color:'rgb(250, 167, 85)',fontSize:30*s}}>{this.state.checked ? '已分享': '未分享'}</Text> */}
+                        </List.Item>
+                        </List>
                     </View>
             </View>
             </ScrollView>
@@ -319,7 +322,7 @@ const styles =StyleSheet.create({
     TextStyle:{
         marginTop:20*s,
         marginRight:30*s,
-        fontSize:30*s
+        fontSize:30*s,
     },
     ButtonStyle:{
         width:300*s,
