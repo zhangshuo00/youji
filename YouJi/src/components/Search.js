@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react'
-import { View, Text, StyleSheet, TextInput, Button,Alert, TouchableOpacity,Image,Dimensions,AsyncStorage } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button,Alert, TouchableOpacity,Image,Dimensions,AsyncStorage, ScrollView } from 'react-native'
 import { Card,Tag } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
@@ -108,14 +108,12 @@ const Search = (props)=> {
     }
 
     const searchAgain = (item)=>{
-        // console.log(item);
-        setValue(item);
         setDisplay(false);
 
         let post ={
-            keywords: value
+            keywords: item
         }
-        // setDisplay(false)
+        // console.log(post);
         setTimeout(() => {
             fetch('http://majia.hbsdduckhouse.club/discoverSearch',{
                 method:'POST',
@@ -134,13 +132,7 @@ const Search = (props)=> {
                         data[a].likes = 0
                     }
                 }
-                console.log(data);
-                // setdatas(data);
-                setState({
-                    datas:data
-                })
-                // console.log(datas?1:2);
-                // 根据返回的消息，渲染响应的页面
+                setDatas(data);
         })
         }, 300);        
     }
@@ -180,7 +172,7 @@ const Search = (props)=> {
 
         if(display){
             return(
-                <View style={{backgroundColor:isDarkMode?'black':'white',height:'100%'}}>
+                <ScrollView style={{backgroundColor:isDarkMode?'black':'white',height:'100%'}}>
                     <View style={stylesBlack.head}>
                         <TextInput 
                             placeholder="请输入您要搜索的关键字"
@@ -201,18 +193,7 @@ const Search = (props)=> {
                             ))
                         }
                     </View>
-                    {/* <View style={stylesBlack.history}>
-                        {
-                            history.map((item)=>(
-                                <View style={{ padding: 10,marginLeft:10 }}>
-                                    <Tag closable onClose={() => {delSearchHistory(item)}} afterClose={() => {console.log('afterClose');}}>
-                                        {item}
-                                    </Tag>
-                                </View>
-                            ))
-                        }
-                    </View> */}
-                </View>
+                </ScrollView>
             )
         }
         else{
