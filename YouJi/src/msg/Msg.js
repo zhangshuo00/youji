@@ -67,6 +67,7 @@ const Msg =(porps)=>{
         Actions.sider();
     }
 
+<<<<<<< HEAD
     return (
         <ScrollView style={{width:width,height:'100%',backgroundColor:isDarkMode?'black':'white'}}>
             <View style={{flexDirection:'row',backgroundColor:isDarkMode?'black':'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
@@ -92,6 +93,46 @@ const Msg =(porps)=>{
             </View>
         </ScrollView>
     )
+=======
+    render() {
+        return (
+            <ScrollView style={{width:width}}>
+                {/* <Text style={{margin:0}}>微笑</Text>
+                <Emoji name ='smile' style = {{fontSize:20}} /> */}
+                 <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                    <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='bars' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <Text style={styles.headText}>消息列表</Text>
+                 </View>
+                 {/* <Image style={{width:width,height:50}} source={{uri:'https://www.hbsdduckhouse.club/' + this.state.pic}}/> */}
+                <View style={styles.msgList}>
+                {
+                    
+                    this.state.data.map((tag,idx)=>(
+                    // <TouchableOpacity key={idx} style={styles.msgLi} onPress={() =>  Actions.msgDetails({ruid:tag.other})}>
+                    //     {/* <View className="msg-img" style={{background:"url(" + require("../" +tag.headimg) + ")"}}></View> */}
+                    //     <Image source={tag.img_path} style={styles.msgImg} ></Image>
+                    //     <View style={styles.msgBox}>
+                    //         <Text style={styles.msgText}>{tag.other}</Text>
+                    //         <Text style={styles.msgTime}>{tag.time}</Text>  
+                    //         <Text style={styles.msgLast}>{tag.last}</Text>      
+                    //     </View>   
+                    // </TouchableOpacity>))
+                    <TouchableOpacity key={idx} style={styles.msgLi} onPress={() =>  Actions.msgDetails({rname:tag.uname,ruid:tag.uid})}>
+                        {/* <View className="msg-img" style={{background:"url(" + require("../" +tag.headimg) + ")"}}></View> */}
+                        <Image source={{uri:'https://www.hbsdduckhouse.club/' + tag.headimg}} 
+                            style={styles.msgImg} ></Image>
+                        <View style={styles.msgBox}>
+                            <Text style={styles.msgText}>{tag.uname}</Text>
+                            <Text style={styles.msgTime}>{tag.sm_date}</Text>  
+                            <Text style={styles.msgLast}>{tag.context}</Text>      
+                        </View>   
+                    </TouchableOpacity>))
+                }
+                </View>
+            </ScrollView>
+        )
+    }
+>>>>>>> c51a2406db6625263fcb4dc0458a93d34f5e7e23
 }
 
 export default Msg
