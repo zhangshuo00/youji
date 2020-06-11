@@ -76,8 +76,8 @@ export default class Msg extends Component {
     render() {
         return (
             <ScrollView style={{width:width}}>
-                <Text style={{margin:0}}>微笑</Text>
-                <Emoji name ='smile' style = {{fontSize:20}} />
+                {/* <Text style={{margin:0}}>微笑</Text>
+                <Emoji name ='smile' style = {{fontSize:20}} /> */}
                  <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
                     <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='bars' color={'white'} size={28}></Icon></TouchableOpacity>
                     <Text style={styles.headText}>消息列表</Text>
