@@ -17,7 +17,8 @@ export default class MsgDetails extends Component {
             text:'',
             x1:'你好',
             x2:'smile',
-            x3:''
+            x3:'',
+            display:0
             // data:{
             //     ruidInfo:{headimg:require("../images/lisi.jpg"), uid:"k3mimknra",uname:"李四"},
             //     uidInfo:{headimg:require("../images/k3i297defyouji.jpg"), uid:"k3i297def",uname:"有纪"},
@@ -63,7 +64,7 @@ export default class MsgDetails extends Component {
             uid:await AsyncStorage.getItem('uid').then(res=>res),
             ruid:this.props.ruid
         }
-        console.log(post)
+        // console.log(post)
         fetch('http://majia.hbsdduckhouse.club/getMsg',{
             method:'POST',
             // mode:'cors',
@@ -72,7 +73,35 @@ export default class MsgDetails extends Component {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
+            // console.log(data.msg[0]);
+            for(var i=0;i<data.msg.length;i++){
+                var message = data.msg[i].context;
+                message = message.split('[')
+                for(var a=0;a<message.length;a++){
+                    message[a]=message[a].split(']')
+                }
+                message= [].concat.apply([], message);
+                var len = message.length -1;
+                if(len < 10){
+                    for(var b=len;b<10;b++){
+                        message.push('');
+                    }
+                }
+                data.msg[i].context = message;
+                // console.log(message);
+            }
+            // console.log(data.msg[0]);
+            // var message = data.msg[0].context;
+            // message = message.split('[')
+            // for(var a=0;a<message.length;a++){
+            //     message[a]=message[a].split(']')
+            // }
+            // // console.log(message[0].split(']'))
+            // // message[1]=message[1].split(']');
+            // // message[2]=message[2].split(']');
+            // // message[3]=message[3].split(']');
+            // message= [].concat.apply([], message);
+            // console.log(message);
             this.setState({
                 data:data})
         })
@@ -93,6 +122,7 @@ export default class MsgDetails extends Component {
                 ruid:this.props.ruid,
                 msg:this.state.text
             }
+            console.log(post);
             await fetch('http://majia.hbsdduckhouse.club/sendMsg',{
                 method:'POST',
                 // mode:'cors',
@@ -112,7 +142,7 @@ export default class MsgDetails extends Component {
     }
 
     texthandle = (text)=>{
-        console.log(text)
+        // console.log(text)
         this.setState({text:text});
     }
     toEnd = ()=>{
@@ -120,10 +150,11 @@ export default class MsgDetails extends Component {
         this.scrollview.scrollToEnd({animated:false});
     }
 
-    emojiAdd = ()=>{
-        var newText = this.state.text + '[smile]';
-        console.log(newText);
-        this.setState({text:newText});
+    emojiHide = ()=>{
+        this.setState({display:1})
+        // var newText = this.state.text + '[smile]';
+        // console.log(newText);
+        // this.setState({text:newText});
     }
 
     render() {
@@ -143,14 +174,14 @@ export default class MsgDetails extends Component {
                             onPress={() => this.toEnd()}>
                             <Text>到底部</Text>
                         </TouchableOpacity> */}
-                        <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                        <View style={{flexDirection:'row',backgroundColor:this.props.isDark?'black':'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
                             <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='bars' color={'white'} size={28}></Icon></TouchableOpacity>
                             <Text style={styles.headText}>{this.props.rname}</Text>
                         </View>
                             <View style={{paddingBottom:50}}>
-                                <View style={styles.letterLi1}>
-                                        {/* <View style={styles.letterImg1} 
-                                        style={{background:"url(" + require("../" +this.state.data.uidInfo.headimg) + ")"}}></View> */}
+                                {/* <View style={styles.letterLi1}>
+                                        <View style={styles.letterImg1} 
+                                        style={{background:"url(" + require("../" +this.state.data.uidInfo.headimg) + ")"}}></View>
                                         <Image style={styles.letterImg1}  source={{uri:'https://www.hbsdduckhouse.club/images/k3mimknra杰尼龟.jpg'}}></Image>
                                         <View style={styles.letterTrian1}></View>
                                         <Text style = {styles.letterText1}>
@@ -159,10 +190,10 @@ export default class MsgDetails extends Component {
                                             {this.state.x1}
                                             <Emoji name ={this.state.x2} style = {{fontSize:20}} />
                                             {this.state.x1}
-                                            <Emoji name ={this.state.x2} style = {{fontSize:20}} />
+                                            <Emoji name ='angry' style = {{fontSize:20}} />
                                         </Text>
-                                        {/* <Emoji name ='smile' style = {styles.letterText1}/> */}
-                                </View>
+                                        <Emoji name ='smile' style = {styles.letterText1}/>
+                                </View> */}
                             {
                                 this.state.data.msg.map((tag,idx)=>
                                 tag.sender == 'me'?
@@ -171,23 +202,103 @@ export default class MsgDetails extends Component {
                                     style={{background:"url(" + require("../" +this.state.data.uidInfo.headimg) + ")"}}></View> */}
                                     <Image style={styles.letterImg1}  source={{uri:'https://www.hbsdduckhouse.club/' + this.state.data.uidInfo.headimg}}></Image>
                                     <View style={styles.letterTrian1}></View>
-                                    <Text style={styles.letterText1}>{tag.context}</Text>
+                                    <Text style={styles.letterText1}>
+                                        {tag.context[0]}
+                                        <Emoji name ={tag.context[1]} style = {{fontSize:20}} />
+                                        {tag.context[2]}
+                                        <Emoji name ={tag.context[3]} style = {{fontSize:20}} />
+                                        {tag.context[4]}
+                                        <Emoji name ={tag.context[5]} style = {{fontSize:20}} />
+                                        {tag.context[6]}
+                                        <Emoji name ={tag.context[7]} style = {{fontSize:20}} />
+                                        {tag.context[8]}
+                                        <Emoji name ={tag.context[9]} style = {{fontSize:20}} />
+                                    </Text>
                                 </View>)
                                 :
                                 (<View key={idx} style={styles.letterLi}>
                                     {/* <View style={styles.letterImg} style={{background:"url(" + require("../" +this.state.data.ruidInfo.headimg) + ")"}}></View> */}
                                     <Image style={styles.letterImg}  source={{uri:'https://www.hbsdduckhouse.club/' + this.state.data.ruidInfo.headimg}}></Image>
                                     <View style={styles.letterTrian}></View>
-                                    <Text style={styles.letterText}>{tag.context}</Text>
+                                    <Text style={styles.letterText}>
+                                        {tag.context[0]}
+                                        <Emoji name ={tag.context[1]} style = {{fontSize:20}} />
+                                        {tag.context[2]}
+                                        <Emoji name ={tag.context[3]} style = {{fontSize:20}} />
+                                        {tag.context[4]}
+                                        <Emoji name ={tag.context[5]} style = {{fontSize:20}} />
+                                        {tag.context[6]}
+                                        <Emoji name ={tag.context[7]} style = {{fontSize:20}} />
+                                        {tag.context[8]}
+                                        <Emoji name ={tag.context[9]} style = {{fontSize:20}} />
+                                    </Text>
                                 </View>))
                                 // <Link to={'/topics/'+item.id}>{item.title}</Link>
                             }
                         </View>
                     </ScrollView>
                 </ImageBackground>
+                <View 
+                    style={{
+                        flexDirection:'row',
+                        position:'absolute',
+                        bottom:35,
+                        left:5,
+                        display:'flex'
+                    }}
+                >
+                    <View style={{
+                         height:80,
+                         width:width*0.4,
+                         backgroundColor:'white',
+                         borderRadius:10,
+                         padding:4,
+                         flexWrap:'wrap',
+                         flexDirection:'row',
+                         display:this.state.display==1?'flex':'none'
+                    }}>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[smile]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'smile'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[angry]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'angry'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[coffee]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'coffee'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[cry]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'cry'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[dog]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'dog'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[cat]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'cat'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[brid]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'bird'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[blush]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'blush'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[scream]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'scream'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[beer]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'beer'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[basketball]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'basketball'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin:2}} onPress={()=>{var newText = this.state.text + '[rice]';this.setState({text:newText,display:0});}}>
+                            <Emoji name ={'rice'} style = {{fontSize:20}} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.emojiTrian}></View>
+                </View>
                 <View style={styles.letterBoxs}>
-                    <TouchableOpacity onPress={() => this.emojiAdd()}>
-                        <Emoji name ='smile' style = {{fontSize:20}} />
+                    <TouchableOpacity onPress={() => this.emojiHide()} style={{marginLeft:5}}>
+                        <Emoji name ='smile' style = {{fontSize:27}} />
                     </TouchableOpacity>
                     <TextInput style={styles.letterInput} multiline={true} value = {this.state.text}
                         keyboardType = 'default' onChangeText={this.texthandle}></TextInput>
@@ -216,11 +327,42 @@ const styles = StyleSheet.create({
         position:'absolute',
         // top:'50%',
         bottom:10,
-        left:0
+        left:0,
+    },
+    // hideBox:{
+    //     flexDirection:'row',
+    //     // marginTop:80,
+    //     position:'absolute',
+    //     // top:'50%',
+    //     bottom:35,
+    //     left:5,
+    // },
+    emojiBox:{
+        height:80,
+        width:width*0.4,
+        backgroundColor:'white',
+        borderRadius:10,
+        padding:4,
+        flexWrap:'wrap',
+        flexDirection:'row',
+    },
+    emojiTrian:{
+        marginLeft: -width*0.38,
+        marginTop: 80,
+        width: 0,
+        height: 0,
+        borderTopWidth: 15,
+        borderTopColor: 'white',
+        borderRightWidth: 15,
+        borderRightColor: 'transparent',
+        borderLeftWidth: 10,
+        borderLeftColor: 'transparent',
+        borderBottomWidth: 15,
+        borderBottomColor: 'transparent',
     },
     letterButton:{
         height: 30,
-        width: width*0.17,
+        width: width*0.16,
         marginLeft:width*0.02,
         borderRadius: 15,
         backgroundColor: '#FAA755',
@@ -229,8 +371,8 @@ const styles = StyleSheet.create({
         marginTop:2,
     },
     letterInput:{
-        marginLeft:width*0.02,
-        width: width*0.77,
+        marginLeft:width*0.01,
+        width: width*0.71,
         // height: 38,
         minHeight:30,
         // maxHeight:38,
@@ -284,17 +426,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 10,
         borderBottomColor: 'transparent',
     },
-    // letterITrian1:{
-    //     margin-right: 1%;
-    //     margin-top: 23,
-    //     width: 0;
-    //     height: 0;
-    //     float: right;
-    //     border-top: 10px solid transparent;
-    //     border-left: 10px solid white;
-    //     border-bottom: 10px solid transparent;
-        
-    // },
     letterTrian1:{
         marginRight: -4,
         marginTop: 21,

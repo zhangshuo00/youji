@@ -1,82 +1,80 @@
-import React, { Component} from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Button,Alert, TouchableOpacity,Image,Dimensions,AsyncStorage } from 'react-native'
 import { Card,Tag } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
 
 const {width} = Dimensions.get('window');
 
-export default class Search extends Component {
+const Search = (props)=> {
+    let [datas, setDatas] = useState([]);
+    let [history, setHistory] = useState(['无']);
+    let [value, setValue] = useState('');
+    let [uid, setUid] = useState('');
+    let [display, setDisplay] = useState(true);
+    const isDarkMode = useDarkMode();
+    const stylesBlack = useDynamicStyleSheet(dynamicStyles);
 
-    // let [datas,setdatas] = useState([]);
-    // const [history, setHistory] = useState(['安安']);
-    // const [value,setValue] = useState('');
-    // const [display,setDisplay] = useState(true);
-
-    constructor(){
-        super();
-        this.state = {
-            datas:[],
-            history:['无'],
-            value:'',
-            display:true
-        }
+    const getUid = async ()=>{
+        setUid(await AsyncStorage.getItem('uid'));
     }
-
-    async componentDidMount(){
-        const post ={
-            uid: await AsyncStorage.getItem('uid').then(res=>res),
-        }
-        fetch('http://majia.hbsdduckhouse.club/getSearchHistory',{
-            method:'POST',
-            // mode:'cors',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data.keyword);
-            this.setState({
-                history:data.keyword
+    useEffect(() => {
+        getUid();
+        let post = {
+            uid: uid
+        };
+        setTimeout(() => {
+            fetch('http://majia.hbsdduckhouse.club/getSearchHistory',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
             })
-        })
-    }
+            .then(res=>res.json())
+            .then(data=>{
+                // console.log(data.keyword);
+                setHistory(data.keyword)
+            })
+        }, 300);
+    })
 
-    texthandle=async (event)=>{
+    const texthandle = (event)=>{
         // setHistory([...history,event.nativeEvent.text])
         // setValue(event.nativeEvent.text);
-        await this.setState({
-            value:event.nativeEvent.text,
-            display:false
-        })
-        // console.log(this.state.value)
+        setValue(event.nativeEvent.text);
+        setDisplay(false);
+
+        // console.log(value)
 
          //添加搜索记录
          //检测搜索记录是否重复
-         for(var i=0,a=0;i<this.state.history.length;i++){
-             if(this.state.value == this.state.history[i]){
+         for(var i=0,a=0;i<history.length;i++){
+             if(value == history[i]){
                  console.log('已进行过相关搜索');
                  a++;
              }
-             if(i==this.state.history.length-1 && a==0){
-                const posts ={
-                    uid: await AsyncStorage.getItem('uid').then(res=>res),
-                    keyword:this.state.value
+             if(i==history.length-1 && a==0){
+                let posts ={
+                    uid: uid,
+                    keyword: value
                 }
-                fetch('http://majia.hbsdduckhouse.club/addSearchHistory',{
-                    method:'POST',
-                    // mode:'cors',
-                    headers: {'Content-Type': 'application/json'},
-                    body:JSON.stringify(posts)
-                })
-                .then(res=>res.json())
-                .then(data=>{
-                    console.log(data);
-                })        
+                setTimeout(() => {
+                    fetch('http://majia.hbsdduckhouse.club/addSearchHistory',{
+                        method:'POST',
+                        // mode:'cors',
+                        headers: {'Content-Type': 'application/json'},
+                        body:JSON.stringify(posts)
+                    })
+                    .then(res=>res.json())
+                    .then(data=>{
+                        console.log(data);
+                    })  
+                }, 300);      
              }
          }
         
-        const post ={
-            keywords:this.state.value
+        let post ={
+            keywords: value
         }
         // setDisplay(false)
         console.log(post);
@@ -100,121 +98,114 @@ export default class Search extends Component {
             console.log(data);
             // setdatas(data);
             if(data != []){
-                this.setState({
-                    datas:data
-                })
+                setDatas(data);
             }
             else{
-                this.setState({
-                    datas:false
-                }) 
+                setDatas(false)
             }
             // 根据返回的消息，渲染响应的页面
         })
     }
 
-    searchAgain=async (item)=>{
+    const searchAgain = (item)=>{
         // console.log(item);
-        await this.setState({
-            value:item,
-            display:false
-        })
-        const post ={
-            keywords:this.state.value
+        setValue(item);
+        setDisplay(false);
+
+        let post ={
+            keywords: value
         }
         // setDisplay(false)
-        console.log(post);
-        fetch('http://majia.hbsdduckhouse.club/discoverSearch',{
-            method:'POST',
-            // mode:'cors',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            for(var a=0;a<data.length;a++){
-                data[a].ch_headimg = 'https://www.hbsdduckhouse.club/'+data[a].ch_headimg;
-                if(!data[a].favorites){
-                    data[a].favorites = 0
-                }
-                if(!data[a].likes){
-                    data[a].likes = 0
-                }
-            }
-            console.log(data);
-            // setdatas(data);
-            this.setState({
-                datas:data
+        setTimeout(() => {
+            fetch('http://majia.hbsdduckhouse.club/discoverSearch',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
             })
-            // console.log(this.state.datas?1:2);
-            // 根据返回的消息，渲染响应的页面
+            .then(res=>res.json())
+            .then(data=>{
+                for(var a=0;a<data.length;a++){
+                    data[a].ch_headimg = 'https://www.hbsdduckhouse.club/'+data[a].ch_headimg;
+                    if(!data[a].favorites){
+                        data[a].favorites = 0
+                    }
+                    if(!data[a].likes){
+                        data[a].likes = 0
+                    }
+                }
+                console.log(data);
+                // setdatas(data);
+                setState({
+                    datas:data
+                })
+                // console.log(datas?1:2);
+                // 根据返回的消息，渲染响应的页面
         })
+        }, 300);        
     }
 
-    delSearchHistory=async (item)=>{
-        let that=this;
+    const delSearchHistory = (item)=>{
         Alert.alert('提示',
         '是否删除该搜索历史?', 
         [
             { text: '取消', onPress: () => console.log('cancel') },
             { text: '确定', onPress: () =>{
-                that.delHistory(item)
+                delHistory(item)
             }},
         ])
     }
-    delHistory= async(item)=>{
+    const delHistory = (item)=>{
         // console.log(item);
-        await this.setState({
-            value:item
-        })
-        const post ={
-            uid: await AsyncStorage.getItem('uid').then(res=>res),
-            keyword:this.state.value
+        setValue(item);
+        let post ={
+            uid: uid,
+            keyword: value
         }
         // setDisplay(false)
         console.log(post);
-        fetch('http://majia.hbsdduckhouse.club/delSearchHistory',{
-            method:'POST',
-            // mode:'cors',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            this.componentDidMount()
-        })
+        setTimeout(() => {
+            fetch('http://majia.hbsdduckhouse.club/delSearchHistory',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+            })
+        }, 200);
     }
 
-    render(){
-        if(this.state.display){
+        if(display){
             return(
-                <View>
-                    <View style={styles.head}>
+                <View style={{backgroundColor:isDarkMode?'black':'white',height:'100%'}}>
+                    <View style={stylesBlack.head}>
                         <TextInput 
                             placeholder="请输入您要搜索的关键字"
-                            style={styles.search} 
+                            style={stylesBlack.search} 
                             autoFocus={true}
-                            onSubmitEditing={(event)=>{this.texthandle(event)}}
+                            onSubmitEditing={(event)=>{texthandle(event)}}
                         />
                         <Icon size={24} style={{position:'absolute',right:45,top:12}} name="search1"/>
                     </View>
                     <Text style={{fontSize:16,marginLeft:20,marginTop:10}}>搜索历史</Text>
-                    <View style={styles.history}>
+                    <View style={stylesBlack.history}>
                         {
-                            this.state.history.map((item)=>(
-                                <TouchableOpacity style={styles.historyBtn}>
-                                    <TouchableOpacity  onPress={()=>{this.searchAgain(item)}}><Text style={{margin:0,color:'white'}}>{item} </Text></TouchableOpacity>
-                                    <Icon name='close' color={'white'} size={10} style={{marginTop:-2}}  onPress={()=>{this.delSearchHistory(item)}}></Icon>
+                            history.map((item)=>(
+                                <TouchableOpacity style={stylesBlack.historyBtn}>
+                                    <TouchableOpacity  onPress={()=>{searchAgain(item)}}><Text style={{margin:0,color:'white'}}>{item} </Text></TouchableOpacity>
+                                    <Icon name='close' color={'white'} size={10} style={{marginTop:-2}}  onPress={()=>{delSearchHistory(item)}}></Icon>
                                 </TouchableOpacity>
                             ))
                         }
                     </View>
-                    {/* <View style={styles.history}>
+                    {/* <View style={stylesBlack.history}>
                         {
-                            this.state.history.map((item)=>(
+                            history.map((item)=>(
                                 <View style={{ padding: 10,marginLeft:10 }}>
-                                    <Tag closable onClose={() => {this.delSearchHistory(item)}} afterClose={() => {console.log('afterClose');}}>
+                                    <Tag closable onClose={() => {delSearchHistory(item)}} afterClose={() => {console.log('afterClose');}}>
                                         {item}
                                     </Tag>
                                 </View>
@@ -226,45 +217,45 @@ export default class Search extends Component {
         }
         else{
             return(
-                <View>
-                    <View style={styles.head}>
+                <View style={{backgroundColor:isDarkMode?'black':'white'}}>
+                    <View style={stylesBlack.head}>
                                 <TextInput 
                                     placeholder="请输入您要搜索的关键字"
-                                    style={styles.search} 
+                                    style={stylesBlack.search} 
                                     autoFocus={true}
-                                    onSubmitEditing={(event)=>{this.texthandle(event)}}
+                                    onSubmitEditing={(event)=>{texthandle(event)}}
                                 />
                                 <Icon size={24} style={{position:'absolute',right:45,top:12}} name="search1"/>
                             </View>
-                    <View style={styles.card}>
+                    <View style={stylesBlack.card}>
                     {
-                        this.state.datas == false ?
-                        (<View style={{width:width,justifyContent:'center', flexDirection:'row',flexWrap:'wrap',}}> 
-                            <Text style={{fontSize:20,marginTop:50}}>未查询到相关内容</Text> 
+                        datas == false ?
+                        (<View style={{width:width,height:'100%',justifyContent:'center', flexDirection:'row',flexWrap:'wrap',backgroundColor:isDarkMode?'black':'white'}}> 
+                            <Text style={{fontSize:20,marginTop:50,color:isDarkMode?'white':'black'}}>未查询到相关内容</Text> 
                         </View>)
                         :
-                        this.state.datas.map(card=>
-                            <Card>
+                        datas.map(card=>
+                            <Card style={{backgroundColor:isDarkMode?'black':'white'}}>
                                 {/* <Card.Header
                                     title={card.uname}
                                     thumb={card.ch_headimg}
                                     thumbStyle={{width: 30,height: 30,borderRadius:15}}
                                 /> */}
-                                <Card.Body>
+                                <Card.Body style={{backgroundColor:isDarkMode?'black':'white'}}>
                                     <View style={{width:width,flexDirection:'row',alignItems:'center',marginBottom:10}}>
                                         <Image style={{width:width*0.3,marginLeft:10,width: 30,height: 30,borderRadius:15}} source={{uri:card.ch_headimg}}></Image>
-                                        <Text style={{width:width*0.5,marginLeft: 10,fontSize:28}}>{card.title}</Text>
+                                        <Text style={{width:width*0.5,marginLeft: 10,fontSize:18,color:isDarkMode?'white':'black'}}>{card.title}</Text>
                                     </View>
-                                    <Text style={{marginLeft: 30}}>{card.context}</Text>
-                                    <Text style={{position:'relative',left:width*0.8,bottom:10}}>{card.chdate}</Text>
+                                    <Text style={{marginLeft: 30,color:isDarkMode?'white':'black',marginBottom: 20}}>{card.context}</Text>
+                                    {/* <Text style={{position:'relative',left:width*0.8,bottom:10}}>{card.chdate}</Text> */}
                                 </Card.Body>
                                 <Card.Footer
                                     content={
                                         <View style={{display: 'flex',flexDirection: 'row',marginTop: -18}}>
-                                            <Image source={{uri: 'https://i.loli.net/2020/04/13/cWKiSzxOIo8fhtv.png'}} style={styles.cardBottomImage}/>
-                                            <Text>  {card.favorites}</Text>
-                                            <Image source={{uri: 'https://i.loli.net/2020/04/13/kbr2KtWGMfvl51E.png'}} style={styles.cardBottomImage}/>
-                                            <Text>  {card.likes}</Text>
+                                            <Image source={{uri: 'https://i.loli.net/2020/04/13/cWKiSzxOIo8fhtv.png'}} style={stylesBlack.cardBottomImage}/>
+                                            <Text style={{color:isDarkMode?'white':'black'}}>  {card.favorites}</Text>
+                                            <Image source={{uri: 'https://i.loli.net/2020/04/13/kbr2KtWGMfvl51E.png'}} style={stylesBlack.cardBottomImage}/>
+                                            <Text style={{color:isDarkMode?'white':'black'}}>  {card.likes}</Text>
                                         </View>
                                     }
                                 />
@@ -275,10 +266,10 @@ export default class Search extends Component {
                 </View>
             )
         }
-    }
 }
+export default Search
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
     search: {
         width:'85%',
         height:40,
@@ -291,7 +282,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         flexDirection:'row',
         flexWrap:'wrap',
-        backgroundColor:'rgb(250, 167, 85)'
+        backgroundColor: new DynamicValue('rgb(250, 167, 85)','black')
     },
     history: {
         display:'flex',
@@ -314,7 +305,8 @@ const styles = StyleSheet.create({
     },
     card: {
         paddingTop: 3,
-        margin:0
+        margin:0,
+        backgroundColor: new DynamicValue('white','black')
     },
     cardTitle: {
 

@@ -115,7 +115,7 @@ export default class OtherSionple extends Component {
 
     async componentDidMount(){
         const post ={
-            uid: await   AsyncStorage.getItem('uid ').then(res=>res),
+            uid: await AsyncStorage.getItem('uid').then(res=>res),
             chid:this.props.chid,
         }
         this.setState({

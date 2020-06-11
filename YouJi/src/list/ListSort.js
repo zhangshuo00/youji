@@ -1,68 +1,68 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Text, View,Dimensions, StyleSheet,ImageBackground, ScrollView,TouchableOpacity,Alert, Image, AsyncStorage} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
+
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 
 console.disableYellowBox = true; //取消显示黄框
 
 
-export default class ListSort extends Component {
-    constructor(){
-        super();
-        this.state={
-            datas:[],
-            uid:'',
-            tags:'',
-            refresh:'',
-        }
-    }
+const ListSort =(porps)=> {
+    let [datas, setDatas] = useState([]);
+    let [uid, setUid] = useState('');
+    let [tags, setTags] = useState('');
+    let [refresh, setRefresh] = useState('');
+    const isDarkMode = useDarkMode();
+    const stylesBlack = useDynamicStyleSheet(dynamicStyles);
 
-   async componentDidMount(){
-        this.setState({
-            uid:await   AsyncStorage.getItem('uid').then(res=>res),
-            tags:await   AsyncStorage.getItem('tags').then(res=>res),
-        })
-        const post ={
-            uid:this.state.uid
-       }
-        console.log(post,"dsa"); 
-       fetch('http://majia.hbsdduckhouse.club/listSort',{
-            method:'POST',
-            // mode:'cors',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            // 根据返回的消息，渲染响应的页面
-            this.setState({
-                datas:data
+    const getStorage = async()=>{
+        setUid(await AsyncStorage.getItem('uid'));
+        setTags(await AsyncStorage.getItem('tags'))
+    };
+
+    useEffect(() => {
+        getStorage();
+        let post = {
+            uid: uid
+        };
+        setTimeout(() => {
+            fetch('http://majia.hbsdduckhouse.club/listSort',{
+                method:'POST',
+                // mode:'cors',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
             })
-            console.log(data);
-        })
-    }
+            .then(res=>res.json())
+            .then(data=>{
+                // 根据返回的消息，渲染响应的页面
+                setDatas(data)
+                // console.log(data);
+            })
+        }, 300);
+    })
 
     
-//长按删除
-    touchStart(item){
-        let that=this;
-            Alert.alert('提示',
-                '是否删除该分类，并删除该分类下所有笔记?', 
-                [
+    //长按删除
+    const touchStart=(item)=>{
+        Alert.alert('提示',
+            '是否删除该分类，并删除该分类下所有笔记?', 
+            [
                 { text: '取消', onPress: () => console.log('cancel') },
-                { text: '确定', onPress: () => that.delTags(item)
+                { text: '确定', onPress: () => delTags(item)
                 },
-                ])
+            ]
+        )
     }
     //删除函数
-    delTags=(item)=>{
-        const post ={
-            uid:this.state.uid,
+    const delTags=(item)=>{
+        let post ={
+            uid:uid,
             tags:item.tags
-       }
-       console.log(post,"dsa");
+        }
+        console.log(post,"dsa");
         fetch('http://majia.hbsdduckhouse.club/delTags',{
             method:'POST',
             // mode:'cors',
@@ -73,12 +73,11 @@ export default class ListSort extends Component {
         .then(data=>{
             console.log(data,'重新加载');
             //重新刷新该页面
-            this.componentDidMount()
         })
     }
 
     //跳转详细分类，笔记页面
-    jumpToSion = (item)=>{
+    const jumpToSion = (item)=>{
         // AsyncStorage.setItem('tags',item.tags)
         Actions.sion({tag:item.tags})
         // console.log(e.target.innerHTML.slice(3,-4));
@@ -86,32 +85,31 @@ export default class ListSort extends Component {
         // // 跳转到点击笔记标签的列表页
     }
 
-    head = ()=>{
+    const head = ()=>{
         Actions.sider();
     }
 
-     render() {
-        return (
-            <ScrollView>
-                <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>{this.head()}}><Icon name='bars' color={'white'} size={28}></Icon></TouchableOpacity>
-                    <Text style={styles.headText}>笔记列表</Text>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.addtag()}><Icon name='tag' color={'white'} size={28}></Icon></TouchableOpacity>
+    return (
+            <ScrollView style={{backgroundColor:isDarkMode?'black':'white'}}>
+                <View style={{flexDirection:'row',backgroundColor:isDarkMode?'black':'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                    <TouchableOpacity style={stylesBlack.headIcon} onPress={()=>{head()}}><Icon name='bars' color={'white'} size={28}></Icon></TouchableOpacity>
+                    <Text style={stylesBlack.headText}>笔记列表</Text>
+                    <TouchableOpacity style={stylesBlack.headIcon} onPress={()=>Actions.addtag()}><Icon name='tag' color={'white'} size={28}></Icon></TouchableOpacity>
                  </View>
                 <View>
                     {
-                        this.state.datas.map((item)=>(
+                        datas.map((item)=>(
                             <View style={{margin:15*s,borderRadius:20*s}}>
                                 <TouchableOpacity
-                                    onLongPress={()=>this.touchStart(item)}
-                                    onPress={()=>this.jumpToSion(item)}
+                                    onLongPress={()=>touchStart(item)}
+                                    onPress={()=>jumpToSion(item)}
                                 >
                                 <ImageBackground 
                                     imageStyle={{borderRadius:20*s}}
                                     source={{uri:'https://www.hbsdduckhouse.club/' + item.img_path}}
                                     style={{height:180*s,borderRadius:20*s}}
                                 >
-                                    <Text style={{color:"orange",fontSize:30*s,marginLeft:20*s,marginTop:10*s}}>
+                                    <Text style={{color:isDarkMode?'white':"orange",fontSize:30*s,marginLeft:20*s,marginTop:10*s}}>
                                         {item.tags}
                                     </Text>
                                 </ImageBackground >
@@ -121,11 +119,12 @@ export default class ListSort extends Component {
                         }
                 </View>
             </ScrollView>
-        )
-    }
-}
+    )
 
-const styles = StyleSheet.create({
+}
+export default ListSort
+
+const dynamicStyles = new DynamicStyleSheet({
     headText:{
         marginRight:width*0.12,
         width:width*0.54,

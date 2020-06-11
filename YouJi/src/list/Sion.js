@@ -1,31 +1,29 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Text, View,StyleSheet,Dimensions,Image, FlatList, TouchableOpacity,Alert, ScrollView,AsyncStorage} from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
+
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 
-export default class Sion extends Component {
-    constructor(){
-        super();
-        this.state={
-            datas:[],
-            chid:'',
-            uid:''
-        }
-    }
+const Sion = (props)=> {
+    let [datas, setDatas] = useState([]);
+    let [chid, setChid] = useState('');
+    let [uid, setUid] = useState('');
+    const isDarkMode = useDarkMode();
+    const stylesBlack = useDynamicStyleSheet(dynamicStyles);
+
     //长按删除
-    touchStart(e){
-        let that=this;
-            Alert.alert('提示',
-                '是否删除这篇笔记?', 
-                [
+    const touchStart=(e)=>{
+        Alert.alert('提示',
+            '是否删除这篇笔记?', 
+            [
                 { text: '取消', onPress: () => console.log('cancel') },
-                { text: '确定', onPress: () => that.delTags(e)
-                },
-                ])
+                { text: '确定', onPress: () => delTags(e) },
+            ])
     }
-     delTags= async(e)=>{
+    const delTags= async(e)=>{
         console.log(e)
         const post ={
             uid:await AsyncStorage.getItem('uid').then(res=>res),
@@ -40,66 +38,66 @@ export default class Sion extends Component {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            this.componentDidMount()
+            // componentDidMount()
         })
     }
-
-    async componentDidMount(){
-        // AsyncStorage.setItem('chid',"20")
-        const post ={
-            uid:await AsyncStorage.getItem('uid').then(res=>res),
-            tags:this.props.tag
+    const getUid = async()=>{
+        setUid(await AsyncStorage.getItem('uid'));
+    }
+    useEffect(() => {
+        getUid();
+        let post = {
+            uid: uid,
+            tags: props.tag
         }
-        this.setState({
-            uid:post.uid
-        })
-        console.log(post,'看uid')
-        AsyncStorage.setItem('tags',this.props.tag)
-        fetch('http://majia.hbsdduckhouse.club/Sion',{
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data,'返回的单页数据'),
-            this.setState({
-                datas:data,
+        // console.log(post)
+        AsyncStorage.setItem('tags',props.tag);
+        setTimeout(() => {
+            fetch('http://majia.hbsdduckhouse.club/Sion',{
+                method:'POST',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
             })
-        })  
-    }
+            .then(res=>res.json())
+            .then(data=>{
+                // console.log(data,'返回的单页数据');
+                setDatas(data)
+            })
+        }, 300);
+
+    })
 
 
     
     //跳转相信分类
-    jumpToSionple =(item)=>{
-        var uid = this.state.uid
-        AsyncStorage.setItem('chid',""+item.chid+"")
-        console.log('跳转到子页',item.chid)
-        console.log(this.state.uid)
-        Actions.sionple({uid})
-     }
+    const jumpToSionple =(item)=>{
+        // var uid = uid
+        // AsyncStorage.setItem('chid',""+item.chid+"")
+        // console.log('跳转到子页',item.chid)
+        // console.log(uid)
+        let chids = item.chid;
+        Actions.sionple({uid,chids});
+    }
     
-
-    render() {
-        return (
-            <ScrollView>
-                <View style={{flexDirection:'row',backgroundColor:'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.listSion()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
-                        <Text style={styles.headText}>{this.props.tag}</Text>
-                    <TouchableOpacity style={styles.headIcon} onPress={()=>Actions.sionnew({tag:this.props.tag})}><Icon name='plus' color={'white'} size={28}></Icon></TouchableOpacity>
+    return (
+            <ScrollView style={{backgroundColor:isDarkMode?'black':'white'}}>
+                <View style={{flexDirection:'row',backgroundColor:isDarkMode?'black':'rgb(250, 167, 85)',paddingTop:10,paddingBottom:10}}>
+                    <TouchableOpacity style={stylesBlack.headIcon} onPress={()=>Actions.listSion()}><Icon name='left' color={'white'} size={28}></Icon></TouchableOpacity>
+                        <Text style={stylesBlack.headText}>{props.tag}</Text>
+                    <TouchableOpacity style={stylesBlack.headIcon} onPress={()=>Actions.sionnew({tag:props.tag})}><Icon name='plus' color={'white'} size={28}></Icon></TouchableOpacity>
                 </View>
                 <View style={{
                     flexDirection: 'row',
-                    alignItems: 'center'}}>
+                    alignItems: 'center',
+                    backgroundColor:isDarkMode?'black':'white'}}>
                         <FlatList
                         numColumns='2'
-                        data={this.state.datas}
+                        data={datas}
                         renderItem={({item})=>{
                             return(
                                 <TouchableOpacity 
-                                    onLongPress={()=>this.touchStart(item)}
-                                    onPress={()=>this.jumpToSionple(item)}
+                                    onLongPress={()=>touchStart(item)}
+                                    onPress={()=>jumpToSionple(item)}
                                     style={{
                                         paddingTop:40*s,
                                         width:'50%',
@@ -110,8 +108,8 @@ export default class Sion extends Component {
                                     <Image 
                                     source={{uri:'https://www.hbsdduckhouse.club/' + item.ch_headimg}}
                                     style={{height:120*s,width:150*s,borderRadius: 10*s}}/>
-                                    <Text  style={{marginBottom:5*s}}>{item.title}</Text>
-                                    <Text>{item.chdate}</Text>
+                                    <Text  style={{marginBottom:5*s,color:isDarkMode?'white':'black'}}>{item.title}</Text>
+                                    <Text style={{color:isDarkMode?'white':'black'}}>{item.chdate}</Text>
                                 </View>
                                 </TouchableOpacity>
                             )
@@ -119,12 +117,11 @@ export default class Sion extends Component {
                             />
                 </View>
             </ScrollView>
-        )
-    }
+    )
 }
+export default Sion
 
-
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
     headText:{
         marginRight:width*0.12,
         width:width*0.54,

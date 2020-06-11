@@ -119,7 +119,7 @@
 //                     <TabBar.Item title="关注列表" 
 //                     style={stylesBlack.me_follow}
 //                     selected={selectedTab === 'Tab2'}
-//                     onPress={() => this.onChangeTab('Tab2')}
+//                     onPress={() => onChangeTab('Tab2')}
 //                     >
 //                         {renderContent(<ListCard/>)} 
 //                         {/* <Text>zhangsan</Text> */}
@@ -216,8 +216,7 @@
 //     }
 // })
 
-
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {View, Text,TouchableOpacity,StyleSheet,Image,AsyncStorage,Dimensions,ScrollView} from 'react-native';
 import {Router,Overlay,  Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
 import { TabBar } from '@ant-design/react-native';
@@ -225,85 +224,82 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Button from 'react-native-button';
 import SaveList from './SaveList';
 import FollowList from './FollowList';
+import { useDarkMode, DynamicStyleSheet, DynamicValue, useDynamicStyleSheet } from 'react-native-dark-mode'
 
 const {width} = Dimensions.get('window');
 
-export default class Me extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          selectedTab: 'redTab',
-          display:1,
-          data:{uname:'张三',uemail:'zhangsan@qq.com',userCounts:5,chapterCounts:5,signature:'我是张三',headimg:'images/timg.jpg',usex:'男'},
-          datas:'',
-          uid:''
-        };
-      }
-    
-    async componentDidMount(){
-        this.setState({
-            uid: await AsyncStorage.getItem('uid').then(res=>res)
-        })
-        // console.log(this.state.uid);
-        const post ={
-            uid:await AsyncStorage.getItem('uid').then(res=>res),
-        }
-        // console.log(post);
-        fetch('http://majia.hbsdduckhouse.club/me',{
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(post)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            // console.log(data[0]);
-            this.setState({
-                data:data[0],
-                datas:data[1]
-            })
-            if(data[0].usex == '男'){
-                this.setState({
-                    seximg:'images/nan.png'
-                })
-            }
-            else{
-                this.setState({
-                    seximg:'images/nv.png'
-                })
-            }
-        })
+const Me = (props)=> {
+    let [selectedTab, setSelectedTab] = useState('redTab');
+    let [display, setDisplay] = useState(1);
+    let [datas, setDatas] = useState('');
+    let [uid, setUid] = useState('');
+    let [data, setData] = useState({
+        uname:'张三',
+        uemail:'zhangsan@qq.com',
+        userCounts:5,
+        chapterCounts:5,
+        signature:'我是张三',
+        headimg:'images/timg.jpg',
+        usex:'男'
+    });
+    let [seximg, setSeximg] = useState('images/nan.png')
+    const isDarkMode = useDarkMode();
+    const stylesBlack = useDynamicStyleSheet(dynamicStyles);
+
+    const getUid = async()=>{
+        setUid(await AsyncStorage.getItem('uid'));
     }
+    useEffect(() => {
+        getUid();
+        let post = {
+            uid: uid
+        };
+        setTimeout(() => {
+            fetch('http://majia.hbsdduckhouse.club/me',{
+                method:'POST',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(post)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                // console.log(data[0]);
+                setData(data[0]);
+                setDatas(data[1]);
+                if(data[0].usex == '男'){
+                    setSeximg('images/nan.png')
+                }
+                else{
+                    setSeximg('images/nv.png')
+                }
+            })
+        }, 300);
+    });
 
     // onChangeTab(tabName) {
-    //     this.setState({
+    //     setState({
     //       selectedTab: tabName,
     //     });
     // }
     // renderContent(pageText) {
     //     return (
-    //       <View style={styles.me_card}>   
+    //       <View style={stylesBlack.me_card}>   
     //         <ListCard/>
     //       </View>
     //     );
     //   }
 
-    saveList=()=>{
-        this.setState({
-            display:1
-        })
+    const saveList = ()=>{
+        setDisplay(1);
     }
 
-    followList=()=>{
-        this.setState({
-            display:0
-        })
+    const followList = ()=>{
+        setDisplay(0);
     }
 
-    render(){
-        return(
+    return(
             <ScrollView>
-                <View style={styles.me_top}>
-                        <View style={styles.me_top_list}>
+                <View style={stylesBlack.me_top}>
+                        <View style={stylesBlack.me_top_list}>
                             <Icon style={{
                             color:'#fff',
                             marginTop:20,
@@ -312,66 +308,68 @@ export default class Me extends Component {
                             onPress={()=>Actions.sider()}
                         />
                         </View>
-                        <View style={styles.me_top_user}>
-                            <Text style={{color:'#fff'}}>{this.state.data.uname}</Text>
+                        <View style={stylesBlack.me_top_user}>
+                            <Text style={{color: isDarkMode ? '#fff':'black'}}>{data.uname}</Text>
                         </View>
-                        <View style={styles.me_top_email}>
-                            <Text>{this.state.data.uemail}</Text>
+                        <View style={stylesBlack.me_top_email}>
+                            <Text style={{color: isDarkMode ? '#fff':'black'}}>{data.uemail}</Text>
                         </View>
                 </View>
-                <View style={{backgroundColor:'white'}}>
-                    <View style={styles.me_title}>
-                        <TouchableOpacity  onPress={()=>Actions.person({ruid:this.state.uid}) }>
-                            <Image style={styles.me_head} source={{uri:'https://www.hbsdduckhouse.club/' +this.state.data.headimg}}/>
+                <View style={{backgroundColor:isDarkMode?'black':'white'}}>
+                    <View style={stylesBlack.me_title}>
+                        <TouchableOpacity  onPress={()=>Actions.person({ruid:uid}) }>
+                            <Image style={stylesBlack.me_head} source={{uri:'https://www.hbsdduckhouse.club/' +data.headimg}}/>
                         </TouchableOpacity>
-                        <View style={styles.me_num}>
-                            <View style={styles.me_sex}>
-                                {/* <Image style={styles.me_imgsex} source={require('./'+this.state.seximg)}/> */}
-                                <Image style={styles.me_imgsex} source={{uri:'https://www.hbsdduckhouse.club/' +this.state.seximg}}/>
-                                <Text style={{fontSize:18}}>{this.state.data.usex}</Text>
+                        <View style={stylesBlack.me_num}>
+                            <View style={stylesBlack.me_sex}>
+                                {/* <Image style={stylesBlack.me_imgsex} source={require('./'+seximg)}/> */}
+                                <Image style={stylesBlack.me_imgsex} source={{uri:'https://www.hbsdduckhouse.club/' +seximg}}/>
+                                <Text style={{fontSize:18,color:isDarkMode?'white':'black'}}>{data.usex}</Text>
                             </View>
-                            <View style={styles.me_atten}>
-                                <Text style={{fontSize:18}}>   {this.state.data.userCounts}</Text>
-                                <Text style={{fontSize:18}}>关注</Text>
+                            <View style={stylesBlack.me_atten}>
+                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>   {data.userCounts}</Text>
+                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>关注</Text>
                             </View>
-                            <View style={styles.me_collect}>
-                                <Text style={{fontSize:18}}>   {this.state.data.chapterCounts}</Text>
-                                <Text style={{fontSize:18}}>收藏</Text>
+                            <View style={stylesBlack.me_collect}>
+                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>   {data.chapterCounts}</Text>
+                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>收藏</Text>
                             </View>
-                            <Button style={styles.me_btn} onPress={()=>Actions.edit()}>编辑资料</Button>
+                            <Button style={stylesBlack.me_btn} onPress={()=>Actions.edit()}>编辑资料</Button>
                         </View>
                     </View>
-                    <Text style={styles.me_sign} >个性签名：{this.state.data.signature?this.state.data.signature:'这个人很懒，啥都没写'}</Text>
+                    <Text style={stylesBlack.me_sign} >个性签名：{data.signature?data.signature:'这个人很懒，啥都没写'}</Text>
                 </View>
                 <View style={{backgroundColor:'grey',width:width,height:1}}></View>
-                <View style={{backgroundColor:'white',paddingBottom:10}}>
+                <View style={{backgroundColor:isDarkMode?'black':'white',paddingBottom:10}}>
                     <View style={{width:width*0.6,marginLeft:width*0.2,flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'}}>
-                        <TouchableOpacity onPress={()=>this.saveList()}>
-                            <Text style={{fontSize:22,marginTop:12}} >收藏列表</Text>
-                            <View style={{height:4,width:'100%',backgroundColor:'#faa755',display:this.state.display==1?'flex':'none'}}></View>
+                        <TouchableOpacity onPress={()=>saveList()}>
+                            <Text style={{fontSize:22,marginTop:12,color:isDarkMode?'white':'black'}} >收藏列表</Text>
+                            <View style={{height:4,width:'100%',backgroundColor:'#faa755',display:display==1?'flex':'none'}}></View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.followList()}>
-                            <Text style={{fontSize:22,marginTop:12}}>关注列表</Text>
-                            <View style={{height:4,width:'100%',backgroundColor:'#faa755',display:this.state.display==0?'flex':'none'}}></View>
+                        <TouchableOpacity onPress={()=>followList()}>
+                            <Text style={{fontSize:22,marginTop:12,color:isDarkMode?'white':'black'}}>关注列表</Text>
+                            <View style={{height:4,width:'100%',backgroundColor:'#faa755',display:display==0?'flex':'none'}}></View>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{backgroundColor:'black',width:width,height:0.5}}></View>
                 <View>
                 {
-                    this.state.display == 1 ?
+                    display == 1 ?
                         <SaveList/>
                     :
                     <FollowList/>
                 }
                 </View>
             </ScrollView>
-        )
-    }
+    )
+
 }
-const styles = StyleSheet.create({
+export default Me
+
+const dynamicStyles = new DynamicStyleSheet({
     me_top:{
-        backgroundColor:'#faa755'
+        backgroundColor:new DynamicValue('#faa755','black')
     },
     me_top_user:{
         flex:1,
@@ -394,7 +392,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         width:width,
         // height:300,
-        backgroundColor:'white'
+        backgroundColor:new DynamicValue('white','black')
     },
     me_head:{
         borderRadius:55,
@@ -438,7 +436,7 @@ const styles = StyleSheet.create({
         marginLeft:15,
         marginTop:10,
         fontSize:18,
-        color:'grey',
+        color:new DynamicValue('grey','black'),
         marginBottom:10
     },
     me_nav:{
@@ -453,4 +451,3 @@ const styles = StyleSheet.create({
         marginTop:50
     }
 })
-
