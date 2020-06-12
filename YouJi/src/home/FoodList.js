@@ -75,9 +75,9 @@ const FoodList = () => {
                     <Card.Footer
                         content={
                             <View style={{display: 'flex',flexDirection: 'row',marginTop: 15}}>
-                                <Image source={{uri: 'https://i.loli.net/2020/04/13/cWKiSzxOIo8fhtv.png'}} style={styles.cardBottomImage}/>
+                                <Image source={{uri: 'http://qinius.acrosstheuniverse.top/images/like1.png'}} style={styles.cardBottomImage}/>
                                 <Text>  {card.favorites}</Text>
-                                <Image source={{uri: 'https://i.loli.net/2020/04/13/kbr2KtWGMfvl51E.png'}} style={styles.cardBottomImage}/>
+                                <Image source={{uri: 'http://qinius.acrosstheuniverse.top/images/exe-collection1.png'}} style={styles.cardBottomImage}/>
                                 <Text>  {card.likes}</Text>
                             </View>
                         }

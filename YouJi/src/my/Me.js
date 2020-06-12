@@ -324,15 +324,15 @@ const Me = (props)=> {
                             <View style={stylesBlack.me_sex}>
                                 {/* <Image style={stylesBlack.me_imgsex} source={require('./'+seximg)}/> */}
                                 <Image style={stylesBlack.me_imgsex} source={{uri:'https://www.hbsdduckhouse.club/' +seximg}}/>
-                                <Text style={{fontSize:18,color:isDarkMode?'white':'black'}}>{data.usex}</Text>
+                                <Text style={{fontSize:14,color:isDarkMode?'white':'black'}}>{data.usex}</Text>
                             </View>
                             <View style={stylesBlack.me_atten}>
-                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>   {data.userCounts}</Text>
-                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>关注</Text>
+                                <Text style={{fontSize:14,color: isDarkMode ? '#fff':'black'}}>   {data.userCounts}</Text>
+                                <Text style={{fontSize:14,color: isDarkMode ? '#fff':'black'}}>关注</Text>
                             </View>
                             <View style={stylesBlack.me_collect}>
-                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>   {data.chapterCounts}</Text>
-                                <Text style={{fontSize:18,color: isDarkMode ? '#fff':'black'}}>收藏</Text>
+                                <Text style={{fontSize:14,color: isDarkMode ? '#fff':'black'}}>   {data.chapterCounts}</Text>
+                                <Text style={{fontSize:14,color: isDarkMode ? '#fff':'black'}}>收藏</Text>
                             </View>
                             <Button style={stylesBlack.me_btn} onPress={()=>Actions.edit()}>编辑资料</Button>
                         </View>
@@ -373,19 +373,19 @@ const dynamicStyles = new DynamicStyleSheet({
     },
     me_top_user:{
         flex:1,
-        marginLeft:220,
+        marginLeft: 180,
         marginBottom:20,
         position:"absolute",
         top:10
     },
     me_top_email:{
         flex:1,
-        marginLeft:180,
+        marginLeft:150,
         position:"absolute",
         top:30
     },
     me_title:{
-        flex:1,
+        display: 'flex',
         flexDirection: 'row',
         flexWrap:'wrap',
         marginLeft:20,
@@ -410,23 +410,27 @@ const dynamicStyles = new DynamicStyleSheet({
         flexWrap:'wrap'
     },
     me_sex:{
-        width:100
+        width: 50,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 20
     },
     me_imgsex:{
-        width:20,
-        height:20
+        width:15,
+        height:15
     },
     me_atten:{
-        width:100
+        width: 50
     },
     me_collect:{
-        width:100
+        width: 50
     },
     me_btn:{
         paddingTop:5,
-        width:270,
+        width:180,
         borderRadius:18,
-        marginTop:3,
+        marginTop:10,
         // marginLeft:145,
         color:'white',
         backgroundColor:"#faa755",

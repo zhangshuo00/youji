@@ -76,18 +76,18 @@ const SaveList= () => {
                     </TouchableOpacity>
                     <View style={stylesBlack.cardFooter}>
                         <View style={{display: 'flex',flexDirection: 'row',marginTop: 15}}>
-                            <Image source={{uri: 'https://i.loli.net/2020/04/13/cWKiSzxOIo8fhtv.png'}} style={stylesBlack.cardBottomImage}/>
+                            <Image source={{uri: 'http://qinius.acrosstheuniverse.top/images/like1.png'}} style={stylesBlack.cardBottomImage}/>
                             <Text style={{color:isDarkMode?'white':'black'}}>  {card.favorites}</Text>
-                            <Image source={{uri: 'https://i.loli.net/2020/04/13/kbr2KtWGMfvl51E.png'}} style={stylesBlack.cardBottomImage}/>
+                            <Image source={{uri: 'http://qinius.acrosstheuniverse.top/images/exe-collection1.png'}} style={stylesBlack.cardBottomImage}/>
                             <Text style={{color:isDarkMode?'white':'black'}}>  {card.likes}</Text>
                         </View>
                     </View>
                     {/* <Card.Footer
                         content={
                             <View style={{display: 'flex',flexDirection: 'row',marginTop: 15}}>
-                                <Image source={{uri: 'https://i.loli.net/2020/04/13/cWKiSzxOIo8fhtv.png'}} style={stylesBlack.cardBottomImage}/>
+                                <Image source={{uri: 'http://qinius.acrosstheuniverse.top/images/like1.png'}} style={stylesBlack.cardBottomImage}/>
                                 <Text>  {card.favorites}</Text>
-                                <Image source={{uri: 'https://i.loli.net/2020/04/13/kbr2KtWGMfvl51E.png'}} style={stylesBlack.cardBottomImage}/>
+                                <Image source={{uri: 'http://qinius.acrosstheuniverse.top/images/exe-collection1.png'}} style={stylesBlack.cardBottomImage}/>
                                 <Text>  {card.likes}</Text>
                             </View>
                         }
